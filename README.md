@@ -15,7 +15,12 @@ docs/HARDWARE.md           cablaggio e build in 2 ore
 docs/API.md                API del relayer per il frontend
 docs/DESIGN.md             tesi, scelte di protocollo, limiti, divisione del lavoro
 docs/STATUS.md             stato attuale, cosa manca per la demo, estensioni: partite da qui
+docs/PRODUCT.md            il prodotto obiettivo: noleggio con collaterale (dal confronto con il professore)
+docs/CALIBRATION.md        calibrazione dell'accelerometro e soglie leggero/medio/forte
+docs/AGENT_PROMPT.md       prompt da dare al proprio agente AI per lavorare sul progetto
 ```
+
+**Nuovi nel gruppo?** Aprite `docs/AGENT_PROMPT.md` e seguite le istruzioni.
 
 ## Avvio rapido (senza hardware)
 
