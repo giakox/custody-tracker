@@ -1,10 +1,10 @@
 // CustodyTracker — ESP32 + GPS u-blox M10 + ADXL375 + ATECC608
-// Ogni secondo: una lettura (posizione, picco di accelerazione). Ogni 16 letture (o subito dopo un
-// urto): Merkle root SHA-256 -> digest del batch -> firma ECDSA P-256 nel secure element -> POST al
-// relayer, che la ancora sul contratto CustodyLog. Formato identico a lib/protocol.mjs.
+// Every second: one reading (position, acceleration peak). Every 16 readings (or right after a
+// shock): SHA-256 Merkle root -> batch digest -> ECDSA P-256 signature in the secure element -> POST to the
+// relayer, which anchors it on the CustodyLog contract. Format identical to lib/protocol.mjs.
 //
-// Comandi da Serial Monitor (115200): INFO = stampa chiave pubblica · PROVISION = configura e
-// blocca l'ATECC608 (IRREVERSIBILE) e genera la chiave nello slot 0.
+// Serial Monitor commands (115200): INFO = print public key · PROVISION = configure and
+// lock the ATECC608 (IRREVERSIBLE) and generate the key in slot 0.
 
 #include <Wire.h>
 #include <WiFi.h>
@@ -18,19 +18,19 @@
 #include <time.h>
 #include "config.h"
 
-// ------------------------------------------------------------------ stato globale
+// ------------------------------------------------------------------ global state
 TinyGPSPlus gps;
 HardwareSerial GPSSerial(2);
 TwoWire SEWire(1);
 ECCX08Class ecc(SEWire, 0x60);
 Preferences prefs;
 
-bool hwSigner = false;          // true = ATECC608, false = chiave software in NVS (fallback dichiarato)
+bool hwSigner = false;          // true = ATECC608, false = software key in NVS (declared fallback)
 uint8_t pubKey[64];             // X || Y
-uint8_t deviceId[32];           // sha256(X || Y), come nel contratto
+uint8_t deviceId[32];           // sha256(X || Y), as in the contract
 mbedtls_ecdsa_context swKey;
 
-// picco di accelerazione: scritto dal task di campionamento, letto/azzerato dal loop
+// acceleration peak: written by the sampling task, read/reset by the loop
 portMUX_TYPE accMux = portMUX_INITIALIZER_UNLOCKED;
 volatile uint16_t windowPeakCg = 0;
 volatile uint32_t accSamples = 0;
@@ -42,12 +42,12 @@ uint8_t batchLen = 0;
 uint32_t recordCounter = 0;
 bool shockInBatch = false;
 
-// batch firmati in attesa di invio (se il WiFi cade non si perde nulla, fino a 6 batch)
+// signed batches waiting to be sent (if WiFi drops nothing is lost, up to 6 batches)
 struct Pending { String json; };
 Pending pending[6];
 uint8_t pendingCount = 0;
 
-// ------------------------------------------------------------------ utilità
+// ------------------------------------------------------------------ utilities
 static void sha256(const uint8_t* a, size_t la, const uint8_t* b, size_t lb, const uint8_t* c, size_t lc, uint8_t out[32]) {
   mbedtls_sha256_context ctx;
   mbedtls_sha256_init(&ctx);
@@ -72,7 +72,7 @@ static void be16(uint8_t* p, uint16_t v) { p[0] = v >> 8; p[1] = v; }
 
 static int rng(void*, unsigned char* out, size_t len) { esp_fill_random(out, len); return 0; }
 
-// ------------------------------------------------------------------ ADXL375 (registri diretti)
+// ------------------------------------------------------------------ ADXL375 (direct registers)
 static void accWrite(uint8_t reg, uint8_t v) {
   Wire.beginTransmission(0x53); Wire.write(reg); Wire.write(v); Wire.endTransmission();
 }
@@ -81,15 +81,15 @@ static bool accBegin() {
   Wire.begin(ACC_SDA, ACC_SCL, 400000);
   Wire.beginTransmission(0x53); Wire.write(0x00); Wire.endTransmission(false);
   if (Wire.requestFrom(0x53, 1) != 1 || Wire.read() != 0xE5) return false;  // DEVID
-  accWrite(0x2D, 0x00);            // POWER_CTL: standby durante la configurazione
-  accWrite(0x31, 0x0B);            // DATA_FORMAT: bit fissi richiesti dall'ADXL375, giustificato a destra
+  accWrite(0x2D, 0x00);            // POWER_CTL: standby during configuration
+  accWrite(0x31, 0x0B);            // DATA_FORMAT: fixed bits required by the ADXL375, right-justified
   accWrite(0x2C, ACC_ODR_CODE);    // BW_RATE
-  accWrite(0x38, 0x80 | 31);       // FIFO_CTL: stream mode, 32 campioni
+  accWrite(0x38, 0x80 | 31);       // FIFO_CTL: stream mode, 32 samples
   accWrite(0x2D, 0x08);            // POWER_CTL: measure
   return true;
 }
 
-// Task ad alta priorità: svuota la FIFO ogni 5 ms (a 1600 Hz la FIFO copre 20 ms), nessun campione perso.
+// High-priority task: drains the FIFO every 5 ms (at 1600 Hz the FIFO covers 20 ms), no samples lost.
 static void accTask(void*) {
   for (;;) {
     Wire.beginTransmission(0x53); Wire.write(0x39); Wire.endTransmission(false);
@@ -123,10 +123,10 @@ static void gpsBegin() {
     uint32_t t0 = millis();
     uint32_t before = gps.passedChecksum();
     while (millis() - t0 < 1500) while (GPSSerial.available()) gps.encode(GPSSerial.read());
-    if (gps.passedChecksum() > before) { Serial.printf("GPS: NMEA valido a %lu baud\n", b); return; }
+    if (gps.passedChecksum() > before) { Serial.printf("GPS: valid NMEA at %lu baud\n", b); return; }
     GPSSerial.end();
   }
-  Serial.println("GPS: nessun NMEA valido (cablaggio TX/RX invertito? alimentazione?). Continuo senza fix.");
+  Serial.println("GPS: no valid NMEA (TX/RX wiring swapped? power?). Continuing without a fix.");
   GPSSerial.begin(115200, SERIAL_8N1, GPS_RX_PIN, GPS_TX_PIN);
 }
 
@@ -139,22 +139,22 @@ static uint32_t gpsUnix() {
   return (uint32_t)mktime(&tm);
 }
 
-// ------------------------------------------------------------------ firma
+// ------------------------------------------------------------------ signing
 static bool signerBegin() {
   SEWire.begin(SE_SDA, SE_SCL, 100000);
   prefs.begin("custody", false);
   if (ecc.begin()) {
     if (!ecc.locked()) {
-      Serial.println("ATECC608 trovato ma NON configurato. Scrivi PROVISION per bloccarlo (irreversibile).");
-      Serial.println("Nel frattempo uso la chiave software.");
+      Serial.println("ATECC608 found but NOT configured. Type PROVISION to lock it (irreversible).");
+      Serial.println("Meanwhile using the software key.");
     } else if (ecc.generatePublicKey(0, pubKey)) {
       hwSigner = true;
     }
   } else {
-    Serial.println("ATECC608 non risponde su I2C#1 (GPIO25/26): uso chiave software (fallback).");
+    Serial.println("ATECC608 not responding on I2C#1 (GPIO25/26): using software key (fallback).");
   }
   if (!hwSigner) {
-    // Chiave P-256 software persistita in NVS: stessa interfaccia, garanzia più debole (estraibile dalla flash).
+    // Software P-256 key persisted in NVS: same interface, weaker guarantee (extractable from flash).
     mbedtls_ecdsa_init(&swKey);
     uint8_t d[32];
     if (prefs.getBytes("swkey", d, 32) == 32) {
@@ -187,14 +187,14 @@ static bool signDigest(const uint8_t h[32], uint8_t sig[64]) {
 }
 
 static void provision() {
-  if (!ecc.begin()) { Serial.println("ATECC608 non trovato."); return; }
-  if (ecc.locked()) { Serial.println("Già bloccato."); }
+  if (!ecc.begin()) { Serial.println("ATECC608 not found."); return; }
+  if (ecc.locked()) { Serial.println("Already locked."); }
   else {
-    if (!ecc.writeConfiguration() || !ecc.lock()) { Serial.println("Configurazione/lock fallito."); return; }
-    Serial.println("Config TLS di default scritta e bloccata.");
+    if (!ecc.writeConfiguration() || !ecc.lock()) { Serial.println("Configuration/lock failed."); return; }
+    Serial.println("Default TLS config written and locked.");
   }
-  if (!ecc.generatePrivateKey(0, pubKey)) { Serial.println("generatePrivateKey fallito."); return; }
-  Serial.println("Chiave generata nello slot 0 (non esce mai dal chip). Riavvio...");
+  if (!ecc.generatePrivateKey(0, pubKey)) { Serial.println("generatePrivateKey failed."); return; }
+  Serial.println("Key generated in slot 0 (never leaves the chip). Restarting...");
   delay(500);
   ESP.restart();
 }
@@ -205,7 +205,7 @@ static void encodeRecord(const Record& r, uint8_t out[19]) {
   be16(out + 16, r.peakCg); out[18] = r.flags;
 }
 
-// leaf = sha256(0x00||rec), node = sha256(0x01||l||r), nodo dispari promosso invariato
+// leaf = sha256(0x00||rec), node = sha256(0x01||l||r), odd node promoted unchanged
 static void merkleRoot(uint8_t recs[][19], uint8_t n, uint8_t root[32]) {
   uint8_t level[BATCH_SIZE][32];
   const uint8_t L = 0x00, N = 0x01;
@@ -229,7 +229,7 @@ static void closeBatch() {
   uint8_t root[32];
   merkleRoot(recs, batchLen, root);
 
-  uint32_t seq = prefs.getUInt("seq", 0) + 1;   // monotono e persistente: il contratto rifiuta seq <= ultimo
+  uint32_t seq = prefs.getUInt("seq", 0) + 1;   // monotonic and persistent: the contract rejects seq <= last
   prefs.putUInt("seq", seq);
   uint32_t tStart = batch[0].t, tEnd = batch[batchLen - 1].t;
 
@@ -246,8 +246,8 @@ static void closeBatch() {
   uint8_t digest[32], sig[64];
   sha256(pre, sizeof pre, nullptr, 0, nullptr, 0, digest);
   uint32_t t0 = millis();
-  if (!signDigest(digest, sig)) { Serial.println("✗ firma fallita, batch scartato"); batchLen = 0; return; }
-  Serial.printf("batch seq %lu · %u letture · picco %.1f g · firmato (%s) in %lu ms\n",
+  if (!signDigest(digest, sig)) { Serial.println("✗ signing failed, batch discarded"); batchLen = 0; return; }
+  Serial.printf("batch seq %lu · %u readings · peak %.1f g · signed (%s) in %lu ms\n",
                 seq, batchLen, maxPeak / 100.0, hwSigner ? "ATECC608" : "sw", millis() - t0);
 
   String j = "{\"seq\":" + String(seq) + ",\"count\":" + String(batchLen) + ",\"maxPeakCg\":" + String(maxPeak) +
@@ -267,24 +267,24 @@ static void closeBatch() {
 static void flushPending() {
   if (!pendingCount || WiFi.status() != WL_CONNECTED) return;
   HTTPClient http;
-  http.setTimeout(15000);  // il relayer risponde dopo la conferma della tx
+  http.setTimeout(15000);  // the relayer responds after the tx is confirmed
   http.begin(RELAYER_URL);
   http.addHeader("content-type", "application/json");
   int code = http.POST(pending[0].json);
   String resp = http.getString();
   http.end();
   if (code == 200) {
-    Serial.println("  ✓ ancorato: " + resp.substring(0, 120));
+    Serial.println("  ✓ anchored: " + resp.substring(0, 120));
     for (int i = 1; i < pendingCount; i++) pending[i - 1] = pending[i];
     pendingCount--;
   } else {
     Serial.printf("  ✗ relayer %d: %s\n", code, resp.c_str());
-    if (code == 400) { for (int i = 1; i < pendingCount; i++) pending[i - 1] = pending[i]; pendingCount--; } // rifiutato: non ritentare
+    if (code == 400) { for (int i = 1; i < pendingCount; i++) pending[i - 1] = pending[i]; pendingCount--; } // rejected: do not retry
   }
 }
 
 static void printInfo() {
-  Serial.printf("signer: %s\nqx: %s\nqy: %s\ndeviceId: %s\nseq: %lu\nacc campioni totali: %lu\nGPS: fix=%d sats=%lu chars=%lu ok=%lu\n",
+  Serial.printf("signer: %s\nqx: %s\nqy: %s\ndeviceId: %s\nseq: %lu\nacc total samples: %lu\nGPS: fix=%d sats=%lu chars=%lu ok=%lu\n",
                 hwSigner ? "ATECC608 (slot 0)" : "software (NVS)", toHex(pubKey, 32).c_str(), toHex(pubKey + 32, 32).c_str(),
                 toHex(deviceId, 32).c_str(), prefs.getUInt("seq", 0), (unsigned long)accSamples, gps.location.isValid(),
                 gps.satellites.value(), gps.charsProcessed(), gps.passedChecksum());
@@ -298,7 +298,7 @@ void setup() {
   Serial.println("\n== CustodyTracker ==");
 
   accOk = accBegin();
-  Serial.println(accOk ? "ADXL375 ok (0xE5)" : "ADXL375 NON trovato su I2C#0 (GPIO21/22)");
+  Serial.println(accOk ? "ADXL375 ok (0xE5)" : "ADXL375 NOT found on I2C#0 (GPIO21/22)");
   if (accOk) xTaskCreatePinnedToCore(accTask, "acc", 4096, nullptr, 5, nullptr, 1);
 
   gpsBegin();
@@ -335,7 +335,7 @@ void loop() {
     bool shock = peak > SHOCK_CG;
     r.flags = (fix ? 1 : 0) | (shock ? 2 : 0) | (gt ? 4 : 0);
     batch[batchLen++] = r;
-    if (shock) { shockInBatch = true; Serial.printf("⚠ URTO %.1f g\n", peak / 100.0); }
+    if (shock) { shockInBatch = true; Serial.printf("⚠ SHOCK %.1f g\n", peak / 100.0); }
     digitalWrite(LED_PIN, shock || (r.n & 1));
 
     if (batchLen == BATCH_SIZE || shockInBatch) closeBatch();
@@ -343,7 +343,7 @@ void loop() {
 
   if (WiFi.status() != WL_CONNECTED && millis() - lastWifiLog > 10000) {
     lastWifiLog = millis();
-    Serial.printf("WiFi: non connesso a \"%s\" (pending %u)\n", WIFI_SSID, pendingCount);
+    Serial.printf("WiFi: not connected to \"%s\" (pending %u)\n", WIFI_SSID, pendingCount);
   }
   flushPending();
 }

@@ -1,6 +1,6 @@
 import { fileURLToPath } from "node:url";
-// Device simulato: stesso formato del firmware, chiave P-256 software (data/sim-device.pem).
-// Uso: node relayer/simulate.mjs [--batches 6] [--drop 3] [--every 3000] [--url http://localhost:8787]
+// Simulated device: same format as the firmware, software P-256 key (data/sim-device.pem).
+// Usage: node relayer/simulate.mjs [--batches 6] [--drop 3] [--every 3000] [--url http://localhost:8787]
 import { generateKeyPairSync, createPrivateKey, createPublicKey, sign } from "node:crypto";
 import { existsSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { encodeRecord, merkleRoot, batchPreimage, deviceIdOf, hex } from "../lib/protocol.mjs";
@@ -8,7 +8,7 @@ import { encodeRecord, merkleRoot, batchPreimage, deviceIdOf, hex } from "../lib
 const arg = (k, d) => { const i = process.argv.indexOf(`--${k}`); return i > 0 ? process.argv[i + 1] : d; };
 const URL_ = arg("url", "http://localhost:8787");
 const N_BATCHES = Number(arg("batches", 6));
-const DROP_AT = Number(arg("drop", 3)); // batch in cui simulare la caduta (0 = mai)
+const DROP_AT = Number(arg("drop", 3)); // batch in which to simulate the drop (0 = never)
 const EVERY = Number(arg("every", 3000));
 const PER_BATCH = 16;
 
@@ -23,10 +23,10 @@ const qx = hex(Buffer.from(jwk.x, "base64url"));
 const qy = hex(Buffer.from(jwk.y, "base64url"));
 const deviceId = hex(deviceIdOf(qx, qy));
 
-// Percorso: Bocconi (via Sarfatti) → Linate, interpolato
+// Route: Bocconi (via Sarfatti) → Linate, interpolated
 const A = [45.4505, 9.1890], B = [45.4600, 9.2780];
 let n = 0;
-// Contatore monotono persistente (sul device lo fa il counter hardware dell'ATECC608)
+// Persistent monotonic counter (on the device this is the ATECC608 hardware counter)
 const SEQ = `${ROOT}data/sim-seq.txt`;
 const seqStart = existsSync(SEQ) ? Number(readFileSync(SEQ, "utf8")) : 0;
 

@@ -1,8 +1,8 @@
 import hre from "hardhat";
 import { mkdirSync, writeFileSync } from "node:fs";
 
-// CustodyLog (registro firmato dal device) + DemoUSD (stablecoin finta di testnet) +
-// RentalEscrow (collaterale del noleggio, legge CustodyLog).
+// CustodyLog (device-signed ledger) + DemoUSD (fake testnet stablecoin) +
+// RentalEscrow (rental collateral, reads CustodyLog).
 const log = await hre.viem.deployContract("CustodyLog");
 const token = await hre.viem.deployContract("DemoUSD");
 const escrow = await hre.viem.deployContract("RentalEscrow", [log.address, token.address]);

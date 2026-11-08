@@ -6,7 +6,7 @@ import { zeroAddress } from "viem";
 import { softDevice, makeBatch, args } from "./helpers.mjs";
 
 const USD = (n) => BigInt(n) * 10n ** 6n;
-// soglie (centesimi di g, picco con gravità inclusa) e trattenute in punti base
+// thresholds (hundredths of g, peak with gravity included) and withholdings in basis points
 const TERMS = {
   collateral: USD(50), lightCg: 800, mediumCg: 3000, strongCg: 8000,
   lightBps: 1000, mediumBps: 4000, strongBps: 10000, set: false,
@@ -20,7 +20,7 @@ describe("RentalEscrow", () => {
     const esc = await hre.viem.deployContract("RentalEscrow", [log.address, usd.address]);
     const dev = softDevice();
     await log.write.registerDevice([dev.qx, dev.qy]);
-    // bene a noleggio: il proprietario ne è custode, nessun "destinatario finale"
+    // rental asset: the owner is its custodian, no "final receiver"
     await log.write.createShipment([dev.deviceId, owner.account.address, zeroAddress, TERMS.lightCg]);
     await esc.write.setTerms([1n, TERMS]);
     const as = async (w) => ({
@@ -42,13 +42,13 @@ describe("RentalEscrow", () => {
     async function end(w) {
       await (await as(w)).log.write.proposeHandoff([1n, owner.account.address]);
       await (await as(owner)).log.write.acceptHandoff([1n]);
-      await esc.write.endRental([1n]); // chiunque può chiudere
+      await esc.write.endRental([1n]); // anyone can close
       return (await esc.getEvents.RentalSettled())[0].args;
     }
     return { log, usd, esc, owner, alice, bob, as, batch, start, end };
   }
 
-  it("noleggio senza urti: collaterale restituito per intero", async () => {
+  it("rental without shocks: collateral fully refunded", async () => {
     const { usd, alice, batch, start, end } = await setup();
     await start(alice);
     await batch([100, 120, 180]);
@@ -58,7 +58,7 @@ describe("RentalEscrow", () => {
     expect(await usd.read.balanceOf([alice.account.address])).to.equal(USD(1000));
   });
 
-  it("caduta media: trattiene il 40% e lo dà al proprietario", async () => {
+  it("medium drop: withholds 40% and gives it to the owner", async () => {
     const { usd, owner, alice, batch, start, end } = await setup();
     await start(alice);
     await batch([100, 4200, 300]); // 42 g
@@ -70,10 +70,10 @@ describe("RentalEscrow", () => {
     expect(await usd.read.balanceOf([alice.account.address])).to.equal(USD(1000 - 20));
   });
 
-  it("l'urto di un cliente non pesa sul noleggio del cliente successivo", async () => {
+  it("one customer's shock does not weigh on the next customer's rental", async () => {
     const { usd, alice, bob, batch, start, end } = await setup();
     await start(alice);
-    await batch([12000]); // 120 g: forte
+    await batch([12000]); // 120 g: strong
     expect((await end(alice)).fee).to.equal(USD(50));
     await start(bob);
     await batch([150]);
@@ -82,7 +82,7 @@ describe("RentalEscrow", () => {
     expect(await usd.read.balanceOf([bob.account.address])).to.equal(USD(1000));
   });
 
-  it("non si chiude finché il cliente ha il bene; solo il custode deposita; solo il proprietario fissa le soglie", async () => {
+  it("cannot be closed while the customer holds the asset; only the custodian deposits; only the owner sets the terms", async () => {
     const { esc, owner, alice, bob, as, start } = await setup();
     await expect((await as(bob)).esc.write.startRental([1n])).to.be.rejectedWith("NotCustodian");
     await start(alice);

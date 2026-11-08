@@ -1,10 +1,10 @@
-# API del relayer (per la web app)
+# Relayer API (for the web app)
 
-Il relayer (`npm run relayer` in locale, `npm run relayer:base` su Base Sepolia; porta 8787, CORS aperto) è l'unico backend. La web app legge da qui oppure, meglio, direttamente dai contratti. Gli ABI sono in `artifacts/contracts/<Nome>.sol/<Nome>.json` dopo `npx hardhat compile`, gli indirizzi in `deployments/<rete>.json` (`address` = CustodyLog, `escrow`, `token`).
+The relayer (`npm run relayer` locally, `npm run relayer:base` on Base Sepolia; port 8787, open CORS) is the only backend. The web app reads from here or, better, directly from the contracts. The ABIs are in `artifacts/contracts/<Name>.sol/<Name>.json` after `npx hardhat compile`, the addresses in `deployments/<network>.json` (`address` = CustodyLog, `escrow`, `token`).
 
 ## `GET /api/state`
 
-Stato del bene più recente (un device = un bene).
+State of the most recent object (one device = one object).
 
 ```json
 {
@@ -33,24 +33,24 @@ Stato del bene più recente (un device = un bene).
 }
 ```
 
-- `rental` è `null` se il bene è disponibile (custode = proprietario).
-- `tier`: 0 nessuno, 1 leggero, 2 medio, 3 forte.
-- `peakCg` è in centesimi di g (4118 = 41,2 g), gravità inclusa: da fermo vale circa 100.
-- Importi dUSD già convertiti in unità (6 decimali on-chain).
-- `flags` è un campo di bit: bit0 = fix GPS, bit1 = urto oltre soglia, bit2 = ora presa dal GPS.
-- `explorer` è null in locale.
+- `rental` is `null` if the object is available (custodian = owner).
+- `tier`: 0 none, 1 light, 2 medium, 3 strong.
+- `peakCg` is in hundredths of a g (4118 = 41.2 g), gravity included: at rest it is about 100.
+- dUSD amounts are already converted to units (6 decimals on-chain).
+- `flags` is a bit field: bit0 = GPS fix, bit1 = shock over threshold, bit2 = time taken from GPS.
+- `explorer` is null locally.
 
 ## `POST /api/rental/start`  `{"renter": "alice" | "bob"}`
 
-Sblocco del bene: il proprietario propone il passaggio, il cliente accetta, poi deposita il collaterale (se serve, prima si conia dUSD con `faucet()`). Sono 4–6 transazioni: su Base Sepolia richiede 10–30 s. Risposta: `{ renter, propose, accept, deposit }` (hash delle transazioni).
+Unlocking the object: the owner proposes the handover, the renter accepts, then deposits the collateral (if needed, dUSD is first minted with `faucet()`). That is 4–6 transactions: on Base Sepolia it takes 10–30 s. Response: `{ renter, propose, accept, deposit }` (transaction hashes).
 
 ## `POST /api/rental/end`
 
-Riconsegna e regolamento: il cliente propone il ritorno al proprietario, il proprietario accetta, poi `endRental` regola il collaterale. Risposta: lo stesso oggetto di `settlements[]`.
+Return and settlement: the renter proposes the return to the owner, the owner accepts, then `endRental` settles the collateral. Response: the same object as in `settlements[]`.
 
-## `GET /api/proof?seq=<seq>&i=<indice>`
+## `GET /api/proof?seq=<seq>&i=<index>`
 
-Merkle proof di una singola lettura e risultato di `verifyReading` sul contratto.
+Merkle proof of a single reading and the result of `verifyReading` on the contract.
 
 ```json
 { "record": "0x…", "decoded": { … }, "proof": ["0x…"], "root": "0x…", "verifiedOnChain": true }
@@ -58,11 +58,11 @@ Merkle proof di una singola lettura e risultato di `verifyReading` sul contratto
 
 ## `POST /batch`
 
-Endpoint usato dal device, non dalla web app. Il formato è in `lib/protocol.mjs`.
+Endpoint used by the device, not by the web app. The format is in `lib/protocol.mjs`.
 
-## Eventi on-chain utili per la web app
+## On-chain events useful for the web app
 
 - `CustodyLog`: `ShipmentCreated(id, deviceId, shipper, carrier, receiver)`, `HandoffProposed(id, from, to)`, `CustodyTransferred(id, from, to)`, `BatchAnchored(id, seq, root, maxPeakCg, custodian)`, `DamageDetected(id, seq, peakCg, custodian)`.
 - `RentalEscrow`: `TermsSet(id, collateral, lightCg, mediumCg, strongCg)`, `RentalStarted(id, renter, period, amount)`, `RentalSettled(id, renter, period, peakCg, tier, fee, refund)`.
 
-Letture utili: `CustodyLog.custodyPeriod(id)`, `CustodyLog.periodMaxPeakCg(id, period)`, `RentalEscrow.rentals(id)`, `RentalEscrow.terms(id)`, `RentalEscrow.tierOf(id, peakCg)`.
+Useful reads: `CustodyLog.custodyPeriod(id)`, `CustodyLog.periodMaxPeakCg(id, period)`, `RentalEscrow.rentals(id)`, `RentalEscrow.terms(id)`, `RentalEscrow.tierOf(id, peakCg)`.

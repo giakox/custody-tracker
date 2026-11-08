@@ -24,22 +24,22 @@ interface ICustodyLog {
 }
 
 /// @title RentalEscrow
-/// @notice Collaterale di un noleggio custodito dal codice, non dal noleggiatore.
-///         Il bene è una "spedizione" di CustodyLog il cui proprietario (shipper) fissa
-///         le condizioni. Il cliente diventa custode con un handoff a due firme, poi
-///         deposita il collaterale. A riconsegna avvenuta (custodia passata ad altri)
-///         chiunque può chiamare endRental: il contratto legge il picco massimo registrato
-///         dal device durante quel periodo di custodia e trattiene la fee del livello
-///         corrispondente. Nessuna parte decide da sola quanto trattenere.
+/// @notice Rental collateral held by code, not by the lessor.
+///         The asset is a CustodyLog "shipment" whose owner (shipper) sets the
+///         terms. The customer becomes custodian via a two-signature handoff, then
+///         deposits the collateral. Once the asset is returned (custody passed to someone else)
+///         anyone can call endRental: the contract reads the maximum peak recorded
+///         by the device during that custody period and withholds the fee of the
+///         corresponding tier. No party decides on its own how much to withhold.
 contract RentalEscrow {
     using SafeERC20 for IERC20;
 
     struct Terms {
-        uint256 collateral;  // importo in unità del token
-        uint16 lightCg;      // soglie in centesimi di g (picco = |a|, gravità inclusa)
+        uint256 collateral;  // amount in token units
+        uint16 lightCg;      // thresholds in hundredths of g (peak = |a|, gravity included)
         uint16 mediumCg;
         uint16 strongCg;
-        uint16 lightBps;     // trattenuta in punti base del collaterale (10000 = 100%)
+        uint16 lightBps;     // withheld share of the collateral in basis points (10000 = 100%)
         uint16 mediumBps;
         uint16 strongBps;
         bool set;
@@ -85,8 +85,8 @@ contract RentalEscrow {
         (,, custodian,,,,,,) = log.shipments(id);
     }
 
-    /// @notice Il proprietario del bene fissa collaterale, soglie e trattenute.
-    ///         Non modificabili durante un noleggio attivo.
+    /// @notice The asset owner sets the collateral, thresholds and withholdings.
+    ///         Not modifiable during an active rental.
     function setTerms(uint256 id, Terms calldata t) external {
         if (msg.sender != _owner(id)) revert NotOwner();
         if (rentals[id].active) revert RentalActive();
@@ -98,8 +98,8 @@ contract RentalEscrow {
         emit TermsSet(id, t.collateral, t.lightCg, t.mediumCg, t.strongCg);
     }
 
-    /// @notice Il cliente, già custode on-chain del bene, deposita il collaterale.
-    ///         Il noleggio copre il periodo di custodia corrente.
+    /// @notice The customer, already the on-chain custodian of the asset, deposits the collateral.
+    ///         The rental covers the current custody period.
     function startRental(uint256 id) external {
         Terms storage t = terms[id];
         if (!t.set) revert NoTerms();
@@ -111,7 +111,7 @@ contract RentalEscrow {
         emit RentalStarted(id, msg.sender, period, t.collateral);
     }
 
-    /// @notice Livello di danno di un picco: 0 nessuno, 1 leggero, 2 medio, 3 forte.
+    /// @notice Damage tier of a peak: 0 none, 1 light, 2 medium, 3 strong.
     function tierOf(uint256 id, uint16 peakCg) public view returns (uint8) {
         Terms storage t = terms[id];
         if (peakCg >= t.strongCg) return 3;
@@ -120,8 +120,8 @@ contract RentalEscrow {
         return 0;
     }
 
-    /// @notice Chiude il noleggio dopo la riconsegna. Chiamabile da chiunque: l'esito
-    ///         dipende solo da ciò che il device ha firmato durante il periodo del noleggio.
+    /// @notice Closes the rental after the return. Callable by anyone: the outcome
+    ///         depends only on what the device signed during the rental period.
     function endRental(uint256 id) external returns (uint256 fee, uint256 refund) {
         Rental memory r = rentals[id];
         if (!r.active) revert NoRental();

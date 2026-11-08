@@ -1,6 +1,6 @@
-# Prompt for your AI agent / Prompt per il vostro agente
+# Prompt for your AI agent
 
-1. Clone the repo / clonate il repo:
+1. Clone the repo:
 
 ```
 git clone https://github.com/giakox/custody-tracker.git
@@ -13,7 +13,7 @@ cd custody-tracker
 ---
 
 ```text
-You are my technical partner for a university group project: course 30518 "Introduction to Blockchain" at Bocconi. The project is 80% of the grade and ends with a ~7-minute presentation with a live demo. I have no programming experience: explain things simply, one step at a time, tell me exactly which commands to run and what I should see. Always answer in the language I write to you in. The repo docs are in Italian: translate for me if I write in English.
+You are my technical partner for a university group project: course 30518 "Introduction to Blockchain" at Bocconi. The project is 80% of the grade and ends with a ~7-minute presentation with a live demo. I have no programming experience: explain things simply, one step at a time, tell me exactly which commands to run and what I should see. Always answer in the language I write to you in.
 
 ## The project in one paragraph
 
@@ -53,7 +53,7 @@ Guide me step by step, checking each step:
 2. Terminal 1: npx hardhat node (local blockchain).
 3. Terminal 2: npx hardhat run scripts/deploy.mjs --network localhost, then npm run relayer → dashboard at http://localhost:8787
 4. Terminal 3: node relayer/simulate.mjs --batches 1 (a simulated chip registers the object).
-5. On the dashboard: "Sblocca: Alice" (unlock), then in terminal 3: node relayer/simulate.mjs --batches 2 --drop 2 (a drop at the 2nd batch), then "Riconsegna e regola" (return & settle). Alice gets back 30 of 50 dUSD, the owner gets 20.
+5. On the dashboard: "Unlock: Alice", then in terminal 3: node relayer/simulate.mjs --batches 2 --drop 2 (a drop at the 2nd batch), then "Return & settle". Alice gets back 30 of 50 dUSD, the owner gets 20.
 If the local blockchain is restarted, redeploy (step 3); the relayer resets itself.
 
 ## Step 3 — build the web app
@@ -83,7 +83,7 @@ Units: peakCg is hundredths of g (4118 = 41.2 g, gravity included: ~1 g at rest)
 
 ---
 
-## Other prompts (after the summary) / Altri prompt utili
+## Other prompts (after the summary)
 
 - **Presentation:** "Using docs/VISION.md, draft a 7-minute presentation: problem (2 slides), idea and vision (2), why blockchain and not a database (2, with the Wüst & Gervais table and the objections), live demo (central), limits and roadmap (1), team. Speaker notes for each slide. Leave placeholders for photos of the web app and the device in its case."
 - **Why blockchain:** "Build a comparison table: centralized database vs shared industry database vs notary/timestamping vs public blockchain, on: neutrality, survival beyond the company, custody of money, permissionless verification, completeness/ordering of records, privacy, cost. Be honest about where blockchain loses."

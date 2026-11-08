@@ -4,8 +4,8 @@ pragma solidity ^0.8.24;
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 /// @title DemoUSD
-/// @notice Stablecoin finta SOLO per la demo su testnet: 6 decimali come USDC,
-///         chiunque può coniarsene 1000 con faucet(). Nessun valore.
+/// @notice Fake stablecoin ONLY for the testnet demo: 6 decimals like USDC,
+///         anyone can mint 1000 for themselves with faucet(). No value.
 contract DemoUSD is ERC20 {
     constructor() ERC20("Demo USD (testnet, no value)", "dUSD") {}
 

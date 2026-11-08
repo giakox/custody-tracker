@@ -1,25 +1,25 @@
 
-# Custody Tracker — design e pitch
+# Custody Tracker — design and pitch
 
-La tesi, il perché della blockchain, i limiti e la demo sono in `docs/VISION.md`. Questo file raccoglie le scelte tecniche, per rispondere alle domande del professore.
+The thesis, why a blockchain, the limits and the demo are in `docs/VISION.md`. This file collects the technical choices, to answer the professor's questions.
 
-## Scelte di protocollo (per le domande del prof)
+## Protocol choices (for the professor's questions)
 
-- **Record** di 19 byte: `n | t | latE7 | lonE7 | peakCg | flags`. Le flag indicano fix GPS, urto oltre soglia e orario da GPS.
-- **Merkle SHA-256** con domain separation: foglia `0x00‖rec`, nodo `0x01‖l‖r`. Il nodo dispari viene promosso senza duplicarlo, il che evita la seconda preimmagine "alla Bitcoin" (CVE-2012-2459).
-- **Digest firmato:** `sha256("CLv1"‖deviceId‖seq‖root‖count‖maxPeakCg‖tStart‖tEnd)`. `deviceId = sha256(Qx‖Qy)`: l'identità del device è la sua chiave pubblica.
-- **Verifica on-chain:** `P256.verify` di OpenZeppelin, che usa il precompile RIP-7212 dove c'è e altrimenti un fallback in Solidity. OZ accetta solo firme low-s, quindi il relayer normalizza `s → n − s` (una firma ECDSA resta valida). Non è un problema di sicurezza perché il replay è bloccato da `seq`.
-- **Campionamento:** ADXL375 a 1600 Hz in FIFO stream, svuotata ogni 5 ms da un task FreeRTOS. Il picco per secondo è il modulo massimo. Una lettura al secondo, batch da 16 o chiusura immediata dopo un urto.
-- **`seq`** oggi è un contatore in NVS. Upgrade possibile: il monotonic counter hardware dell'ATECC, così il seq non è riavvolgibile nemmeno riscrivendo la flash.
+- **Record** of 19 bytes: `n | t | latE7 | lonE7 | peakCg | flags`. The flags indicate GPS fix, shock over threshold and time taken from GPS.
+- **Merkle SHA-256** with domain separation: leaf `0x00‖rec`, node `0x01‖l‖r`. The odd node is promoted without being duplicated, which avoids the Bitcoin-style second preimage (CVE-2012-2459).
+- **Signed digest:** `sha256("CLv1"‖deviceId‖seq‖root‖count‖maxPeakCg‖tStart‖tEnd)`. `deviceId = sha256(Qx‖Qy)`: the device's identity is its public key.
+- **On-chain verification:** OpenZeppelin's `P256.verify`, which uses the RIP-7212 precompile where available and a Solidity fallback otherwise. OZ accepts only low-s signatures, so the relayer normalizes `s → n − s` (an ECDSA signature stays valid). This is not a security issue because replay is blocked by `seq`.
+- **Sampling:** ADXL375 at 1600 Hz in FIFO stream mode, drained every 5 ms by a FreeRTOS task. The per-second peak is the maximum magnitude. One reading per second, batches of 16 or immediate closure after a shock.
+- **`seq`** is currently a counter in NVS. Possible upgrade: the ATECC's hardware monotonic counter, so the seq cannot be rolled back even by rewriting the flash.
 
-## Collaterale (RentalEscrow)
+## Collateral (RentalEscrow)
 
-- **Periodi di custodia:** `CustodyLog.custodyPeriod(id)` aumenta a ogni passaggio accettato; `periodMaxPeakCg(id, periodo)` tiene il picco massimo di quel periodo. Un noleggio = un periodo, quindi l'urto di un cliente non può pesare sul successivo, e l'escrow non deve scorrere i batch.
-- **Regolamento senza arbitro:** `endRental` è chiamabile da chiunque, ma solo dopo che la custodia è passata ad altri (`StillInCustody`). L'esito dipende solo da soglie fissate prima dello sblocco e dai batch firmati dal device.
-- **Condizioni bloccate durante il noleggio:** il proprietario non può cambiare soglie o trattenute mentre un noleggio è attivo (`RentalActive`).
-- **Token:** `DemoUSD`, ERC-20 a 6 decimali come USDC, coniabile liberamente: è solo per la testnet. In produzione: USDC su Base.
+- **Custody periods:** `CustodyLog.custodyPeriod(id)` increases with every accepted handover; `periodMaxPeakCg(id, period)` holds the maximum peak of that period. One rental = one period, so one renter's shock cannot weigh on the next, and the escrow does not have to iterate over the batches.
+- **Settlement without an arbiter:** `endRental` can be called by anyone, but only after custody has passed to someone else (`StillInCustody`). The outcome depends only on thresholds fixed before the unlock and on the batches signed by the device.
+- **Terms locked during the rental:** the owner cannot change thresholds or deductions while a rental is active (`RentalActive`).
+- **Token:** `DemoUSD`, a 6-decimal ERC-20 like USDC, freely mintable: it is for the testnet only. In production: USDC on Base.
 
-## Numeri misurati
+## Measured numbers
 
-- Gas per batch da 16 letture: ~120k con il solo `CustodyLog`, ~145k dopo l'aggiunta del picco per periodo (una scrittura in storage in più).
-- Costo su Base Sepolia (8 novembre 2026): ~145k gas × 0,006 gwei ≈ 8,7·10⁻⁷ ETH per batch, L1 data fee trascurabile. Prezzo del gas di testnet: in slide va presentato come ordine di grandezza.
+- Gas per 16-reading batch: ~120k with `CustodyLog` alone, ~145k after adding the per-period peak (one extra storage write).
+- Cost on Base Sepolia (8 November 2026): ~145k gas × 0.006 gwei ≈ 8.7·10⁻⁷ ETH per batch, L1 data fee negligible. Testnet gas price: on the slides it should be presented as an order of magnitude.

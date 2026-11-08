@@ -1,12 +1,12 @@
 import { fileURLToPath } from "node:url";
-// Relayer: riceve i batch firmati dal device (HTTP, stessa rete/hotspot), conserva le letture
-// off-chain e ancora root + firma su CustodyLog. Il relayer NON è fidato: se altera qualcosa
-// la verifica P-256 on-chain fallisce. Gestisce anche la demo del noleggio con collaterale
-// (RentalEscrow) e serve la dashboard su http://<ip>:8787.
+// Relayer: receives the signed batches from the device (HTTP, same network/hotspot), keeps the
+// readings off-chain and anchors root + signature on CustodyLog. The relayer is NOT trusted: if
+// it tampers with anything the on-chain P-256 verification fails. It also runs the collateralized
+// rental demo (RentalEscrow) and serves the dashboard at http://<ip>:8787.
 //
-// Ruoli demo: owner = proprietario del bene (chiave del relayer); alice e bob = clienti,
-// con chiavi proprie generate in data/<rete>.json. In un'app reale ogni parte firma dal
-// proprio wallet: il relayer tiene le chiavi solo per rendere la demo un clic.
+// Demo roles: owner = asset owner (relayer key); alice and bob = customers,
+// with their own keys generated in data/<network>.json. In a real app each party signs from its
+// own wallet: the relayer holds the keys only to make the demo a single click.
 import http from "node:http";
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { networkInterfaces } from "node:os";
@@ -21,15 +21,15 @@ const NET = process.env.NETWORK || "localhost";
 const chain = NET === "baseSepolia" ? baseSepolia : hardhat;
 const RPC = process.env.RPC_URL || (NET === "baseSepolia" ? "https://sepolia.base.org" : "http://127.0.0.1:8545");
 const PORT = Number(process.env.PORT || 8787);
-// Prima chiave di default di `hardhat node`: solo per la chain locale.
+// First default key of `hardhat node`: for the local chain only.
 const HARDHAT_KEY0 = "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80";
-const RELAYER_KEY = NET === "localhost" ? HARDHAT_KEY0 : process.env.PRIVATE_KEY; // in locale ignora .env
-if (!RELAYER_KEY) throw new Error("Serve PRIVATE_KEY per " + NET);
+const RELAYER_KEY = NET === "localhost" ? HARDHAT_KEY0 : process.env.PRIVATE_KEY; // on local chain, ignore .env
+if (!RELAYER_KEY) throw new Error("PRIVATE_KEY is required for " + NET);
 
-// Condizioni del noleggio (provvisorie: da tarare con il test di caduta, docs/CALIBRATION.md).
-// Picco = |a| con gravità inclusa, in centesimi di g. Trattenute in punti base del collaterale.
+// Rental terms (provisional: to be tuned with the drop test, docs/CALIBRATION.md).
+// Peak = |a| with gravity included, in hundredths of g. Withholdings in basis points of the collateral.
 const TERMS = {
-  collateral: 50_000_000n, // 50 dUSD (6 decimali)
+  collateral: 50_000_000n, // 50 dUSD (6 decimals)
   lightCg: 800, mediumCg: 3000, strongCg: 8000,
   lightBps: 1000, mediumBps: 4000, strongBps: 10000, set: false,
 };
@@ -41,19 +41,19 @@ const C = {
   escrow: { address: dep.escrow, abi: artifact("RentalEscrow") },
   usd: { address: dep.token, abi: artifact("DemoUSD") },
 };
-if (!C.escrow.address) throw new Error(`deployments/${NET}.json senza escrow: rifare il deploy (scripts/deploy.mjs)`);
+if (!C.escrow.address) throw new Error(`deployments/${NET}.json has no escrow: redeploy (scripts/deploy.mjs)`);
 const { address } = C.log;
 
 const pub = createPublicClient({ chain, transport: rpc(RPC) });
 const walletFor = (pk) => createWalletClient({ account: privateKeyToAccount(pk), chain, transport: rpc(RPC) });
 const relayer = walletFor(RELAYER_KEY);
 
-// --- stato locale (data availability delle letture) ---
+// --- local state (data availability of the readings) ---
 mkdirSync(`${ROOT}data`, { recursive: true });
 const DB = `${ROOT}data/${NET}.json`;
 let db = existsSync(DB) ? JSON.parse(readFileSync(DB, "utf8")) : null;
 if (!db || db.escrow !== C.escrow.address) {
-  // nuovo deploy (o vecchio formato a "spedizioni"): si riparte da zero
+  // new deploy (or old "shipments" format): start from scratch
   db = { escrow: C.escrow.address, roles: null, shipments: {}, batches: [], settlements: [] };
 }
 const save = () => writeFileSync(DB, JSON.stringify(db, null, 2));
@@ -67,7 +67,7 @@ const ROLES = ["owner", "alice", "bob"];
 const roleOf = (addr) => ROLES.find((r) => roleAddr(r).toLowerCase() === addr.toLowerCase()) ?? addr;
 
 async function fundRoles() {
-  // Su Base Sepolia una transazione dei clienti costa ~1e-7–1e-6 ETH: 0,00001 ETH bastano per decine.
+  // On Base Sepolia a customer transaction costs ~1e-7–1e-6 ETH: 0.00001 ETH is enough for dozens.
   const fund = parseEther(process.env.ROLE_FUND_ETH || (NET === "localhost" ? "0.0005" : "0.00001"));
   for (const r of ["alice", "bob"]) {
     const bal = await pub.getBalance({ address: roleAddr(r) });
@@ -86,22 +86,22 @@ const tx = async (wallet, c, functionName, args = []) => {
 };
 const read = (c, functionName, args = []) => pub.readContract({ address: c.address, abi: c.abi, functionName, args });
 
-// Coda seriale: niente nonce in conflitto se arrivano due batch insieme.
-// Ogni job ha un timeout: una transazione appesa (RPC caduto, cambio di rete) non deve
-// bloccare per sempre tutti i batch successivi.
+// Serial queue: no conflicting nonces if two batches arrive together.
+// Every job has a timeout: a hung transaction (RPC down, network change) must not
+// block all subsequent batches forever.
 const JOB_TIMEOUT_MS = Number(process.env.JOB_TIMEOUT_MS || 90_000);
 let queue = Promise.resolve();
 const serial = (fn, ms = JOB_TIMEOUT_MS) => {
   const job = queue.then(() => Promise.race([
     fn(),
-    new Promise((_, rej) => setTimeout(() => rej(new Error(`timeout ${ms / 1000}s (RPC lento o appeso)`)), ms)),
+    new Promise((_, rej) => setTimeout(() => rej(new Error(`timeout ${ms / 1000}s (RPC slow or hung)`)), ms)),
   ]));
   queue = job.catch(() => {});
   return job;
 };
 
-// Un device = un bene a noleggio. Il proprietario (relayer) ne è il primo custode e
-// non c'è "destinatario finale": il bene passa di cliente in cliente.
+// One device = one rental asset. The owner (relayer) is its first custodian and
+// there is no "final receiver": the asset passes from customer to customer.
 async function ensureAsset(qx, qy) {
   const deviceId = hex(deviceIdOf(qx, qy));
   if (db.shipments[deviceId]) return db.shipments[deviceId];
@@ -112,15 +112,15 @@ async function ensureAsset(qx, qy) {
   await tx(relayer, C.escrow, "setTerms", [BigInt(id), TERMS]);
   db.shipments[deviceId] = { id, custodian: "owner", qx, qy };
   save();
-  console.log(`device ${deviceId.slice(0, 10)}… registrato, bene #${id}`);
+  console.log(`device ${deviceId.slice(0, 10)}… registered, asset #${id}`);
   return db.shipments[deviceId];
 }
 
 async function handleBatch(b) {
   const recs = b.records.map(unhex);
-  if (recs.some((r) => r.length !== 19)) throw new Error("record di lunghezza errata");
+  if (recs.some((r) => r.length !== 19)) throw new Error("record has wrong length");
   const root = hex(merkleRoot(recs));
-  if (root.toLowerCase() !== b.root.toLowerCase()) throw new Error(`root non coincide: device ${b.root} vs ricalcolata ${root}`);
+  if (root.toLowerCase() !== b.root.toLowerCase()) throw new Error(`root mismatch: device ${b.root} vs recomputed ${root}`);
   const ship = await ensureAsset(b.qx, b.qy);
   const t = await tx(relayer, C.log, "submitBatch", [
     BigInt(ship.id), b.seq, root, recs.length, b.maxPeakCg, b.tStart, b.tEnd, b.r, lowS(b.s),
@@ -131,22 +131,22 @@ async function handleBatch(b) {
   };
   db.batches.push(entry);
   save();
-  const dmg = b.maxPeakCg >= TERMS.lightCg ? `  ⚠ URTO ${(b.maxPeakCg / 100).toFixed(1)} g → ${ship.custodian}` : "";
-  console.log(`#${ship.id} seq ${b.seq} · ${recs.length} letture · gas ${t.gasUsed} · ${t.hash}${dmg}`);
+  const dmg = b.maxPeakCg >= TERMS.lightCg ? `  ⚠ SHOCK ${(b.maxPeakCg / 100).toFixed(1)} g → ${ship.custodian}` : "";
+  console.log(`#${ship.id} seq ${b.seq} · ${recs.length} readings · gas ${t.gasUsed} · ${t.hash}${dmg}`);
   return entry;
 }
 
 const currentAsset = () => {
   const ship = Object.values(db.shipments).at(-1);
-  if (!ship) throw new Error("nessun bene registrato: aspetta il primo batch del device");
+  if (!ship) throw new Error("no asset registered: wait for the first batch from the device");
   return ship;
 };
 
-// Sblocco: owner propone, cliente accetta (due firme), cliente deposita il collaterale.
+// Unlock: owner proposes, customer accepts (two signatures), customer deposits the collateral.
 async function startRental(renter) {
-  if (!["alice", "bob"].includes(renter)) throw new Error("cliente sconosciuto (alice | bob)");
+  if (!["alice", "bob"].includes(renter)) throw new Error("unknown customer (alice | bob)");
   const ship = currentAsset();
-  if (ship.custodian !== "owner") throw new Error(`il bene è già noleggiato da ${ship.custodian}`);
+  if (ship.custodian !== "owner") throw new Error(`the asset is already rented by ${ship.custodian}`);
   await fundRoles();
   const w = walletFor(keyOf(renter));
   const bal = await read(C.usd, "balanceOf", [roleAddr(renter)]);
@@ -158,15 +158,15 @@ async function startRental(renter) {
   const s = await tx(w, C.escrow, "startRental", [id]);
   ship.custodian = renter;
   save();
-  console.log(`noleggio #${ship.id} iniziato da ${renter}: collaterale ${formatUnits(TERMS.collateral, 6)} dUSD`);
+  console.log(`rental #${ship.id} started by ${renter}: collateral ${formatUnits(TERMS.collateral, 6)} dUSD`);
   return { renter, propose: p.hash, accept: a.hash, deposit: s.hash };
 }
 
-// Riconsegna: cliente propone, owner accetta, poi chiunque chiude e il contratto regola.
+// Return: customer proposes, owner accepts, then anyone closes and the contract settles.
 async function endRental() {
   const ship = currentAsset();
   const renter = ship.custodian;
-  if (renter === "owner") throw new Error("nessun noleggio in corso");
+  if (renter === "owner") throw new Error("no rental in progress");
   const id = BigInt(ship.id);
   const p = await tx(walletFor(keyOf(renter)), C.log, "proposeHandoff", [id, roleAddr("owner")]);
   const a = await tx(relayer, C.log, "acceptHandoff", [id]);
@@ -180,7 +180,7 @@ async function endRental() {
   };
   db.settlements.push(out);
   save();
-  console.log(`noleggio #${ship.id} chiuso (${renter}): picco ${(out.peakCg / 100).toFixed(1)} g, livello ${out.tier}, trattenuti ${out.fee} dUSD, restituiti ${out.refund}`);
+  console.log(`rental #${ship.id} closed (${renter}): peak ${(out.peakCg / 100).toFixed(1)} g, tier ${out.tier}, withheld ${out.fee} dUSD, refunded ${out.refund}`);
   return out;
 }
 
@@ -214,7 +214,7 @@ async function state() {
 
 async function proof(seq, i) {
   const b = db.batches.findLast((x) => x.seq === seq);
-  if (!b) throw new Error("batch sconosciuto");
+  if (!b) throw new Error("unknown batch");
   const recs = b.records.map(unhex);
   const pr = merkleProof(recs, i).map(hex);
   const ok = await read(C.log, "verifyReading", [BigInt(b.shipmentId), seq, b.records[i], BigInt(i), pr]);
@@ -246,6 +246,6 @@ http.createServer(async (req, res) => {
   }
 }).listen(PORT, "0.0.0.0", () => {
   const ips = Object.values(networkInterfaces()).flat().filter((i) => i.family === "IPv4" && !i.internal).map((i) => i.address);
-  console.log(`relayer su ${NET} · CustodyLog ${address} · RentalEscrow ${C.escrow.address} · dUSD ${C.usd.address}`);
-  console.log(`dashboard: http://localhost:${PORT}   ·   endpoint device: ${ips.map((ip) => `http://${ip}:${PORT}/batch`).join("  ")}`);
+  console.log(`relayer on ${NET} · CustodyLog ${address} · RentalEscrow ${C.escrow.address} · dUSD ${C.usd.address}`);
+  console.log(`dashboard: http://localhost:${PORT}   ·   device endpoint: ${ips.map((ip) => `http://${ip}:${PORT}/batch`).join("  ")}`);
 });

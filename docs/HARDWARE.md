@@ -1,26 +1,26 @@
-# Hardware — build in 2 ore
+# Hardware — 2-hour build
 
-Obiettivo: alla fine delle 2 ore il device colpito sul tavolo produce un batch firmato, ancorato on-chain e visibile nella dashboard.
+Goal: by the end of the 2 hours, the device hit on the table produces a signed batch, anchored on-chain and visible in the dashboard.
 
-## Componenti
+## Components
 
-| # | Componente | Ruolo | Bus / pin ESP32 |
+| # | Component | Role | ESP32 bus / pin |
 |---|---|---|---|
-| 1 | ELEGOO ESP32-WROOM-32 (USB-C) | MCU, WiFi verso l'hotspot | — |
-| 2 | HGLRC M100 Mini (u-blox M10) | posizione e ora UTC | UART2: GPS TX → GPIO33 (D33), GPS RX → GPIO32 (D32), 5V, GND. Mai su RX0/TX0: sono la USB |
-| 3 | ADXL375 (±200 g, 49 mg/LSB) | urti e cadute | I2C #0: SDA → GPIO21, SCL → GPIO22, **VCC e VS → 3V3**, GND, **CS → 3V3, SDO → GND** (0x53). INT1/INT2 scollegati |
-| 4 | Adafruit ATECC608 (4314) | firma ECDSA P-256, la chiave non esce dal chip | I2C #1: SDA → **GPIO25**, SCL → **GPIO26**, 3V3, GND (0x60) |
-| 5 | Cavi STEMMA QT ↔ Dupont | collegano l'ATECC608 | rosso V+, nero GND, blu SDA, giallo SCL |
-| 6–8 | LiPo 2000 mAh + TP4056 + boost 5 V | alimentazione autonoma | LiPo → TP4056 B+/B−, OUT+/OUT− → boost IN, boost 5V → ESP32 5V/VIN |
-| 9 | Breadboard + jumper | prototipazione | — |
+| 1 | ELEGOO ESP32-WROOM-32 (USB-C) | MCU, WiFi to the hotspot | — |
+| 2 | HGLRC M100 Mini (u-blox M10) | position and UTC time | UART2: GPS TX → GPIO33 (D33), GPS RX → GPIO32 (D32), 5V, GND. Never on RX0/TX0: they are the USB |
+| 3 | ADXL375 (±200 g, 49 mg/LSB) | shocks and drops | I2C #0: SDA → GPIO21, SCL → GPIO22, **VCC and VS → 3V3**, GND, **CS → 3V3, SDO → GND** (0x53). INT1/INT2 disconnected |
+| 4 | Adafruit ATECC608 (4314) | ECDSA P-256 signing, the key never leaves the chip | I2C #1: SDA → **GPIO25**, SCL → **GPIO26**, 3V3, GND (0x60) |
+| 5 | STEMMA QT ↔ Dupont cables | connect the ATECC608 | red V+, black GND, blue SDA, yellow SCL |
+| 6–8 | 2000 mAh LiPo + TP4056 + 5 V boost | standalone power | LiPo → TP4056 B+/B−, OUT+/OUT− → boost IN, boost 5V → ESP32 5V/VIN |
+| 9 | Breadboard + jumpers | prototyping | — |
 
-Perché due bus I2C: la firma dell'ATECC608 tiene il bus per circa 60 ms. Se ADXL375 e ATECC608 condividessero il bus, l'urto arrivato durante la firma andrebbe perso. L'ESP32 ha due controller I2C, quindi basta spostare due fili.
+Why two I2C buses: the ATECC608 signature holds the bus for about 60 ms. If the ADXL375 and ATECC608 shared a bus, a shock arriving during signing would be lost. The ESP32 has two I2C controllers, so it is enough to move two wires.
 
-Perché VS: il chip ha due alimentazioni, VS per il sensore e VDDIO (VCC) per l'interfaccia. Con solo VCC i pull-up I2C sono alimentati ma il sensore è spento: il bus sembra a posto e non risponde nessuno. È il guasto che abbiamo avuto al primo bring-up.
+Why VS: the chip has two supplies, VS for the sensor and VDDIO (VCC) for the interface. With only VCC the I2C pull-ups are powered but the sensor is off: the bus looks fine and nothing answers. This is the fault we had at the first bring-up.
 
-Perché CS e SDO: con CS alto l'ADXL375 resta in modalità I2C, con SDO a massa risponde all'indirizzo 0x53. Lasciati flottanti, il chip può non rispondere o spostarsi su 0x1D.
+Why CS and SDO: with CS high the ADXL375 stays in I2C mode, with SDO to ground it answers at address 0x53. Left floating, the chip may not respond or may move to 0x1D.
 
-## Schema
+## Schematic
 
 ```
                  ┌──────────── ESP32 (ELEGOO) ────────────┐
@@ -28,96 +28,96 @@ Perché CS e SDO: con CS alto l'ADXL375 resta in modalità I2C, con SDO a massa 
            GND ──┤ GND                            GND ├─── GND ADXL375, SDO ADXL375, GND ATECC608
            TX ───┤ GPIO33 (D33)            GPIO21 SDA ├─── SDA ADXL375
            RX ───┤ GPIO32 (D32)            GPIO22 SCL ├─── SCL ADXL375
-                 │                         GPIO25 SDA ├─── SDA ATECC608 (blu)
-                 │                         GPIO26 SCL ├─── SCL ATECC608 (giallo)
+                 │                         GPIO25 SDA ├─── SDA ATECC608 (blue)
+                 │                         GPIO26 SCL ├─── SCL ATECC608 (yellow)
                  └────────────────────────────────────┘
 ```
 
-Il pin 5V dell'ESP32 viene dalla USB attraverso un diodo, quindi arriva a circa 4,7 V: va bene per il GPS, che ha un suo regolatore.
+The ESP32's 5V pin comes from the USB through a diode, so it arrives at about 4.7 V: this is fine for the GPS, which has its own regulator.
 
-## Piano a checkpoint
+## Checkpoint plan
 
-### 0:00–0:20 · Cablaggio, solo USB
+### 0:00–0:20 · Wiring, USB only
 
-- Monta l'ESP32 a cavallo della scanalatura centrale della breadboard e porta 3V3 e GND sulle rail laterali.
-- Collega ADXL375 e ATECC608 come nella tabella. Per l'ADXL375 ricorda **CS → 3V3 e SDO → GND**.
-- Collega il GPS per ultimo. Il TX del GPS va sul pin RX dell'ESP32: un errore frequente è collegare TX con TX.
-- Niente batteria per ora.
+- Mount the ESP32 straddling the central groove of the breadboard and bring 3V3 and GND to the side rails.
+- Connect the ADXL375 and ATECC608 as in the table. For the ADXL375 remember **CS → 3V3 and SDO → GND**.
+- Connect the GPS last. The GPS TX goes to the ESP32's RX pin: a frequent mistake is connecting TX to TX.
+- No battery for now.
 
-### 0:20–0:40 · Bring-up dei componenti, uno alla volta
+### 0:20–0:40 · Component bring-up, one at a time
 
 ```bash
-arduino-cli board list          # trova la porta, di solito /dev/cu.usbserial-XXXX o /dev/cu.wchusbserial-XXXX
-arduino-cli upload  --fqbn esp32:esp32:esp32 -p <porta> firmware/BringUp
-arduino-cli monitor -p <porta> -c baudrate=115200
+arduino-cli board list          # find the port, usually /dev/cu.usbserial-XXXX or /dev/cu.wchusbserial-XXXX
+arduino-cli upload  --fqbn esp32:esp32:esp32 -p <port> firmware/BringUp
+arduino-cli monitor -p <port> -c baudrate=115200
 ```
 
-Se l'upload si blocca su `Connecting....`, tieni premuto BOOT finché non parte.
+If the upload hangs on `Connecting....`, hold BOOT until it starts.
 
-All'avvio lo sketch esegue da solo questi controlli:
+At startup the sketch runs these checks on its own:
 
-| Riga attesa | Se non la vedi |
+| Expected line | If you don't see it |
 |---|---|
-| `I2C#0 …: 0x53` | controlla SDA/SCL invertiti, 3V3, CS e SDO |
-| `I2C#1 …: 0x60` | controlla il cavo STEMMA (blu = SDA) e che il V+ sia collegato |
-| `ADXL375 DEVID: 0xE5 ok` | se lo scan vede 0x1D, SDO non è a massa; se non vede nulla ma la sonda pin dice D21/D22 "tirato su da fuori", manca **VS** o CS non è a 3V3 |
-| `GPS: NMEA valido a N baud` (il nostro M100 va a 115200) | se i caratteri ricevuti sono 0, TX/RX sono invertiti o manca il 5V; se ci sono caratteri ma nessun NMEA valido, la velocità è insolita: usa `r` per vedere il flusso grezzo |
-| `ATECC608: seriale … non bloccato` | se dice "non risponde", controlla il bus #1 |
+| `I2C#0 GPIO21/22 (expected 0x53)` | check swapped SDA/SCL, 3V3, CS and SDO |
+| `I2C#1 GPIO25/26 (expected 0x60)` | check the STEMMA cable (blue = SDA) and that V+ is connected |
+| `ADXL375 DEVID: 0xE5 ok` | if the scan sees 0x1D, SDO is not grounded; if it sees nothing but the pin probe says D21/D22 "pulled up externally", **VS** is missing or CS is not at 3V3 |
+| `GPS: valid NMEA at N baud` (our M100 runs at 115200) | if the received characters are 0, TX/RX are swapped or 5V is missing; if there are characters but no valid NMEA, the baud rate is unusual: use `r` to see the raw stream |
+| `ATECC608: serial … unlocked` | if it says "not responding", check bus #1 |
 
-Poi i comandi interattivi:
-- `a` stampa l'accelerazione dal vivo. Da fermo deve leggere circa 1 g (±0,4 g è normale per l'offset di fabbrica). Un colpo secco sul tavolo deve superare 15 g.
-- `g` mostra lo stato del GPS. Vicino a una finestra o all'aperto il fix arriva in circa 30–60 s a freddo; al chiuso, lontano dalle finestre, può non arrivare mai.
+Then the interactive commands:
+- `a` prints live acceleration. At rest it should read about 1 g (±0.4 g is normal for the factory offset). A sharp knock on the table should exceed 15 g.
+- `g` shows the GPS status. Near a window or outdoors the fix arrives in about 30–60 s from cold; indoors, away from windows, it may never arrive.
 
-**Checkpoint 1:** tutte e cinque le righe ok, e l'accelerometro reagisce al colpo.
+**Checkpoint 1:** all five lines ok, and the accelerometer reacts to the knock.
 
-### 0:40–1:10 · Firmware completo + blockchain in locale
+### 0:40–1:10 · Full firmware + blockchain locally
 
-Terminale 1:
+Terminal 1:
 ```bash
 npm install
 npx hardhat node
 ```
 
-Terminale 2:
+Terminal 2:
 ```bash
 npx hardhat run scripts/deploy.mjs --network localhost
-npm run relayer        # stampa l'URL da usare per il device
+npm run relayer        # prints the URL to use for the device
 ```
 
-- Sull'iPhone attiva l'hotspot con **"Massimizza compatibilità"**: l'ESP32 vede solo le reti a 2,4 GHz.
-- Collega anche il Mac all'hotspot e riavvia il relayer, così stampa l'IP giusto (di solito `172.20.10.x`).
-- In `firmware/CustodyTracker/config.h` imposta `WIFI_SSID`, `WIFI_PASS` e `RELAYER_URL`. Il file è escluso da git perché contiene la password dell'hotspot; se non c'è, copialo da `config.example.h`.
+- On the iPhone turn on the hotspot with **"Maximize Compatibility"**: the ESP32 only sees 2.4 GHz networks.
+- Also connect the Mac to the hotspot and restart the relayer, so it prints the right IP (usually `172.20.10.x`).
+- In `firmware/CustodyTracker/config.h` set `WIFI_SSID`, `WIFI_PASS` and `RELAYER_URL`. The file is git-ignored because it contains the hotspot password; if it is missing, copy it from `config.example.h`.
 
 ```bash
-arduino-cli upload --fqbn esp32:esp32:esp32 -p <porta> firmware/CustodyTracker
-arduino-cli monitor -p <porta> -c baudrate=115200
+arduino-cli upload --fqbn esp32:esp32:esp32 -p <port> firmware/CustodyTracker
+arduino-cli monitor -p <port> -c baudrate=115200
 ```
 
-Atteso ogni 16 s: `batch seq N · 16 letture · firmato (sw)` seguito da `✓ ancorato`. Su http://localhost:8787 compare il batch.
+Expected every 16 s: `batch seq N · 16 readings · signed (sw)` followed by `✓ anchored`. The batch appears at http://localhost:8787.
 
-**Checkpoint 2:** un colpo sul tavolo chiude subito il batch, la dashboard mostra "DANNO REGISTRATO" e lo attribuisce al vettore A.
+**Checkpoint 2:** after "Unlock: Alice" on the dashboard, a knock on the table closes the batch immediately and the shock appears attributed to Alice; "Return & settle" then withholds the fee for that shock level.
 
 ### 1:10–1:30 · Secure element
 
-Nel Serial Monitor del firmware principale scrivi `PROVISION`.
+In the main firmware's Serial Monitor type `PROVISION`.
 
-> **Attenzione: è irreversibile.** Scrive la configurazione TLS di default nell'ATECC608 e la blocca, poi genera la chiave privata nello slot 0. La chiave non lascia mai il chip.
+> **Warning: this is irreversible.** It writes the default TLS configuration into the ATECC608 and locks it, then generates the private key in slot 0. The key never leaves the chip.
 
-Dopo il riavvio, `INFO` deve mostrare `signer: ATECC608 (slot 0)` e la dashboard non mostra più "(sw)". Il device ha ora una nuova chiave, cioè una nuova identità: il relayer lo registra di nuovo e apre una nuova spedizione. È il comportamento corretto.
+After the reboot, `INFO` must show `signer: ATECC608 (slot 0)` and the dashboard no longer shows "(sw)". The device now has a new key, i.e. a new identity: the relayer registers it again and opens a new shipment. This is the correct behavior.
 
-**Checkpoint 3:** batch firmati dall'hardware e accettati on-chain.
+**Checkpoint 3:** hardware-signed batches accepted on-chain.
 
-### 1:30–2:00 · Batteria e scatola
+### 1:30–2:00 · Battery and box
 
-1. Collega il boost alla USB del TP4056 senza carico e misura l'uscita: deve dare 5,0 V.
-2. Collega LiPo → TP4056 (B+/B−), poi OUT+/OUT− → IN del boost.
-3. Collega l'uscita 5V del boost a 5V/VIN dell'ESP32 e unisci le masse.
-4. Non tenere USB e boost collegati insieme: quando flashi, stacca il boost.
-5. Per caricare la LiPo usa un cavo USB-A → C. I TP4056 economici non hanno le resistenze sui pin CC e con un cavo C↔C non caricano: per questo c'è l'adattatore da 5,1 kΩ.
-6. Metti tutto in una scatola, fissando l'ADXL375 rigido alla parete con nastro biadesivo spesso. Se il sensore è appoggiato su gommapiuma, la gommapiuma assorbe il picco e la misura risulta più bassa.
+1. Connect the boost to the TP4056's USB with no load and measure the output: it must read 5.0 V.
+2. Connect LiPo → TP4056 (B+/B−), then OUT+/OUT− → boost IN.
+3. Connect the boost's 5V output to the ESP32's 5V/VIN and join the grounds.
+4. Do not keep USB and boost connected together: when flashing, disconnect the boost.
+5. To charge the LiPo use a USB-A → C cable. Cheap TP4056 boards lack the resistors on the CC pins and do not charge with a C↔C cable: that is why there is the 5.1 kΩ adapter.
+6. Put everything in a box, fixing the ADXL375 rigidly to the wall with thick double-sided tape. If the sensor rests on foam, the foam absorbs the peak and the measurement comes out lower.
 
-**Checkpoint 4:** device autonomo nella scatola, a batteria, collegato all'hotspot. Una caduta della scatola da 30–50 cm deve registrare il danno.
+**Checkpoint 4:** standalone device in the box, on battery, connected to the hotspot. A drop of the box from 30–50 cm must record the damage.
 
-## Consumi (stima, da misurare)
+## Power consumption (estimate, to be measured)
 
-Il consumo è dominato dal WiFi sempre acceso: ESP32 circa 100–160 mA in media, GPS M10 circa 25–30 mA in tracking, ADXL375 e ATECC608 trascurabili. Con la LiPo da 2000 mAh l'autonomia stimata è di **12–15 ore**. Per una demo basta e avanza. In un prodotto reale si userebbero modem-sleep e invii meno frequenti.
+Consumption is dominated by the always-on WiFi: ESP32 about 100–160 mA on average, GPS M10 about 25–30 mA in tracking, ADXL375 and ATECC608 negligible. With the 2000 mAh LiPo the estimated runtime is **12–15 hours**. That is more than enough for a demo. A real product would use modem-sleep and less frequent uploads.

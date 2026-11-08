@@ -10,7 +10,7 @@ export function softDevice() {
   const qy = hex(Buffer.from(jwk.y, "base64url"));
   return {
     qx, qy, deviceId: hex(deviceIdOf(qx, qy)),
-    // ECDSA su sha256(preimage) = stessa firma che l'ATECC fa sul digest
+    // ECDSA over sha256(preimage) = same signature the ATECC produces over the digest
     sign: (pre) => {
       const sig = sign("sha256", pre, { key: privateKey, dsaEncoding: "ieee-p1363" });
       return { r: hex(sig.subarray(0, 32)), s: lowS(hex(sig.subarray(32))) };

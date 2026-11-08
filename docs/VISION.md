@@ -1,119 +1,119 @@
-# La scatola nera degli oggetti
+# The black box for physical objects
 
-Documento di riferimento del progetto di gruppo (30518 Introduction to Blockchain, Bocconi). Se qualcosa nel codice o nelle slide contraddice questo file, vale questo file.
+Reference document for the group project (30518 Introduction to Blockchain, Bocconi). If anything in the code or the slides contradicts this file, this file wins.
 
-## 1. Il problema
+## 1. The problem
 
-**Oggi la verità sullo stato di un oggetto fisico appartiene a chi ha più potere.**
+**Today, the truth about the state of a physical object belongs to whoever has the most power.**
 
-- All'autonoleggio il graffio è tuo perché lo dice l'azienda.
-- Se la spedizione arriva rotta, decide il corriere.
-- Sulla bici usata ti devi fidare del venditore.
-- Il deposito cauzionale lo trattiene chi lo incassa.
+- At a car rental desk, the scratch is yours because the company says so.
+- If a shipment arrives broken, the courier decides.
+- With a used bike, you have to trust the seller.
+- The security deposit is kept by whoever collects it.
 
-In ognuno di questi casi chi tiene il registro è anche **parte in causa** nella lite. Il registro è tenuto proprio da chi ha interesse a scriverlo a proprio favore.
+In each of these cases, the party that keeps the record is also a **party to the dispute**. The record is kept by exactly the people who have an interest in writing it in their own favor.
 
-## 2. L'idea
+## 2. The idea
 
-**L'oggetto diventa testimone di se stesso.**
+**The object becomes a witness to itself.**
 
-Un chip attaccato all'oggetto ha una chiave crittografica che non può uscire dal silicio (secure element). Misura ciò che succede all'oggetto: urti, cadute, posizione, chi lo ha in custodia. **Firma** queste misure e le scrive su un **registro pubblico che nessuna delle parti controlla**: una blockchain. Uno smart contract applica le regole concordate, per esempio la restituzione del deposito, senza che nessuno debba fidarsi di nessuno.
+A chip attached to the object holds a cryptographic key that cannot leave the silicon (a secure element). It measures what happens to the object: shocks, drops, location, who has it in custody. It **signs** these measurements and writes them to a **public ledger that none of the parties controls**: a blockchain. A smart contract enforces the agreed rules, for example returning the deposit, without anyone having to trust anyone.
 
-**La visione: ogni oggetto condiviso, noleggiato, spedito o rivenduto ha una scatola nera pubblica, come gli aerei.** Una memoria del mondo fisico che non appartiene a nessuno, scritta dagli oggetti stessi.
+**The vision: every object that is shared, rented, shipped or resold has a public black box, like aircraft do.** A memory of the physical world that belongs to no one, written by the objects themselves.
 
-Cosa cambia quando gli oggetti hanno una scatola nera:
+What changes when objects have a black box:
 
-| Oggi | Con la scatola nera |
+| Today | With the black box |
 |---|---|
-| Noleggio: lite al banco, deposito trattenuto a discrezione | il deposito si regola da solo in base a ciò che l'oggetto ha registrato |
-| Assicurazioni: perizie, mesi di attesa | polizze **parametriche** che pagano in automatico all'evento registrato |
-| Mercato dell'usato: "fidati, non è mai caduta" | lo storico verificabile dell'oggetto alza il valore di chi lo ha trattato bene |
-| Noleggio auto internazionale: lo storico resta nel gestionale di ogni filiale | lo storico segue il veicolo tra paesi, aziende e proprietari |
-| Logistica: ogni vettore ha il suo sistema | catena di custodia unica, firmata a ogni passaggio |
+| Rentals: disputes at the counter, deposit withheld at the lender's discretion | the deposit settles itself based on what the object recorded |
+| Insurance: surveys, months of waiting | **parametric** policies that pay out automatically on the recorded event |
+| Second-hand market: "trust me, it's never been dropped" | a verifiable history raises the value of objects that were treated well |
+| International car rental: history stays in each branch's management system | the history follows the vehicle across countries, companies and owners |
+| Logistics: every carrier has its own system | a single chain of custody, signed at every handoff |
 
-## 3. La prima applicazione: il noleggio con collaterale
+## 3. The first application: rentals with collateral
 
-È il caso discusso con il professore, ed è quello della demo.
+This is the case discussed with the professor, and it is the one in the demo.
 
-1. **Sblocco.** Il cliente sblocca il bene (bici, monopattino, telecamera, auto) dall'app e deposita un **collaterale** in stablecoin su una L2 (Base). Il collaterale lo custodisce il contratto, non il noleggiatore. On-chain il cliente diventa il **custode** del bene, con un passaggio firmato da entrambe le parti.
-2. **Uso.** Il chip registra continuamente. Ogni gruppo di letture è firmato dal chip e scritto on-chain, attribuito al custode di quel momento.
-3. **Riconsegna.** Il bene torna al proprietario, con un altro passaggio firmato da entrambi.
-4. **Regolamento automatico.** Il contratto guarda l'urto più forte avvenuto **durante quel noleggio**:
-   - nessun urto oltre soglia → collaterale restituito per intero;
-   - urto **leggero / medio / forte** → trattenuta del 10% / 40% / 100% (valori da tarare), il resto torna al cliente.
-5. **Storico.** Anche dopo mesi chiunque vede chi aveva il bene quando è caduto. Il cliente successivo non può vedersi addebitare un danno vecchio.
+1. **Unlock.** The renter unlocks the object (bike, scooter, camera, car) from the app and deposits **collateral** in stablecoins on an L2 (Base). The collateral is held by the contract, not by the rental company. On-chain, the renter becomes the **custodian** of the object, through a handoff signed by both parties.
+2. **Use.** The chip records continuously. Each group of readings is signed by the chip and written on-chain, attributed to the custodian at that moment.
+3. **Return.** The object goes back to the owner, with another handoff signed by both.
+4. **Automatic settlement.** The contract looks at the strongest shock that occurred **during that rental**:
+   - no shock above threshold → collateral returned in full;
+   - **light / medium / strong** shock → 10% / 40% / 100% fee withheld (values to be calibrated), and the rest goes back to the renter.
+5. **History.** Even months later, anyone can see who had the object when it was dropped. The next renter cannot be charged for old damage.
 
-Mercato: il professore suggerisce di partire dalle **aziende** (sharing come Lime o ATM, e soprattutto il **noleggio auto internazionale**, dove lo storico deve viaggiare tra paesi), non dai privati. Fase 2: **scoring bidirezionale**, cioè il cliente vede lo storico del veicolo e il noleggiatore vede l'affidabilità del cliente, con il vincolo della privacy (vedi §6).
+Market: the professor suggests starting with **businesses** (sharing operators like Lime or ATM, and above all **international car rental**, where the history has to travel across countries), not with private individuals. Phase 2: **two-way scoring**, meaning the renter sees the vehicle's history and the rental company sees the renter's reliability, subject to the privacy constraint (see §6).
 
-## 4. Perché blockchain e non un database
+## 4. Why a blockchain and not a database
 
-È la domanda centrale del corso. La risposta ha tre livelli.
+This is the central question of the course. The answer has three levels.
 
-### 4.1 Il test formale
+### 4.1 The formal test
 
-Wüst e Gervais, *"Do you need a blockchain?"* (2018). Una blockchain ha senso solo se valgono tutte queste condizioni:
+Wüst and Gervais, *"Do you need a blockchain?"* (2018). A blockchain makes sense only if all of these conditions hold:
 
-| Domanda | Nel nostro caso |
+| Question | In our case |
 |---|---|
-| Serve uno stato condiviso? | sì: lo storico dell'oggetto e chi ne era custode |
-| Ci sono più parti che scrivono? | sì: oggetto, proprietario, clienti, in futuro assicuratori e acquirenti |
-| Esiste un terzo fidato da tutti, sempre disponibile? | **no**: chiunque tenga il database è parte in causa o diventa il nuovo punto di fiducia |
-| Le parti si fidano tra loro? | **no**: hanno interessi opposti su chi ha causato il danno |
-| Serve verifica pubblica? | sì: periti, giudici, acquirenti futuri |
+| Is shared state needed? | yes: the object's history and who had custody of it |
+| Are there multiple writers? | yes: object, owner, renters, and in future insurers and buyers |
+| Is there a third party trusted by everyone and always available? | **no**: whoever runs the database is a party to the dispute or becomes the new point of trust |
+| Do the parties trust each other? | **no**: they have opposing interests over who caused the damage |
+| Is public verification needed? | yes: surveyors, judges, future buyers |
 
-Con queste risposte il test indica una **blockchain pubblica, o permissionless**.
+With these answers, the test points to a **public, or permissionless, blockchain**.
 
-### 4.2 Cosa un database non può fare
+### 4.2 What a database cannot do
 
-1. **Neutralità.** "Il database di chi?" Se è del noleggiatore, può riscrivere chi aveva il bene durante la caduta. Se è nostro, il cliente deve fidarsi di noi. La blockchain toglie il proprietario del registro.
-2. **Sopravvivenza.** Lo storico deve durare più dell'azienda che lo ha scritto. Se il noleggiatore fallisce o cambia gestionale, il suo database sparisce. Lo storico on-chain segue l'oggetto tra aziende, paesi e proprietari.
-3. **Soldi e dati nello stesso sistema.** Il collaterale lo custodisce il codice, non la controparte. Il cliente non deve fidarsi che il deposito gli torni: la regola è pubblica e si esegue da sola. Un database può registrare un debito, non custodire denaro in modo neutrale.
-4. **Verifica senza permesso.** Chiunque controlla una singola lettura con una **Merkle proof** contro il registro pubblico, senza accesso al server di nessuno e senza chiedere niente a nessuno.
+1. **Neutrality.** "Whose database?" If it belongs to the rental company, it can rewrite who had the object when it was dropped. If it is ours, the renter has to trust us. The blockchain removes the owner of the ledger.
+2. **Survival.** The history has to outlive the company that wrote it. If the rental company goes bankrupt or changes its management system, its database disappears. The on-chain history follows the object across companies, countries and owners.
+3. **Money and data in the same system.** The collateral is held by code, not by the counterparty. The renter does not have to trust that the deposit will come back: the rule is public and executes itself. A database can record a debt, but it cannot hold money neutrally.
+4. **Permissionless verification.** Anyone can check a single reading with a **Merkle proof** against the public ledger, without access to anyone's server and without asking anyone for anything.
 
-### 4.3 La sottigliezza tecnica
+### 4.3 The technical subtlety
 
-Bastano le firme del chip, senza blockchain? **No.** La firma garantisce che una lettura è **autentica**, ma chi conserva le letture firmate può sempre **ometterne** una, per esempio il batch dell'urto. La blockchain garantisce **completezza e ordine**: ogni batch ha un numero di sequenza crescente e on-chain si vede subito se ne manca uno. Si vede anche quando è stato scritto e mentre chi era custode.
+Are the chip's signatures enough, without a blockchain? **No.** A signature guarantees that a reading is **authentic**, but whoever stores the signed readings can always **omit** one, for example the batch containing the shock. The blockchain guarantees **completeness and ordering**: every batch has an increasing sequence number, and on-chain it is immediately visible if one is missing. You can also see when it was written and who was the custodian at the time.
 
-**Firma alla fonte = autenticità. Registro pubblico = nessuno nasconde, cancella o riordina.** Servono entrambe.
+**Signing at the source = authenticity. Public ledger = nobody hides, deletes or reorders.** You need both.
 
-### 4.4 Le obiezioni prevedibili, con risposta
+### 4.4 The predictable objections, with answers
 
-- *"Un database condiviso tra le aziende del settore?"* È un consorzio: funziona finché i membri si fidano dell'operatore. Non include il cliente, non custodisce denaro e muore con il consorzio.
-- *"Un notaio digitale, un servizio di timestamping?"* Garantisce la data, non la completezza. Resta un intermediario unico e non gestisce il collaterale.
-- *"La blockchain è lenta e costosa?"* Su una L2 come Base un gruppo di 16 letture costa circa 145.000 gas, cioè **meno di 10⁻⁶ ETH su testnet**, frazioni di centesimo. Sulla catena va solo un'impronta (Merkle root) ogni 16 letture, non i dati.
+- *"A database shared among the companies in the industry?"* That is a consortium: it works as long as the members trust the operator. It does not include the renter, it does not hold money, and it dies with the consortium.
+- *"A digital notary, a timestamping service?"* It guarantees the date, not completeness. It remains a single intermediary and does not handle the collateral.
+- *"Isn't blockchain slow and expensive?"* On an L2 like Base, a group of 16 readings costs about 145,000 gas, i.e. **less than 10⁻⁶ ETH on testnet**, a fraction of a cent. Only a fingerprint (Merkle root) goes on-chain every 16 readings, not the data.
 
-## 5. Cosa esiste già (verificato sull'hardware)
+## 5. What already exists (verified on hardware)
 
-- Chip: ESP32 + accelerometro ADXL375 (fino a 200 g, 1600 misure/s) + GPS + secure element ATECC608, a batteria.
-- Ogni 16 secondi, o subito dopo un urto, il chip firma un gruppo di letture e lo invia.
-- Contratto `CustodyLog` su **Base Sepolia**: verifica la firma del chip on-chain, registra la catena di custodia con passaggi a due firme e attribuisce ogni urto al custode del momento.
-- Contratto `RentalEscrow` su Base Sepolia: collaterale in stablecoin di test, trattenuta automatica per livello di urto. Provato end-to-end.
-- Dashboard minima e API per la web app.
+- Chip: ESP32 + ADXL375 accelerometer (up to 200 g, 1600 measurements/s) + GPS + ATECC608 secure element, battery-powered.
+- Every 16 seconds, or immediately after a shock, the chip signs a group of readings and sends it.
+- `CustodyLog` contract on **Base Sepolia**: verifies the chip's signature on-chain, records the chain of custody with two-signature handoffs, and attributes each shock to the custodian at that moment.
+- `RentalEscrow` contract on Base Sepolia: test-stablecoin collateral, automatic fee withheld by shock level. Tested end-to-end.
+- Minimal dashboard and API for the web app.
 
-Dettagli: `docs/STATUS.md`. Scelte tecniche: `docs/DESIGN.md`.
+Details: `docs/STATUS.md`. Technical choices: `docs/DESIGN.md`.
 
-## 6. Limiti (da dire prima che li dica il professore)
+## 6. Limitations (to state before the professor does)
 
-- **Il problema dell'oracolo.** La blockchain garantisce i dati che riceve, non che siano veri. La nostra risposta è firmare alla fonte con un secure element: il dato non si può alterare dopo. Resta la manomissione fisica (chip staccato, sensore schermato), che si limita con un fissaggio rigido e un contenitore che mostra se è stato aperto.
-- **Un urto non è un danno.** Un picco di accelerazione è un indizio, non una perizia. Le soglie sono una regola che il cliente accetta allo sblocco, tarata con test di caduta reali (`docs/CALIBRATION.md`).
-- **Privacy.** Percorsi GPS e scoring delle persone non devono finire in chiaro on-chain (GDPR, diritto alla cancellazione). On-chain vanno solo impronte crittografiche; i dati personali restano off-chain, sotto il controllo dell'utente.
-- **Disponibilità dei dati.** La catena prova che le letture non sono state alterate, ma le letture stesse vanno conservate da qualcuno. Evoluzione: archiviazione decentralizzata (IPFS/Arweave).
-- **Connettività ed energia.** Oggi WiFi, circa 12–15 h di autonomia. In un prodotto: LTE-M/NB-IoT o Bluetooth verso il telefono del cliente, e consumi ridotti.
+- **The oracle problem.** The blockchain guarantees the data it receives, not that the data is true. Our answer is to sign at the source with a secure element: the data cannot be altered afterwards. Physical tampering remains (chip detached, sensor shielded), which is limited by rigid mounting and an enclosure that shows if it has been opened.
+- **A shock is not damage.** An acceleration peak is an indication, not a survey. The thresholds are a rule the renter accepts at unlock, calibrated with real drop tests (`docs/CALIBRATION.md`).
+- **Privacy.** GPS routes and scoring of individuals must not end up in the clear on-chain (GDPR, right to erasure). Only cryptographic fingerprints go on-chain; personal data stays off-chain, under the user's control.
+- **Data availability.** The chain proves that the readings have not been altered, but someone still has to store the readings themselves. Evolution: decentralized storage (IPFS/Arweave).
+- **Connectivity and power.** Today it uses WiFi, with about 12–15 h of battery life. In a product: LTE-M/NB-IoT or Bluetooth to the renter's phone, and lower power consumption.
 
 ## 7. Roadmap
 
-1. **Oggi:** noleggio con collaterale (la demo).
-2. **Poi:** storico pubblico per oggetto, valido tra aziende e paesi (noleggio auto internazionale, flotte).
-3. **Poi:** assicurazioni parametriche che leggono lo storico e pagano in automatico.
-4. **Poi:** mercato dell'usato con storico verificabile; scoring bidirezionale con tutela della privacy.
-5. **Visione:** la scatola nera come standard per qualunque oggetto di valore che cambia mano.
+1. **Today:** rentals with collateral (the demo).
+2. **Next:** a public history per object, valid across companies and countries (international car rental, fleets).
+3. **Next:** parametric insurance that reads the history and pays out automatically.
+4. **Next:** a second-hand market with verifiable history; two-way scoring with privacy protection.
+5. **Vision:** the black box as the standard for any valuable object that changes hands.
 
-## 8. La demo (circa 90 secondi)
+## 8. The demo (about 90 seconds)
 
-1. La "bici" (la scatola con il chip) è del proprietario. Il cliente la sblocca e **50 USD di test** vanno nel contratto.
-2. Il cliente la usa e le letture arrivano on-chain.
-3. **La scatola cade.** Compare l'urto, attribuito al cliente, con il link alla transazione su basescan.
-4. Il cliente la riconsegna. **Il contratto trattiene la fee e restituisce il resto, da solo.**
-5. Si clicca su una lettura e si mostra la prova crittografica verificata on-chain: chiunque può controllarla.
+1. The "bike" (the box with the chip) belongs to the owner. The renter unlocks it and **50 test USD** go into the contract.
+2. The renter uses it and the readings arrive on-chain.
+3. **The box is dropped.** The shock appears, attributed to the renter, with the link to the transaction on basescan.
+4. The renter returns it. **The contract withholds the fee and returns the rest, on its own.**
+5. Click on a reading and show the cryptographic proof verified on-chain: anyone can check it.
 
-Piano B: video registrato della stessa sequenza.
+Plan B: a recorded video of the same sequence.
