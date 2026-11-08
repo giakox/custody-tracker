@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Custody Tracker</title>
+<title>Custody Tracker · noleggio</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
@@ -39,13 +39,21 @@
   <section class="card"><div id="map"></div></section>
   <section style="display:grid; gap:16px; align-content:start; min-width:0">
     <div class="card">
-      <div class="mute">Stato spedizione</div>
+      <div class="mute">Noleggio</div>
       <div class="status" id="status">in attesa del primo batch</div>
       <div id="custodian" class="mute"></div>
+      <div id="terms" class="mute"></div>
       <div style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap">
-        <button onclick="handoff('carrierB')">Handoff → Vettore B</button>
-        <button onclick="handoff('receiver')">Consegna → Destinatario</button>
+        <button onclick="rent('alice')">Sblocca: Alice</button>
+        <button onclick="rent('bob')">Sblocca: Bob</button>
+        <button onclick="giveBack()">Riconsegna e regola</button>
+        <span id="busy" class="mute"></span>
       </div>
+      <div id="balances" class="mute" style="margin-top:8px"></div>
+    </div>
+    <div class="card">
+      <div class="mute" style="margin-bottom:6px">Noleggi chiusi (regolati dal contratto RentalEscrow)</div>
+      <div class="scroll"><table><thead><tr><th>cliente</th><th>picco</th><th>livello</th><th>trattenuti</th><th>restituiti</th><th>tx</th></tr></thead><tbody id="settled"></tbody></table></div>
     </div>
     <div class="card">
       <div class="mute" style="margin-bottom:6px">Batch ancorati on-chain (clic su un punto della mappa per la Merkle proof)</div>
@@ -58,7 +66,10 @@
 const map = L.map("map").setView([45.455, 9.23], 13);
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "© OpenStreetMap" }).addTo(map);
 const layer = L.layerGroup().addTo(map);
-const COLORS = { carrierA: "#2d5bd7", carrierB: "#8e44ad", receiver: "#1f7a4d" };
+const COLORS = { owner: "#1f7a4d", alice: "#2d5bd7", bob: "#8e44ad" };
+const TIERS = ["nessuno", "leggero", "medio", "forte"];
+const g = (cg) => (Number(cg) / 100).toFixed(1) + " g";
+const link = (h) => S.explorer ? `<a target="_blank" href="${S.explorer}/tx/${h}">${h.slice(0, 10)}…</a>` : h.slice(0, 10) + "…";
 let lastKey = "", fitted = false, S = null;
 
 async function refresh() {
@@ -66,13 +77,19 @@ async function refresh() {
   document.getElementById("net").textContent = `${S.network} · chain ${S.chainId}`;
   const c = document.getElementById("contract");
   c.innerHTML = S.explorer ? `<a target="_blank" href="${S.explorer}/address/${S.contract}">${S.contract}</a>` : `<code>${S.contract}</code>`;
+  const t = S.terms;
+  document.getElementById("terms").textContent = `Collaterale ${t.collateral} dUSD · soglie ${g(t.lightCg)} / ${g(t.mediumCg)} / ${g(t.strongCg)} → trattenuta ${t.lightBps / 100}% / ${t.mediumBps / 100}% / ${t.strongBps / 100}%`;
+  document.getElementById("balances").textContent = "Saldi dUSD: " + Object.entries(S.balances).map(([r, b]) => `${r} ${Number(b).toFixed(2)}`).join(" · ");
   if (S.onchain) {
     const st = document.getElementById("status");
-    st.textContent = (S.onchain.delivered ? "Consegnata" : "In viaggio") + (S.onchain.damaged ? " · DANNO REGISTRATO" : " · integra");
-    st.className = "status " + (S.onchain.damaged ? "bad" : "ok");
-    const who = Object.entries(S.roles).find(([, a]) => a.toLowerCase() === S.onchain.custodian.toLowerCase());
-    document.getElementById("custodian").textContent = `Custode on-chain: ${who ? who[0] : S.onchain.custodian} · soglia ${(S.maxCg / 100).toFixed(0)} g · ultimo seq ${S.onchain.lastSeq}`;
+    if (S.rental) {
+      st.textContent = `Noleggiato da ${S.rental.renter} · picco ${g(S.rental.peakCg)} · livello ${TIERS[S.rental.tier]}`;
+      st.className = "status " + (S.rental.tier > 0 ? "bad" : "ok");
+    } else { st.textContent = "Disponibile (dal proprietario)"; st.className = "status ok"; }
+    document.getElementById("custodian").textContent = `Custode on-chain: ${S.onchain.custodianRole} · periodo ${S.onchain.period} · ultimo seq ${S.onchain.lastSeq}`;
   }
+  document.getElementById("settled").innerHTML = [...S.settlements].reverse().map((x) =>
+    `<tr><td>${x.renter}</td><td>${g(x.peakCg)}</td><td class="${x.tier ? "bad" : "ok"}">${TIERS[x.tier]}</td><td>${x.fee}</td><td>${x.refund}</td><td>${link(x.tx)}</td></tr>`).join("");
   const key = S.batches.map((b) => b.tx).join();
   if (key === lastKey) return;
   lastKey = key;
@@ -102,12 +119,17 @@ async function prove(seq, i) {
     `lettura: ${JSON.stringify(p.decoded)}\nrecord: ${p.record}\nroot: ${p.root}\nproof (${p.proof.length}):\n${p.proof.join("\n")}`;
 }
 
-async function handoff(to) {
-  const r = await fetch("/api/handoff", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ to }) });
-  const j = await r.json();
-  if (!r.ok) alert(j.error);
-  lastKey = ""; refresh();
+async function post(path, payload) {
+  const busy = document.getElementById("busy");
+  busy.textContent = "transazioni in corso…";
+  try {
+    const r = await fetch(path, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload || {}) });
+    const j = await r.json();
+    if (!r.ok) alert(j.error);
+  } finally { busy.textContent = ""; lastKey = ""; refresh(); }
 }
+const rent = (renter) => post("/api/rental/start", { renter });
+const giveBack = () => post("/api/rental/end");
 
 refresh(); setInterval(refresh, 2000);
 </script>

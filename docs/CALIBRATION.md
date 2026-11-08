@@ -41,7 +41,7 @@ Residuo atteso dopo la calibrazione: meno di 0,1 g, cioè sotto il rumore di qua
 
 ### 3. Soglie a tre livelli (leggero / medio / forte)
 
-Il prodotto (vedi `docs/PRODUCT.md`) trattiene una fee in base alla gravità dell'urto. Le soglie **vanno misurate**, non inventate, perché il picco dipende quasi tutto da **come** il bene si ferma:
+Il prodotto (vedi `docs/VISION.md`) trattiene una fee in base alla gravità dell'urto. Le soglie **vanno misurate**, non inventate, perché il picco dipende quasi tutto da **come** il bene si ferma:
 
 - da un'altezza h la velocità d'impatto è v = √(2gh);
 - se l'arresto avviene in uno spazio d, il picco medio è a/g ≈ h/d;

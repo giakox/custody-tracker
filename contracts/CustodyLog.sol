@@ -43,6 +43,13 @@ contract CustodyLog {
     mapping(uint256 => mapping(uint32 => Batch)) public batches;
     uint256 public shipmentCount;
 
+    /// @notice Periodo di custodia corrente: aumenta di 1 a ogni passaggio accettato.
+    ///         Un noleggio corrisponde a un periodo (sblocco → riconsegna).
+    mapping(uint256 => uint32) public custodyPeriod;
+    /// @notice Picco massimo registrato per spedizione e periodo di custodia (centesimi di g).
+    ///         Lo legge RentalEscrow per regolare il collaterale del noleggio.
+    mapping(uint256 => mapping(uint32 => uint16)) public periodMaxPeakCg;
+
     event DeviceRegistered(bytes32 indexed deviceId, bytes32 qx, bytes32 qy);
     event ShipmentCreated(uint256 indexed id, bytes32 indexed deviceId, address shipper, address carrier, address receiver);
     event HandoffProposed(uint256 indexed id, address from, address to);
@@ -99,6 +106,7 @@ contract CustodyLog {
         address from = s.custodian;
         s.custodian = msg.sender;
         s.pendingCustodian = address(0);
+        custodyPeriod[id]++;
         emit CustodyTransferred(id, from, msg.sender);
         if (msg.sender == s.receiver) {
             s.delivered = true;
@@ -144,6 +152,8 @@ contract CustodyLog {
         s.lastSeq = seq;
         batches[id][seq] = Batch(root, count, maxPeakCg, tStart, tEnd, s.custodian);
         emit BatchAnchored(id, seq, root, maxPeakCg, s.custodian);
+        uint32 period = custodyPeriod[id];
+        if (maxPeakCg > periodMaxPeakCg[id][period]) periodMaxPeakCg[id][period] = maxPeakCg;
 
         if (maxPeakCg > s.maxAllowedCg) {
             s.damaged = true;
