@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Custody Tracker</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  :root { --bg:#f6f6f3; --card:#fff; --fg:#1b1b1b; --mute:#6b6b6b; --line:#e3e3de; --ok:#1f7a4d; --bad:#c0392b; --acc:#2d5bd7; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#121212; --card:#1c1c1c; --fg:#ececec; --mute:#9a9a9a; --line:#2c2c2c; --ok:#4cc38a; --bad:#ff6b5e; --acc:#7aa2ff; } }
+  * { box-sizing: border-box; }
+  body { margin:0; font:14px/1.45 ui-sans-serif, system-ui, -apple-system, sans-serif; background:var(--bg); color:var(--fg); }
+  header { padding:16px; display:flex; flex-wrap:wrap; gap:8px 24px; align-items:baseline; border-bottom:1px solid var(--line); }
+  h1 { font-size:18px; margin:0; }
+  .mute { color:var(--mute); } code { font-size:12px; }
+  main { display:grid; grid-template-columns: 1.4fr 1fr; gap:16px; padding:16px; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px; min-width:0; }
+  #map { height: 460px; border-radius:8px; }
+  .status { font-size:22px; font-weight:600; }
+  .ok { color:var(--ok); } .bad { color:var(--bad); }
+  button { font:inherit; padding:7px 12px; border-radius:8px; border:1px solid var(--line); background:var(--card); color:var(--fg); cursor:pointer; }
+  button:hover { border-color:var(--acc); }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  td, th { padding:6px 4px; border-bottom:1px solid var(--line); text-align:left; white-space:nowrap; }
+  .scroll { overflow-x:auto; }
+  a { color:var(--acc); }
+  pre { white-space:pre-wrap; word-break:break-all; font-size:12px; margin:0; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Custody Tracker</h1>
+  <span class="mute" id="net"></span>
+  <span class="mute" id="contract"></span>
+</header>
+<main>
+  <section class="card"><div id="map"></div></section>
+  <section style="display:grid; gap:16px; align-content:start; min-width:0">
+    <div class="card">
+      <div class="mute">Stato spedizione</div>
+      <div class="status" id="status">in attesa del primo batch</div>
+      <div id="custodian" class="mute"></div>
+      <div style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap">
+        <button onclick="handoff('carrierB')">Handoff → Vettore B</button>
+        <button onclick="handoff('receiver')">Consegna → Destinatario</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="mute" style="margin-bottom:6px">Batch ancorati on-chain (clic su un punto della mappa per la Merkle proof)</div>
+      <div class="scroll"><table><thead><tr><th>seq</th><th>picco</th><th>custode</th><th>gas</th><th>tx</th></tr></thead><tbody id="rows"></tbody></table></div>
+    </div>
+    <div class="card"><div class="mute">Verifica lettura</div><pre id="proof">—</pre></div>
+  </section>
+</main>
+<script>
+const map = L.map("map").setView([45.455, 9.23], 13);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "© OpenStreetMap" }).addTo(map);
+const layer = L.layerGroup().addTo(map);
+const COLORS = { carrierA: "#2d5bd7", carrierB: "#8e44ad", receiver: "#1f7a4d" };
+let lastKey = "", fitted = false, S = null;
+
+async function refresh() {
+  S = await (await fetch("/api/state")).json();
+  document.getElementById("net").textContent = `${S.network} · chain ${S.chainId}`;
+  const c = document.getElementById("contract");
+  c.innerHTML = S.explorer ? `<a target="_blank" href="${S.explorer}/address/${S.contract}">${S.contract}</a>` : `<code>${S.contract}</code>`;
+  if (S.onchain) {
+    const st = document.getElementById("status");
+    st.textContent = (S.onchain.delivered ? "Consegnata" : "In viaggio") + (S.onchain.damaged ? " · DANNO REGISTRATO" : " · integra");
+    st.className = "status " + (S.onchain.damaged ? "bad" : "ok");
+    const who = Object.entries(S.roles).find(([, a]) => a.toLowerCase() === S.onchain.custodian.toLowerCase());
+    document.getElementById("custodian").textContent = `Custode on-chain: ${who ? who[0] : S.onchain.custodian} · soglia ${(S.maxCg / 100).toFixed(0)} g · ultimo seq ${S.onchain.lastSeq}`;
+  }
+  const key = S.batches.map((b) => b.tx).join();
+  if (key === lastKey) return;
+  lastKey = key;
+  layer.clearLayers();
+  const rows = [];
+  for (const b of S.batches) {
+    const pts = b.decoded.filter((d) => d.flags & 1).map((d) => [d.lat, d.lon]);
+    if (pts.length) L.polyline(pts, { color: COLORS[b.custodian] || "#888", weight: 4 }).addTo(layer);
+    b.decoded.forEach((d, i) => {
+      if (!(d.flags & 1)) return;
+      const shock = d.peakCg > S.maxCg;
+      L.circleMarker([d.lat, d.lon], { radius: shock ? 9 : 3, color: shock ? "#c0392b" : COLORS[b.custodian] || "#888", fillOpacity: shock ? .8 : .5 })
+        .on("click", () => prove(b.seq, i)).bindTooltip(`seq ${b.seq} #${i} · ${(d.peakCg / 100).toFixed(1)} g`).addTo(layer);
+    });
+    const tx = S.explorer ? `<a target="_blank" href="${S.explorer}/tx/${b.tx}">${b.tx.slice(0, 10)}…</a>` : b.tx.slice(0, 10) + "…";
+    rows.push(`<tr><td>${b.seq}</td><td class="${b.maxPeakCg > S.maxCg ? "bad" : ""}">${(b.maxPeakCg / 100).toFixed(1)} g</td><td>${b.custodian}</td><td>${b.gasUsed}</td><td>${tx}${b.hw ? "" : " <span class='mute'>(sw)</span>"}</td></tr>`);
+  }
+  document.getElementById("rows").innerHTML = rows.reverse().join("");
+  const all = S.batches.flatMap((b) => b.decoded.filter((d) => d.flags & 1).map((d) => [d.lat, d.lon]));
+  if (all.length) { map.invalidateSize(); map.fitBounds(all, { padding: [30, 30], maxZoom: 16 }); }
+}
+
+async function prove(seq, i) {
+  const p = await (await fetch(`/api/proof?seq=${seq}&i=${i}`)).json();
+  document.getElementById("proof").innerHTML =
+    `<span class="${p.verifiedOnChain ? "ok" : "bad"}">${p.verifiedOnChain ? "✔ verificata on-chain (verifyReading)" : "✗ non verificata"}</span>\n` +
+    `lettura: ${JSON.stringify(p.decoded)}\nrecord: ${p.record}\nroot: ${p.root}\nproof (${p.proof.length}):\n${p.proof.join("\n")}`;
+}
+
+async function handoff(to) {
+  const r = await fetch("/api/handoff", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ to }) });
+  const j = await r.json();
+  if (!r.ok) alert(j.error);
+  lastKey = ""; refresh();
+}
+
+refresh(); setInterval(refresh, 2000);
+</script>
+</body>
+</html>

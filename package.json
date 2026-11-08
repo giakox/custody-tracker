@@ -1,0 +1,28 @@
+{
+  "name": "custody-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "node": "hardhat node",
+    "deploy": "hardhat run scripts/deploy.mjs",
+    "relayer": "node relayer/server.mjs",
+    "sim": "node relayer/simulate.mjs",
+    "deploy:base": "hardhat run scripts/deploy.mjs --network baseSepolia",
+    "relayer:base": "NETWORK=baseSepolia node relayer/server.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-viem": "^2.1.5",
+    "@openzeppelin/contracts": "^5.6.1",
+    "chai": "^4.5.0",
+    "chai-as-promised": "^7.1.2",
+    "hardhat": "^2.29.1",
+    "viem": "^2.57.16"
+  }
+}

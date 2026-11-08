@@ -1,0 +1,8 @@
+node_modules/
+artifacts/
+cache/
+data/
+data-*.log
+.env
+firmware/CustodyTracker/config.h
+deployments/localhost.json
