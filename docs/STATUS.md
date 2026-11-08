@@ -20,13 +20,21 @@ Il percorso completo funziona dal sensore al contratto. È stato verificato con 
 
 **Secure element volutamente non provisionato.** `PROVISION` blocca per sempre la configurazione dell'ATECC608. Finché il protocollo può ancora cambiare, i batch sono firmati con una chiave software in NVS (`hw: false` nell'API). Lo facciamo prima della demo. Il resto del sistema non cambia: il device ottiene solo una nuova identità e una nuova spedizione.
 
+## Base Sepolia (testnet pubblica)
+
+- Contratto `CustodyLog`: [`0xa4ae868952eaf7b248bd70a986954f1c4c3f7f91`](https://sepolia.basescan.org/address/0xa4ae868952eaf7b248bd70a986954f1c4c3f7f91) (chain 84532). Indirizzo anche in `deployments/baseSepolia.json`.
+- Relayer / deployer: [`0xDD15B25f8b1E18482d491992298844e54E50FC35`](https://sepolia.basescan.org/address/0xDD15B25f8b1E18482d491992298844e54E50FC35). La chiave è solo nel `.env` di Giacomo.
+- Avvio: `npm run relayer:base` (stessa porta 8787, il firmware non cambia).
+- **Costo misurato per batch** (16 letture, verifica P-256 on-chain): 120.119 gas × 0,006 gwei ≈ **7,2·10⁻⁷ ETH**; la L1 data fee è trascurabile (~5·10⁻¹⁶ ETH). Con un batch ogni 16 s sono ~0,00016 ETH/h. Il prezzo del gas su testnet non è quello di mainnet: per le slide va dichiarato come stima.
+- **Budget:** il faucet ha dato 0,0001 ETH, che bastano per circa 120 batch (~30 minuti di device acceso). Prima della demo servono almeno 0,005 ETH da un faucet. Quando non serve, spegnete il relayer: i batch non inviati vengono scartati dal device, non c'è altro effetto.
+
 ## Cosa manca per la demo d'esame
 
 In ordine di priorità.
 
 | # | Cosa | Chi | Note |
 |---|---|---|---|
-| 1 | **Deploy su Base Sepolia** | chain (Giacomo) | chiave del progetto già generata in `.env` (escluso da git), indirizzo `0xDD15B25f8b1E18482d491992298844e54E50FC35`: va finanziato da un faucet Base Sepolia, poi `npm run deploy:base` e `npm run relayer:base`. Dà indirizzo pubblico, transazioni su basescan e gas reale da mettere nelle slide |
+| 1 | ~~Deploy su Base Sepolia~~ ✅ | chain (Giacomo) | fatto: vedi sezione "Base Sepolia" sotto. **Da fare:** più ETH di test sull'indirizzo del relayer prima della demo |
 | 2 | **Web app** | frontend (compagni) | vedi sotto: deve leggere gli eventi dal contratto, non solo il relayer |
 | 3 | **Scatola** | hardware | batteria già funzionante; manca il montaggio rigido dell'ADXL375 nella scatola e il test di caduta da 30–50 cm (`docs/HARDWARE.md`, ultimo checkpoint) |
 | 4 | **PROVISION ATECC608** | hardware | a protocollo congelato, almeno 2 giorni prima della demo |

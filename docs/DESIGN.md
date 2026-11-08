@@ -34,4 +34,5 @@ Limiti da dire nel pitch, prima che li dica il prof:
 
 ## Numeri misurati
 
-- Gas per batch da 16 letture, chain locale Hardhat: ~120k (`submitBatch` con verifica P-256). Da rimisurare su Base Sepolia prima di metterlo nelle slide.
+- Gas per batch da 16 letture: ~120k (`submitBatch` con verifica P-256), uguale in locale e su Base Sepolia.
+- Costo su Base Sepolia (8 novembre 2026): 120.119 gas × 0,006 gwei ≈ 7,2·10⁻⁷ ETH per batch, L1 data fee trascurabile. Prezzo del gas di testnet: in slide va presentato come ordine di grandezza.

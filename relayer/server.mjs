@@ -45,8 +45,10 @@ const roleAddr = (r) => privateKeyToAccount(db.roles[r]).address;
 async function fundRoles() {
   for (const r of Object.keys(db.roles)) {
     const bal = await pub.getBalance({ address: roleAddr(r) });
-    if (bal < parseEther("0.0002")) {
-      const hash = await relayer.sendTransaction({ to: roleAddr(r), value: parseEther("0.0005") });
+    // Su Base Sepolia un handoff costa ~4e-7 ETH: 0,00001 ETH per ruolo bastano per decine di handoff.
+    const fund = parseEther(process.env.ROLE_FUND_ETH || (NET === "localhost" ? "0.0005" : "0.00001"));
+    if (bal < fund / 2n) {
+      const hash = await relayer.sendTransaction({ to: roleAddr(r), value: fund });
       await pub.waitForTransactionReceipt({ hash, timeout: 60_000 });
     }
   }
