@@ -146,6 +146,23 @@
 .fleet-map, .ride-map { background: var(--midnight) !important; }
 @media (max-width: 760px) {
   /* credits sit just above the bottom strip, compact */
-  .map-shell .leaflet-bottom.leaflet-right { bottom: 70px; }
+  .map-shell .leaflet-bottom.leaflet-right { bottom: 150px; }
   .leaflet-control-attribution { font-size: 9px; max-width: 70vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+}
+
+/* Round 1: the nearest rentable bike as a card over the map, with Rent one tap away. */
+.nearest { position: absolute; z-index: 700; left: calc(400px + 14px); bottom: 14px; /* over the map, right of the 400 px list */ width: min(420px, calc(100% - 28px)); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center;
+  background: rgba(2, 7, 10, .94); border: 1px solid rgba(2, 151, 222, .55); border-radius: 10px; padding: 14px 14px 14px 16px; box-shadow: 0 12px 40px rgba(0, 0, 0, .55); }
+.nearest-info { display: grid; gap: 4px; text-align: left; background: none; border: 0; padding: 0; color: inherit; font: inherit; cursor: pointer; min-width: 0; }
+.nearest-k { font-size: 11px; color: var(--blue); }
+.nearest-name { font-size: 21px; color: var(--ink); line-height: 1.15; }
+.nearest-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: 12px; color: var(--fog); }
+.nearest-actions { display: grid; gap: 6px; }
+.nearest-actions .btn { min-height: 44px; }
+.nearest-list { font-size: 12px; min-height: 34px !important; padding: 0 12px; }
+.map-legend { left: auto; right: 14px; top: 62px; bottom: auto; }
+@media (max-width: 760px) {
+  .strip { display: none !important; }
+  .nearest { left: 0; right: 0; bottom: 0; width: auto; border-radius: 14px 14px 0 0; border-width: 1px 0 0; padding: 16px var(--gutter) 18px; }
+  .nearest-actions .btn { padding: 0 18px; }
 }

@@ -8,7 +8,7 @@ import { FleetMap, type LatLon } from "../components/FleetMap";
 import { BikeDetail, BlackBoxLine, LiveBadge } from "../components/BikeCard";
 import { BOCCONI } from "../data/mock/fleet";
 import { href } from "../ui/router";
-import { distanceText, metres } from "../ui/geo";
+import { distanceText, metres, walkText } from "../ui/geo";
 import "./object-page.css";
 import "./site.css";
 import "./map.css";
@@ -31,7 +31,7 @@ export function HomePage() {
   const current = bikes.find((x) => x.b.key === selected) ?? null;
   const fleetBikes = useMemo(() => bikes.map((x) => x.b), [bikes]);
   // Room taken by the buttons (top), the legend or bottom strip: the first framing keeps pins clear of them.
-  const padding = useMemo(() => (window.matchMedia("(max-width: 760px)").matches ? { top: 64, bottom: 76, left: 0, sheet: 0.66 } : { top: 64, bottom: 48, left: 0 }), []);
+  const padding = useMemo(() => (window.matchMedia("(max-width: 760px)").matches ? { top: 64, bottom: 140, left: 0, sheet: 0.66 } : { top: 64, bottom: 130, left: 0 }), []);
   const select = useCallback((k: string | null) => { setSelected(k); if (k) setView("map"); }, []);
 
   const locate = () => {
@@ -90,11 +90,27 @@ export function HomePage() {
             </p>
           </div>
           {!current && view === "map" && (
-            <button type="button" className="strip" onClick={() => setView("list")}>
-              <span className="strip-grip" aria-hidden="true" />
-              <span><b>{bikes.length} bikes nearby</b>{live ? " · 1 live" : ""}</span>
-              <span className="mono strip-cta">Show the list</span>
-            </button>
+            // The one bike you can actually rent, one tap away (Lime's "Find Available Scooter").
+            <div className="nearest" role="region" aria-label="Nearest bike you can rent">
+              {live ? (
+                <>
+                  <button type="button" className="nearest-info" onClick={() => select(live.b.key)}>
+                    <span className="nearest-k mono">Nearest · {distanceText(live.d)} · {walkText(live.d)}</span>
+                    <span className="nearest-name">{live.b.label}</span>
+                    <span className="nearest-meta mono"><LiveBadge live />{live.b.pricePerHour} dUSD/h · deposit {live.b.deposit}</span>
+                  </button>
+                  <div className="nearest-actions">
+                    <a className="btn btn-primary" href={href(`rent/${live.b.objectId}`)}>Rent</a>
+                    <button type="button" className="btn btn-secondary nearest-list" onClick={() => setView("list")}>{bikes.length} nearby</button>
+                  </div>
+                </>
+              ) : (
+                <button type="button" className="nearest-info" onClick={() => setView("list")}>
+                  <span className="nearest-k mono">The live bike is out on a rental right now</span>
+                  <span className="nearest-name">{bikes.length} sample bikes nearby</span>
+                </button>
+              )}
+            </div>
           )}
           {current && (
             <div className="sheet" role="dialog" aria-label={current.b.label}>
