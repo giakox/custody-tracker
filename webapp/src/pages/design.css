@@ -9,14 +9,14 @@
 .scheme ol { list-style: none; margin: 0; padding: 0; counter-reset: none; }
 .stage { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; padding: 26px 0; border-bottom: 1px solid var(--line); position: relative; }
 .stage + .stage::before { content: ""; position: absolute; left: 22px; top: -14px; width: 1px; height: 28px; background: var(--blue); }
-.stage-block { border: 1px solid var(--ink); border-radius: 6px; padding: 20px 22px; background: var(--midnight); }
-.stage-n { color: var(--blue); font-size: 14px; }
+.stage-block { border: 1px solid var(--ink); border-radius: var(--radius); padding: 20px 22px; background: var(--bg); }
+.stage-n { color: var(--blue-ink); font-size: 14px; }
 .stage-block h3 { font-size: clamp(24px, 2.4vw, 30px); margin-top: 6px; letter-spacing: -0.01em; }
 .stage-parts { font-size: 14px; color: var(--fog); margin-top: 6px; }
 .stage-block p:last-child { margin-top: 12px; font-size: 18px; line-height: 1.5; color: var(--ink); }
-.stage-threat { border: 1px dashed var(--line-strong); border-radius: 6px; padding: 20px 22px; display: grid; gap: 14px; align-content: start; }
+.stage-threat { border: 1px dashed var(--line-strong); border-radius: var(--radius); padding: 20px 22px; display: grid; gap: 14px; align-content: start; }
 .stage-threat p { font-size: 18px; line-height: 1.5; color: var(--ink); }
-.stage-threat .k { display: block; font-size: 12px; color: var(--blue); margin-bottom: 4px; }
+.stage-threat .k { display: block; font-size: 12px; color: var(--blue-ink); margin-bottom: 4px; }
 .stage-threat p + p .k { color: var(--fog); }
 .scheme-foot { margin-top: 22px; font-size: 18px; color: var(--mist); max-width: 80ch; }
 .scheme-foot .link { font-size: 13px; }
@@ -34,14 +34,14 @@
 .test thead th { font: 13px var(--mono); color: var(--fog); padding: 10px 0; }
 .test tbody th { font-weight: 400; color: var(--ink); padding-right: 28px; width: 48%; }
 .test td { color: var(--mist); }
-.yn { display: inline-block; min-width: 44px; margin-right: 12px; font-size: 13px; padding: 2px 8px; border-radius: 3px; text-align: center; }
-.yn.yes { background: var(--blue); color: var(--midnight); }
+.yn { display: inline-block; min-width: 44px; margin-right: 12px; font-size: 13px; padding: 2px 8px; border-radius: var(--radius); text-align: center; }
+.yn.yes { background: var(--blue); color: var(--on-blue); }
 .yn.no { border: 1px solid var(--ink); color: var(--ink); }
 .verdict { font-size: clamp(22px, 2.2vw, 28px); color: var(--ink); margin-top: 6px; }
 
 .four { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line-strong); counter-reset: f; }
 .four li { counter-increment: f; padding: 18px 24px 18px 0; border-bottom: 1px solid var(--line); font-size: 18px; line-height: 1.5; color: var(--mist); }
-.four li::before { content: "0" counter(f); display: block; font: 13px var(--mono); color: var(--blue); margin-bottom: 6px; }
+.four li::before { content: "0" counter(f); display: block; font: 13px var(--mono); color: var(--blue-ink); margin-bottom: 6px; }
 .four b { font-weight: 400; color: var(--ink); }
 .qa { margin: 0; border-top: 1px solid var(--line-strong); }
 .qa div { padding: 18px 0; border-bottom: 1px solid var(--line); }

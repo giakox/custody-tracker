@@ -2,18 +2,21 @@
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
-  background: var(--midnight);
+  background: var(--bg);
   color: var(--mist);
-  font: 400 17px/1.55 var(--serif);
+  font: 400 17px/1.55 var(--text);
   font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
-h1, h2, h3 { color: var(--ink); font-weight: 400; margin: 0; }
+h1, h2, h3 { color: var(--ink); font-family: var(--display); font-weight: var(--display-weight); letter-spacing: var(--display-tracking); margin: 0; }
+h1 em, h2 em, h3 em { font-style: var(--em-style); }
 p { margin: 0; }
 a { color: inherit; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
 a:hover { text-decoration-color: currentColor; }
-:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
-.mono { font-family: var(--mono); font-size: 13px; letter-spacing: 0; font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--blue-ink); outline-offset: 3px; }
+.mono { font-family: var(--ui); font-size: 13px; letter-spacing: 0; font-variant-numeric: tabular-nums; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+/* Monospace only where the proof is: hashes, batch numbers, raw values. Everywhere else data reads in the UI face. */
+.proof .mono, .design .mono, .verify .mono, .v-hex, .ledger .mono, .tx { font-family: var(--mono); }

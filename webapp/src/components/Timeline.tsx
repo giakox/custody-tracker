@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import type { ObjectDetail } from "../data/types";
 import { buildStory, type Chapter, type StoryEvent } from "../ui/story";
-import { day, g, hm, inSentence, nameOf, possessive, shortHex, span, txUrl, usd } from "../ui/format";
+import { day, g, hm, inSentence, nameOf, possessive, shortHex, span, TIER_NAMES, txUrl, usd } from "../ui/format";
 import { TierMeter } from "./TierMeter";
 
 function Tx({ explorer, tx }: { explorer: string | null; tx: string }) {
@@ -14,47 +14,47 @@ function Tx({ explorer, tx }: { explorer: string | null; tx: string }) {
 
 const Seq = ({ n }: { n: number }) => <a className="mono seq-link" href={`#batch-${n}`}>seq {n}</a>;
 
-function sentence(e: StoryEvent, d: ObjectDetail): { text: ReactNode; extra?: ReactNode; tone?: "shock" | "gap" | "quiet" } {
+function sentence(e: StoryEvent): { text: ReactNode; extra?: ReactNode; tone?: "shock" | "gap" | "quiet" } {
   switch (e.kind) {
     case "registered":
-      return { text: <>Registered on-chain. From here on, the chip signs each batch of readings it sends.</>, tone: "quiet" };
+      return { text: <>Joined Sharify. From here on, its box keeps a sealed diary of every hard knock.</>, tone: "quiet" };
     case "took":
-      return { text: <>{nameOf(e.who)} took it from {inSentence(e.from)}: handover proposed and accepted on-chain.</> };
+      return { text: <>{nameOf(e.who)} picked it up from {inSentence(e.from)}.</> };
     case "deposit":
-      return { text: <>{nameOf(e.who)} locked <span className="num">{usd(e.amount)}</span> in the contract as collateral.</> };
+      return { text: <>{nameOf(e.who)} left a <span className="num">{usd(e.amount)}</span> deposit.</> };
     case "shock":
-      return { text: <>Recorded a <span className="num shock">{g(e.peakCg)}</span> shock in <Seq n={e.seq} />.</>, extra: <TierMeter tier={e.tier} />, tone: "shock" };
+      return { text: <>It was dropped: a <span className="shock">{TIER_NAMES[e.tier]}</span> knock<span className="proof-only">, <span className="num">{g(e.peakCg)}</span> in <Seq n={e.seq} /></span>.</>, extra: <TierMeter tier={e.tier} />, tone: "shock" };
     case "late":
       return {
-        text: <>A <span className="num shock">{g(e.peakCg)}</span> shock from {e.during ? `${possessive(e.during)} rental` : "the previous custody"} reached the chain after the return, so it counts for {inSentence(e.countsFor)}.</>,
+        text: <>A <span className="shock">{TIER_NAMES[e.tier]}</span> knock from {e.during ? `${possessive(e.during)} rental` : "before"} arrived after the return, so it counts for {inSentence(e.countsFor)}.</>,
         extra: <TierMeter tier={e.tier} />, tone: "shock",
       };
     case "gap":
       return {
         text: e.missing === 1
-          ? <>Seq {e.from} never reached the chain. The record shows the gap; nobody can fill it later.</>
-          : <>Seq {e.from} to {e.to} never reached the chain: {e.missing} batches missing. The record shows the gap; nobody can fill it later.</>,
+          ? <>A page of the diary never arrived<span className="proof-only"> (seq {e.from})</span>. The record shows the hole; nobody can fill it later.</>
+          : <>{e.missing} pages of the diary never arrived<span className="proof-only"> (seq {e.from} to {e.to})</span>. The record shows the hole; nobody can fill it later.</>,
         tone: "gap",
       };
     case "returned":
-      return { text: <>Back with {inSentence(e.to)}: return proposed and accepted on-chain.</> };
+      return { text: <>Back with {inSentence(e.to)}.</> };
     case "settled":
       return e.tier === 0
-        ? { text: <>Settled by the contract: nothing above {g(d.terms.lightCg)}, all <span className="num">{usd(e.refund)}</span> back to {nameOf(e.who)}.</> }
+        ? { text: <>No drops: the whole <span className="num">{usd(e.refund)}</span> deposit went back to {nameOf(e.who)}.</> }
         : {
-          text: <>Settled by the contract: <span className="num">{usd(e.fee)}</span> withheld for the {g(e.peakCg)} shock{e.causeSeq !== null && <> in <Seq n={e.causeSeq} /></>}, {Number(e.refund) === 0 ? <>nothing back to {nameOf(e.who)}</> : <><span className="num">{usd(e.refund)}</span> back to {nameOf(e.who)}</>}.</>,
+          text: <>By the rule, <span className="num">{usd(e.fee)}</span> kept for the {TIER_NAMES[e.tier]} knock<span className="proof-only">{e.causeSeq !== null && <> in <Seq n={e.causeSeq} /></>}</span>; {Number(e.refund) === 0 ? <>nothing went back to {nameOf(e.who)}</> : <><span className="num">{usd(e.refund)}</span> went back to {nameOf(e.who)}</>}.</>,
           extra: <TierMeter tier={e.tier} />,
         };
     case "offered":
       return e.to.role === "owner"
         ? { text: <>{nameOf(e.from)} handed it back. Waiting for the owner to confirm.</> }
-        : { text: <>The owner offered it to {nameOf(e.to)}. Waiting for {nameOf(e.to)} to accept and lock the collateral.</> };
+        : { text: <>The owner offered it to {nameOf(e.to)}. Waiting for {nameOf(e.to)} to accept and leave the deposit.</> };
   }
 }
 
 function ChapterBlock({ c, d, explorer }: { c: Chapter; d: ObjectDetail; explorer: string | null }) {
   const who = c.isRental ? `${possessive(c.custodian)} rental` : c.custodian.role === "owner" ? "With the owner" : `With ${nameOf(c.custodian)}`;
-  const peak = c.maxPeakCg === null ? "no readings" : c.batchCount === 1 ? "1 batch" : `${c.batchCount} batches`;
+  const peak = c.maxPeakCg === null ? "no readings" : c.batchCount === 1 ? "1 batch" : `${c.batchCount} batches`; // proof only
   const quiet = c.events.length === 0;
   return (
     <section className={`chapter ${c.isRental ? "rental" : ""} ${quiet ? "quiet" : ""}`} aria-label={who}>
@@ -62,13 +62,13 @@ function ChapterBlock({ c, d, explorer }: { c: Chapter; d: ObjectDetail; explore
         <h3>{who}</h3>
         <p className="mono">
           {day(c.start)}, {hm(c.start)}{c.end ? `–${hm(c.end)}` : ", now"} <span className="sep" aria-hidden="true">/</span> {span(c.start, c.end)}
-          <span className="sep" aria-hidden="true">/</span> {peak}{c.maxPeakCg !== null && c.maxPeakCg < d.terms.lightCg ? `, nothing above ${g(d.terms.lightCg)}` : ""}
+          <span className="proof-only"><span className="sep" aria-hidden="true">/</span> {peak}{c.maxPeakCg !== null && c.maxPeakCg < d.terms.lightCg ? `, nothing above ${g(d.terms.lightCg)}` : ""}</span>
         </p>
       </header>
       {!quiet && (
         <ol className="events">
           {c.events.map((e, i) => {
-            const s = sentence(e, d);
+            const s = sentence(e);
             return (
               <li key={i} className={`event ${s.tone ?? ""}`}>
                 <time className="mono" dateTime={new Date(e.at.at).toISOString()}>{hm(e.at.at)}</time>
@@ -92,9 +92,9 @@ function RecordSummary({ d }: { d: ObjectDetail }) {
     <dl className="record">
       <div><dt>Rentals</dt><dd className="mono">{settled.length}{d.activeRental ? " + 1 now" : ""}</dd></div>
       <div><dt>Drops</dt><dd className="mono">{drops.length === 0 ? "none" : drops.map((x) => <span key={x.t} className="record-drop"><TierMeter tier={x.t} />{x.n}</span>)}</dd></div>
-      <div><dt>Batches signed</dt><dd className="mono">{d.batches.length}</dd></div>
-      <div><dt>Missing batches</dt><dd className={`mono ${missing ? "gap" : ""}`}>{missing || "none"}</dd></div>
-      <div><dt>On record since</dt><dd className="mono">{day(d.created.at)}</dd></div>
+      <div><dt>Holes in the diary</dt><dd className={`mono ${missing ? "gap" : ""}`}>{missing || "none"}</dd></div>
+      <div><dt>On Sharify since</dt><dd className="mono">{day(d.created.at)}</dd></div>
+      <div className="proof-only"><dt>Batches signed</dt><dd className="mono">{d.batches.length}</dd></div>
     </dl>
   );
 }
@@ -103,12 +103,12 @@ export function Timeline({ d, explorer }: { d: ObjectDetail; explorer: string | 
   return (
     <section className="block timeline" aria-labelledby="timeline-title">
       <div className="block-intro">
-        <h2 id="timeline-title">What it went through</h2>
-        <p>Newest first. Each line links to the transaction that proves it, so you can check it without asking us.</p>
+        <h2 id="timeline-title">Its story</h2>
+        <p>Newest first. Every line is kept where nobody can rewrite it. <span className="proof-only">Each one links to the transaction that proves it.</span></p>
       </div>
       <div className="chapters">
         <RecordSummary d={d} />
-        <p className="record-note">Counts of what the recorder signed, not a verdict on the bike. A missing batch never reached the chain; nobody can add it later.</p>
+        <p className="record-note">What the box recorded, not a verdict on the bike. A knock is a jolt, not proof of damage.</p>
         {buildStory(d).map((c) => <ChapterBlock key={c.period} c={c} d={d} explorer={explorer} />)}
       </div>
     </section>

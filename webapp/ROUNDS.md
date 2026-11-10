@@ -84,3 +84,20 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
   https://www.uber.com/blog/live-activity-on-ios/
 - **Shots:** [before](rounds/06-before.jpg) · [after](rounds/06-after.jpg) (1440 px, Alice renting)
 - **Lines:** 5891
+
+## Themes · Light, warm, for everyone (three options to choose from)
+
+- **What:** three light themes on the same structure, switchable from the Demo menu ("Look"), or `?theme=paper|day|sticker`
+  (the old dark one stays as "Night (old)" for comparison). A · Paper: ivory, Newsreader serif, editorial.
+  B · Day: white with a warm sand neutral, Figtree, an everyday app. C · Sticker: warm stone, Bricolage Grotesque
+  headings, and the brand blue used as a surface for the rule, like the sticker on the bike. One corner radius
+  per theme (`--radius`), pills only for badges and chips. Blue fills keep dark text; text and links use a
+  darker blue (`--blue-ink`, ≥ 4.5:1 on every background). Map tiles are OpenStreetMap, warmed by a CSS filter.
+- **Also:** Home opens on a daylight photo with the rule in one sentence ("Not the owner, not us"), then the map
+  with the owners' photos, three moments of a rental, and the owner's estimator. The bike page uses a photo, plain
+  words ("knock", "deposit went back"), the rule in its own card, and keeps transactions and batch numbers behind
+  "See the proof". Monospace only on proof surfaces.
+- **Why:** Edoardo: the site read as technical and for nerds; "tutto scuro non va bene".
+- **Reference:** the Bean There Coffee site from Nate Herk's video (warm tones, big real photos, few words).
+- **Shots:** [Home A/B/C](rounds/temi-home.jpg) · [bike page A/B/C](rounds/temi-bike.jpg) (1440 and 375 px)
+- **Open:** the bike page photo is still a blue-hour shot; a daylight photo of the demo bike would fit better.

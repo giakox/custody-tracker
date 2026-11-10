@@ -9,7 +9,7 @@ function steps(d: ObjectDetail): Step[] {
   const p = d.pendingHandoff;
   const avail = last ? hm(d.periods[last.period - 1].start.at) : null;
   const mk = (states: Step["state"][], notes: (string | null)[], flag?: number): Step[] =>
-    ["Available", "Rented", "Returned", "Settled"].map((name, i) => ({ name, state: states[i], note: notes[i], flag: flag === i }));
+    ["Available", "Rented", "Returned", "Deposit settled"].map((name, i) => ({ name, state: states[i], note: notes[i], flag: flag === i }));
 
   if (p && p.to.role !== "owner") return mk(["current", "next", "next", "next"], ["now", `offered to ${nameOf(p.to)}`, null, null]);
   if (p && last) return mk(["done", "done", "current", "next"], [avail, hm(last.started.at), `requested ${hm(p.anchor.at)}`, null]);

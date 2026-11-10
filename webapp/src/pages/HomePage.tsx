@@ -3,10 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 import { getFleet, listObjects } from "../data/api";
 import { useViewer } from "../ui/viewer";
 import { SiteHeader } from "../components/SiteHeader";
-import { HowItWorks } from "../components/HowItWorks";
+import { Moments } from "../components/HowItWorks";
 import { DemoSwitcher } from "../components/DemoSwitcher";
 import { FleetMap, type LatLon } from "../components/FleetMap";
-import { BikeDetail, BlackBoxLine, LiveBadge } from "../components/BikeCard";
+import { BikeDetail, BikePhoto, BlackBoxLine, LiveBadge } from "../components/BikeCard";
 import { BOCCONI } from "../data/mock/fleet";
 import { href } from "../ui/router";
 import { distanceText, metres, walkText } from "../ui/geo";
@@ -23,11 +23,11 @@ function Earnings() {
   const month = Math.round(price * hours * 52 / 12);
   return (
     <div className="own-cta earn">
-      <h3>What could your bike <em>earn</em>?</h3>
+      <h3>What could your bike earn?</h3>
       <label className="earn-row"><span>Price per hour</span><input type="range" min={1} max={4} step={0.5} value={price} onChange={(e) => setPrice(Number(e.target.value))} /><b className="mono">{price} dUSD</b></label>
       <label className="earn-row"><span>Hours rented a week</span><input type="range" min={1} max={40} step={1} value={hours} onChange={(e) => setHours(Number(e.target.value))} /><b className="mono">{hours} h</b></label>
       <p className="earn-out"><span className="mono">≈ {month} dUSD</span> a month</p>
-      <p className="earn-note">Your price times your hours: an estimate, not a promise. The rental price is paid outside today's contract. If a renter drops the bike, the fee comes from the rule you set, settled by the contract.</p>
+      <p className="earn-note">Your price times your hours: an estimate, not a promise. If someone drops your bike, the rule you set decides what you get from their deposit.</p>
       <a className="btn btn-primary" href={href("add/1")}>Rent out your bike</a>
     </div>
   );
@@ -68,17 +68,20 @@ export function HomePage() {
   const list = (
     <div className="fleet-list">
       <div className="fleet-list-head">
-        <h1>{bikes.length} bikes free {me ? <>near <em>you</em></> : <>around <em>Bocconi</em></>}</h1>
-        <p className="muted">Nearest first. Only free, parked bikes are shown: a rented bike's position would be its renter's.</p>
+        <h2>{bikes.length} bikes free {me ? "near you" : "around Bocconi"}</h2>
+        <p className="muted">Nearest first. Bikes out on a ride aren't shown: where they are is where someone is.</p>
         {!live && fleet.data && <p className="note">{rentingIt ? "You have the live bike right now, so it isn't on the map." : "The live bike is out on a rental right now, so it isn't on the map."}</p>}
       </div>
       <ol>
         {bikes.map(({ b, d }) => (
           <li key={b.key}>
             <button type="button" className={`fleet-row ${b.live ? "is-live" : ""} ${b.key === selected ? "is-selected" : ""}`} onClick={() => select(b.key)}>
-              <span className="row-top"><span className="row-name">{b.label}</span><span className="mono row-dist">{distanceText(d)}</span></span>
-              <span className="row-meta"><LiveBadge live={b.live} /><span className="mono">{b.pricePerHour} dUSD/h · deposit {b.deposit}</span></span>
-              <BlackBoxLine b={b} />
+              <BikePhoto b={b} className="row-photo" />
+              <span className="row-body">
+                <span className="row-top"><span className="row-name">{b.label}</span><span className="mono row-dist">{distanceText(d)}</span></span>
+                <span className="row-meta"><LiveBadge live={b.live} /><span className="mono">{b.pricePerHour} dUSD an hour</span></span>
+                <BlackBoxLine b={b} />
+              </span>
             </button>
           </li>
         ))}
@@ -90,6 +93,19 @@ export function HomePage() {
     <div className="page">
       <SiteHeader />
       <main>
+        <section className="welcome" aria-labelledby="home-title">
+          <img className="welcome-photo" src="./img/day/hero-navigli.jpg" alt="A woman riding a city bike with a basket along the Naviglio in Milan, smiling" fetchPriority="high" />
+          <div className="welcome-card">
+            <h1 id="home-title">Borrow a bike from someone nearby.</h1>
+            <p>If it gets dropped, a public rule decides what you pay. Not the owner, not us.</p>
+            <div className="actions">
+              <a className="btn btn-primary btn-lg" href="#bikes" onClick={(e) => { e.preventDefault(); document.getElementById("bikes")?.scrollIntoView({ behavior: "smooth" }); }}>Find a bike near you</a>
+              <a className="btn btn-secondary btn-lg" href={href("add/1")}>Rent out your bike</a>
+            </div>
+          </div>
+        </section>
+
+        <div id="bikes" className="bikes-anchor" />
         <section className={`map-shell view-${view} ${current ? "has-selection" : ""}`} aria-label="Bikes near you">
           <aside className="map-panel">
             {current
@@ -107,7 +123,7 @@ export function HomePage() {
             </div>
             {locating === "denied" && <p className="map-msg mono" role="status">Location unavailable: showing bikes around Bocconi.</p>}
             <p className="map-legend mono" aria-hidden="true">
-              <span><i className="lg-live" />Live bike, on-chain</span><span><i className="lg-sample" />Sample fleet</span><span><i className="lg-drop" />Dropped in the last 7 days</span>
+              <span><i className="lg-live" />The live bike</span><span><i className="lg-sample" />Sample bikes</span><span><i className="lg-drop" />Dropped this week</span>
             </p>
           </div>
           {!current && view === "map" && (
@@ -115,10 +131,11 @@ export function HomePage() {
             <div className="nearest" role="region" aria-label="Nearest bike you can rent">
               {live ? (
                 <>
+                  <BikePhoto b={live.b} className="nearest-photo" />
                   <button type="button" className="nearest-info" onClick={() => select(live.b.key)}>
                     <span className="nearest-k mono">Nearest · {distanceText(live.d)} · {walkText(live.d)}</span>
                     <span className="nearest-name">{live.b.label}</span>
-                    <span className="nearest-meta mono"><LiveBadge live />{live.b.pricePerHour} dUSD/h · deposit {live.b.deposit}</span>
+                    <span className="nearest-meta mono"><LiveBadge live />{live.b.pricePerHour} dUSD an hour · {live.b.deposit} dUSD deposit</span>
                   </button>
                   <div className="nearest-actions">
                     <a className="btn btn-primary" href={href(`rent/${live.b.objectId}`)}>Rent</a>
@@ -140,16 +157,17 @@ export function HomePage() {
           )}
         </section>
 
-        <section className="home-hero" aria-labelledby="home-title">
-          <div className="home-copy">
-            <h2 id="home-title" className="home-title">Rent things without arguing about <em>damage</em>.</h2>
-            <p className="lead">A small recorder on the bike signs every shock it feels. The deposit sits in a public contract and comes back on its own: all of it, or minus a fee if the bike was dropped during your rental.</p>
+        <Moments />
+
+        <section className="owners" aria-labelledby="owners-title">
+          <div className="owners-copy">
+            <h2 id="owners-title">Your bike sits still most of the week.</h2>
+            <p>Lend it to people nearby. You set the price, the deposit and what a drop costs; the rule is public before anyone rides.</p>
           </div>
           <Earnings />
         </section>
-        <HowItWorks />
       </main>
-      <footer className="site-foot mono">Sharify · course project, Bocconi 30518 · test network only</footer>
+      <footer className="site-foot">Sharify is a course project at Bocconi (30518). It runs on a test network: no real money moves. <a className="link" href={href("design")}>How Sharify is designed</a></footer>
     </div>
   );
 }

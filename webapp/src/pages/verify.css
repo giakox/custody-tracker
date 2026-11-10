@@ -4,8 +4,8 @@
 .v-reading .kicker { font-size: 13px; color: var(--fog); }
 .bars { list-style: none; margin: 16px 0 0; padding: 0; display: flex; align-items: flex-end; gap: 4px; height: 150px; border-bottom: 1px solid var(--line-strong); }
 .bars li { flex: 1; height: 100%; }
-.bar { width: 100%; height: 100%; display: flex; align-items: flex-end; background: none; border: 0; padding: 0; cursor: pointer; border-radius: 2px; }
-.bar i { display: block; width: 100%; background: var(--line-strong); border-radius: 2px 2px 0 0; transition: background-color .15s ease; }
+.bar { width: 100%; height: 100%; display: flex; align-items: flex-end; background: none; border: 0; padding: 0; cursor: pointer; border-radius: var(--radius); }
+.bar i { display: block; width: 100%; background: var(--line-strong); border-radius: var(--radius) var(--radius) 0 0; transition: background-color .15s ease; }
 .bar:hover i { background: var(--fog); }
 .bar.is-shock i { background: var(--orange); }
 .bar.is-picked { outline: 2px solid var(--blue); outline-offset: 3px; }
@@ -15,21 +15,21 @@
 .v-facts div { padding: 12px 0; border-bottom: 1px solid var(--line); }
 .v-facts dt { font-size: 14px; color: var(--fog); }
 .v-facts dd { margin: 4px 0 0; font-size: 18px; color: var(--ink); }
-.v-facts dd.shock { color: var(--orange); }
+.v-facts dd.shock { color: var(--orange-ink); }
 
-.v-check { border: 1px solid var(--line-strong); border-radius: 8px; padding: clamp(22px, 3vw, 36px); min-height: 320px; display: grid; align-content: center; gap: 12px; }
+.v-check { border: 1px solid var(--line-strong); border-radius: var(--radius); padding: clamp(22px, 3vw, 36px); min-height: 320px; display: grid; align-content: center; gap: 12px; }
 .v-check h2 { font-size: clamp(26px, 2.6vw, 34px); line-height: 1.1; }
 .v-check > p { color: var(--mist); max-width: 52ch; }
 .v-check .btn-lg { justify-self: start; margin-top: 10px; }
 .v-asking { display: flex; align-items: center; gap: 16px; font-size: 20px; color: var(--ink); }
-.v-asking .mono { font-size: 14px; color: var(--blue); }
+.v-asking .mono { font-size: 14px; color: var(--blue-ink); }
 .spinner { width: 34px; height: 34px; border-radius: 50%; border: 3px solid var(--line-strong); border-top-color: var(--blue); animation: spin .9s linear infinite; flex: none; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .v-check.state-done { border-color: var(--blue); background: rgba(2, 151, 222, .07); }
 .v-result { display: grid; gap: 6px; }
-.v-mark { width: 64px; height: 64px; border-radius: 50%; background: var(--blue); color: var(--midnight); display: grid; place-items: center; font-size: 34px; font-weight: 700; margin-bottom: 8px; }
+.v-mark { width: 64px; height: 64px; border-radius: 50%; background: var(--blue); color: var(--on-blue); display: grid; place-items: center; font-size: 34px; font-weight: 700; margin-bottom: 8px; }
 .v-title { font-size: clamp(34px, 3.6vw, 48px); line-height: 1.02; color: var(--ink); letter-spacing: -0.02em; }
-.v-sub { font-size: clamp(20px, 2vw, 26px); font-style: italic; color: var(--blue); }
+.v-sub { font-size: clamp(20px, 2vw, 26px); font-style: italic; color: var(--blue-ink); }
 .v-result p:last-child { margin-top: 12px; color: var(--mist); max-width: 52ch; }
 .v-result.bad .v-title { color: var(--ink); }
 .again { justify-self: start; font-size: 12px; margin-top: 6px; }

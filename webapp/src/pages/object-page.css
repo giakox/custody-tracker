@@ -15,7 +15,7 @@
 .source .fresh { color: var(--dim); }
 .live { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 3px rgba(2, 151, 222, .18); }
 .live.down { background: transparent; border: 1px solid var(--dim); box-shadow: none; }
-.sample { color: var(--blue); border: 1px solid rgba(2, 151, 222, .5); border-radius: 999px; padding: 1px 9px; font-size: 11px; }
+.sample { color: var(--blue-ink); border: 1px solid rgba(2, 151, 222, .5); border-radius: var(--radius); padding: 1px 9px; font-size: 11px; }
 
 /* ---------- hero ---------- */
 .hero { position: relative; overflow: hidden; text-align: center; padding: clamp(32px, 4.5vw, 64px) 0 clamp(40px, 5vw, 64px); isolation: isolate; }
@@ -42,10 +42,10 @@
   font-size: clamp(40px, 5.6vw, 80px); line-height: 1.02; letter-spacing: -0.024em;
   max-width: 15ch; margin: 0 auto; text-wrap: balance; font-variation-settings: "opsz" 72;
 }
-.hero h1 em { font-style: italic; letter-spacing: -0.01em; }
+.hero h1 em { font-style: var(--em-style); letter-spacing: -0.01em; }
 .hero-summary { max-width: 56ch; margin: 22px auto 0; font-size: clamp(17px, 1.45vw, 20px); line-height: 1.5; color: var(--mist); text-wrap: pretty; }
-.hero-summary .shock, strong.shock { font-family: var(--mono); font-weight: 500; font-size: .9em; color: var(--orange); }
-.hero-summary time { font-family: var(--mono); font-size: .9em; color: var(--ink); }
+.hero-summary .shock, strong.shock { font-family: var(--ui); font-weight: 500; font-size: .9em; color: var(--orange-ink); }
+.hero-summary time { font-family: var(--ui); font-size: .9em; color: var(--ink); }
 
 .hero-body {
   display: grid; grid-template-columns: 1fr minmax(0, 470px) 1fr; align-items: center; gap: 40px;
@@ -85,7 +85,7 @@
   background: repeating-linear-gradient(90deg, var(--line-strong) 0 4px, transparent 4px 8px);
 }
 .step.done::before, .step.current::before { background: var(--fog); }
-.node { width: 11px; height: 11px; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--midnight); }
+.node { width: 11px; height: 11px; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--bg); }
 .step.done .node { background: var(--fog); border-color: var(--fog); }
 .step.current .node { border: 2px solid var(--blue); box-shadow: 0 0 0 5px rgba(2, 151, 222, .16); }
 .tier-glow-1 .step.current .node, .tier-glow-2 .step.current .node, .tier-glow-3 .step.current .node { border-color: var(--orange); box-shadow: 0 0 0 5px rgba(252, 115, 77, .16); }
@@ -119,24 +119,24 @@
 .event { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 4px 20px; align-items: baseline; padding: 8px 0; }
 .event time { font-size: 12px; color: var(--dim); }
 .event p { font-size: 17px; line-height: 1.5; color: var(--mist); max-width: 64ch; }
-.event .num { font-family: var(--mono); font-size: .86em; color: var(--ink); }
-.event .num.shock { color: var(--orange); font-weight: 500; }
+.event .num { font-family: var(--ui); font-size: .86em; color: var(--ink); }
+.event .num.shock { color: var(--orange-ink); font-weight: 500; }
 .event.shock p { color: var(--ink); }
 .event.gap p { font-style: italic; color: var(--fog); }
 .event.quiet p { color: var(--fog); }
 .event-extra { display: inline-flex; margin-left: 12px; vertical-align: 1px; }
 .tx { font-size: 12px; color: var(--dim); text-decoration: none; }
 /* Electric Blue = you can open it: every transaction, seq and contract link. */
-a.tx { color: var(--blue); }
+a.tx { color: var(--blue-ink); }
 a.tx:hover, .seq-link:hover, .ledger .c-tx a:hover, .contracts a:hover { text-decoration: underline; text-decoration-color: currentColor; }
-.seq-link { font-size: .86em; color: var(--blue); text-decoration: none; }
+.seq-link { font-size: .86em; color: var(--blue-ink); text-decoration: none; }
 
 /* ---------- tier meter ---------- */
 .tier { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
 .tier-bars { display: inline-flex; gap: 2px; }
 .tier-bars i { width: 14px; height: 6px; border: 1px solid var(--line-strong); }
 .tier-bars i.on { background: var(--orange); border-color: var(--orange); }
-.tier-name { font-family: var(--mono); font-size: 11px; color: var(--orange); }
+.tier-name { font-family: var(--ui); font-size: 11px; color: var(--orange-ink); }
 .tier-0 .tier-name { color: var(--dim); }
 
 /* ---------- ledger (solid black, no glow) ---------- */
@@ -155,12 +155,12 @@ a.tx:hover, .seq-link:hover, .ledger .c-tx a:hover, .contracts a:hover { text-de
 .ledger .c-count { text-align: right; }
 .ledger th.c-count { text-align: right; }
 .ledger .peak-cell { display: inline-flex; align-items: baseline; gap: 12px; }
-.ledger td.c-peak .shock { color: var(--orange); font-weight: 500; }
+.ledger td.c-peak .shock { color: var(--orange-ink); font-weight: 500; }
 .ledger .c-root { color: var(--dim); }
-.ledger .c-tx a { color: var(--blue); text-decoration: none; }
+.ledger .c-tx a { color: var(--blue-ink); text-decoration: none; }
 .late-note { display: block; font-size: 11px; color: var(--fog); margin-top: 2px; white-space: normal; max-width: 20ch; }
 .ledger tr.gap td {
-  font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--fog);
+  font-family: var(--text); font-style: italic; font-size: 15px; color: var(--fog);
   background: repeating-linear-gradient(135deg, transparent 0 6px, var(--line-strong) 6px 7px);
   border-bottom: 1px dashed var(--line-strong); border-top: 1px dashed var(--line-strong);
 }
@@ -172,7 +172,7 @@ a.tx:hover, .seq-link:hover, .ledger .c-tx a:hover, .contracts a:hover { text-de
 .contracts { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; border-top: 1px solid var(--line-strong); padding-top: 22px; align-self: start; }
 .contracts dt { font-size: 15px; color: var(--fog); }
 .contracts dd { margin: 6px 0 0; color: var(--ink); }
-.contracts a { color: var(--blue); text-decoration: none; }
+.contracts a { color: var(--blue-ink); text-decoration: none; }
 
 /* ---------- loading / error ---------- */
 .hero.message { min-height: 62vh; display: grid; align-content: center; }

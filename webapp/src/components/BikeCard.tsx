@@ -5,8 +5,14 @@ import { distanceText, walkText } from "../ui/geo";
 import { TierMeter } from "./TierMeter";
 
 export const LiveBadge = ({ live }: { live: boolean }) =>
-  live ? <span className="badge badge-live mono"><i aria-hidden="true" />Live · on-chain</span>
-    : <span className="badge badge-sample mono">Sample fleet</span>;
+  live ? <span className="badge badge-live"><i aria-hidden="true" />Live · on-chain</span>
+    : <span className="badge badge-sample">Sample fleet</span>;
+
+/** The owner's photo of the bike (one per bike in public/img/fleet; the live bike is "demo"). */
+export function BikePhoto({ b, className = "" }: { b: FleetBike; className?: string }) {
+  const src = `./img/fleet/${b.live ? "demo" : b.key}.jpg`;
+  return <img className={`bike-photo ${className}`} src={src} alt={`${b.label}, parked`} loading="lazy" />;
+}
 
 function ago(ms: number) {
   const h = Math.round((Date.now() - ms) / 3600_000);
@@ -19,12 +25,12 @@ function ago(ms: number) {
 /** What the black box says about this bike, in one line: Sharify's difference. */
 export function BlackBoxLine({ b }: { b: FleetBike }) {
   const r = b.record;
-  if (!r.lastDrop) return <p className="bb-line"><TierMeter tier={0} showNone /><span>{r.rentals} rentals · no drops recorded</span></p>;
+  if (!r.lastDrop) return <p className="bb-line"><TierMeter tier={0} showNone /><span>{r.rentals} rentals, never dropped</span></p>;
   const d = r.lastDrop;
   return (
-    <p className="bb-line">
+    <p className="bb-line" title={g(d.peakCg)}>
       <TierMeter tier={d.tier} />
-      <span>{r.drops === 1 ? "1 drop" : `${r.drops} drops`} in {r.rentals} rentals · last {TIER_NAMES[d.tier]}, <span className="shock">{g(d.peakCg)}</span>, {ago(d.at)}</span>
+      <span>{r.drops === 1 ? "Dropped once" : `Dropped ${r.drops} times`} in {r.rentals} rentals · last a <span className="shock">{TIER_NAMES[d.tier]}</span> knock, {ago(d.at)}</span>
     </p>
   );
 }
@@ -48,31 +54,31 @@ export function BikeDetail({ b, distance, onClose, onShowLive }: { b: FleetBike;
   return (
     <article className="bike-detail" aria-labelledby={`bike-${b.key}`}>
       <button type="button" className="sheet-close mono" onClick={onClose} aria-label="Close">Close</button>
+      <BikePhoto b={b} className="detail-photo" />
       <div className="bike-detail-top">
-        <BikeThumb kind={b.kind} />
         <div>
           <LiveBadge live={b.live} />
           <h2 id={`bike-${b.key}`}>{b.label}</h2>
-          <p className="muted">{b.kind} · {b.ownerName}</p>
+          <p className="muted">{b.kind}, lent by {b.ownerName}</p>
           <p className="mono dist">{distanceText(distance)} · {walkText(distance)}</p>
         </div>
       </div>
       <dl className="bike-facts">
-        <div><dt>Price</dt><dd className="mono">{b.pricePerHour} dUSD/h</dd></div>
+        <div><dt>Price</dt><dd className="mono">{b.pricePerHour} dUSD an hour</dd></div>
         <div><dt>Deposit</dt><dd className="mono">{b.deposit} dUSD</dd></div>
       </dl>
       <div className="bb">
-        <p className="bb-title">From its black box</p>
+        <p className="bb-title">Its record</p>
         <BlackBoxLine b={b} />
       </div>
       {b.live && b.objectId !== null ? (
         <div className="actions">
           <a className="btn btn-primary" href={href(`rent/${b.objectId}`)}>Rent</a>
-          <a className="btn btn-secondary" href={href(`object/${b.objectId}`)}>See its history</a>
+          <a className="btn btn-secondary" href={href(`object/${b.objectId}`)}>See the bike</a>
         </div>
       ) : (
         <div className="sample-note">
-          <p>Sample bike: it has no recorder yet, so there is nothing real to rent or check.</p>
+          <p>This is a sample bike: it has no recorder yet, so it can't be rented. One bike is real.</p>
           {onShowLive
             ? <button type="button" className="btn btn-secondary" onClick={onShowLive}>Show the live bike</button>
             : <p className="muted">The live bike is out on a rental right now.</p>}

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getNetwork, getObject, getStatus } from "../data/api";
 import { DataError } from "../data/types";
@@ -29,16 +30,25 @@ export function ObjectPage({ id }: { id: number }) {
   const status = useQuery({ queryKey: ["status"], queryFn: getStatus, refetchInterval: 4_000 });
   const obj = useQuery({ queryKey: ["object", id], queryFn: () => getObject(id), refetchInterval: 4_000, retry: 1 });
   const err = obj.error instanceof DataError ? obj.error : null;
+  const [proof, setProof] = useState(false);
 
   let body: React.ReactNode;
   if (obj.data && net.data) {
     body = (
       <>
         <Hero d={obj.data} />
-        <Timeline d={obj.data} explorer={net.data.explorer} />
-        <Ledger d={obj.data} explorer={net.data.explorer} />
+        <div className={proof ? "proof" : "no-proof"}>
+          <Timeline d={obj.data} explorer={net.data.explorer} />
+          <div className="proof-toggle">
+            <button type="button" className="btn btn-secondary" aria-expanded={proof} onClick={() => setProof(!proof)}>{proof ? "Hide the proof" : "See the proof"}</button>
+            <p>{proof ? "Transactions, batch numbers and where the data comes from." : "Every line above can be checked on a public blockchain, without asking us."}</p>
+          </div>
+          {proof && <>
+            <Ledger d={obj.data} explorer={net.data.explorer} />
+            <Sources net={net.data} status={status.data} updatedAt={obj.dataUpdatedAt || undefined} />
+          </>}
+        </div>
         <HowItWorks />
-        <Sources net={net.data} status={status.data} updatedAt={obj.dataUpdatedAt || undefined} />
         <StickyAction d={obj.data} />
       </>
     );
