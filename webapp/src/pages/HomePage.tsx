@@ -15,6 +15,23 @@ import "./map.css";
 
 type Me = LatLon & { accuracy: number };
 
+/** "What could your bike earn?" (Airbnb's host estimator): your price × your hours, nothing invented. */
+function Earnings() {
+  const [price, setPrice] = useState(2);
+  const [hours, setHours] = useState(10);
+  const month = Math.round(price * hours * 52 / 12);
+  return (
+    <div className="own-cta earn">
+      <h3>What could your bike <em>earn</em>?</h3>
+      <label className="earn-row"><span>Price per hour</span><input type="range" min={1} max={4} step={0.5} value={price} onChange={(e) => setPrice(Number(e.target.value))} /><b className="mono">{price} dUSD</b></label>
+      <label className="earn-row"><span>Hours rented a week</span><input type="range" min={1} max={40} step={1} value={hours} onChange={(e) => setHours(Number(e.target.value))} /><b className="mono">{hours} h</b></label>
+      <p className="earn-out"><span className="mono">≈ {month} dUSD</span> a month</p>
+      <p className="earn-note">Your price times your hours: an estimate, not a promise. The rental price is paid outside today's contract. If a renter drops the bike, the fee comes from the rule you set, settled by the contract.</p>
+      <a className="btn btn-primary" href={href("add/1")}>Rent out your bike</a>
+    </div>
+  );
+}
+
 /** Home = the map of bikes free to rent near you, then what Sharify is. */
 export function HomePage() {
   const fleet = useQuery({ queryKey: ["fleet"], queryFn: getFleet, refetchInterval: 10_000 });
@@ -124,11 +141,7 @@ export function HomePage() {
             <h2 id="home-title" className="home-title">Rent things without arguing about <em>damage</em>.</h2>
             <p className="lead">A small recorder on the bike signs every shock it feels. The deposit sits in a public contract and comes back on its own: all of it, or minus a fee if the bike was dropped during your rental.</p>
           </div>
-          <div className="own-cta">
-            <h3>Rent out your bike</h3>
-            <p>Fix a recorder to it, set your deposit and your rules, print the QR. Renters pay damage by rule, not by argument.</p>
-            <a className="btn btn-primary" href={href("add/1")}>Rent out your bike</a>
-          </div>
+          <Earnings />
         </section>
         <HowItWorks />
       </main>

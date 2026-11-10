@@ -58,3 +58,16 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
   https://www.carfax.ca/whats-in-a-report · https://clutch.ca/blog/posts/how-to-read-a-carfax-report
 - **Shots:** [before](rounds/04-before.jpg) · [after](rounds/04-after.jpg) (1440 px)
 - **Lines:** 5796
+
+## Round 5 · "What could your bike earn?"
+
+- **What:** the owner's entry on Home becomes an estimator: two sliders (price per hour, hours rented a week)
+  and the monthly figure, then "Rent out your bike". The note under it says it is the owner's own price times
+  their own hours, that the rental price is paid outside today's contract, and that damage is settled by the rule.
+- **Why:** the old box described the steps (recorder, rules, QR) before giving any reason to take them. An owner
+  decides on the money first. The figure is only the owner's inputs multiplied: no market data we don't have.
+- **Reference:** Airbnb's host earnings estimator ("What's My Place Worth"), which shows a monthly figure before
+  any sign-up: https://houst.com/blog/airbnb-calculator ·
+  https://airroi.com/resources/revenue-calculator/airbnb-income-calculator-guide
+- **Shots:** [before](rounds/05-before.jpg) · [after](rounds/05-after.jpg) (375 px)
+- **Lines:** 5825

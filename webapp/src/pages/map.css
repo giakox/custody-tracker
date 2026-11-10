@@ -166,3 +166,19 @@
   .nearest { left: 0; right: 0; bottom: 0; width: auto; border-radius: 14px 14px 0 0; border-width: 1px 0 0; padding: 16px var(--gutter) 18px; }
   .nearest-actions .btn { padding: 0 18px; }
 }
+
+/* Round 5: the owner's entry is an estimate they control. */
+.earn { display: grid; gap: 14px; }
+.earn h3 em { font-style: italic; }
+.earn-row { display: grid; grid-template-columns: 150px minmax(0, 1fr) 72px; gap: 14px; align-items: center; font-size: 15px; color: var(--mist); }
+.earn-row input { accent-color: var(--blue); width: 100%; }
+.earn-row b { font-weight: 400; color: var(--ink); text-align: right; }
+.earn-out { font-size: 18px; color: var(--mist); margin: 4px 0 0 !important; }
+.earn-out .mono { font-size: 40px; color: var(--ink); margin-right: 6px; }
+.earn-note { font-size: 14px !important; color: var(--fog) !important; margin: 0 !important; }
+.earn .btn { justify-self: start; }
+@media (max-width: 640px) {
+  .earn-row { grid-template-columns: minmax(0, 1fr) 64px; }
+  .earn-row span { grid-column: 1 / -1; }
+  .earn-out .mono { font-size: 32px; }
+}
