@@ -1,0 +1,180 @@
+/* Shared site chrome (header, buttons, demo switcher), Home, and the bike page's top block.
+   Loaded after object-page.css; same tokens and type as the bike page. */
+
+.page { overflow-x: clip; }
+
+/* ---------- header ---------- */
+.site-header {
+  display: flex; align-items: center; gap: 16px; max-width: var(--max); margin: 0 auto;
+  padding: 18px var(--gutter); position: relative; z-index: 3;
+}
+.site-header .wordmark { display: block; line-height: 0; }
+.site-header .wordmark img { height: 28px; width: auto; display: block; }
+.site-header .sample { color: var(--blue); border: 1px solid rgba(2, 151, 222, .5); border-radius: 999px; padding: 1px 9px; font-size: 11px; white-space: nowrap; }
+.site-nav { margin-left: auto; display: flex; align-items: center; gap: 22px; }
+.site-nav + .site-wallet { margin-left: 8px; }
+.nav-link { font-size: 16px; color: var(--mist); text-decoration: none; }
+.nav-link:hover { color: var(--ink); }
+.acct { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--mist); border: 1px solid var(--line-strong); border-radius: 999px; padding: 5px 12px; }
+.acct i { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
+
+/* ---------- buttons: blue is "you can act"; text on blue is always Midnight Black ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px;
+  font: 500 15px/1 var(--mono); letter-spacing: 0; text-decoration: none; border-radius: 4px; cursor: pointer;
+  border: 1px solid transparent; transition: background-color .15s ease, border-color .15s ease;
+}
+.btn-primary { background: var(--blue); color: var(--midnight); }
+.btn-primary:hover { background: #22a9ea; }
+.btn-secondary { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+.btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
+.btn-sm { min-height: 38px; padding: 0 16px; font-size: 13px; }
+.link { color: var(--blue); text-decoration: none; }
+.link:hover { text-decoration: underline; }
+
+/* ---------- Home ---------- */
+.home-hero {
+  max-width: var(--max); margin: 0 auto; padding: clamp(24px, 5vw, 72px) var(--gutter) 0;
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 32px; align-items: center;
+  position: relative; isolation: isolate;
+}
+.home-copy h1 { font-size: clamp(42px, 6vw, 84px); line-height: 1; letter-spacing: -0.026em; font-variation-settings: "opsz" 72; text-wrap: balance; }
+.home-copy h1 em { font-style: italic; }
+.lead { margin-top: 24px; font-size: clamp(18px, 1.5vw, 21px); line-height: 1.5; color: var(--mist); max-width: 46ch; text-wrap: pretty; }
+
+
+
+.entry { border: 1px solid var(--line-strong); border-radius: 6px; padding: clamp(22px, 2.6vw, 32px); background: rgba(2, 7, 10, .82); }
+.entry h2 { font-size: clamp(26px, 2.4vw, 34px); letter-spacing: -0.015em; }
+.entry p { margin: 12px 0 22px; font-size: 17px; color: var(--mist); max-width: 40ch; }
+
+.qr-sticker { width: 100%; height: auto; display: block; }
+.qr-label { font-family: var(--mono); font-size: 10px; fill: var(--midnight); }
+.qr-label.dim { fill: #5a6973; }
+
+.hint { margin: 10px 0 0 !important; font-size: 14px !important; color: var(--fog) !important; }
+.phone-only { display: none; }
+@media (max-width: 640px), (pointer: coarse) {
+  .desktop-only { display: none; }
+  .phone-only { display: block; }
+}
+
+/* ---------- How it works (Home and bike page) ---------- */
+.how-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line-strong); }
+.how-steps li { padding: 24px 24px 8px 0; }
+.how-steps li + li { padding-left: 24px; border-left: 1px solid var(--line); }
+.how-n { color: var(--blue); font-size: 12px; }
+.how-steps h3 { font-size: 22px; margin: 10px 0 8px; letter-spacing: -0.01em; }
+.how-steps p { font-size: 16px; color: var(--mist); line-height: 1.5; }
+.block-intro h2 em { font-style: italic; }
+.block-intro .link { font-family: var(--mono); font-size: 14px; }
+
+.site-foot { max-width: var(--max); margin: 0 auto; padding: 72px var(--gutter) 40px; color: var(--dim); font-size: 12px; }
+
+/* ---------- bike page top: status and action first ---------- */
+.bike-top {
+  max-width: var(--max); margin: 0 auto; padding: clamp(24px, 4vw, 56px) var(--gutter) clamp(40px, 5vw, 64px);
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 16px 40px; align-items: center;
+  text-align: left; overflow: visible;
+}
+.bike-copy { min-width: 0; }
+.kicker { font-size: 16px; color: var(--fog); margin-bottom: 14px; }
+.kicker .addr { font-size: 12px; color: var(--dim); margin-left: 8px; }
+.bike-top h1 { font-size: clamp(40px, 5vw, 72px); line-height: 1.02; letter-spacing: -0.024em; max-width: 14ch; margin: 0; text-wrap: balance; font-variation-settings: "opsz" 72; }
+.bike-top .hero-summary { margin: 18px 0 0; max-width: 46ch; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.action-note { font-size: 16px; color: var(--fog); }
+
+
+.bike-top .stateline { margin: 30px 0 0; padding: 0; max-width: 520px; align-items: start; }
+.bike-top .step { align-content: start; justify-items: start; text-align: left; }
+.bike-top .step + .step::before { right: auto; left: calc(-100% + 6px); width: 100%; }
+.bike-top .step-name { font-size: 16px; }
+/* Blur hides the faint ring where a radial gradient reaches zero (it shows as a band on projectors). */
+
+
+/* ---------- placeholder for pages of later batches ---------- */
+.next-page { max-width: var(--max); margin: 0 auto; padding: 96px var(--gutter); }
+.next-page h1 { font-size: clamp(36px, 5vw, 64px); line-height: 1.05; max-width: 16ch; }
+.next-page h1 em { font-style: italic; }
+.next-page .btn { margin-right: 16px; margin-top: 24px; }
+
+/* ---------- demo switcher: for the presentation, not part of the product ---------- */
+
+.demo-toggle { background: var(--midnight); color: var(--dim); border: 1px solid var(--line-strong); border-radius: 999px; padding: 5px 12px; font-size: 11px; cursor: pointer; opacity: .7; }
+.demo-toggle:hover, .demo.open .demo-toggle { opacity: 1; color: var(--mist); }
+.demo-panel { background: #061017; border: 1px solid var(--line-strong); border-radius: 6px; padding: 12px 14px; width: 260px; display: grid; gap: 10px; font: 12px/1.4 var(--mono); color: var(--fog); }
+.demo-panel label { display: grid; gap: 4px; }
+.demo-panel select { font: inherit; color: var(--ink); background: var(--midnight); border: 1px solid var(--line-strong); padding: 6px; border-radius: 3px; }
+.demo-panel p { color: var(--dim); }
+
+/* ---------- small screens ---------- */
+@media (max-width: 900px) {
+
+  .how-steps { grid-template-columns: minmax(0, 1fr); }
+  .how-steps li, .how-steps li + li { padding: 18px 0; border-left: 0; border-bottom: 1px solid var(--line); }
+}
+@media (max-width: 640px) {
+  .site-header { gap: 10px; flex-wrap: wrap; }
+  .site-nav { gap: 14px; }
+
+  .actions .btn { flex: 1 1 100%; }
+
+  .acct { display: none; }
+}
+
+/* Phones: status and action before the drawing; demo control sits at the end of the page,
+   so it never covers text. */
+
+
+
+/* ---------- object image: the case render (or the drawing until it exists), right of the heading ---------- */
+.object-image { margin: 0; position: relative; width: 100%; max-width: 400px; justify-self: end; }
+.object-image img, .object-image .device { width: 100%; height: auto; display: block; }
+.object-image .glow { position: absolute; inset: -45% -60% -45%; pointer-events: none; z-index: -1; }
+.object-image .glow i { top: 59%; width: 100%; height: 72%; }
+/* Blur hides the faint ring where a radial gradient reaches zero (it shows as a band on projectors). */
+.object-image .glow i:not(.grain) { filter: blur(24px); }
+
+/* ---------- the rule, readable: level, threshold, share, amount ---------- */
+.rule-title { margin-top: 26px; font-size: 15px; color: var(--fog); max-width: 48ch; }
+.rule-tiers { margin-top: 10px; display: grid; max-width: 460px; border-top: 1px solid var(--line-strong); }
+.rule-row { display: grid; grid-template-columns: 104px 116px minmax(0, 1fr); gap: 12px; align-items: center; padding: 9px 0 9px 10px; white-space: nowrap; border-bottom: 1px solid var(--line); font: 14px/1.3 var(--mono); color: var(--mist); }
+.rule-row .rule-from { color: var(--ink); }
+.rule-row.none .rule-from, .rule-row.none .rule-out { color: var(--fog); }
+.rule-row.hl { background: rgba(252, 115, 77, .08); box-shadow: inset 2px 0 0 var(--orange); }
+.rule-row.none.hl { background: rgba(2, 151, 222, .08); box-shadow: inset 2px 0 0 var(--blue); }
+
+/* ---------- Home entries: two equal ways in ---------- */
+.entries {
+  max-width: var(--max); margin: clamp(32px, 5vw, 64px) auto 0; padding: 0 var(--gutter);
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: stretch;
+}
+.entry { display: grid; grid-template-rows: auto 1fr; gap: 8px; }
+.entry-copy { display: flex; flex-direction: column; align-items: flex-start; }
+.entry-copy p { min-height: 4.6em; } /* three lines: both buttons line up */
+.entry-art { align-self: end; margin: 0 -12px -12px; }
+.tube-label { font-family: var(--mono); font-size: 11px; fill: var(--fog); }
+
+/* ---------- demo control: in the empty left margin on wide screens, at the end of the page otherwise ---------- */
+.demo { display: grid; justify-items: start; gap: 8px; padding: 0 var(--gutter) 28px; max-width: var(--max); margin: 0 auto; }
+@media (min-width: 1400px) {
+  .demo { position: fixed; left: 14px; bottom: 14px; z-index: 50; padding: 0; margin: 0; }
+}
+
+/* ---------- layout: image right of the heading down to small tablets ---------- */
+.home-hero, .bike-top { grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); }
+@media (max-width: 900px) {
+  .entries { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .how-steps { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 700px) {
+  .home-hero, .bike-top { grid-template-columns: minmax(0, 1fr); }
+  .object-image { max-width: 260px; justify-self: center; }
+  .entries { grid-template-columns: minmax(0, 1fr); }
+  .rule-row { grid-template-columns: 96px minmax(0, 1fr); gap: 2px 8px; font-size: 13px; padding-left: 6px; }
+  .rule-row .rule-out { grid-column: 2; white-space: normal; }
+}
+
+.bike-top .object-image { align-self: start; margin-top: clamp(24px, 6vw, 96px); }
+@media (max-width: 700px) { .bike-top .object-image { margin-top: 8px; } }

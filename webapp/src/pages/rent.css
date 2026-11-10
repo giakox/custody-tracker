@@ -1,0 +1,171 @@
+/* Renting path, My rentals and receipts. Narrow reading column, same tokens as the bike page. */
+
+.rent { max-width: 760px; margin: 0 auto; padding: clamp(20px, 3vw, 40px) var(--gutter) 96px; }
+.rent.rent-wide { max-width: var(--max); }
+.rent h1 { font-size: clamp(36px, 4.6vw, 60px); line-height: 1.04; letter-spacing: -0.022em; font-variation-settings: "opsz" 72; margin: 18px 0 0; text-wrap: balance; max-width: 18ch; }
+.rent h1 em { font-style: italic; }
+.rent h2 { font-size: 24px; letter-spacing: -0.01em; }
+.rent .lead { margin-top: 16px; max-width: 54ch; }
+
+.rent-top { display: flex; justify-content: space-between; align-items: center; gap: 12px 24px; flex-wrap: wrap; }
+.back { font-size: 13px; }
+.back::before { content: "‹ "; }
+.rent-progress { list-style: none; margin: 0; padding: 0; display: flex; gap: 4px; counter-reset: s; }
+.rent-progress li { counter-increment: s; font: 12px/1 var(--mono); color: var(--dim); padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; }
+.rent-progress li::before { content: counter(s) " "; color: var(--dim); }
+.rent-progress li.done { color: var(--fog); border-color: var(--line-strong); }
+.rent-progress li.current { color: var(--midnight); background: var(--blue); border-color: var(--blue); }
+.rent-progress li.current::before { color: var(--midnight); }
+
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 0 24px; margin: 28px 0 8px; border-top: 1px solid var(--line-strong); }
+.facts div { padding: 12px 0; border-bottom: 1px solid var(--line); }
+.facts dt { font-size: 14px; color: var(--fog); }
+.facts dd { margin: 4px 0 0; font-size: 18px; color: var(--ink); }
+.facts dd.tag { font-size: 11px; color: var(--dim); }
+.facts dd.shock, .shock { color: var(--orange); }
+.tag { font-size: 11px; color: var(--dim); border: 1px dashed var(--line-strong); border-radius: 999px; padding: 1px 8px; white-space: nowrap; }
+.facts dd.tag { border: 0; padding: 0; }
+.rent .rule-tiers { max-width: none; margin-top: 18px; }
+.fine { margin: 18px 0 0; padding-left: 18px; color: var(--fog); font-size: 15px; display: grid; gap: 6px; }
+.numbered { margin: 24px 0 0; padding-left: 22px; display: grid; gap: 10px; font-size: 18px; color: var(--mist); }
+
+.check { display: flex; gap: 12px; align-items: flex-start; margin-top: 28px; font-size: 17px; color: var(--ink); cursor: pointer; }
+.check input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--blue); }
+.btn.is-off { opacity: .35; cursor: not-allowed; }
+.btn:disabled { opacity: .5; cursor: progress; }
+.hint-line { margin-top: 10px; font-size: 14px; color: var(--fog); }
+.notice { margin-top: 24px; padding: 14px 16px; border: 1px solid var(--line-strong); border-left: 2px solid var(--blue); font-size: 16px; color: var(--mist); }
+.notice.error { border-left-color: var(--ink); color: var(--ink); }
+
+.wallets { display: grid; gap: 10px; margin-top: 28px; max-width: 420px; }
+.wallet-opt { display: grid; gap: 4px; text-align: left; background: var(--raise); color: var(--ink); border: 1px solid var(--line-strong); border-radius: 6px; padding: 16px 18px; font: inherit; cursor: pointer; }
+.wallet-opt b { font-weight: 400; font-size: 19px; }
+.wallet-opt span { font-size: 12px; color: var(--fog); }
+.wallet-opt:hover { border-color: var(--blue); }
+
+/* transactions, one row each */
+.tx-steps { list-style: none; margin: 28px 0 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line-strong); }
+.tx-step { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 14px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.tx-dot { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font: 12px var(--mono); color: var(--dim); border: 1px solid var(--line-strong); }
+.tx-body { display: grid; gap: 3px; }
+.tx-label { font-size: 17px; color: var(--mist); }
+.tx-status { font-size: 12px; color: var(--dim); }
+.tx-status a { color: var(--blue); text-decoration: none; }
+.tx-step.signing .tx-dot, .tx-step.pending .tx-dot { border-color: var(--blue); color: var(--blue); animation: tx-pulse 1.4s ease-in-out infinite; }
+.tx-step.signing .tx-label, .tx-step.pending .tx-label { color: var(--ink); }
+.tx-step.signing .tx-status, .tx-step.pending .tx-status { color: var(--blue); }
+.tx-step.confirmed .tx-dot { background: var(--blue); border-color: var(--blue); color: var(--midnight); }
+.tx-step.confirmed .tx-label { color: var(--ink); }
+.tx-step.failed .tx-dot { border-color: var(--ink); color: var(--ink); }
+.tx-step.failed .tx-status { color: var(--ink); }
+@keyframes tx-pulse { 50% { box-shadow: 0 0 0 6px rgba(2, 151, 222, .18); } }
+
+/* rental in progress */
+.ride-hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .9fr); gap: 40px; align-items: start; isolation: isolate; }
+.ride-hero.compact { grid-template-columns: minmax(0, 1fr); }
+.ride-hero .kicker { margin: 18px 0 0; }
+.ride-hero .facts { margin-top: 24px; }
+.ride-side { position: sticky; top: 20px; }
+.ride-map { height: 440px; border: 1px solid var(--line-strong); border-radius: 6px; overflow: hidden; background: #050b10; }
+.ride-side .object-image { max-width: none; justify-self: stretch; }
+.ride-side .hint-line { font-size: 13px; }
+
+.panel { margin-top: 32px; border: 1px solid var(--line-strong); border-radius: 6px; padding: 20px 22px; }
+.panel h2 { font-size: 22px; }
+.panel p { margin-top: 10px; color: var(--mist); max-width: 60ch; }
+.demo-line { margin-top: 28px; font-size: 12px; color: var(--dim); }
+.link-btn { background: none; border: 0; padding: 0; font: inherit; color: var(--blue); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+
+/* My rentals */
+.live-rental { border-color: rgba(2, 151, 222, .55); }
+.live-rental .kicker { margin: 0; color: var(--blue); font-size: 13px; }
+.live-rental h2 { margin-top: 6px; }
+.meta { font-size: 12px; color: var(--fog); margin-top: 6px; }
+.history-list { margin-top: 40px; }
+.history-list ol { list-style: none; margin: 14px 0 0; padding: 0; border-top: 1px solid var(--line-strong); }
+.past-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr) auto minmax(0, 1fr) auto; gap: 8px 18px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; }
+.past-row:hover { background: var(--raise); }
+.past-name { font-size: 18px; color: var(--ink); }
+.past-when, .past-back { font-size: 12px; color: var(--fog); white-space: nowrap; }
+.past-shock { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; }
+.past-shock .tier-name { display: none; }
+.past-row .link { font-size: 12px; }
+
+/* receipt: reads like a printed slip */
+.receipt { margin-top: 18px; border: 1px solid var(--line-strong); border-radius: 6px; padding: clamp(20px, 3vw, 32px); }
+.receipt h1 { margin: 0; font-size: clamp(32px, 4vw, 44px); }
+.receipt-lines { margin: 24px 0 0; border-top: 1px solid var(--line-strong); }
+.receipt-lines div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 16px; padding: 12px 0; border-bottom: 1px dashed var(--line-strong); }
+.receipt-lines dt { color: var(--mist); font-size: 16px; }
+.receipt-lines dd { margin: 0; text-align: right; color: var(--ink); font-size: 15px; }
+.receipt-lines dd.sub { grid-column: 1 / -1; text-align: left; font-size: 11px; color: var(--dim); }
+.receipt-lines .total dt { color: var(--ink); font-size: 18px; }
+.receipt-lines .total dd { font-size: 18px; }
+.receipt section { margin-top: 26px; }
+.tx-list { list-style: none; margin: 10px 0 0; padding: 0; }
+.tx-list li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 15px; color: var(--mist); }
+.tx-list a { color: var(--blue); text-decoration: none; font-size: 13px; }
+
+.demo-act { font: inherit; color: var(--ink); background: var(--raise); border: 1px solid var(--line-strong); border-radius: 3px; padding: 6px 8px; cursor: pointer; text-align: left; }
+
+@media (max-width: 860px) {
+  .ride-hero { grid-template-columns: minmax(0, 1fr); }
+  .ride-side { position: relative; top: auto; } /* the glow stays behind the map, not behind the whole page */
+  .ride-map { height: 300px; }
+}
+@media (max-width: 640px) {
+  .rent-progress li { padding: 6px 8px; font-size: 11px; }
+  .rent-progress li:not(.current) { font-size: 0; padding: 6px 7px; }
+  .rent-progress li:not(.current)::before { font-size: 11px; }
+  .past-row { grid-template-columns: minmax(0, 1fr) auto; }
+  .past-when, .past-back { grid-column: 1; }
+  .past-shock { grid-column: 2; grid-row: 1; }
+  .past-row .link { grid-column: 2; }
+  .actions .btn { flex: 1 1 100%; }
+}
+@media print {
+  :root { --midnight: #fff; --ink: #000; --mist: #222; --fog: #444; --dim: #555; --line: #ccc; --line-strong: #999; --raise: #f4f4f4; }
+  .site-header, .demo, .actions, .back { display: none !important; }
+  body { background: #fff; }
+}
+
+/* The renter's view keeps the state glow, behind the ride map. */
+.ride-side .glow { position: absolute; inset: -20% -25%; z-index: -1; pointer-events: none; }
+.ride-side .glow i { top: 50%; width: 100%; height: 90%; filter: blur(30px); }
+
+.ride-map .leaflet-tile-pane { filter: brightness(.62) contrast(1.12); }
+.ride-map { background: var(--midnight); }
+
+/* Outcome: the drawing carries the result's glow (orange if a fee was withheld). The rest stays in a reading column. */
+.ride-hero.outcome { grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); align-items: center; }
+.ride-hero.outcome .object-image { max-width: 340px; }
+.rent-wide > .rule-tiers, .rent-wide > .actions, .rent-wide > .hint-line { max-width: 760px; }
+@media (max-width: 860px) { .ride-hero.outcome { grid-template-columns: minmax(0, 1fr); } .ride-hero.outcome .object-image { max-width: 240px; justify-self: center; } }
+
+/* Deposit: what you lock sits beside the signatures it takes. */
+.deposit { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .85fr); gap: 48px; align-items: start; }
+.deposit .tx-steps { margin-top: 26px; }
+.deposit-summary { position: sticky; top: 20px; margin-top: 26px; border: 1px solid var(--line-strong); border-radius: 6px; padding: 20px 22px; background: var(--raise); }
+.sum-bike { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; align-items: center; }
+.sum-bike .object-image { max-width: 120px; justify-self: start; }
+.sum-name { font-size: 22px; color: var(--ink); line-height: 1.15; }
+.sum-owner { font-size: 12px; color: var(--fog); margin-top: 4px; }
+.sum-lines { margin: 18px 0 0; border-top: 1px solid var(--line-strong); }
+.sum-lines div { padding: 12px 0; border-bottom: 1px solid var(--line); }
+.sum-lines dt { font-size: 14px; color: var(--fog); }
+.sum-lines dd { margin: 4px 0 0; font-size: 16px; color: var(--ink); }
+.sum-lines dd.big { font-size: 30px; }
+.sum-lines dd.tag { font-size: 11px; color: var(--dim); border: 0; padding: 0; }
+.deposit-summary .rule-title { margin-top: 18px; }
+.deposit-summary .rule-tiers { margin-top: 8px; }
+.deposit-summary .rule-row { grid-template-columns: 92px 96px minmax(0, 1fr); font-size: 12px; }
+@media (max-width: 960px) {
+  .deposit { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .deposit-summary { position: static; order: -1; margin-top: 18px; }
+}
+@media (max-width: 640px) {
+  /* phones: keep the summary short so the signatures and the button stay close; the rule is one tap away */
+  .deposit-summary .rule-title, .deposit-summary .rule-tiers { display: none; }
+  .sum-bike { grid-template-columns: 88px minmax(0, 1fr); }
+  .sum-lines dd.big { font-size: 26px; }
+}
