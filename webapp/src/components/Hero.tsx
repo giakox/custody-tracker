@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import type { ObjectDetail, Party, Rental } from "../data/types";
 import { g, hm, inSentence, nameOf, objectName, possessive, shortHex, usd, TIER_NAMES } from "../ui/format";
 import { href } from "../ui/router";
@@ -51,7 +52,7 @@ function Summary({ d }: { d: ObjectDetail }) {
 const T = ({ ms }: { ms: number }) => <time dateTime={new Date(ms).toISOString()}>{hm(ms)}</time>;
 
 /** The action at the top depends on who is looking (approved wireframe). */
-function Action({ d, me }: { d: ObjectDetail; me: Party | null }) {
+export function Action({ d, me, compact = false }: { d: ObjectDetail; me: Party | null; compact?: boolean }) {
   const r = relation(d, me);
   const deposit = usd(d.terms.collateral);
   const id = d.id;
@@ -67,7 +68,7 @@ function Action({ d, me }: { d: ObjectDetail; me: Party | null }) {
     return <p className="action-note">Come back later, or ask the owner for another bike.</p>;
   }
   if (r.isOwner) return <a className="btn btn-secondary" href={href("my-objects")}>Manage</a>;
-  return <a className="btn btn-primary" href={href(`rent/${id}`)}>Rent this bike · {deposit} deposit</a>;
+  return <a className="btn btn-primary" href={href(`rent/${id}`)}>{compact ? "Rent" : <>Rent this bike · {deposit} deposit</>}</a>;
 }
 
 /** Title for this viewer: the italic word is who has it, or what is missing. */
@@ -80,6 +81,37 @@ function ViewerTitle({ d, me }: { d: ObjectDetail; me: Party | null }) {
   if (r.isOwner && d.status === "available") return <>{name} is back with <em>you</em>.</>;
   if (d.status === "available") return <>{name} is <em>available</em>.</>;
   return <Title d={d} />;
+}
+
+/** One line for the sticky bar: where the bike stands, for this viewer. */
+function shortStatus(d: ObjectDetail, me: Party | null) {
+  const r = relation(d, me);
+  const c = d.activeRental?.current;
+  if (r.isCustodian && c) return c.peakCg === null ? "Out with you · no readings yet" : `Out with you · worst ${g(c.peakCg)}, ${TIER_NAMES[c.tier]}`;
+  if (d.pendingHandoff?.to.role === "owner") return "Being returned";
+  if (d.status === "rented") return `Rented by ${nameOf(d.custodian)}`;
+  return `Available · ${usd(d.terms.collateral)} deposit`;
+}
+
+/** Keeps the page's one action in reach once the top block has scrolled away (Airbnb's pinned "Reserve"). */
+export function StickyAction({ d }: { d: ObjectDetail }) {
+  const { account } = useViewer();
+  const [shown, setShown] = useState(false);
+  useEffect(() => {
+    const el = document.querySelector(".bike-top .actions");
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => setShown(!e.isIntersecting && e.boundingClientRect.top < 0));
+    io.observe(el);
+    return () => io.disconnect();
+  }, [d.id]);
+  return (
+    <div className={`sticky-action ${shown ? "is-shown" : ""}`} inert={!shown}>
+      <div className="sticky-inner">
+        <div className="sticky-text"><span className="sticky-name">{objectName(d)}</span><span className="mono sticky-status">{shortStatus(d, account)}</span></div>
+        <div className="sticky-btns"><Action d={d} me={account} compact /></div>
+      </div>
+    </div>
+  );
 }
 
 export function Hero({ d }: { d: ObjectDetail }) {

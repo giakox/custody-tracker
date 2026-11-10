@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getNetwork, getObject, getStatus } from "../data/api";
 import { DataError } from "../data/types";
-import { Hero } from "../components/Hero";
+import { Hero, StickyAction } from "../components/Hero";
 import { Timeline } from "../components/Timeline";
 import { Ledger } from "../components/Ledger";
 import { Sources } from "../components/Sources";
@@ -39,6 +39,7 @@ export function ObjectPage({ id }: { id: number }) {
         <Ledger d={obj.data} explorer={net.data.explorer} />
         <HowItWorks />
         <Sources net={net.data} status={status.data} updatedAt={obj.dataUpdatedAt || undefined} />
+        <StickyAction d={obj.data} />
       </>
     );
   } else if (err?.code === "not-found") {

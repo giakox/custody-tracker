@@ -178,3 +178,22 @@
 
 .bike-top .object-image { align-self: start; margin-top: clamp(24px, 6vw, 96px); }
 @media (max-width: 700px) { .bike-top .object-image { margin-top: 8px; } }
+
+/* Round 2: the page's action stays in reach while reading the history. */
+.sticky-action { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: var(--midnight); box-shadow: 0 -10px 30px rgba(0, 0, 0, .5); border-top: 1px solid var(--line-strong);
+  transform: translateY(110%); transition: transform .25s ease; }
+.sticky-action.is-shown { transform: none; }
+.sticky-inner { max-width: var(--max); margin: 0 auto; padding: 12px var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.sticky-text { display: grid; gap: 2px; min-width: 0; }
+.sticky-name { font-size: 18px; color: var(--ink); }
+.sticky-status { font-size: 12px; color: var(--fog); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sticky-btns { display: flex; gap: 8px; flex: none; }
+.sticky-btns .btn { min-height: 44px; }
+.sticky-btns .btn-secondary:not(:first-child) { display: none; } /* one action in the bar */
+.sticky-btns .action-note { display: none; }
+.page:has(.sticky-action.is-shown) .demo { margin-bottom: 72px; }
+@media (max-width: 640px) {
+  .sticky-inner { padding: 10px var(--gutter) 12px; }
+  .sticky-name { font-size: 16px; }
+  .sticky-btns .btn { padding: 0 20px; flex: none !important; }
+}

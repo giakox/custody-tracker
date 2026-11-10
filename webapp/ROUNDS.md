@@ -16,3 +16,16 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
   immediately: https://www.li.me/blog/lime-latest-app-tech-find-available-scooter-feature
 - **Shots:** [before](rounds/01-before.jpg) · [after](rounds/01-after.jpg) (375 px)
 - **Lines:** 5617
+
+## Round 2 · The bike page keeps its action in reach
+
+- **What:** once the top block scrolls away, a bar slides up from the bottom with the bike, a one-line status
+  for this viewer ("Available · 50 dUSD deposit", "Out with you · worst 41.2 g, medium", "Being returned") and
+  the page's one action in short form (Rent, Return, Confirm, Manage). It is not focusable while hidden.
+- **Why:** the bike page is long (story, ledger, how it works, sources). A renter who scrolled to check the
+  history had to scroll all the way back up to rent or return.
+- **Reference:** Airbnb's mobile listing keeps "Request to Book" pinned to the bottom
+  (https://mobilemarketingmagazine.com/?p=91435); Booking.com reports a sticky mobile CTA among its best
+  experiments (AB Tasty case study, https://www.abtasty.com/wp-content/uploads/2026/04/AB-Tasty-x-Booking.com-Case-Study.pdf).
+- **Shots:** [before](rounds/02-before.jpg) · [after](rounds/02-after.jpg) (375 px, scrolled into the history)
+- **Lines:** 5669
