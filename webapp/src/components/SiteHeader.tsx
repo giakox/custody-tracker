@@ -4,6 +4,7 @@ import { getNetwork } from "../data/api";
 import { shortHex } from "../ui/format";
 import { href } from "../ui/router";
 import { useViewer } from "../ui/viewer";
+import { LiveRental } from "./LiveRental";
 
 /** Logo, the main sections, and the wallet. On phones the sections fold into a menu. */
 export function SiteHeader() {
@@ -11,6 +12,7 @@ export function SiteHeader() {
   const { account, connect, ready } = useViewer();
   const [open, setOpen] = useState(false);
   return (
+    <>
     <header className="site-header">
       <a className="wordmark" href={href("")}>
         {/* 3× of the 28 px display height: the original is 1216 px wide and 157 KB. */}
@@ -30,5 +32,7 @@ export function SiteHeader() {
         <button type="button" className="menu-btn mono" aria-expanded={open} onClick={() => setOpen(!open)}>{open ? "Close" : "Menu"}</button>
       </div>
     </header>
+    <LiveRental />
+    </>
   );
 }

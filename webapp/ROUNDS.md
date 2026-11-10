@@ -71,3 +71,16 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
   https://airroi.com/resources/revenue-calculator/airbnb-income-calculator-guide
 - **Shots:** [before](rounds/05-before.jpg) · [after](rounds/05-after.jpg) (375 px)
 - **Lines:** 5825
+
+## Round 6 · Your rental, on every page
+
+- **What:** while you have a bike, a slim bar under the header on every page: "Your rental · The demo bike ·
+  22 min · worst 41.2 g" with the level, and one button (Open, or "See where it stands" while returning). Blue
+  dot at rest, orange once the rental has a shock. Hidden on the renting pages, which already show all of it.
+  The map also stops saying "the live bike is out on a rental" to the person who has it.
+- **Why:** a renter who left the rental page (to look at the map, at the design page) lost sight of the deposit
+  at risk and of the way back to Return. And the home page told Alice her own bike was rented by someone else.
+- **Reference:** Uber's ride-in-progress Live Activity: glanceable, priority-based, one state per phase:
+  https://www.uber.com/blog/live-activity-on-ios/
+- **Shots:** [before](rounds/06-before.jpg) · [after](rounds/06-after.jpg) (1440 px, Alice renting)
+- **Lines:** 5891

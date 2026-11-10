@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getFleet } from "../data/api";
+import { getFleet, listObjects } from "../data/api";
+import { useViewer } from "../ui/viewer";
 import { SiteHeader } from "../components/SiteHeader";
 import { HowItWorks } from "../components/HowItWorks";
 import { DemoSwitcher } from "../components/DemoSwitcher";
@@ -45,6 +46,9 @@ export function HomePage() {
     .map((b) => ({ b, d: metres(origin, b) }))
     .sort((x, y) => x.d - y.d), [fleet.data, origin.lat, origin.lon]); // eslint-disable-line react-hooks/exhaustive-deps
   const live = bikes.find((x) => x.b.live);
+  const { account } = useViewer();
+  const mine = useQuery({ queryKey: ["objects-mine-home", account?.address], enabled: !!account, queryFn: listObjects });
+  const rentingIt = !!account && !!mine.data?.some((o) => o.custodian.address.toLowerCase() === account.address.toLowerCase() && o.activeRental);
   const current = bikes.find((x) => x.b.key === selected) ?? null;
   const fleetBikes = useMemo(() => bikes.map((x) => x.b), [bikes]);
   // Room taken by the buttons (top), the legend or bottom strip: the first framing keeps pins clear of them.
@@ -66,7 +70,7 @@ export function HomePage() {
       <div className="fleet-list-head">
         <h1>{bikes.length} bikes free {me ? <>near <em>you</em></> : <>around <em>Bocconi</em></>}</h1>
         <p className="muted">Nearest first. Only free, parked bikes are shown: a rented bike's position would be its renter's.</p>
-        {!live && fleet.data && <p className="note">The live bike is out on a rental right now, so it isn't on the map.</p>}
+        {!live && fleet.data && <p className="note">{rentingIt ? "You have the live bike right now, so it isn't on the map." : "The live bike is out on a rental right now, so it isn't on the map."}</p>}
       </div>
       <ol>
         {bikes.map(({ b, d }) => (
@@ -123,7 +127,7 @@ export function HomePage() {
                 </>
               ) : (
                 <button type="button" className="nearest-info" onClick={() => setView("list")}>
-                  <span className="nearest-k mono">The live bike is out on a rental right now</span>
+                  <span className="nearest-k mono">{rentingIt ? "You have the live bike right now" : "The live bike is out on a rental right now"}</span>
                   <span className="nearest-name">{bikes.length} sample bikes nearby</span>
                 </button>
               )}

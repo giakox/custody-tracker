@@ -222,3 +222,17 @@
   .record div:nth-child(n + 3) { border-top: 1px solid var(--line); }
   .record dd { font-size: 19px; }
 }
+
+/* Round 6: your rental, on every page. */
+.live-rental-bar { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #04111a; position: relative; z-index: 2; }
+.live-rental-bar.has-shock { background: #170b07; }
+.lrb-inner { max-width: var(--max); margin: 0 auto; padding: 8px var(--gutter); display: flex; align-items: center; gap: 12px; }
+.lrb-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 4px rgba(2, 151, 222, .22); flex: none; animation: lrb 2s ease-in-out infinite; }
+.has-shock .lrb-dot { background: var(--orange); box-shadow: 0 0 0 4px rgba(252, 115, 77, .22); }
+@keyframes lrb { 50% { box-shadow: 0 0 0 7px rgba(2, 151, 222, 0); } }
+.lrb-text { flex: 1; min-width: 0; font-size: 15px; color: var(--mist); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lrb-text b { font-weight: 400; color: var(--ink); }
+.lrb-peak { font-size: 12px; display: inline-flex; align-items: center; gap: 6px; }
+.lrb-peak .tier-name { display: none; }
+.lrb-peak .shock { color: var(--orange); }
+@media (max-width: 640px) { .lrb-text { font-size: 14px; } .lrb-peak { display: none; } }

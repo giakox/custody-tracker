@@ -182,3 +182,5 @@
   .earn-row span { grid-column: 1 / -1; }
   .earn-out .mono { font-size: 32px; }
 }
+/* the live rental bar takes a row: the map gives it back so the bottom card stays on screen */
+.page:has(.live-rental-bar) .map-shell { height: calc(100svh - 132px); }
