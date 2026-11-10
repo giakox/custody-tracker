@@ -169,3 +169,33 @@
   .sum-bike { grid-template-columns: 88px minmax(0, 1fr); }
   .sum-lines dd.big { font-size: 26px; }
 }
+
+/* Round 3: try the rule before accepting it. */
+.sim { margin-top: 28px; border: 1px solid var(--line-strong); border-radius: 8px; padding: 22px 22px 16px; }
+.sim-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.sim-k { font-size: 12px; color: var(--fog); }
+.sim-peak { font-size: 44px; line-height: 1; color: var(--ink); margin-top: 6px; font-variant-numeric: tabular-nums; }
+.sim-peak.shock { color: var(--orange); }
+.sim-out { text-align: right; }
+.sim-back { font-size: 32px; line-height: 1; color: var(--ink); margin-top: 6px; }
+.sim-fee { font-size: 13px; color: var(--fog); margin-top: 6px; }
+.sim.tier-1 .sim-fee, .sim.tier-2 .sim-fee, .sim.tier-3 .sim-fee { color: var(--orange); }
+.sim-track { position: relative; margin: 26px 0 54px; }
+.sim-track input { width: 100%; accent-color: var(--blue); height: 28px; cursor: pointer; position: relative; z-index: 1; }
+.sim.tier-1 .sim-track input, .sim.tier-2 .sim-track input, .sim.tier-3 .sim-track input { accent-color: var(--orange); }
+.sim-ticks i { position: absolute; top: -4px; width: 1px; height: 36px; background: var(--line-strong); }
+.sim-ticks span { position: absolute; top: -16px; left: 4px; font-size: 10px; color: var(--dim); white-space: nowrap; }
+.sim-examples button { position: absolute; top: 36px; transform: translateX(-50%); background: none; border: 1px solid var(--line); border-radius: 999px; padding: 3px 8px; font-size: 11px; color: var(--fog); cursor: pointer; white-space: nowrap; }
+.sim-examples button:hover { border-color: var(--blue); color: var(--ink); }
+.sim .rule-tiers { margin-top: 0; }
+.sim .hint-line { font-size: 13px; }
+@media (max-width: 640px) {
+  .sim { padding: 18px 16px 12px; }
+  .sim-peak { font-size: 34px; }
+  .sim-back { font-size: 26px; }
+  /* phones: the examples become a row of chips under the slider instead of labels on it */
+  .sim-track { margin-bottom: 14px; }
+  .sim-examples { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .sim-examples button { position: static; transform: none; font-size: 11px; }
+  .sim-out { text-align: left; width: 100%; }
+}

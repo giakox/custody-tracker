@@ -7,6 +7,7 @@ import { DataError, type ObjectDetail, type Party, type Reading, type TxStep } f
 import { SiteHeader } from "../components/SiteHeader";
 import { DemoSwitcher } from "../components/DemoSwitcher";
 import { RuleTiers } from "../components/RuleTiers";
+import { RuleSimulator } from "../components/RuleSimulator";
 import { TxSteps } from "../components/TxSteps";
 import { RideMap } from "../components/RideMap";
 import { ObjectImage } from "../components/ObjectImage";
@@ -64,7 +65,7 @@ export function RulePage({ id }: { id: number }) {
         <div><dt>Rental price</dt><dd className="mono">2 dUSD per hour</dd><dd className="tag mono">paid when you return it · not in today's contract</dd></div>
         <div><dt>Deposit</dt><dd className="mono">{usd(d.terms.collateral)}</dd><dd className="tag mono">back by this table</dd></div>
       </dl>
-      <RuleTiers terms={d.terms} />
+      <RuleSimulator terms={d.terms} />
       <ul className="fine">
         <li>Only your rental counts: shocks from earlier renters stay on their record.</li>
         <li>1 g is the bike standing still: gravity is included in every number.</li>

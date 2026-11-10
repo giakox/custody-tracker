@@ -29,3 +29,18 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
   experiments (AB Tasty case study, https://www.abtasty.com/wp-content/uploads/2026/04/AB-Tasty-x-Booking.com-Case-Study.pdf).
 - **Shots:** [before](rounds/02-before.jpg) · [after](rounds/02-after.jpg) (375 px, scrolled into the history)
 - **Lines:** 5669
+
+## Round 3 · Try the rule before accepting it
+
+- **What:** the rule page gets a simulator. Drag the worst shock of the rental (1 g to 200 g on a log scale, so
+  8 / 30 / 80 g aren't squeezed at the start) or tap an example (riding, pothole, falls over, dropped on stone):
+  the page shows what you'd get back and what would be withheld, and the matching row of the table lights up.
+- **Why:** a table of thresholds in g asks the renter to imagine what 30 g feels like. Seeing "falls over →
+  30 dUSD back" is the moment the rule becomes a promise you understand. The examples are labelled as
+  indicative (docs/CALIBRATION.md), not measurements of this bike.
+- **Reference:** interactive pricing sliders (HubSpot's CRM slider, Mailchimp's calculator) and the argument
+  that black-box pricing creates suspicion, not trust:
+  https://wua.cx/en/insights/how-price-transparency-builds-trust-and-drives-conversion ·
+  https://hostadvice.com/blog/how-to-make-money-online/how-to-sell-online/pricing-page-design/
+- **Shots:** [before](rounds/03-before.jpg) · [after](rounds/03-after.jpg) (1440 px)
+- **Lines:** 5753
