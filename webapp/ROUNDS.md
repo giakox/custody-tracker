@@ -44,3 +44,17 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
   https://hostadvice.com/blog/how-to-make-money-online/how-to-sell-online/pricing-page-design/
 - **Shots:** [before](rounds/03-before.jpg) · [after](rounds/03-after.jpg) (1440 px)
 - **Lines:** 5753
+
+## Round 4 · The bike's record at a glance
+
+- **What:** above the story of the bike, five counts: rentals, drops by level (with the meter), batches signed,
+  missing batches, on record since. One line under it says what they are: counts of what the recorder signed,
+  not a verdict on the bike.
+- **Why:** to know whether a bike was treated well you had to read every chapter. A second-hand buyer or an
+  insurer wants the answer first, then the detail. Missing batches are counted openly: completeness is the
+  argument for the blockchain, so the gap belongs in the summary, not hidden in the story.
+- **Reference:** the Carfax vehicle history report summary, a "snapshot of the records found", where the
+  icons "don't indicate whether something is good or bad — they show what types of records exist":
+  https://www.carfax.ca/whats-in-a-report · https://clutch.ca/blog/posts/how-to-read-a-carfax-report
+- **Shots:** [before](rounds/04-before.jpg) · [after](rounds/04-after.jpg) (1440 px)
+- **Lines:** 5796

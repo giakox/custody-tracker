@@ -83,6 +83,22 @@ function ChapterBlock({ c, d, explorer }: { c: Chapter; d: ObjectDetail; explore
   );
 }
 
+/** The record at a glance, before the details (Carfax's report summary): counts, not verdicts. */
+function RecordSummary({ d }: { d: ObjectDetail }) {
+  const settled = d.rentals.filter((r) => r.settlement);
+  const drops = [1, 2, 3].map((t) => ({ t: t as 1 | 2 | 3, n: settled.filter((r) => r.settlement!.tier === t).length })).filter((x) => x.n > 0);
+  const missing = d.gaps.reduce((s, x) => s + x.missing, 0);
+  return (
+    <dl className="record">
+      <div><dt>Rentals</dt><dd className="mono">{settled.length}{d.activeRental ? " + 1 now" : ""}</dd></div>
+      <div><dt>Drops</dt><dd className="mono">{drops.length === 0 ? "none" : drops.map((x) => <span key={x.t} className="record-drop"><TierMeter tier={x.t} />{x.n}</span>)}</dd></div>
+      <div><dt>Batches signed</dt><dd className="mono">{d.batches.length}</dd></div>
+      <div><dt>Missing batches</dt><dd className={`mono ${missing ? "gap" : ""}`}>{missing || "none"}</dd></div>
+      <div><dt>On record since</dt><dd className="mono">{day(d.created.at)}</dd></div>
+    </dl>
+  );
+}
+
 export function Timeline({ d, explorer }: { d: ObjectDetail; explorer: string | null }) {
   return (
     <section className="block timeline" aria-labelledby="timeline-title">
@@ -91,6 +107,8 @@ export function Timeline({ d, explorer }: { d: ObjectDetail; explorer: string | 
         <p>Newest first. Each line links to the transaction that proves it, so you can check it without asking us.</p>
       </div>
       <div className="chapters">
+        <RecordSummary d={d} />
+        <p className="record-note">Counts of what the recorder signed, not a verdict on the bike. A missing batch never reached the chain; nobody can add it later.</p>
         {buildStory(d).map((c) => <ChapterBlock key={c.period} c={c} d={d} explorer={explorer} />)}
       </div>
     </section>
