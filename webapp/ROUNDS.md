@@ -342,3 +342,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Teenage Engineering and Oura product pages: the object in a hand, large, before any specification: https://www.oura.com
 - **Shots:** [1440 px](rounds/34-1440.jpg)
 - **Lines:** 6359
+
+## Round 35 · A step back: the length of the Home
+
+- **What:** Measured the Home: about 6,100 px, of which the three chapters took 2,400. Each chapter is now 74% of the screen tall instead of 86%, which takes about 350 px out without losing a photo or a sentence.
+- **Why:** A story is stronger when it is shorter than the reader's patience. Rhythm: hero, map, chapters, rule, owners, each about one screen and a half at most.
+- **Reference:** Apple's iPhone page pacing: chapters that fit a screen and a bit, never more: https://www.apple.com/iphone/
+- **Shots:** none
+- **Lines:** 6359
