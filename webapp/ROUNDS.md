@@ -814,6 +814,33 @@ Return used a layout whose CSS was deleted in round 66 (the photo spilled over t
 - **Lines removed as dividers:** the record counters, chapter rows, rule table rows, signature rows, receipt rows, owner KPIs, the past-rentals list: all now separate by space, surface or tint.
 - **Step back:** round 70 (Home 2,000 px shorter, two "how it works" merged into one).
 
+## Round 71 · Verify as one sheet: the second you picked, then the answer in place
+
+**Hierarchy audit (before):**
+
+| Block | Who, when | If it vanished | Verdict |
+|---|---|---|---|
+| Back link in monospace | — | — | normal type, like every other back link |
+| H1 + a two-line lead | professor, curious renter | the purpose | kept; lead shortened to what you do and why |
+| Batch line (batch, readings, anchored, custodian) | the careful | context | tertiary kicker on the card |
+| Nine tall tombstone bars, the picked one ringed | everyone: "which second?" | can't pick | secondary: a quieter strip, the picked bar dark (orange if a knock), tooltips on hover and focus |
+| Four facts in ruled monospace cells (when, peak, where, reading n of 9) | everyone | can't tell what's being checked | merged into one line: "Second 9 of 9 · 41.2 g · at 03:02:12, near…", with the peak at 60 px |
+| "Is this reading on the chain?" panel with its own 56 px H2 | — | the H2 competed with the H1 | removed: the button says what it does |
+| Result: 88 px ringed check, "Verified on-" / "chain" broken over two lines at 96 px | everyone | the answer | primary: in the same place as the button, check 64 px, title 44 px on one line |
+
+**Levels after:** the result (or the button before it) is primary; the picked peak secondary; the strip, the batch line and the proof tertiary. **Squint test:** before, three things shouted at once (H1, the tombstones, the panel's H2). After, a white half with one big number and a sand half with one blue button; after the check, the sand turns blue with the check mark.
+
+**References:** Apple Pay's sheet (what you're about to confirm on top, one action, the answer replaces the action in place) and Stripe's payment success page (a large check, one line of result, the details below in a quiet block). Why ours looked cheaper: a page of parts of equal weight; the result arrived in a different box from the action.
+
+**Three ideas:** (1) one card: the reading on the white half, the action on the sand half that becomes the answer. (2) A two-step wizard (pick, then check) on separate screens. (3) The bars full width as a seismograph across the page, the result as a banner under it.
+**Discarded:** (2) splits a five-second action into two pages. (3) a banner under a full-width chart pushes the answer below the fold on a laptop.
+
+**Chosen, (1):** [before and after](rounds/71-verify-1440.jpg), [after the check](rounds/71-verified-1440.jpg), [phone, after the check](rounds/71-verify-375.jpg). The proof values sit on sand, label and value per row, no ruled lines.
+
+**Motion and states:** bars press to 96%, hover and focus show a tooltip with the value and time and a focus ring; the check pops in with a slight overshoot and the sentence follows (off with reduced motion); the sand panel fades to blue on success.
+
+**Test, "another screen at a glance?"** Yes: two columns of parts became one card with an answer in it.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -831,5 +858,5 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Receipt and My rentals | 68 |
 | Owner (My bikes) | 69 |
 | Add a bike | 63 |
-| Verify | — |
+| Verify | 71 |
 | Design | — |

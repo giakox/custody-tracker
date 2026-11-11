@@ -243,23 +243,6 @@ p, li, dd { text-wrap: pretty; }
 }
 @keyframes page-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
-/* ---------- Round 33: Verify is the proof moment, so it is dressed like one ---------- */
-.verify-grid { gap: 36px 56px; }
-.bars { height: 190px; gap: 6px; border-bottom: 0; }
-.bar i { border-radius: 999px 999px 6px 6px; }
-.bar.is-picked { outline: 0; }
-.bar.is-picked i { box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--blue-ink), var(--elev-1); }
-.bar.is-picked.is-shock i { box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--orange-ink), var(--elev-1); }
-.v-check { background: var(--surface); border: 0; box-shadow: var(--elev-2); }
-.v-check.state-done { background: var(--blue-wash); box-shadow: var(--elev-3); }
-.v-mark { width: 88px; height: 88px; font-size: 48px; box-shadow: 0 0 0 10px var(--bg), 0 0 0 11px var(--blue); }
-.v-title { font-size: var(--t-h1); line-height: .95; letter-spacing: -0.04em; }
-.v-check h2 { font-size: var(--t-h2); line-height: 1; letter-spacing: -0.04em; }
-@media (prefers-reduced-motion: no-preference) { .v-result { animation: verified-in .6s cubic-bezier(.2, .8, .2, 1) both; } .v-mark { animation: stamp .5s .1s cubic-bezier(.3, 1.6, .5, 1) both; } }
-@keyframes verified-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
-@keyframes stamp { from { transform: scale(.4) rotate(-12deg); opacity: 0; } to { transform: none; opacity: 1; } }
-.v-title { font-family: var(--display); font-weight: var(--display-weight); color: var(--ink); }
-
 /* ---------- Round 36: the hero photo and its card move at different speeds ---------- */
 .welcome { overflow: clip; }
 @supports (animation-timeline: scroll()) {
