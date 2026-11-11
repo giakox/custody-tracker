@@ -49,7 +49,7 @@
 .finder-map .leaflet-top.leaflet-right { margin: 6px 6px 0 0; }
 .mini { position: absolute; left: 16px; right: 16px; bottom: 16px; z-index: 600; display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 16px; padding: 12px; border-radius: var(--radius); background: var(--bg); box-shadow: var(--elev-3); }
 @media (prefers-reduced-motion: no-preference) { .mini { animation: page-in .3s cubic-bezier(.2, .7, .2, 1) backwards; } }
-.mini .mini-photo { width: 112px; height: 100%; min-height: 84px; object-fit: cover; border-radius: calc(var(--radius) - 4px); }
+.mini .mini-photo { width: 112px; height: 100%; min-height: 84px; object-fit: cover; border-radius: var(--radius); }
 .mini-body { display: grid; gap: 4px; align-content: center; min-width: 0; padding-right: 28px; }
 .mini-name { font-size: 20px; font-weight: 650; letter-spacing: -0.03em; }
 .mini-meta, .mini-sample { font-size: 14px; color: var(--mist); }
@@ -134,7 +134,7 @@
   .finder-list[data-sheet="peek"] .fcard { flex: 0 0 min(86vw, 340px); position: relative; }
   .finder-list[data-sheet="peek"] .fcard-hit { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 12px; align-items: center; height: 100%; padding: 8px; border-radius: var(--radius); background: var(--bg); box-shadow: var(--elev-1), inset 0 0 0 1px var(--line); text-align: left; }
   .finder-list[data-sheet="peek"] .fcard.is-selected .fcard-hit { box-shadow: var(--elev-2), inset 0 0 0 2px var(--ink); }
-  .finder-list[data-sheet="peek"] .fcard-photo { aspect-ratio: 1; border-radius: 10px; }
+  .finder-list[data-sheet="peek"] .fcard-photo { aspect-ratio: 1; border-radius: var(--radius); }
   .finder-list[data-sheet="peek"] .fcard-badge { transform: scale(.82); transform-origin: top left; }
   .finder-list[data-sheet="peek"] .fcard-body { padding: 0; gap: 2px; }
   .finder-list[data-sheet="peek"] .fcard-top { display: grid; gap: 0; }

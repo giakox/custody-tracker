@@ -73,7 +73,7 @@
 /* ---------- the rule, readable: level, threshold, share, amount ---------- */
 .rule-title { margin-top: 26px; font-size: 15px; color: var(--fog); max-width: 48ch; }
 .rule-tiers { margin-top: 10px; display: grid; gap: 2px; max-width: 460px; }
-.rule-row { display: grid; grid-template-columns: 104px 116px minmax(0, 1fr); gap: 12px; align-items: center; padding: 9px 10px; border-radius: 10px; white-space: nowrap; font: 14px/1.3 var(--ui); color: var(--mist); }
+.rule-row { display: grid; grid-template-columns: 104px 116px minmax(0, 1fr); gap: 12px; align-items: center; padding: 9px 10px; border-radius: var(--radius); white-space: nowrap; font: 14px/1.3 var(--ui); color: var(--mist); }
 .rule-row .rule-from { color: var(--ink); }
 .rule-row.none .rule-from, .rule-row.none .rule-out { color: var(--fog); }
 .rule-row.hl { background: rgba(252, 115, 77, .08); box-shadow: inset 2px 0 0 var(--orange); }
@@ -147,7 +147,7 @@
 .moments-row { list-style: none; margin: 32px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .moment-pic { position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 5; background: var(--raise); }
 .moment-photo { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
-.moment-inset { position: absolute; right: 16px; bottom: 16px; width: 34%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 10px; box-shadow: var(--elev-3); outline: 4px solid #fff; }
+.moment-inset { position: absolute; right: 16px; bottom: 16px; width: 34%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); box-shadow: var(--elev-3); outline: 4px solid #fff; }
 .moment-n { position: absolute; left: 16px; top: 16px; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--overlay); box-shadow: var(--elev-1); font-weight: 700; font-size: 17px; color: var(--ink); }
 .moment h3 { margin-top: 20px; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.15; letter-spacing: -0.025em; text-wrap: balance; }
 .moment p { margin-top: 8px; font-size: 16px; line-height: 1.5; color: var(--mist); max-width: 38ch; }

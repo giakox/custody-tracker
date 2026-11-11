@@ -10,8 +10,8 @@
 /* the seconds of the batch: a strip of bars you pick from */
 .bars { list-style: none; margin: 20px 0 0; padding: 0; display: flex; align-items: flex-end; gap: 6px; height: 140px; }
 .bars li { flex: 1; height: 100%; }
-.bar { position: relative; width: 100%; height: 100%; display: flex; align-items: flex-end; background: none; border: 0; padding: 0; cursor: pointer; border-radius: 8px; }
-.bar i { display: block; width: 100%; background: var(--raise); border-radius: 8px; transition: background-color .15s ease, transform .2s cubic-bezier(.2, .7, .2, 1); transform-origin: bottom; }
+.bar { position: relative; width: 100%; height: 100%; display: flex; align-items: flex-end; background: none; border: 0; padding: 0; cursor: pointer; border-radius: var(--radius); }
+.bar i { display: block; width: 100%; background: var(--raise); border-radius: var(--radius); transition: background-color .15s ease, transform .2s cubic-bezier(.2, .7, .2, 1); transform-origin: bottom; }
 .bar:hover i { background: var(--line-strong); }
 .bar.is-shock i { background: rgba(252, 115, 77, .45); }
 .bar.is-picked i { background: var(--ink); }

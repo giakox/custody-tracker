@@ -1366,6 +1366,19 @@ Also removed: the estimator's styles in map.css, which matched the earnings card
 
 **Test, "another screen at a glance?"** For the chrome during a ride, yes: a band became a pill.
 
+## Round 95 · A step back: one radius, really
+
+**Hierarchy audit (corners across the site):** the rule is one corner radius (14 px, the `--radius` token) for cards, photos, buttons, fields and panels, with only pills and dots fully round. Fourteen declarations had drifted: 10 px on the trip card's photo, the hero's bike photo, the compact map cards, the account menu items, the Design contents, the rule rows and the inset photo in "three moments"; 8 px on Verify's bars; 6 px and 4 px on two focus outlines; and one `radius − 4 px` on the map's mini card. Most of them were added in rounds 64–94, each reasonable alone, together a second radius scale nobody chose.
+
+**Levels:** not a hierarchy change; a consistency one. **Squint test:** the corners of nested photos now match the cards around them.
+
+**Three ideas (what to remove):** (1) every stray radius, back to the token. (2) A second, smaller token for nested elements. (3) Square corners for photos inside cards.
+**Discarded:** (2) would make two radii official, which is what the rule forbids. (3) square photos in round cards read as unfinished.
+
+**Chosen, (1):** [Verify's bars and the hero's bike card with the one radius](rounds/95-one-radius.jpg). Kept: 2 px on hairline strokes (slider ticks), 999 px and 50% for pills and dots. Also fixed a double space in the hero's card ("walk  from Bocconi").
+
+**Test, "another screen at a glance?"** No: a step back.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
