@@ -125,3 +125,22 @@
 .fsplit b { color: var(--ink); font-weight: 650; }
 .finder-grid .fcard:not(.is-live) .fcard-name { font-size: 16px; }
 @media (max-width: 899px) { .fsplit { display: none; } }
+
+/* ---------- Round 81: on a phone the low sheet holds compact cards, so the map gets the room ---------- */
+@media (max-width: 899px) {
+  .finder-list[data-sheet="peek"] { height: 196px; }
+  .finder-map .leaflet-bottom.leaflet-right { bottom: 196px; }
+  .finder-list[data-sheet="peek"] .finder-grid { padding: 4px 12px 16px; }
+  .finder-list[data-sheet="peek"] .fcard { flex: 0 0 min(86vw, 340px); position: relative; }
+  .finder-list[data-sheet="peek"] .fcard-hit { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 12px; align-items: center; height: 100%; padding: 8px; border-radius: var(--radius); background: var(--bg); box-shadow: var(--elev-1), inset 0 0 0 1px var(--line); text-align: left; }
+  .finder-list[data-sheet="peek"] .fcard.is-selected .fcard-hit { box-shadow: var(--elev-2), inset 0 0 0 2px var(--ink); }
+  .finder-list[data-sheet="peek"] .fcard-photo { aspect-ratio: 1; border-radius: 10px; }
+  .finder-list[data-sheet="peek"] .fcard-badge { transform: scale(.82); transform-origin: top left; }
+  .finder-list[data-sheet="peek"] .fcard-body { padding: 0; gap: 2px; }
+  .finder-list[data-sheet="peek"] .fcard-top { display: grid; gap: 0; }
+  .finder-list[data-sheet="peek"] .fcard-name { font-size: 16px; }
+  .finder-list[data-sheet="peek"] .fcard-dist { font-size: 13px; }
+  .finder-list[data-sheet="peek"] .fcard-price { font-size: 15px; margin-top: 4px; }
+  .finder-list[data-sheet="peek"] .bb-line { display: none; }
+  .finder-list[data-sheet="peek"] .fcard-rent { top: auto; right: 12px; bottom: 12px; }
+}

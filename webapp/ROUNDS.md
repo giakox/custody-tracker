@@ -1068,6 +1068,28 @@ Also removed: the estimator's styles in map.css, which matched the earnings card
 - **Steps back:** round 75 (calmer titles on working screens, about 120 lines of dead CSS removed) and round 80 (the earnings estimate removed, stray styles that leaked into My bikes removed).
 - **Next in the rotation:** the try-the-rule section on the Home, the bike page's booking card on a phone, the phone map's crowded pins, empty and error states.
 
+## Round 81 · The phone map gets the room: compact cards when the sheet is low
+
+**Hierarchy audit (finder on a phone, sheet low):**
+
+| Block | Who, when | If it vanished | Verdict |
+|---|---|---|---|
+| Title + chips over the map | renter | can't filter | kept |
+| The map: about 226 px tall between the chips and the sheet; ten price pins stacked on each other | renter: "where are they?" | the point of a map | primary: now about 420 px; the fit keeps the pins clear of the chips and the sheet |
+| The sheet at 372 px with a big photo card (photo, name, distance, price, record) | renter browsing | — | low sheet = compact cards (square photo, name, distance, price, Rent); the record line waits for the pulled-up sheet |
+| Pulled-up sheet | renter comparing | — | unchanged: full cards with the record |
+
+**Levels after:** with the sheet low, the map leads and the card names the selected bike; pulled up, the cards lead. **Squint test:** before, a blob of overlapping white pills; after, ten separate prices with the blue one in the middle.
+
+**References:** Airbnb on a phone with the map open (small horizontal cards along the bottom, the map is the screen) and Lime (one compact vehicle card over a big map). Why ours looked cheaper: the bottom half of the screen repeated what the pins should have said, and the pins couldn't say it.
+
+**Three ideas:** (1) compact cards in the low sheet. (2) Cluster overlapping pins into "+3" bubbles. (3) Fit the map to the five nearest bikes only.
+**Discarded:** (2) ten bikes don't need clustering once the map has room; clusters add a tap. (3) hides half the fleet from a first look.
+
+**Chosen, (1):** [before and after, sheet low](rounds/81-map-375.jpg), [sheet pulled up](rounds/81-map-375-full.jpg). The selected compact card gets an ink ring. (In these headless shots the map tiles are blank: OpenStreetMap throttled our many screenshot requests; the tiles load in the browser.)
+
+**Test, "another screen at a glance?"** Yes on a phone: a stack of pins over a big card became a map with a slim row of cards.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1077,7 +1099,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Home: hero | 78 |
 | Home: "how it works" band (and bike page) | 70 |
 | Home: owners band | 80 |
-| Home: find a bike (grid + map) | 79 |
+| Home: find a bike (grid + map) | 81 |
 | Header | 77 |
 | Footer | 73 |
 | Bike page | 65 |

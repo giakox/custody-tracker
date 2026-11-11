@@ -61,7 +61,7 @@ export function Finder({ bikes, me, locating, onLocate, live, rentingIt, loaded 
   }, [phone, sheet, selected]);
 
   const drag = useRef<number | null>(null);
-  const padding = useMemo(() => (phone ? { top: 190, bottom: 340, left: 0, sheet: 0.5 } : { top: 28, bottom: 150, left: 0 }), [phone]);
+  const padding = useMemo(() => (phone ? { top: 150, bottom: 190, left: 0, sheet: 0.3 } : { top: 28, bottom: 150, left: 0 }), [phone]);
 
   const title = `Bikes near ${me ? "you" : "Bocconi"}`;
   return (
