@@ -2034,6 +2034,25 @@ Rounds 111–119 rotated through the screens that had gone longest untouched and
 
 **Test on the blurred shots:** yes: a grey square left of the form disappears; the card's photo area now carries a dark point, so the eye lands on it.
 
+## Round 130 · A step back: what 121–129 left behind
+
+**Hierarchy audit (the screens touched in this block, rechecked):** Confirm a return on a phone had two "Confirm it's back" buttons (the sticky bar from 121 and the card's, further down); the CSS still carried the dashed photo box (gone from the page in 129) and the outlined "primary" wallet option (gone in 126).
+
+**What was removed:** the card's button on phones on Confirm a return (the bar is the one action; verified: one visible button at 375 and at 1440); the `.photo` and `.wallet-opt.primary` rules. Nothing added.
+
+**Café test:** a good café clears the cups as it goes. Still missing: the owner side of the site (My bikes, Add) is still whiter and emptier than the renter side.
+
+**Three ideas:** (1) remove the duplicate and the dead rules. (2) Merge the two rails' CSS (tx-steps and ahead-list) into one class. (3) Remove the "How renters will see it" label everywhere.
+**Discarded:** (2) one is live state, the other a static preview: the same look on purpose, but merging the markup would mean faking transaction steps before a wallet exists. (3) on desktop the label is what tells the owner the card is a preview, not their published listing.
+
+**Chosen, (1).** No visual sheet: the only visible change is one button fewer on a phone.
+
+**Test on the blurred shots:** not applicable beyond the phone: one blue bar instead of a bar plus a second blue block below.
+
+## Block 121 to 130 (summary)
+
+Block 121–130 worked through the oldest screens in the register and two composition passes. Confirm a return starts at the rack (121). The Home's bands after the finder meet edge to edge (122). The finder's middle band is a lead bike beside a list (123). The wallet's confirmations are one rail, numbered as the sentence counts them (124). The simulator lost its box in a box (125, step back). Connect a wallet has its action in the card, and every rent step keeps its action reachable on a phone (126). The bike page ends sand-then-dark (127). Pairing is a viewfinder (128). The bike's photo is added in the preview card (129). This round cleaned up after them. Lines in `src`: about 7,860 of the 10,560 cap. Next: My bikes and the Add flow's rules step (owner side, whitest part of the site), Home hero (78), page transitions (88), states (89), the live rental pill (94).
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.

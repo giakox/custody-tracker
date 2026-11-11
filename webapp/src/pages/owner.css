@@ -26,9 +26,6 @@ button.choice-opt:hover { border-color: var(--blue); }
 .scan-frame i:nth-child(4) { bottom: 12px; right: 12px; border-left: 0; border-top: 0; }
 .facts.single { grid-template-columns: minmax(0, 1fr); margin-top: 0; }
 .form { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 24px; margin-top: 24px; align-items: start; }
-.photo { position: relative; aspect-ratio: 4 / 3; border: 1px dashed var(--line-strong); border-radius: var(--radius); display: grid; place-items: center; overflow: hidden; cursor: pointer; color: var(--fog); font-size: 13px; }
-.photo img { width: 100%; height: 100%; object-fit: cover; }
-.photo input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
 .fields { display: grid; gap: 14px; }
 .field { display: grid; gap: 6px; align-content: start; }
 .field > span:first-child { font-size: 14px; color: var(--fog); }
@@ -57,7 +54,7 @@ button.choice-opt:hover { border-color: var(--blue); }
   
   
   .choice, .mount, .scan, .form, .rule-form, .ready { grid-template-columns: minmax(0, 1fr); }
-  .scan-frame, .photo, .qr-print { max-width: 260px; }
+  .scan-frame, .qr-print { max-width: 260px; }
 }
 @media print {
   .page:has(.qr-print) :is(.ready > div, .rent-top, h1, .tx-steps, .lead) { display: none !important; }
@@ -249,3 +246,6 @@ table.levels td:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
 .preview-change { position: absolute; right: 12px; bottom: 12px; padding: 8px 12px; border-radius: 999px; background: var(--overlay); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); font-size: 13px; font-weight: 600; color: var(--ink); box-shadow: var(--elev-2); }
 @media (max-width: 900px) { .preview-photo { aspect-ratio: 16 / 9; } }
 @media (max-width: 900px) { .add-grid:has(.preview-photo) .listing-preview { order: -1; margin: 8px 0 8px; } .add-grid:has(.preview-photo) .preview-k { display: none; } }
+
+/* ---------- Round 130: a step back: on a phone Confirm a return has one "Confirm it's back", the bar's ---------- */
+@media (max-width: 899px) { main.rent:has(.confirm-sticky) .rent-side .trip-act { display: none; } }
