@@ -171,3 +171,8 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 .price-note { margin-top: 14px; font-size: 17px; color: var(--mist); }
 .price-note b { color: var(--ink); font-weight: 600; }
 .action-note { align-self: center; font-size: 16px; color: var(--fog); }
+
+.live-line { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; font-size: 16px; color: var(--card-ink); text-decoration: none; }
+.live-line i { width: 10px; height: 10px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 4px var(--blue-wash); }
+.live-line:hover { text-decoration: underline; }
+.live-line i { flex: none; }

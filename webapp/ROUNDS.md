@@ -202,3 +202,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Airbnb's "hope you enjoyed your stay" screen: https://www.airbnb.com
 - **Shots:** [1440 px](rounds/18-1440.jpg)
 - **Lines:** 6186
+
+## Round 19 · The real bike, one tap from the headline
+
+- **What:** Under the two buttons on Home, a live line: "The demo bike is free now, 2 min walk from Bocconi", linking straight to the bike. It disappears when the bike is out on a ride.
+- **Why:** The map is the main path but the one bike that can really be rented is also the demo path. One honest line, one tap.
+- **Reference:** Lime's app: the nearest vehicle is offered before you browse the map: https://www.li.me
+- **Shots:** [1440 px](rounds/19-1440.jpg)
+- **Lines:** 6192

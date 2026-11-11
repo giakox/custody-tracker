@@ -118,6 +118,7 @@ export function HomePage() {
               <a className="btn btn-primary btn-lg" href="#bikes" onClick={(e) => { e.preventDefault(); document.getElementById("bikes")?.scrollIntoView({ behavior: "smooth" }); }}>Find a bike near you</a>
               <a className="btn btn-secondary btn-lg" href={href("add/1")}>Rent out your bike</a>
             </div>
+            {live && live.b.objectId !== null && <a className="live-line" href={href(`object/${live.b.objectId}`)}><i aria-hidden="true" />{live.b.label} is free now, {walkText(live.d)} from {me ? "you" : "Bocconi"}</a>}
           </div>
         </section>
 
