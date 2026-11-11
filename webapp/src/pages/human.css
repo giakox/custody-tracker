@@ -166,3 +166,5 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 
 .check-it { margin-left: 6px; font-size: .92em; white-space: nowrap; }
 .event .num { font-size: 1em; font-weight: 600; }
+.price-line { margin-top: 12px; font-size: 16px; color: var(--mist); }
+.price-line b { color: var(--ink); font-weight: 600; }

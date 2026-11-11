@@ -162,3 +162,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Carfax's report: the claim and "view the record" side by side: https://www.carfax.com
 - **Shots:** [375 px](rounds/13-375.jpg)
 - **Lines:** 6183
+
+## Round 14 · Price on the bike page
+
+- **What:** Under the Rent button on the bike page: "2 dollars an hour · 50 dollars deposit, back by the rule". The price was only visible after starting the rental.
+- **Why:** A renter decides on price and deposit; both were hidden until the second page.
+- **Reference:** Airbnb listing page: the price line sits right under the title and action: https://www.airbnb.com
+- **Shots:** [1440 px](rounds/14-1440.jpg)
+- **Lines:** 6186

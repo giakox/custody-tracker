@@ -125,6 +125,7 @@ export function Hero({ d }: { d: ObjectDetail }) {
         <h1 id="object-title"><ViewerTitle d={d} me={account} /></h1>
         <p className="hero-summary"><Summary d={d} /></p>
         <div className="actions"><Action d={d} me={account} /></div>
+        {d.status === "available" && <p className="price-line"><b>2 dollars an hour</b> · {usd(d.terms.collateral)} deposit, back by the rule</p>}
         <StateLine d={d} />
       </div>
       <div className="bike-side">
