@@ -615,3 +615,24 @@ Edoardo: the header was flat, a thin full-width strip with a small logo, the "Sa
 - **Reference 3, Raycast (raycast.com, often featured on godly.website):** the bar floats: inset 16 px from the top and the sides, 76 px tall, 16 px radius, a light 5 px blur and a hairline border. We take the inset, the radius and the light blur; we use our own white, one shadow from the scale and our single radius.
 - **What changed:** a floating bar aligned to the page's content width (12 px from the top), the logo at 30 px, the sections in the middle as rounded items with a dark pill for the page you are on, "Connect wallet" as the quiet action and "Find a bike" as the filled one (your wallet once connected, with My bikes beside it). It tightens and its shadow deepens over the first 140 px of scroll (off with reduced motion). The "Sample data" pill left the bar: the Demo button now reads "Demo · sample data". On a phone: the logo and a round dark menu button that turns into a cross and opens the page of big words.
 - **"Find a bike" goes to the finder:** a new address, #/bikes, opens Home scrolled to the bikes.
+- **Before and after, side by side:** [finder 1440](rounds/sbs-finder-1440.jpg), [Home top 1440](rounds/sbs-home-1440.jpg), [finder on a phone](rounds/sbs-finder-375.jpg), [header scrolled](rounds/sbs-header-scrolled-1440.jpg), [phone menu](rounds/after-menu-375.jpg).
+- **Critique after the first pass, fixed before the commit:** "Near me" fell alone onto a second chip row at 1440 (chips 15 px padding, 8 px gap: one row now); the legend had lost its two dots when the old map CSS went; the other pins faded to 55% when one was selected, which put their price text under 4.5:1 (no fading now: the selected pin is dark and larger, that is enough); the phone menu was 362 px wide and centred, not full screen, because a fixed grid child kept `justify-self: center` (now stretched); the mini-card's "deposit 50 · 2 min walk" broke mid-phrase (now two lines).
+- **Test, "is it another page at a glance?"** Yes. Edoardo, after seeing it: «OH ORA SIAMO SULLA STRADA GIUSTA».
+
+## Rotation register
+
+Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
+
+| Screen | Last round |
+|---|---|
+| Home: hero and story | 62 |
+| Home: find a bike (grid + map) | Structure |
+| Header | Structure |
+| Footer | — |
+| Bike page | — |
+| Rent flow | — |
+| Receipt and My rentals | — |
+| Owner (My bikes) | — |
+| Add a bike | 63 |
+| Verify | — |
+| Design | — |

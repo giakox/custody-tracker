@@ -3,7 +3,6 @@ import type { FleetBike } from "../data/types";
 import { href } from "../ui/router";
 import { distanceText, walkText } from "../ui/geo";
 import { BOCCONI } from "../data/mock/fleet";
-import { DemoSwitcher } from "./DemoSwitcher";
 import { FleetMap, type LatLon } from "./FleetMap";
 import { BikePhoto, BlackBoxLine, LiveBadge } from "./BikeCard";
 
@@ -73,17 +72,14 @@ export function Finder({ bikes, me, locating, onLocate, live, rentingIt, loaded 
         <div className="finder-title">
         <div className="finder-title-row">
           <h2 id="finder-title">{title}</h2>
-          <span className="chips-end">
-            <button type="button" className="chip chip-near" onClick={onLocate} disabled={locating === "asking"}>{locating === "asking" ? "Locating…" : me ? "Recenter" : "Near me"}</button>
-            <DemoSwitcher inline />
-          </span>
         </div>
           <p>{shown.length} free to borrow, nearest first. Bikes out on a ride never show: where they are is where someone is.</p>
         </div>
         <div className="finder-chips" role="group" aria-label="Filter the bikes">
           <button type="button" className="chip" aria-pressed={!kind && !cheap} onClick={() => { setKind(null); setCheap(false); }}>All</button>
           {KINDS.map((k) => <button key={k.id} type="button" className="chip" aria-pressed={kind === k.id} onClick={() => setKind(kind === k.id ? null : k.id)}>{k.label}</button>)}
-          <button type="button" className="chip" aria-pressed={cheap} onClick={() => setCheap(!cheap)}>Up to {CHEAP} dollars an hour</button>
+          <button type="button" className="chip" aria-pressed={cheap} onClick={() => setCheap(!cheap)}>Up to {CHEAP} dollars</button>
+          <button type="button" className="chip chip-near" onClick={onLocate} disabled={locating === "asking"}>{locating === "asking" ? "Locating…" : me ? "Recenter" : "Near me"}</button>
         </div>
         {locating === "denied" && <p className="finder-note" role="status">Location unavailable: showing bikes around Bocconi.</p>}
         {!live && loaded && <p className="finder-note">{rentingIt ? "You have the real bike right now, so it isn't on the map." : "The real bike is out on a ride right now, so it isn't on the map."}</p>}
@@ -126,7 +122,7 @@ export function Finder({ bikes, me, locating, onLocate, live, rentingIt, loaded 
               <BikePhoto b={current.b} className="mini-photo" />
               <div className="mini-body">
                 <p className="mini-name">{current.b.label}</p>
-                <p className="mini-meta">{current.b.pricePerHour} dollars an hour · deposit {current.b.deposit} · {walkText(current.d)}</p>
+                <p className="mini-meta">{current.b.pricePerHour} dollars an hour, {current.b.deposit} deposit<br />{walkText(current.d)}</p>
                 {current.b.live && current.b.objectId !== null
                   ? <div className="mini-actions"><a className="btn btn-primary btn-sm" href={href(`rent/${current.b.objectId}`)}>Rent</a><a className="btn btn-secondary btn-sm" href={href(`object/${current.b.objectId}`)}>See the bike</a></div>
                   : <p className="mini-sample">A sample bike: it has no recorder, so it can't be rented. {live && <button type="button" className="link-btn" onClick={() => select(live.b.key)}>Show the real bike</button>}</p>}

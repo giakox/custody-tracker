@@ -6,6 +6,7 @@ import { useViewer } from "../ui/viewer";
 import { SiteHeader } from "../components/SiteHeader";
 import { Moments } from "../components/HowItWorks";
 import { SiteFooter } from "../components/SiteFooter";
+import { DemoSwitcher } from "../components/DemoSwitcher";
 import { Finder } from "../components/Finder";
 import type { LatLon } from "../components/FleetMap";
 import { RuleSimulator } from "../components/RuleSimulator";
@@ -112,6 +113,7 @@ export function HomePage() {
           </section>
         </div>
       </main>
+      <div className="home-demo"><DemoSwitcher inline /></div>
       <SiteFooter />
     </div>
   );
