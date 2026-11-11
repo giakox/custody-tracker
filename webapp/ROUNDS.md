@@ -500,3 +500,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Stripe's and Linear's mobile menus: full-screen, large type: https://linear.app
 - **Shots:** none
 - **Lines:** 6506
+
+## Round 53 · The map in paper tones
+
+- **What:** The base map is tinted warm (a sepia wash and a slight hue shift) with a soft inner vignette, so it sits in the same world as the sand surfaces and the photographs; price pins get a warm shadow instead of grey.
+- **Why:** A cold grey-blue street map was the one thing on the page that did not belong to the palette.
+- **Reference:** Aesop's store locator and Kinfolk's maps: a map tinted to the brand paper colour: https://aesop.com
+- **Shots:** [1440 px](rounds/53-1440.jpg)
+- **Lines:** 6511
