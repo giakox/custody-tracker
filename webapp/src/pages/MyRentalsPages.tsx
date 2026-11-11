@@ -147,6 +147,7 @@ export function ReceiptPage({ id, period }: { id: number; period: number }) {
   return (
     <Page>
       <p><a className="link back" href={href("my-rentals")}>My rentals</a></p>
+      <div className="receipt-stage">
       <article className={`receipt slip tier-${s?.tier ?? 0}`}>
         <header className="slip-head">
           <p className="slip-kicker">Receipt · {objectName(d)}, lent by {d.ownerName ?? shortHex(d.owner.address)}</p>
@@ -180,6 +181,7 @@ export function ReceiptPage({ id, period }: { id: number; period: number }) {
           <button type="button" className="btn btn-secondary" onClick={() => window.print()}>Print</button>
         </div>
       </article>
+      </div>
     </Page>
   );
 }

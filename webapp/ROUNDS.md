@@ -1729,6 +1729,25 @@ Fixed on the way: an absolutely positioned photo inside a grid takes its grid ar
 
 **Test on the blurred shots:** yes: a uniform grey column became one with a dark band near the top and a dark bar mid-page.
 
+## Round 113 · The receipt is a slip on the counter
+
+**Hierarchy audit (receipt):** the round-68 slip leads with the money and reads well; but it was a white card on a white page, a document, not a thing you were handed. The café's receipt (paper, torn edge, set over its photo) is the object people remember.
+
+**What changed:** the slip lies on a dark counter that crosses the page, tilted a degree, with a torn bottom edge, and drops into place when the page opens (off with reduced motion). On paper none of it applies: printed, it is the plain round-97 receipt with its proof. On a phone the slip isn't tilted.
+
+**Café test:** this is the café's receipt, made of our own material (the money bar, the rule, the proof). The tone ladder of the site now has paper on the counter as well as cards on sand.
+
+**References:** the café's order slip; Apple Wallet's passes (a document shown as the object it stands for).
+
+**Three ideas:** (1) a slip on a dark counter. (2) A receipt you can "tear off" with a drag to save it. (3) An emailed-receipt look with a header band.
+**Discarded:** (2) a gesture for a novelty adds no information. (3) an email look on a web page is a costume.
+
+**Note:** in round 68 I discarded the torn edge as "decoration, not hierarchy". Under the café yardstick it earns its place again: the hierarchy is already right, and the edge says "this is something you keep". Nothing is final.
+
+**Chosen, (1):** [before and after](rounds/113-receipt-slip.jpg), [phone](rounds/113-receipt-375.jpg). Print rechecked: no shadow, no tilt, no mask.
+
+**Test on the blurred shots:** yes: a white card on white became a light slip on a dark band.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1751,7 +1770,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Rent flow: Ride, Waiting | 67 |
 | Rent flow: Return | 111 |
 | Rent flow: Outcome | 91 |
-| Receipt (print) | 97 |
+| Receipt | 113 (print: 97) |
 | My rentals | 99 |
 | Owner (My bikes) | 69 |
 | Owner: Confirm a return | 76 |

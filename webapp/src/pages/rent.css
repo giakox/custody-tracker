@@ -369,3 +369,15 @@ i.split-kept { background: var(--orange); }
 .spot-pin i { width: 10px; height: 10px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 3px rgba(2, 151, 222, .35); }
 .spot-map .leaflet-tile-pane { filter: var(--tile-filter); }
 @media (max-width: 640px) { .return-spot { grid-template-columns: minmax(0, 1fr); } .return-spot > img, .return-spot .spot-map { grid-row: auto; height: 180px; } }
+
+/* ---------- Round 113: the receipt is a slip on the counter ---------- */
+.receipt-stage { margin-top: 24px; padding: 56px 0 72px; background: var(--ink); box-shadow: 0 0 0 100vmax var(--ink); clip-path: inset(0 -100vmax); }
+.receipt-stage .receipt.slip { margin: 0 auto; transform: rotate(-1.2deg); box-shadow: 0 30px 70px rgba(0, 0, 0, .5);
+  -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 18px 51% repeat-x, linear-gradient(#000 0 0) top / 100% calc(100% - 9px) no-repeat;
+  mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 18px 51% repeat-x, linear-gradient(#000 0 0) top / 100% calc(100% - 9px) no-repeat;
+  padding-bottom: 12px; }
+@media (prefers-reduced-motion: no-preference) { .receipt-stage .receipt.slip { animation: slip-in .7s cubic-bezier(.2, .7, .2, 1) backwards; } }
+@keyframes slip-in { from { transform: translateY(-24px) rotate(-3deg); opacity: 0; } }
+@media print { .receipt-stage { background: none; box-shadow: none; clip-path: none; padding: 0; } .receipt-stage .receipt.slip { transform: none; -webkit-mask: none; mask: none; } }
+@media (max-width: 640px) { .receipt-stage { padding: 32px 0 48px; } .receipt-stage .receipt.slip { transform: none; } }
+@media print { .receipt-stage .receipt.slip { box-shadow: none !important; border: 1px solid #999; animation: none !important; } }
