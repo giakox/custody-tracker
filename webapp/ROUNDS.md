@@ -2309,6 +2309,21 @@ The owner side and the system's edges. "Your rules" shows the rule renters will 
 
 **Test on the blurred shots:** yes: a column of grey slabs became a line of blue dots with text beside it.
 
+## Round 145 · A step back: the verdict is a sentence, not a second black box
+
+**Hierarchy audit (Design, after 144 cleared the scheme):** the reading page had two dark blocks, the numbers band (the page's one dark moment, 112) and, further down, "Result: a public, permissionless blockchain." in an ink box. Two black slabs on a page meant to be read, the second one a single line of text dressed as a banner.
+
+**What was removed:** the verdict's ink box: it is the same large sentence on the page, with a blue edge on its left (the same "aside" mark as the scheme's notes, in blue because it's the conclusion), the key words in the dark blue. The numbers band stays.
+
+**Café test:** the café writes the day's special big on the board, not in a frame on the board. Still missing: the four "Do we need a blockchain?" questions above it are four identical sand rows; next pass on this page.
+
+**Three ideas:** (1) unbox the verdict. (2) Unbox the numbers band instead. (3) Remove the verdict (the yes/no list already implies it).
+**Discarded:** (2) the numbers are the page's only image-like moment; the verdict is a sentence. (3) the professors read for the conclusion; it must be said.
+
+**Chosen, (1):** [before and after](rounds/145-verdict.jpg).
+
+**Test on the blurred shots:** yes: a black rectangle became a line of large text with a blue mark.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -2340,4 +2355,4 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Add a bike | 119 (step 2), 128 (step 3), 129 (step 4), 131 (step 5) |
 | Verify | 137 |
 | Empty, loading and error states | 134 (finder) |
-| Design | 144 |
+| Design | 144, 145 (step back) |

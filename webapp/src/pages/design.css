@@ -137,3 +137,7 @@
 @media (max-width: 700px) { .stage { gap: 16px; padding-bottom: 36px; } .stage-threat { margin-left: 56px; } }
 .scheme ol > li:not(:last-child) .stage-block::before { content: none; }
 .scheme ol > li:not(:last-child)::before { content: ""; position: absolute; left: 17px; top: 46px; bottom: 8px; width: 2px; border-radius: 2px; background: var(--line-strong); }
+
+/* ---------- Round 145: a step back: the verdict is a sentence on the page, not a second black box; the numbers band stays the page's one dark moment ---------- */
+.verdict { padding: 0 0 0 24px; border-radius: 0; background: none; color: var(--ink); box-shadow: inset 4px 0 0 var(--blue); }
+.verdict em { color: var(--blue-ink); }
