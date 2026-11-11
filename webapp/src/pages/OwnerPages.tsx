@@ -210,7 +210,7 @@ function validate(d: Draft): string | null {
   return null;
 }
 
-function AddShell({ n, title, children, next, onNext, wide = false }: { n: number; title: ReactNode; children: ReactNode; next?: string; onNext?: () => void; wide?: boolean }) {
+function AddShell({ n, title, children, next, onNext, wide = false, aside }: { n: number; title: ReactNode; children: ReactNode; next?: string; onNext?: () => void; wide?: boolean; aside?: ReactNode }) {
   return (
     <Page wide={wide}>
       <div className="rent-top">
@@ -220,14 +220,36 @@ function AddShell({ n, title, children, next, onNext, wide = false }: { n: numbe
         </ol>
       </div>
       <h1>{title}</h1>
-      {children}
-      {(next || (n > 1 && n < 6)) && (
-        <div className="actions">
-          {next && (onNext ? <button type="button" className="btn btn-primary" onClick={onNext}>{next}</button> : <span className="btn btn-primary is-off" aria-disabled="true">{next}</span>)}
-          {n > 1 && n < 6 && <a className="btn btn-secondary" href={href(`add/${n - 1}`)}>Back</a>}
+      <div className={aside ? "add-grid" : undefined}>
+        <div>
+          {children}
+          {(next || (n > 1 && n < 6)) && (
+            <div className="actions">
+              {next && (onNext ? <button type="button" className="btn btn-primary" onClick={onNext}>{next}</button> : <span className="btn btn-primary is-off" aria-disabled="true">{next}</span>)}
+              {n > 1 && n < 6 && <a className="btn btn-secondary" href={href(`add/${n - 1}`)}>Back</a>}
+            </div>
+          )}
         </div>
-      )}
+        {aside}
+      </div>
     </Page>
+  );
+}
+
+/** What renters will see, updating as the owner types (Airbnb's host preview). */
+function ListingPreview({ d }: { d: Draft }) {
+  return (
+    <aside className="listing-preview" aria-label="How renters will see your bike">
+      <p className="preview-k">How renters will see it</p>
+      <div className="preview-card">
+        {d.photo ? <img src={d.photo} alt="" /> : <div className="preview-empty">Your photo</div>}
+        <div className="preview-body">
+          <p className="preview-name">{d.label.trim() || "Your bike"}</p>
+          <p className="preview-meta">{d.kind}{d.spot.trim() ? `, ${d.spot.trim()}` : ""}</p>
+          <p className="preview-price"><b>{d.price || "0"} dollars</b> an hour · deposit {d.deposit || "0"}</p>
+        </div>
+      </div>
+    </aside>
   );
 }
 
@@ -288,7 +310,7 @@ export function AddPage({ n }: { n: number }) {
       );
     }
     case 4: return (
-      <AddShell n={4} title={<>Your <em>bike</em>.</>} next="Continue" onNext={d.label.trim() && d.spot.trim() ? () => go(5) : undefined}>
+      <AddShell n={4} wide aside={<ListingPreview d={d} />} title={<>Your <em>bike</em>.</>} next="Continue" onNext={d.label.trim() && d.spot.trim() ? () => go(5) : undefined}>
         <div className="form">
           <label className="photo">
             {d.photo ? <img src={d.photo} alt="Your bike" /> : <span className="mono">Add a photo</span>}
@@ -313,7 +335,7 @@ export function AddPage({ n }: { n: number }) {
       const lv = (i: number, v: string) => { const a = [...d.levels] as [number, number, number]; a[i] = Number(v); set({ levels: a }); };
       const bp = (i: number, v: string) => { const a = [...d.bps] as [number, number, number]; a[i] = Number(v); set({ bps: a }); };
       return (
-        <AddShell n={5} title={<>Your <em>rules</em>.</>} next="Save the rules" onNext={err ? undefined : () => go(6)}>
+        <AddShell n={5} wide aside={<ListingPreview d={d} />} title={<>Your <em>rules</em>.</>} next="Save the rules" onNext={err ? undefined : () => go(6)}>
           <p className="lead">Renters accept these before they unlock. You can't change them during a rental. <span className="test-money">{TEST_MONEY}</span></p>
           <div className="rule-form">
             <label className="field"><span>Price per hour</span><span className="unit"><input inputMode="decimal" value={d.price} onChange={(e) => set({ price: e.target.value })} /> dollars</span><span className="tag">paid to you separately</span></label>

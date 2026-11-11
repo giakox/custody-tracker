@@ -453,3 +453,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Uber and Lyft ride-in-progress screens, Apple Live Activities: a pulsing live marker: https://www.uber.com/blog/live-activity-on-ios/
 - **Shots:** [1440 px](rounds/47-1440.jpg)
 - **Lines:** 6448
+
+## Round 48 · The owner sees the listing while typing
+
+- **What:** On the "Your bike" and "Your rules" steps of adding a bike, a card on the right shows how renters will see it (photo, name, type and spot, price and deposit) and updates as you type; on a phone it sits above the form.
+- **Why:** Adding a bike is the owner's one act of faith. Seeing the finished listing grow makes it concrete and shows why each field matters.
+- **Reference:** Airbnb's host onboarding: a live preview card of your listing: https://www.airbnb.com/host/homes
+- **Shots:** [1440 px](rounds/48-1440.jpg)
+- **Lines:** 6483

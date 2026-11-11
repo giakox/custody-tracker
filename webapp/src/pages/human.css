@@ -418,3 +418,16 @@ p, li, dd { text-wrap: pretty; }
   .pulse::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: inherit; animation: pulse-ring 1.8s ease-out infinite; }
 }
 @keyframes pulse-ring { from { transform: scale(1); opacity: .6; } to { transform: scale(3.2); opacity: 0; } }
+
+/* ---------- Round 48: the owner sees their listing while typing ---------- */
+.add-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 380px); gap: clamp(24px, 5vw, 72px); align-items: start; }
+.listing-preview { position: sticky; top: 88px; }
+.preview-k { font-size: 14px; color: var(--fog); margin: 24px 0 10px; }
+.preview-card { background: var(--bg); border-radius: var(--radius); box-shadow: var(--elev-3); overflow: hidden; }
+.preview-card img, .preview-empty { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: grid; place-items: center; background: var(--raise); color: var(--dim); font-size: 15px; }
+.preview-body { padding: 16px 18px 20px; display: grid; gap: 4px; }
+.preview-name { font-size: 24px; line-height: 1.1; letter-spacing: -0.03em; font-weight: 650; color: var(--ink); }
+.preview-meta { font-size: 15px; color: var(--fog); }
+.preview-price { font-size: 16px; color: var(--mist); margin-top: 6px; }
+.preview-price b { color: var(--ink); font-weight: 650; }
+@media (max-width: 900px) { .add-grid { grid-template-columns: minmax(0, 1fr); } .listing-preview { position: static; order: -1; } .preview-card img, .preview-empty { aspect-ratio: 16 / 9; } }
