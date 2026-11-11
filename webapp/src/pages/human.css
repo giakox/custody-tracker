@@ -277,3 +277,9 @@ p, li, dd { text-wrap: pretty; }
 .try-rule .sim-peak { font-size: clamp(56px, 6vw, 96px); letter-spacing: -0.04em; }
 .try-rule .sim-back { font-size: clamp(40px, 4.4vw, 68px); letter-spacing: -0.03em; }
 .try-rule .sim-k { font-size: 15px; }
+
+/* ---------- Round 31: on the bike page the rule card overlaps the photo ---------- */
+.bike-side { gap: 0; }
+.bike-side .object-image img { aspect-ratio: 5 / 4; box-shadow: var(--elev-2); }
+.bike-side .rule-card { margin: -72px 20px 0; position: relative; background: var(--bg); border: 0; box-shadow: var(--elev-3); }
+@media (max-width: 860px) { .bike-side .rule-card { margin: -48px 12px 0; } }

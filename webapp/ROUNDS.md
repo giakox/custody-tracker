@@ -310,3 +310,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Apple's product pages: each chapter introduces one new idea, none repeats the one before: https://www.apple.com/iphone/
 - **Shots:** none
 - **Lines:** 6314
+
+## Round 31 · The rule card overlaps the bike's photo
+
+- **What:** On the bike page the rule card now rises over the bottom of the photo, floating on the large soft shadow, with the photo itself lifted on the middle one. Same on a phone.
+- **Why:** Depth, as asked: the rule is the product and now literally sits on top of the bike.
+- **Reference:** Apple's iPhone buy page: the product photo with a floating spec card overlapping it: https://www.apple.com/shop/buy-iphone
+- **Shots:** [1440 px](rounds/31-1440.jpg)
+- **Lines:** 6320
