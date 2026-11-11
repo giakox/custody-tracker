@@ -41,3 +41,6 @@
 /* Esri's dark grey is lighter than Midnight Black: darken the tiles so map and header read as one surface. */
 .fleet-map .leaflet-tile-pane, .ride-map .leaflet-tile-pane { filter: var(--tile-filter); }
 .fleet-map, .ride-map { background: var(--bg) !important; }
+
+/* ---------- Round 139: Leaflet's panes (z-index 400–1000) stay inside their map, so fixed bars and buttons are never painted under a map ---------- */
+.leaflet-container { isolation: isolate; }

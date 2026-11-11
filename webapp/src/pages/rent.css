@@ -459,3 +459,9 @@ i.split-kept { background: var(--orange); }
   main.rent:has(.rent-side .trip-act > .btn-primary:first-child) { padding-bottom: 88px; }
   .page:has(main.rent .rent-side .trip-act > .btn-primary:first-child) .demo { margin-bottom: 72px; }
 }
+
+/* ---------- Round 139: Deposit back: the split and the ride's map sit on the page, not in a sand box ---------- */
+.trip-sum { padding: 0; background: none; border-radius: 0; box-shadow: none; }
+.trip-sum .split { height: 14px; }
+.trip-sum-map { margin-top: 24px; }
+.trip-sum-map .ride-map, .trip-sum-map .leaflet-container { height: clamp(320px, 34vw, 440px); border-radius: var(--radius); box-shadow: var(--elev-2); }

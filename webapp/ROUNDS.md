@@ -2199,6 +2199,23 @@ Block 121–130 worked through the oldest screens in the register and two compos
 
 **Test on the blurred shots:** yes: on the Home the white strip at the top is gone; the photo is under the header and the pill again.
 
+## Round 139 · Deposit back: the split and the map on the page; no map ever covers a button
+
+**Hierarchy audit (Outcome, untouched since 91):** the side card says the answer large ("Back to you 30 dollars"); the column below the lead held a sand box containing the split bar, its legend and the ride map, a box in a box with the map's own shadow inside it. On a phone, a real bug: the fixed "Receipt" button from round 126 was painted *under* the map (Leaflet's panes use z-index 400–1000), so it showed as an empty blue bar.
+
+**What changed:** the split and the map sit on the page (no sand container), the map taller (320–440 px) with its own shadow. Every Leaflet map is now its own stacking context (`isolation: isolate`), so its panes can never rise above fixed bars and buttons anywhere (Outcome, Confirm a return's rack map, the ride). Verified: on a phone the element at the centre of "Receipt" is the button; on the Home "Near me" is still above the map.
+
+**Café test:** the café doesn't serve the cake in a box on a plate. Still missing: the outcome has no photo when there was a knock (only when there wasn't).
+
+**References:** Uber's trip receipt screen (map and fare on the page, no nested panels); Stripe's payment success (the amount in one place, the detail open below).
+
+**Three ideas:** (1) unbox the column, isolate the maps. (2) Put the split over the map as a floating card, like the ride page. (3) Remove the split from the column (the side card has the amount).
+**Discarded:** (2) at the end of a ride the money is the subject, not the map; a card over the map would make the map the stage again. (3) the side card is below the column on a phone, where the split is the first thing after the lead.
+
+**Chosen, (1):** [before and after](rounds/139-outcome.jpg), [phone: the button that was under the map](rounds/139-outcome-375.jpg).
+
+**Test on the blurred shots:** yes: a sand rectangle with a map in it became a bar and a larger map on white; on the phone the bottom bar now reads "Receipt".
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -2222,7 +2239,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Rent flow: Ride | 116 |
 | Rent flow: Waiting | 118 |
 | Rent flow: Return | 111 |
-| Rent flow: Outcome | 91 |
+| Rent flow: Outcome | 139 |
 | Receipt | 113 (print: 97) |
 | My rentals | 117 |
 | Owner (My bikes) | 132, 135 (step back) |
