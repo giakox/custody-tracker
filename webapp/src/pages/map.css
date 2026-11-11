@@ -30,22 +30,6 @@
 .own-cta h3 { font-size: 26px; }
 .own-cta p { margin: 10px 0 20px; color: var(--mist); }
 
-/* header additions */
-.site-wallet { display: flex; align-items: center; gap: 10px; }
-.menu-btn { display: none; background: none; border: 1px solid var(--line-strong); color: var(--mist); border-radius: var(--radius); min-height: 38px; padding: 0 12px; font-size: 12px; cursor: pointer; }
-
-@media (max-width: 760px) {
-  .site-nav { display: none; }
-  .site-nav.open { display: grid; position: absolute; top: 100%; left: 0; right: 0; z-index: 900; background: var(--bg); border-bottom: 1px solid var(--line-strong); padding: 8px var(--gutter) 16px; gap: 0; }
-  .site-nav.open .nav-link { padding: 12px 0; border-bottom: 1px solid var(--line); display: block; }
-  .menu-btn { display: inline-block; }
-  .site-header { flex-wrap: nowrap; }
-  .site-wallet { margin-left: auto; }
-  .site-header { gap: 8px; }
-  .site-header .btn-sm { padding: 0 12px; }
-  .wide-only { display: none; }
-}
-
 /* Demo control as a map tool on Home (never over the list, the legend or the map credits). */
 .demo.demo-inline { position: relative; inset: auto; padding: 0; margin: 0 0 0 auto; pointer-events: auto; justify-items: end; align-self: start; }
 .demo.demo-inline .demo-panel { position: absolute; top: 34px; right: 0; }

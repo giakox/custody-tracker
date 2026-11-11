@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useRoute } from "../ui/router";
 import { useQuery } from "@tanstack/react-query";
 import { getFleet, getObject, listObjects } from "../data/api";
 import { useViewer } from "../ui/viewer";
@@ -52,6 +53,9 @@ function TryTheRule({ objectId }: { objectId: number }) {
 /** Home = the map of bikes free to rent near you, then what Sharify is. */
 export function HomePage() {
   const fleet = useQuery({ queryKey: ["fleet"], queryFn: getFleet, refetchInterval: 10_000 });
+  const [page] = useRoute();
+  // "Find a bike" (#/bikes) opens Home on the finder.
+  useEffect(() => { if (page === "bikes") setTimeout(() => document.getElementById("bikes")?.scrollIntoView(), 60); }, [page]);
   const [me, setMe] = useState<Me | null>(null);
   const [locating, setLocating] = useState<"idle" | "asking" | "denied">("idle");
   const origin: LatLon = me ?? BOCCONI;
@@ -84,7 +88,7 @@ export function HomePage() {
             <h1 id="home-title">Borrow a bike from someone nearby.</h1>
             <p>If it gets dropped, a public rule decides what you pay. Not the owner, not us.</p>
             <div className="actions">
-              <a className="btn btn-primary btn-lg" href="#bikes" onClick={(e) => { e.preventDefault(); document.getElementById("bikes")?.scrollIntoView({ behavior: "smooth" }); }}>Find a bike near you</a>
+              <a className="btn btn-primary btn-lg" href={href("bikes")}>Find a bike near you</a>
               <a className="btn btn-secondary btn-lg" href={href("add/1")}>Rent out your bike</a>
             </div>
             {live && live.b.objectId !== null && <a className="live-line" href={href(`object/${live.b.objectId}`)}><i aria-hidden="true" />{live.b.label} is free now, {walkText(live.d)} from {me ? "you" : "Bocconi"}</a>}

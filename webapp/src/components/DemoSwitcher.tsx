@@ -43,7 +43,7 @@ export function DemoSwitcher({ inline = false }: { inline?: boolean }) {
           <p>Only counts while the bike is rented: the next batch carries the shock.</p>
         </div>
       )}
-      <button type="button" className="demo-toggle mono" aria-expanded={open} onClick={() => setOpen(!open)}>{open ? "Close" : "Demo"}</button>
+      <button type="button" className="demo-toggle mono" aria-expanded={open} onClick={() => setOpen(!open)}>{open ? "Close" : "Demo · sample data"}</button>
     </div>
   );
 }

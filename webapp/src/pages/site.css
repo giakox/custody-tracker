@@ -3,21 +3,6 @@
 
 .page { overflow-x: clip; }
 
-/* ---------- header ---------- */
-.site-header {
-  display: flex; align-items: center; gap: 16px; max-width: var(--max); margin: 0 auto;
-  padding: 18px var(--gutter); position: relative; z-index: 3;
-}
-.site-header .wordmark { display: block; line-height: 0; }
-.site-header .wordmark img { height: 28px; width: auto; display: block; }
-.site-header .sample { color: var(--blue-ink); border: 1px solid rgba(2, 151, 222, .5); border-radius: 999px; padding: 1px 9px; font-size: 11px; white-space: nowrap; }
-.site-nav { margin-left: auto; display: flex; align-items: center; gap: 22px; }
-.site-nav + .site-wallet { margin-left: 8px; }
-.nav-link { font-size: 16px; color: var(--mist); text-decoration: none; }
-.nav-link:hover { color: var(--ink); }
-.acct { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--mist); border: 1px solid var(--line-strong); border-radius: 999px; padding: 5px 12px; }
-.acct i { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
-
 /* ---------- buttons: blue is "you can act"; text on blue is always Midnight Black ---------- */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px;
@@ -103,12 +88,9 @@
   .how-steps li, .how-steps li + li { padding: 18px 0; border-left: 0; border-bottom: 1px solid var(--line); }
 }
 @media (max-width: 640px) {
-  .site-header { gap: 10px; flex-wrap: wrap; }
-  .site-nav { gap: 14px; }
 
   .actions .btn { flex: 1 1 100%; }
 
-  .acct { display: none; }
 }
 
 /* Phones: status and action before the drawing; demo control sits at the end of the page,
