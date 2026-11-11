@@ -2091,13 +2091,32 @@ Block 121–130 worked through the oldest screens in the register and two compos
 
 **Test on the blurred shots:** yes: three equal blocks became one large photograph beside a card, with a slim row under it.
 
+## Round 133 · The hero: the proposition on the left, the bike that's free now pinned on the photo
+
+**Hierarchy audit (Home hero, untouched since 78):** one white card held four things (headline, sentence, button, and the "Free now" demo bike row), 585 px tall over a 774 px photo: the card covered the canal's facades and the cyclist's bike, and the live fact (the one thing that changes) sat inside the card as its fourth line, like a footnote. Bug found: "2 min walkfrom Bocconi" (the flex row swallowed the space before the phone-hidden span).
+
+**What changed:** the card keeps the proposition (headline, sentence, button) and is 117 px shorter; the free bike becomes its own frosted card pinned to the photo's bottom right (photo, "Free now, 2 min walk from Bocconi", name, price and deposit, white on hover). The facades and the rider are uncovered. On phones it stays in the flow right after the hero card. The missing space is fixed with a non-breaking space.
+
+**Separation without lines:** two surfaces on one photograph, at the two ends of the same baseline.
+
+**Café test:** the café's sign says what it is; the chalk board by the door says what's fresh today. Two objects, two jobs. Still missing: nothing in the hero moves with the real state except that card (it hides when the demo bike is out, as before).
+
+**References:** Airbnb's experiences hero (the proposition card and a live "available" card on the photo); Apple's store pages (a pinned availability chip on the hero photo).
+
+**Three ideas:** (1) split the live fact out of the card. (2) Text directly on the photo with a scrim, no card. (3) Card straddling the photo's bottom edge.
+**Discarded:** (2) the canal photo is bright: white text needs a heavy scrim that would grey the picture. (3) the hero clips its overflow for the scroll drift; straddling would mean rebuilding that.
+
+**Chosen, (1):** [before and after](rounds/133-hero.jpg).
+
+**Test on the blurred shots:** yes: one big white block became a block and a small frosted one; more photograph in the top half.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
 
 | Screen | Last round |
 |---|---|
-| Home: hero | 78 |
+| Home: hero | 133 |
 | Home: journey (dark band) | 102 |
 | Bike page: "how it works" band | 127 (sand journey) |
 | Home: owners band | 108 |

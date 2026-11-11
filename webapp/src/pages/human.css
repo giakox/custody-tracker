@@ -469,3 +469,11 @@ p, li, dd { text-wrap: pretty; }
 /* ---------- Round 125: a step back: no box inside the simulator's card; the amount sits on the card itself ---------- */
 .sim-money { padding: 20px 0 0; border-radius: 0; background: none; }
 .rule-after { margin-top: 20px; max-width: 64ch; font-size: 15px; line-height: 1.5; color: var(--mist); }
+
+/* ---------- Round 133: the hero's live fact leaves the card: the proposition on the left, the bike that's free now pinned on the photo ---------- */
+.welcome > .nearest { margin: 0; }
+@media (min-width: 761px) {
+  .welcome > .nearest { position: absolute; right: max(var(--gutter), calc((100% - var(--max)) / 2 + var(--gutter))); bottom: clamp(24px, 5vw, 56px); width: 380px; background: var(--overlay); -webkit-backdrop-filter: blur(18px) saturate(1.4); backdrop-filter: blur(18px) saturate(1.4); box-shadow: var(--elev-3); }
+  .welcome > .nearest:hover { background: var(--bg); box-shadow: var(--elev-3); }
+}
+@media (max-width: 760px) { .welcome > .nearest { margin: 12px 12px 0; } }

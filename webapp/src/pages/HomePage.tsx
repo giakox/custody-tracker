@@ -77,18 +77,18 @@ export function HomePage() {
             <div className="actions">
               <a className="btn btn-primary btn-lg" href={href("bikes")}>Find a bike near you</a>
             </div>
-            {live && live.b.objectId !== null && (
-              <a className="nearest" href={href(`object/${live.b.objectId}`)}>
-                <BikePhoto b={live.b} className="nearest-photo" />
-                <span className="nearest-body">
-                  <span className="nearest-k"><i aria-hidden="true" />Free now, {walkText(live.d)}<span className="wide-only"> from {me ? "you" : "Bocconi"}</span></span>
-                  <span className="nearest-name">{live.b.label}</span>
-                  <span className="nearest-price">{live.b.pricePerHour} dollars an hour<span className="wide-only">, deposit {live.b.deposit}</span></span>
-                </span>
-                <span className="nearest-go" aria-hidden="true">›</span>
-              </a>
-            )}
           </div>
+          {live && live.b.objectId !== null && (
+            <a className="nearest" href={href(`object/${live.b.objectId}`)}>
+              <BikePhoto b={live.b} className="nearest-photo" />
+              <span className="nearest-body">
+                <span className="nearest-k"><i aria-hidden="true" />Free now, {walkText(live.d)}<span className="wide-only">{"\u00a0"}from {me ? "you" : "Bocconi"}</span></span>
+                <span className="nearest-name">{live.b.label}</span>
+                <span className="nearest-price">{live.b.pricePerHour} dollars an hour<span className="wide-only">, deposit {live.b.deposit}</span></span>
+              </span>
+              <span className="nearest-go" aria-hidden="true">›</span>
+            </a>
+          )}
         </section>
 
         <div id="bikes" className="bikes-anchor" />
