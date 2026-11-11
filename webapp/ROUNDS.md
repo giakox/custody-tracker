@@ -2421,7 +2421,7 @@ The receipt became a slip with its actions on the counter (141), then the whole 
 
 ## Rounds 101 to 150, in one paragraph
 
-Fifty rounds under PROTOCOL.md: every screen in the rotation register was touched at least once more (the oldest now is round 116), five composition rounds per block were judged on the full page and the blurred shot, every fifth round removed instead of added. Real bugs found and fixed on the way: "walkfrom" in the hero (133), "no bike matches" during a chain outage (134), the phone's fixed buttons painted under Leaflet maps (139), a printed receipt tilted (147), a duplicate confirm button on phones (130). Lines in `src`: about 8,080 of the 10,560 cap. Nothing pushed; everything is on `webapp-edoardo`, one local commit per round.
+Fifty rounds under PROTOCOL.md: most screens in the rotation register were touched again; the ones that have waited longest are the bike page as a whole (107), the Home owners band (108), Return (111) and Add step 1 (not since 74), which is where a next block should start, five composition rounds per block were judged on the full page and the blurred shot, every fifth round removed instead of added. Real bugs found and fixed on the way: "walkfrom" in the hero (133), "no bike matches" during a chain outage (134), the phone's fixed buttons painted under Leaflet maps (139), a printed receipt tilted (147), a duplicate confirm button on phones (130). Lines in `src`: about 8,080 of the 10,560 cap. Nothing pushed; everything is on `webapp-edoardo`, one local commit per round.
 
 ## Rotation register
 
