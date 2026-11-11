@@ -258,7 +258,9 @@ export function ReturnPage({ id }: { id: number }) {
   };
   if (!d) return <Loading stage="Return" />;
   return (
-    <Shell d={d} stage="Return">
+    <Shell d={d} stage="Return" wide>
+      <div className="wallet-grid">
+        <div>
       <h1>Return the <em>bike</em>.</h1>
       <ol className="numbered">
         <li>Leave it where the owner asked, locked.</li>
@@ -270,6 +272,9 @@ export function ReturnPage({ id }: { id: number }) {
       <div className="actions">
         <button type="button" className="btn btn-primary" onClick={run} disabled={state === "running"}>{state === "running" ? "Working…" : "It's back"}</button>
         <a className="btn btn-secondary" href={href(`rent/${id}/active`)}>Back to your rental</a>
+      </div>
+        </div>
+        <img className="wallet-photo" src="./img/day/bocconi-park.jpg" alt="A city bike parked at a rack outside Bocconi" />
       </div>
     </Shell>
   );

@@ -540,3 +540,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Apple Pay setup pages: the device in a hand beside one clear action: https://www.apple.com/apple-pay/
 - **Shots:** none
 - **Lines:** 6540
+
+## Round 58 · Returning shows where to leave it
+
+- **What:** The return page pairs the three steps with a large photo of a bike parked at a rack, the same two-column composition as the wallet step.
+- **Why:** The return is where a renter worries; the photo says what a normal, finished ride looks like.
+- **Reference:** Airbnb's check-out instructions: the photo of the place beside the steps: https://www.airbnb.com
+- **Shots:** none
+- **Lines:** 6545
