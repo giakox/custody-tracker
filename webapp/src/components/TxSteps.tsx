@@ -31,9 +31,10 @@ export function TxSteps({ steps, deposit, explorer, viewer = "renter" }: { steps
     <ol className="tx-steps">
       {steps.map((s, i) => {
         const url = s.tx ? txUrl(explorer, s.tx) : null;
+        const n = steps.slice(0, i + 1).filter((x) => x.viaWallet).length;
         return (
-          <li key={`${s.id}-${i}`} className={`tx-step ${s.status}`} aria-current={s.status === "signing" || s.status === "pending" ? "step" : undefined}>
-            <span className="tx-dot" aria-hidden="true">{s.status === "confirmed" ? "✓" : i + 1}</span>
+          <li key={`${s.id}-${i}`} className={`tx-step ${s.status} ${s.viaWallet ? "" : "auto"}`} aria-current={s.status === "signing" || s.status === "pending" ? "step" : undefined}>
+            <span className="tx-dot" aria-hidden="true">{s.status === "confirmed" ? "✓" : s.viaWallet ? n : ""}</span>
             <span className="tx-body">
               <span className="tx-label">{label(s, deposit, viewer)}</span>
               <span className="tx-status">

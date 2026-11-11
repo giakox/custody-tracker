@@ -1926,6 +1926,25 @@ Rounds 111–119 rotated through the screens that had gone longest untouched and
 
 **Test on the blurred shots:** yes: a row of three equal blocks and an orphan became one big block beside three small ones.
 
+## Round 124 · Leaving the deposit: the wallet's confirmations are one rail, counted the way the sentence counts them
+
+**Hierarchy audit (Deposit, untouched since 86):** the lead says "it will ask you to confirm 3 times"; below it, four identical sand boxes numbered 1 to 4, the first of which is the owner's ("Nothing to do on your side"). Four equal blocks (a row of identical elements), a count that contradicts the sentence above it, and nothing showing which one is happening now except a blue outline.
+
+**What changed:** the steps are a rail: dots joined by a line that turns blue as each step is done. Only the wallet's confirmations are numbered (1, 2, 3, as the lead says); the owner's step is a small dot with smaller grey text, riding along. The step your wallet is asking for has a filled blue dot, a bold label and "Confirm in your wallet" in blue; done steps get a tick and fade to grey with their "proof" link. The same component serves the owner's Confirm a return and the Add flow, so they get the same rail. Tested the whole run: asking → three ticks → "Unlocked. Enjoy the ride."
+
+**Separation without lines:** the boxes are gone; the connecting line is not a divider but the path itself, and it carries state (grey → blue).
+
+**Café test:** the café's order slip moves along the counter one station at a time; this is now the same: one point lit, the rest waiting. Still missing: the left column is short beside the card at 1440 (the space under the rail is empty).
+
+**References:** Stripe's payment-link checkout steps (one active, the rest muted); Coinbase Wallet's transaction progress (numbered confirmations on a line).
+
+**Three ideas:** (1) the rail, wallet steps numbered. (2) Hide the owner's step. (3) A single progress bar with "1 of 3".
+**Discarded:** (2) the owner's step is real and happens first; hiding it would make the first wait unexplained. (3) a bar loses what each confirmation is for, which is what people read in the wallet's pop-up.
+
+**Chosen, (1):** [before and after, wallet asking](rounds/124-deposit.jpg), [phone, done](rounds/124-deposit-375.jpg).
+
+**Test on the blurred shots:** yes: four grey slabs became a line of dots with one blue point.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1943,7 +1962,8 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Live rental strip | 94 |
 | Footer | 120 (wordmark only on reading pages) |
 | Bike page | 107 (proof mode: 100) |
-| Rent flow: Rule, Deposit | 86 |
+| Rent flow: Rule | 86 |
+| Rent flow: Deposit | 124 |
 | Rent flow: Wallet | 92 |
 | Rent flow: Ride | 116 |
 | Rent flow: Waiting | 118 |

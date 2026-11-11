@@ -423,3 +423,25 @@ i.split-kept { background: var(--orange); }
 .held-amount { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; color: #fff; }
 .held p + p { margin-top: 6px; font-size: 15px; line-height: 1.5; max-width: 56ch; }
 @media (max-width: 640px) { .wait-line { grid-template-columns: minmax(0, 1fr); row-gap: 20px; } .wait-line::before { display: none; } .wait-line li { grid-template-columns: 40px minmax(0, 1fr); column-gap: 14px; } .wait-line li > b { margin-top: 0; } .wait-line li .wl-dot { grid-row: span 2; } }
+
+/* ---------- Round 124: the wallet's confirmations are one rail, numbered as the sentence counts them; the owner's step rides along small ---------- */
+.tx-steps { position: relative; gap: 0; }
+.tx-step, .tx-step + .tx-step { position: relative; padding: 12px 0 12px 0; background: none; box-shadow: none; border-radius: 0; grid-template-columns: 36px minmax(0, 1fr); gap: 16px; }
+.tx-step:not(:last-child)::before { content: ""; position: absolute; left: 17px; top: 46px; bottom: -10px; width: 2px; border-radius: 2px; background: var(--line-strong); transition: background-color .4s ease; }
+.tx-step.confirmed:not(:last-child)::before { background: var(--blue); }
+.tx-dot { position: relative; z-index: 1; width: 36px; height: 36px; font-size: 15px; font-weight: 700; color: var(--ink); background: var(--bg); border: 2px solid var(--line-strong); }
+.tx-label { font-size: 18px; color: var(--ink); }
+.tx-status { font-size: 14px; color: var(--fog); }
+.tx-step.auto .tx-dot { width: 14px; height: 14px; margin: 0 11px; border-width: 2px; }
+.tx-step.auto:not(:last-child)::before { top: 34px; }
+.tx-step.auto .tx-label { font-size: 15px; color: var(--mist); }
+.tx-step.auto .tx-status { font-size: 13px; }
+.tx-step.signing, .tx-step.pending { background: none; box-shadow: none; }
+.tx-step.signing .tx-dot, .tx-step.pending .tx-dot { background: var(--blue); border-color: var(--blue); color: var(--on-blue); }
+.tx-step.signing .tx-label, .tx-step.pending .tx-label { font-weight: 650; }
+.tx-step.confirmed { background: none; box-shadow: none; }
+.tx-step.confirmed .tx-label { color: var(--mist); }
+.tx-step.failed { box-shadow: none; }
+.tx-step.failed .tx-dot { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.tx-step.failed .tx-status { color: var(--orange-ink); }
+.tx-step.auto .tx-dot { font-size: 0; }
