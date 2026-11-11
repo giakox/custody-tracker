@@ -482,3 +482,11 @@ i.split-kept { background: var(--orange); }
 
 /* ---------- Round 142: composition: My rentals ends on the next ride, not on the footer ---------- */
 .again-row { margin-top: 20px; max-width: 560px; }
+
+/* ---------- Round 147: composition: the receipt page is the counter, one dark surface from under the header to the footer ---------- */
+.page:has(.receipt-stage) { background: var(--ink); }
+.page:has(.receipt-stage) main { padding-bottom: 0; }
+.page:has(.receipt-stage) main > p:first-child .link, .page:has(.receipt-stage) .link.back { color: rgba(244, 241, 236, .82); }
+.page:has(.receipt-stage) .receipt-stage { margin-top: 8px; padding-bottom: 96px; box-shadow: none; clip-path: none; background: none; }
+.page:has(.receipt-stage) footer.site-end { margin-top: 0; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06); }
+@media print { .page:has(.receipt-stage) { background: none; } }

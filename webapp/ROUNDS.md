@@ -2343,6 +2343,25 @@ The owner side and the system's edges. "Your rules" shows the rule renters will 
 
 **Test on the blurred shots:** yes: five grey slabs became five short lines with blue and sand dots, then the verdict.
 
+## Round 147 · Composition: the receipt page is the counter
+
+**Hierarchy audit (Receipt, full page at 1440, 1,280 px):** white strip (only "‹ My rentals"), dark counter with the slip, white strip (96 px, nothing in it), dark footer. On the blurred shot: two pale cuts slicing one dark scene into three, the same seam 122 and 137 dealt with elsewhere, here with nothing true to put in the gap.
+
+**What changed:** the whole receipt page is the counter: the page background is ink from under the header to the footer, "‹ My rentals" sits on it in light text (rgba 244/241/236 at .82, well above 4.5:1 on ink), the slip and its desk buttons on the same surface, and the footer continues it with a 1 px light inner edge as the only hint of a change. 88 px shorter. Printing drops the dark (print styles unchanged: slip only).
+
+**Why dark into dark is right here, when 127 undid it on the bike page:** on the bike page two dark bands of different content (the journey, the footer) merged into one heavy slab under the page's real content. Here the dark *is* the page's scene: a single object lies on it, and the footer is just the edge of the counter.
+
+**Café test:** the receipt comes on the dark wooden counter, and you don't see the floor between the counter and the wall. Still missing: nothing on this page.
+
+**References:** Apple's order confirmation on dark product pages (one surface, the summary card on it); a restaurant's bill on a slate.
+
+**Three ideas:** (1) the page is the counter. (2) Fill the lower white strip with "Earlier rentals". (3) Make the counter light (sand).
+**Discarded:** (2) My rentals is one tap away; duplicating its list on each receipt makes the receipt a list page. (3) the white slip needs a dark ground to read as paper (113).
+
+**Chosen, (1):** [full page before, after, blurred](rounds/147-receipt-full.jpg).
+
+**Test on the blurred shots:** yes: three dark bands with white cuts became one dark field with a white slip on it.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -2367,7 +2386,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Rent flow: Waiting | 118 |
 | Rent flow: Return | 111 |
 | Rent flow: Outcome | 139 |
-| Receipt | 141 (print: 97) |
+| Receipt | 147 (print: 97) |
 | My rentals | 142 |
 | Owner (My bikes) | 132, 135 (step back) |
 | Owner: Confirm a return | 121 |
