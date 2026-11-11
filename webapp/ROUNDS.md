@@ -2150,7 +2150,7 @@ Block 121–130 worked through the oldest screens in the register and two compos
 
 **Mid-animation frames:** [three frames at 6× slower](rounds/136-photo-transition.jpg): the thumbnail leaves its card, grows over the fading Home, lands in the gallery.
 
-**Café test:** when the waiter brings what you pointed at in the window, it's the same cake. Still missing: the same continuity from the finder's cards (they select on the map rather than navigate; their "See the bike" link does carry it from the map's mini card).
+**Café test:** when the waiter brings what you pointed at in the window, it's the same cake. Still missing: the same continuity from the finder's cards (they select on the map rather than navigate; the map's mini card "See the bike" names its photo too, but the finder doesn't warm the cache yet, so there it still falls back to the cross-fade).
 
 **References:** the iOS Photos app (the thumbnail opens into the photo); Airbnb's listing open on mobile web (the card's photo expands into the listing's).
 
