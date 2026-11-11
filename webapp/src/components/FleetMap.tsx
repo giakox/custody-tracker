@@ -9,12 +9,11 @@ export type LatLon = { lat: number; lon: number };
 const pinHtml = (b: FleetBike, selected: boolean) => {
   const drop = b.record.lastDrop && Date.now() - b.record.lastDrop.at < 7 * 24 * 3600_000;
   return `<span class="pin ${b.live ? "pin-live" : ""} ${selected ? "is-selected" : ""}">
-    <span class="pin-dot"></span>${drop ? '<span class="pin-drop" title="Dropped in the last 7 days"></span>' : ""}
-    ${b.live ? '<span class="pin-tag">Live</span>' : ""}
+    <span class="pin-price">$${b.pricePerHour}</span>${drop ? '<span class="pin-drop" title="Dropped in the last 7 days"></span>' : ""}
   </span>`;
 };
 
-/** Dark map of free bikes. Leaflet is driven imperatively; React only passes data in. */
+/** Map of free bikes, each pin showing its hourly price (Airbnb's map). Leaflet is driven imperatively; React only passes data in. */
 export function FleetMap({ bikes, center, me, selected, onSelect, padding }: {
   bikes: FleetBike[]; center: LatLon; me: (LatLon & { accuracy: number }) | null;
   selected: string | null; onSelect: (key: string | null) => void;
@@ -53,7 +52,7 @@ export function FleetMap({ bikes, center, me, selected, onSelect, padding }: {
     const seen = new Set<string>();
     for (const b of bikes) {
       seen.add(b.key);
-      const icon = L.divIcon({ className: "pin-wrap", html: pinHtml(b, b.key === selected), iconSize: [36, 36], iconAnchor: [18, 18] });
+      const icon = L.divIcon({ className: "pin-wrap", html: pinHtml(b, b.key === selected), iconSize: [52, 30], iconAnchor: [26, 15] });
       const existing = markers.current.get(b.key);
       if (existing) { existing.setIcon(icon); existing.setZIndexOffset(b.key === selected ? 1000 : b.live ? 500 : 0); continue; }
       const mk = L.marker([b.lat, b.lon], { icon, keyboard: true, title: b.label, riseOnHover: true, zIndexOffset: b.live ? 500 : 0 })

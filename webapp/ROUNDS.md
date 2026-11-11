@@ -146,3 +146,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Etsy's "sell on Etsy" band: a seller's face, then the one action: https://www.etsy.com/sell
 - **Shots:** [1440 px](rounds/11-1440.jpg)
 - **Lines:** 6173
+
+## Round 12 · Prices on the map
+
+- **What:** Every pin on the map is now a price tag (, .5): you see what a bike costs without tapping it. The real bike is blue, a selected bike turns dark, an orange dot still means dropped this week. Also: sliders with a thin warm track and a blue handle instead of the browser default, and the rule simulator's header laid out in two columns.
+- **Why:** A map of dots made you tap each bike to learn anything. Price on the pin is the first thing every renter wants.
+- **Reference:** Airbnb's map: price tags as pins: https://www.airbnb.com
+- **Shots:** [1440 px](rounds/12-1440.jpg)
+- **Lines:** 6179

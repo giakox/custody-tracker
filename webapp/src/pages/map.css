@@ -12,12 +12,11 @@
 
 /* pins */
 .pin-wrap { background: none; border: 0; }
-.pin { position: relative; display: grid; place-items: center; width: 36px; height: 36px; }
-.pin-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 3px var(--overlay), 0 0 0 4px rgba(2, 151, 222, .55); transition: transform .15s ease; }
-.pin-live .pin-dot { width: 18px; height: 18px; background: var(--ink); box-shadow: 0 0 0 3px var(--blue), 0 0 0 9px rgba(2, 151, 222, .25); }
-.pin-tag { position: absolute; left: 30px; top: 9px; font: 500 10px/1 var(--ui); color: var(--on-blue); background: var(--blue); padding: 3px 5px; border-radius: 999px; white-space: nowrap; }
-.pin-drop { position: absolute; right: 6px; top: 6px; width: 7px; height: 7px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 2px var(--bg); }
-.pin.is-selected .pin-dot { transform: scale(1.45); }
+.pin { position: relative; display: block; width: 52px; height: 30px; }
+.pin-price { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 999px; background: #fff; color: var(--ink); border: 1px solid var(--line-strong); font: 600 14px/1 var(--ui); box-shadow: 0 2px 8px var(--shadow); transition: transform .15s ease; }
+.pin-live .pin-price { background: var(--blue); color: var(--on-blue); border-color: var(--blue-ink); }
+.pin.is-selected .pin-price { transform: scale(1.15); background: var(--ink); color: #fff; border-color: var(--ink); }
+.pin-drop { position: absolute; right: -2px; top: -3px; width: 10px; height: 10px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 2px #fff; }
 .me-dot { display: block; width: 14px; height: 14px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 3px var(--blue); }
 
 /* tools over the map */
@@ -28,8 +27,8 @@
 .map-msg { position: absolute; top: 62px; left: 14px; z-index: 500; background: var(--overlay); border: 1px solid var(--line-strong); padding: 6px 10px; font-size: 12px; color: var(--mist); border-radius: var(--radius); }
 .map-legend { position: absolute; left: 14px; bottom: 14px; z-index: 500; display: flex; flex-wrap: wrap; gap: 6px 14px; background: var(--overlay); border: 1px solid var(--line); padding: 7px 10px; border-radius: var(--radius); font-size: 11px; color: var(--fog); pointer-events: none; }
 .map-legend i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
-.lg-live { background: var(--ink); box-shadow: 0 0 0 2px var(--blue); }
-.lg-sample { background: var(--blue); }
+.lg-live { background: var(--blue); }
+.lg-sample { background: #fff; border: 1px solid var(--ink); }
 .lg-drop { background: var(--orange); }
 
 /* list */
@@ -123,8 +122,6 @@
 
 /* Selection: the chosen pin lights up, the others step back. */
 .fleet-map-wrap.has-selection .pin:not(.is-selected) { opacity: .4; }
-.pin.is-selected .pin-dot { transform: scale(1.5); box-shadow: 0 0 0 3px var(--bg), 0 0 0 6px var(--blue), 0 0 22px 6px rgba(2, 151, 222, .55); }
-.pin-live.is-selected .pin-dot { transform: scale(1.3); }
 .pin { transition: opacity .2s ease; }
 
 /* The Esri reference layer sits in the overlay pane: keep its labels under the pins and quiet. */
