@@ -1795,6 +1795,25 @@ Fixed on the way: an absolutely positioned photo inside a grid takes its grid ar
 
 **Test on the blurred shots:** a change inside the card: a coloured bar now sits in it; the screen as a whole is the same, as intended.
 
+## Round 117 · Composition: My rentals opens on your last ride
+
+**A composition round**, judged on the whole page: [blurred, before and after](rounds/117-rentals-full-blur.jpg), [sharp](rounds/117-rentals-full-sharp.jpg).
+
+**Hierarchy audit (the page):** a title ("One rental, settled."), the heading "Past rentals" and one small photo tile (the same stock photo of the bike for every rental). The page knew about the ride (where it went, what came back) and showed a thumbnail.
+
+**What changed:** after the title, **your last ride** as one wide card: on the left the map of the route you rode (with the knock, if any, in orange); on the right, on ink, "Your last ride · 40 minutes ago", the bike and how long, the split bar (back / kept) and two buttons (Receipt, Check the knock). Earlier rentals follow as tiles under "Earlier rentals"; with only one rental, no list repeats it.
+
+**Café test:** the café greets you with your usual and your order ready; this greets you with your last ride. Personal, concrete, in our dark tone.
+
+**References:** Strava's activity feed (the map of your last ride is the hero) and Uber's trip history (the latest trip with its map and fare first).
+
+**Three ideas:** (1) the last ride as the page's hero. (2) All your rides drawn on one map. (3) A summary of totals (rides, minutes, dollars back).
+**Discarded:** (2) one line across separate rides would draw journeys that never happened. (3) totals in a demo with one or two rentals are trivia.
+
+**Chosen, (1):** [phone](rounds/117-rentals-375.jpg). The routes are shown only to the renter who rode them.
+
+**Test on the blurred shots:** yes: a small tile on white became a wide map-and-ink band.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1819,7 +1838,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Rent flow: Return | 111 |
 | Rent flow: Outcome | 91 |
 | Receipt | 113 (print: 97) |
-| My rentals | 99 |
+| My rentals | 117 |
 | Owner (My bikes) | 114 |
 | Owner: Confirm a return | 76 |
 | Add a bike | 74 |

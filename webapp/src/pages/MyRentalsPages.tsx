@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getNetwork, getObject, listObjects } from "../data/api";
+import { getNetwork, getObject, getReadings, listObjects } from "../data/api";
 import type { ObjectDetail, Rental } from "../data/types";
 import { SiteHeader } from "../components/SiteHeader";
 import { DemoSwitcher } from "../components/DemoSwitcher";
 import { SiteFooter } from "../components/SiteFooter";
 import { TierMeter } from "../components/TierMeter";
+import { RideMap } from "../components/RideMap";
 import { CASE_IMAGE } from "../components/ObjectImage";
 import { day, g, hm, objectName, shortHex, span, TEST_MONEY, TIER_NAMES, txUrl, usd, when } from "../ui/format";
 import { href } from "../ui/router";
@@ -70,6 +71,8 @@ export function MyRentalsPage() {
   const active = rows?.filter((x) => x.r.status === "active") ?? [];
   const past = [...(rows?.filter((x) => x.r.settlement) ?? [])].reverse();
   const n = past.length;
+  const featured = past.length > 0 && !active.length;
+  const earlier = featured ? past.slice(1) : past;
   return (
     <Page>
       <header className="host-head">
@@ -94,12 +97,13 @@ export function MyRentalsPage() {
           </section>
         );
       })}
-      {rows && (
+      {featured && <LastRide d={past[0].d} r={past[0].r} />}
+      {rows && (past.length === 0 || earlier.length > 0) && (
         <section className="history-list" aria-labelledby="past-title">
-          <h2 id="past-title">Past rentals</h2>
+          <h2 id="past-title">{featured ? "Earlier rentals" : "Past rentals"}</h2>
           {past.length === 0 && <p className="empty-line">No finished rentals yet. <a className="link" href={href("bikes")}>Find a bike near you</a></p>}
           <ol className="trips">
-            {past.map(({ d, r }) => {
+            {earlier.map(({ d, r }) => {
               const s = r.settlement!;
               return (
                 <li key={`${d.id}-${r.period}`}>
@@ -120,6 +124,26 @@ export function MyRentalsPage() {
         </section>
       )}
     </Page>
+  );
+}
+
+/** Your most recent ride as the page's picture: its route, and where the deposit went (round 117). */
+function LastRide({ d, r }: { d: ObjectDetail; r: Rental }) {
+  const s = r.settlement!;
+  const seqs = d.batches.filter((b) => b.period === r.period).map((b) => b.seq);
+  const ride = useQuery({ queryKey: ["ride-done", d.id, seqs.join(",")], queryFn: async () => (await Promise.all(seqs.map((q) => getReadings(d.id, q)))).flat(), enabled: seqs.length > 0, retry: false });
+  const back = Number(s.refund), kept = Number(s.fee);
+  return (
+    <section className="last-ride" aria-labelledby="last-title">
+      <div className="last-map">{ride.data?.length ? <RideMap readings={ride.data} lightCg={d.terms.lightCg} /> : CASE_IMAGE && <img src={CASE_IMAGE.src} alt="" />}</div>
+      <div className="last-body">
+        <p className="last-k">Your last ride · {when(r.started.at)}</p>
+        <h2 id="last-title">{objectName(d)}, {span(r.started.at, s.anchor.at)}</h2>
+        <div className="split" aria-hidden="true">{back > 0 && <i className="split-back" style={{ flexGrow: back }} />}{kept > 0 && <i className="split-kept" style={{ flexGrow: kept }} />}</div>
+        <p className="split-legend"><span><i className="split-back" /><span>{usd(s.refund)} back</span></span>{kept > 0 && <span><i className="split-kept" /><span>{usd(s.fee)} kept for a <span className="shock">{TIER_NAMES[s.tier]}</span> knock</span></span>}</p>
+        <div className="actions"><a className="btn btn-primary" href={href(`receipt/${d.id}/${r.period}`)}>Receipt</a>{s.causeSeq !== null && <a className="btn btn-secondary" href={href(`verify/${d.id}/${s.causeSeq}`)}>Check the knock</a>}</div>
+      </div>
+    </section>
   );
 }
 
