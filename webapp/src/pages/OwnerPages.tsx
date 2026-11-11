@@ -272,7 +272,7 @@ export function AddPage({ n }: { n: number }) {
         <AddShell n={3} title={<>Pair the <em>recorder</em>.</>} next="Continue" onNext={r ? () => go(4) : undefined}>
           <p className="lead">Scan the QR on the recorder. It tells Sharify which box belongs to your bike.</p>
           <div className="scan">
-            <div className="scan-frame" aria-hidden="true"><i /><i /><i /><i /><span className="mono">{scanning ? "Reading…" : r ? "Found" : "Point the camera at the recorder's QR"}</span></div>
+            <div className={`scan-frame ${scanning ? "is-scanning" : r ? "is-found" : ""}`} aria-hidden="true"><i /><i /><i /><i /><span className="mono">{scanning ? "Reading…" : r ? "Found" : "Point the camera at the recorder's QR"}</span></div>
             <div>
               {r ? (
                 <dl className="facts single">

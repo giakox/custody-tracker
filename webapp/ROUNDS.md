@@ -405,3 +405,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Linear.app and Resend.com footers: the wordmark scaled to the full container width: https://resend.com
 - **Shots:** [1440 px](rounds/41-1440.jpg)
 - **Lines:** 6389
+
+## Round 42 · Scanning, then found
+
+- **What:** Pairing the recorder: the scan frame sweeps a blue line top to bottom while it reads, then the corners tighten and the frame turns pale blue with "Found" in bold.
+- **Why:** The step that connects the real object to the app deserves a moment of feedback you can see.
+- **Reference:** Apple Pay and bank apps' card scanners: a sweeping line then a lock-on: https://www.apple.com/apple-pay/
+- **Shots:** [1440 px](rounds/42-1440.jpg)
+- **Lines:** 6400
