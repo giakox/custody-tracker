@@ -1,27 +1,32 @@
 import { href } from "../ui/router";
 
-/** The three moments of a rental, told with photos (Home). Plain words; the proof lives elsewhere. */
+/** The rental as a story in four chapters: a big photo each, a card that rises over it, the movement driven by the scroll. */
+const CHAPTERS = [
+  { id: "find", img: "./img/day/bocconi-park.jpg", alt: "A grey city bike parked at a rack outside Bocconi, students walking past", side: "left",
+    title: "Find a bike a few minutes away.", text: "Every pin on the map is a price. Bikes that are out on a ride never show: where they are is where someone is." },
+  { id: "unlock", img: "./img/day/unlock-phone.jpg", alt: "Hands holding a phone next to a parked city bike", side: "right",
+    title: "Scan the sticker on the frame.", text: "You see the price, the deposit and the rule for drops before you pay anything." },
+  { id: "ride", img: "./img/day/friends-ride.jpg", alt: "Two friends riding city bikes down a sunny, tree-lined street", side: "left", inset: "./img/day/recorder-hand.jpg", insetAlt: "The recorder, a small black box with a blue light, held in a hand",
+    title: "Ride. A small box rides along.", text: "It notes every hard knock and seals each note, so nobody can change it afterwards: not you, not the owner, not us." },
+  { id: "return", img: "./img/day/return-smile.jpg", alt: "A renter handing a bike back to its owner, both smiling", side: "right",
+    title: "Bring it back. The deposit follows the rule.", text: "When the owner confirms, your deposit comes back by itself: all of it, or minus what the rule says for a drop." },
+] as const;
+
 export function Moments() {
   return (
-    <section className="moments" aria-labelledby="moments-title">
-      <h2 id="moments-title">A rental, from start to finish</h2>
-      <ol>
-        <li>
-          <img src="./img/day/unlock-phone.jpg" alt="Hands holding a phone next to a parked city bike" loading="lazy" />
-          <h3>Scan the sticker on the bike.</h3>
-          <p>You see the price, the deposit and the rule for drops before you pay anything.</p>
-        </li>
-        <li>
-          <img src="./img/day/recorder-hand.jpg" alt="A hand holding the Sharify recorder, a small black box with a blue light, next to a bike" loading="lazy" />
-          <h3>Ride. A small box rides along.</h3>
-          <p>It notes every hard knock and seals each note, so nobody can change it afterwards: not you, not the owner, not us.</p>
-        </li>
-        <li>
-          <img src="./img/day/return-smile.jpg" alt="A young woman hands a bike back to its owner, both smiling, outside a bike shop" loading="lazy" />
-          <h3>Bring it back.</h3>
-          <p>When the owner confirms it's back, your deposit comes back by itself: all of it, or minus what the rule says for a drop.</p>
-        </li>
-      </ol>
+    <section className="chapters" aria-label="A rental, from start to finish">
+      {CHAPTERS.map((c) => (
+        <article key={c.id} className={`chapter chapter-${c.side}`}>
+          <div className="chapter-photo">
+            <img src={c.img} alt={c.alt} loading="lazy" />
+            {"inset" in c && <img className="chapter-inset" src={c.inset} alt={c.insetAlt} loading="lazy" />}
+          </div>
+          <div className="chapter-card">
+            <h2>{c.title}</h2>
+            <p>{c.text}</p>
+          </div>
+        </article>
+      ))}
     </section>
   );
 }
