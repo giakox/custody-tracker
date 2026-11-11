@@ -155,3 +155,36 @@
 .map-locate:disabled { cursor: progress; }
 .finder:has(.mini) .map-locate { bottom: auto; top: 64px; }
 @media (max-width: 899px) { .map-locate { left: auto; right: 12px; bottom: 210px; } .finder:has(.finder-list[data-sheet="full"]) .map-locate { display: none; } }
+
+/* ---------- Round 103: the closer the bike, the bigger its card ---------- */
+@media (min-width: 1024px) {
+  .finder-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); column-gap: 20px; }
+  .finder-grid .fcard[data-band="near"] { grid-column: span 3; }
+  .finder-grid .fcard[data-band="mid"] { grid-column: span 2; }
+  .finder-grid .fcard[data-band="mid"] .bb-line { display: none; }
+  .finder-grid .fcard[data-band="mid"] .fcard-top { display: grid; gap: 2px; }
+  .finder-grid .fcard[data-band="mid"] .fcard-name { font-size: 15px; }
+  .finder-grid .fcard[data-band="far"] { grid-column: span 3; }
+  .fcard[data-band="far"] .fcard-hit { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 14px; align-items: center; padding: 8px; border-radius: var(--radius); background: var(--surface); }
+  .fcard[data-band="far"] .fcard-photo { aspect-ratio: 1; border-radius: var(--radius); }
+  .fcard[data-band="far"] .fcard-badge { display: none; }
+  .fcard[data-band="far"] .fcard-top { display: grid; gap: 2px; }
+  .fcard[data-band="far"] .fcard-name { font-size: 15px; }
+  .fcard[data-band="far"] .fcard-price { margin-top: 2px; font-size: 14px; }
+  .fcard[data-band="far"] .bb-line { display: none; }
+  .fcard[data-band="far"] .fcard-hit:hover { background: var(--raise); }
+  .fgroup, .fsplit { grid-column: 1 / -1; }
+}
+@media (min-width: 900px) and (max-width: 1023px) { .fgroup { grid-column: 1 / -1; } }
+.fgroup { list-style: none; padding: 16px 0 0; }
+.fgroup p { font-size: 15px; font-weight: 650; color: var(--ink); }
+.finder-grid .fgroup + .fcard, .finder-grid .fgroup ~ .fcard { scroll-snap-align: none; }
+@media (min-width: 1024px) {
+  .finder-grid { row-gap: 24px; }
+  .finder-grid .fcard[data-band="near"] { grid-column: 1 / -1; }
+  .fcard[data-band="near"] .fcard-hit { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: center; }
+  .fcard[data-band="near"] .fcard-photo { aspect-ratio: 16 / 10; }
+  .fcard[data-band="near"] .fcard-top { display: grid; gap: 4px; }
+  .fcard[data-band="near"] .fcard-name { font-size: 20px; }
+  .fgroup { padding-top: 24px; margin-bottom: -8px; }
+}

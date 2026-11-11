@@ -1538,6 +1538,27 @@ Every screen was rebuilt at least once with the same method (a written hierarchy
 
 **Test, "another screen at a glance?" on the blurred shots:** yes for the bottom half (a dark block appears where there was a row of three, and the page now ends dark); **no** for the top half, which is unchanged: the finder still reads as a long grid. That part is the next composition target.
 
+## Round 103 · The finder: the closer the bike, the bigger its card
+
+**Hierarchy audit (the finder's list):** after the real bike, nine sample cards of one shape filled two and a half screens (protocol: no rows of identical cards). Distance is what a renter cares about most after the price, and it was a grey line under each card.
+
+**What changed:** the samples are grouped by how far you'd walk, and the size of the card says it:
+- **Under 5 minutes' walk:** a wide card, photo left, name, distance, price and record right (one per row).
+- **10 to 15 minutes:** three per row, photo and price, the record line left for the bike page.
+- **A longer walk:** compact sand tiles, two per row: a square photo, name, distance, price.
+Each group has a short heading. On a phone the carousel is unchanged (one card at a time already varies by what's centred).
+
+**Levels after:** real bike → near → mid → far, in decreasing size. **Café test:** the café's menu varies objects by what they are (the bag of beans, the cups, the pastry case); we vary by what matters here, distance. Closer: the page no longer reads as a wall. Still missing: places (no street or owner names on the samples), and no object from the bike's world yet.
+
+**References:** Airbnb search ("Guest favourite" larger, the rest smaller) and Apple Maps' results (nearest first and largest, the rest compact).
+
+**Three ideas:** (1) size by distance with group headings. (2) A table of all bikes. (3) Only the five nearest, "show more" for the rest.
+**Discarded:** (2) a table loses the photographs, the one thing that makes a bike desirable. (3) hides half the fleet the map still shows.
+
+**Chosen, (1):** [the finder's bands](rounds/103-finder-bands.jpg), [whole Home, blurred, before and after](rounds/103-home-full-blur.jpg), [sharp](rounds/103-home-full-sharp.jpg). The Home is 743 px shorter at 1440.
+
+**Test on the blurred shots:** yes for the finder: a regular grid of nine became a wide strip, a row of three, and a block of small tiles.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1549,7 +1570,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Bike page: "how it works" band | 70 |
 | Home: owners band | 80 |
 | Home: try the rule (and Rule step) | 82 |
-| Home: find a bike (grid + map) | 96 |
+| Home: find a bike (grid + map) | 103 |
 | Header | 77 |
 | Page transitions | 88 |
 | Live rental strip | 94 |

@@ -20,6 +20,10 @@ function useMedia(q: string) {
 
 /** Find a bike: large photo cards on the left, the map as a framed panel that stays in view on the right (a phone: the map
  *  fills the screen and the cards ride in a sheet that pulls up). Structure after Airbnb's search with the map on. */
+/** Closer bikes get bigger cards: size says distance (round 103). */
+const band = (m: number) => { const min = Math.round(m / 80); return min <= 5 ? "near" : min <= 15 ? "mid" : "far"; };
+const BAND_NAMES: Record<string, string> = { near: "Under 5 minutes' walk", mid: "10 to 15 minutes' walk", far: "A longer walk" };
+
 export function Finder({ bikes, me, locating, onLocate, live, rentingIt, loaded }: {
   bikes: Entry[]; me: (LatLon & { accuracy: number }) | null; locating: "idle" | "asking" | "denied"; onLocate: () => void;
   live: Entry | undefined; rentingIt: boolean; loaded: boolean;
@@ -97,7 +101,10 @@ export function Finder({ bikes, me, locating, onLocate, live, rentingIt, loaded 
               {!b.live && i > 0 && shown[i - 1].b.live && (
                 <li className="fsplit" aria-hidden={phone ? true : undefined}><p><b>Sample fleet.</b> How the map will look with more owners. These bikes have no recorder and can't be rented.</p></li>
               )}
-              <li ref={(el) => { if (el) cards.current.set(b.key, el); else cards.current.delete(b.key); }}
+              {!phone && !b.live && (i === 0 || shown[i - 1].b.live || band(shown[i - 1].d) !== band(d)) && (
+                <li className="fgroup"><p>{BAND_NAMES[band(d)]}</p></li>
+              )}
+              <li data-band={b.live ? "live" : band(d)} ref={(el) => { if (el) cards.current.set(b.key, el); else cards.current.delete(b.key); }}
                 className={`fcard ${b.key === selected ? "is-selected" : ""} ${b.live ? "is-live" : ""}`}
                 onMouseEnter={() => setHover(b.key)} onMouseLeave={() => setHover(null)}>
                 <button type="button" className="fcard-hit" onClick={() => { select(b.key); if (phone) setSheet("peek"); }} aria-label={`${b.label}, ${b.pricePerHour} dollars an hour, ${distanceText(d)}`}>
