@@ -12,14 +12,14 @@ const CHAPTERS = [
 
 export function Moments() {
   return (
-    <section className="chapters" aria-label="A rental, from start to finish">
+    <section className="tale" aria-label="A rental, from start to finish">
       {CHAPTERS.map((c) => (
-        <article key={c.id} className={`chapter chapter-${c.side}`}>
-          <div className="chapter-photo">
+        <article key={c.id} className={`tale-chapter tale-${c.side}`}>
+          <div className="tale-photo">
             <img src={c.img} alt={c.alt} loading="lazy" />
-            {"inset" in c && <img className="chapter-inset" src={c.inset} alt={c.insetAlt} loading="lazy" />}
+            {"inset" in c && <img className="tale-inset" src={c.inset} alt={c.insetAlt} loading="lazy" />}
           </div>
-          <div className="chapter-card">
+          <div className="tale-card">
             <h2>{c.title}</h2>
             <p>{c.text}</p>
           </div>

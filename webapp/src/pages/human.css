@@ -184,31 +184,31 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 
 /* ---------- Home: the rental as chapters (round 24) ---------- */
 :root { --elev-1: 0 2px 8px var(--shadow); --elev-2: 0 12px 32px var(--shadow); --elev-3: 0 28px 70px rgba(23, 25, 27, .22); }
-.chapters { margin-top: clamp(64px, 9vw, 128px); display: grid; gap: clamp(20px, 3vw, 40px); }
-.chapter { position: relative; min-height: min(74svh, 700px); display: grid; align-items: end; overflow: clip; }
-.chapter-photo { position: absolute; inset: 0; overflow: clip; }
-.chapter-photo > img:first-child { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.08); }
-.chapter-inset { position: absolute; right: clamp(16px, 8vw, 140px); top: clamp(24px, 8vh, 80px); width: clamp(160px, 22vw, 320px); aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); box-shadow: var(--elev-3); border: 6px solid #fff; }
-.chapter-card { position: relative; width: min(560px, calc(100% - 2 * var(--gutter))); margin: 0 0 clamp(24px, 5vw, 64px) max(var(--gutter), calc((100% - var(--max)) / 2 + var(--gutter))); padding: clamp(24px, 3vw, 40px); background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--elev-3); }
-.chapter-right .chapter-card { margin-left: auto; margin-right: max(var(--gutter), calc((100% - var(--max)) / 2 + var(--gutter))); }
-.chapter-right .chapter-inset { right: auto; left: clamp(16px, 8vw, 140px); }
-.chapter-card h2 { font-size: clamp(34px, 4.6vw, 68px); line-height: .98; letter-spacing: -0.04em; text-wrap: balance; }
-.chapter-card p { margin-top: 18px; font-size: clamp(18px, 1.5vw, 21px); line-height: 1.5; color: var(--mist); max-width: 36ch; }
+.tale { margin-top: clamp(64px, 9vw, 128px); display: grid; gap: clamp(20px, 3vw, 40px); }
+.tale .tale-chapter { position: relative; min-height: min(74svh, 700px); display: grid; align-items: end; overflow: clip; }
+.tale-photo { position: absolute; inset: 0; overflow: clip; }
+.tale-photo > img:first-child { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.08); }
+.tale-inset { position: absolute; right: clamp(16px, 8vw, 140px); top: clamp(24px, 8vh, 80px); width: clamp(160px, 22vw, 320px); aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); box-shadow: var(--elev-3); border: 6px solid #fff; }
+.tale-card { position: relative; width: min(560px, calc(100% - 2 * var(--gutter))); margin: 0 0 clamp(24px, 5vw, 64px) max(var(--gutter), calc((100% - var(--max)) / 2 + var(--gutter))); padding: clamp(24px, 3vw, 40px); background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--elev-3); }
+.tale-right .tale-card { margin-left: auto; margin-right: max(var(--gutter), calc((100% - var(--max)) / 2 + var(--gutter))); }
+.tale-right .tale-inset { right: auto; left: clamp(16px, 8vw, 140px); }
+.tale-card h2 { font-size: clamp(34px, 4.6vw, 68px); line-height: .98; letter-spacing: -0.04em; text-wrap: balance; }
+.tale-card p { margin-top: 18px; font-size: clamp(18px, 1.5vw, 21px); line-height: 1.5; color: var(--mist); max-width: 36ch; }
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    .chapter-photo > img:first-child { animation: chapter-drift linear both; animation-timeline: view(); }
-    .chapter-card { animation: chapter-rise linear both; animation-timeline: view(); animation-range: entry 5% cover 38%; }
-    .chapter-inset { animation: chapter-float linear both; animation-timeline: view(); }
+    .tale-photo > img:first-child { animation: tale-drift linear both; animation-timeline: view(); }
+    .tale-card { animation: tale-rise linear both; animation-timeline: view(); animation-range: entry 5% cover 38%; }
+    .tale-inset { animation: tale-float linear both; animation-timeline: view(); }
   }
 }
-@keyframes chapter-drift { from { transform: translateY(-5%) scale(1.1); } to { transform: translateY(5%) scale(1.1); } }
-@keyframes chapter-rise { from { opacity: 0; transform: translateY(64px); } to { opacity: 1; transform: none; } }
-@keyframes chapter-float { from { transform: translateY(40px) rotate(1.5deg); } to { transform: translateY(-40px) rotate(-1.5deg); } }
+@keyframes tale-drift { from { transform: translateY(-5%) scale(1.1); } to { transform: translateY(5%) scale(1.1); } }
+@keyframes tale-rise { from { opacity: 0; transform: translateY(64px); } to { opacity: 1; transform: none; } }
+@keyframes tale-float { from { transform: translateY(40px) rotate(1.5deg); } to { transform: translateY(-40px) rotate(-1.5deg); } }
 @media (max-width: 760px) {
-  .chapter { min-height: 78svh; }
-  .chapter-card, .chapter-right .chapter-card { margin: 0 12px 16px; width: auto; }
-  .chapter-inset { width: 120px; top: 16px; right: 16px; border-width: 4px; }
-  .chapter-right .chapter-inset { left: auto; right: 16px; }
+  .tale .tale-chapter { min-height: 78svh; }
+  .tale-card, .tale-right .tale-card { margin: 0 12px 16px; width: auto; }
+  .tale-inset { width: 120px; top: 16px; right: 16px; border-width: 4px; }
+  .tale-right .tale-inset { left: auto; right: 16px; }
 }
 
 /* ---------- Round 25: a translucent header that floats over the photos ---------- */
@@ -286,12 +286,12 @@ p, li, dd { text-wrap: pretty; }
 
 /* ---------- Round 32: pages arrive, they don't pop ---------- */
 @media (prefers-reduced-motion: no-preference) {
-  .page > main { animation: page-in .45s cubic-bezier(.2, .7, .2, 1) both; }
-  .page > main > *:nth-child(2) { animation: page-in .5s .06s cubic-bezier(.2, .7, .2, 1) both; }
-  .page > main > *:nth-child(3) { animation: page-in .55s .12s cubic-bezier(.2, .7, .2, 1) both; }
-  .bike-copy > * { animation: page-in .55s cubic-bezier(.2, .7, .2, 1) both; }
+  .page > main { animation: page-in .45s cubic-bezier(.2, .7, .2, 1) backwards; }
+  .page > main > *:nth-child(2) { animation: page-in .5s .06s cubic-bezier(.2, .7, .2, 1) backwards; }
+  .page > main > *:nth-child(3) { animation: page-in .55s .12s cubic-bezier(.2, .7, .2, 1) backwards; }
+  .bike-copy > * { animation: page-in .55s cubic-bezier(.2, .7, .2, 1) backwards; }
   .bike-copy > *:nth-child(2) { animation-delay: .06s; } .bike-copy > *:nth-child(3) { animation-delay: .12s; } .bike-copy > *:nth-child(4) { animation-delay: .18s; } .bike-copy > *:nth-child(5) { animation-delay: .24s; }
-  .welcome-card > * { animation: page-in .6s cubic-bezier(.2, .7, .2, 1) both; }
+  .welcome-card > * { animation: page-in .6s cubic-bezier(.2, .7, .2, 1) backwards; }
   .welcome-card > *:nth-child(2) { animation-delay: .08s; } .welcome-card > *:nth-child(3) { animation-delay: .16s; } .welcome-card > *:nth-child(4) { animation-delay: .24s; }
 }
 @keyframes page-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
@@ -343,3 +343,10 @@ p, li, dd { text-wrap: pretty; }
 .rent-progress li.current { background: none; border: 0; color: var(--ink); font-weight: 600; }
 .rent-progress li.current::before { background: var(--blue-ink); color: inherit; }
 @media (max-width: 640px) { .rent-progress { flex-basis: 100%; max-width: none; margin-left: 0; } .rent-progress li:not(.current) { font-size: 0; } .rent-progress li.current { font-size: 13px; flex: 2 1 0; } }
+
+/* ---------- Round 39: the action bar floats ---------- */
+.sticky-action { left: 12px; right: 12px; bottom: 12px; width: min(880px, calc(100% - 24px)); margin: 0 auto; border: 0; border-radius: var(--radius); background: var(--overlay); -webkit-backdrop-filter: blur(16px) saturate(1.4); backdrop-filter: blur(16px) saturate(1.4); box-shadow: var(--elev-3); transform: translateY(calc(100% + 24px)); }
+.sticky-action.is-shown { transform: none; }
+.sticky-inner { padding: 12px 14px 12px 22px; }
+.sticky-name { font-weight: 650; letter-spacing: -0.02em; }
+.page:has(.sticky-action.is-shown) .demo { margin-bottom: 84px; }

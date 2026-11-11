@@ -374,3 +374,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Stripe Checkout and Typeform: a thin segmented progress, one label: https://stripe.com/payments/checkout
 - **Shots:** [1440 px](rounds/38-1440.jpg)
 - **Lines:** 6390
+
+## Round 39 · A floating action bar, and a bug fixed
+
+- **What:** The bar that follows you down a bike page is now a frosted floating card with the large shadow instead of a full-width strip. Also fixed a regression from round 24: the Home chapters shared a class name with the bike page's story, which stretched every story entry to a screen tall; the Home ones are now named differently. Page entrances no longer keep an animation in effect once finished.
+- **Why:** Found by measuring the bike page after the chapters shipped. The cost of reusing a short word like "chapter" in a flat stylesheet.
+- **Reference:** Apple's bag bar and Airbnb's reserve bar: a floating translucent card pinned to the bottom: https://www.apple.com
+- **Shots:** [1440 px](rounds/39-1440.jpg)
+- **Lines:** 6397
