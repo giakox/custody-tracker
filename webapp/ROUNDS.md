@@ -1235,6 +1235,27 @@ Also removed: the estimator's styles in map.css, which matched the earnings card
 
 **Test, "another screen at a glance?"** No: a motion round. The difference is that nothing jumps.
 
+## Round 89 · Empty and signed-out screens invite instead of apologise
+
+**Hierarchy audit:**
+
+| Screen | Before | After |
+|---|---|---|
+| My bikes with no bikes | H1 "Nothing needs you right now." over a bordered box "Rent out your first bike": the title contradicted the page | H1 "Your first bike, in three steps."; a card with the shop-owner photo and the three steps (recorder, price and rule, confirm returns) beside one button |
+| My rentals without a wallet | a title, one sentence, one button, then white | the same photo card: why a wallet ("Sharify keeps no account of its own"), "Connect wallet" and, for someone with no rentals yet, "Find a bike" |
+| My bikes without a wallet | the same thin text | the same card, "Connect wallet" and "Add a bike" |
+
+**Levels after:** the title says what to do; the card's button does it; the photo says who it's for. **Squint test:** before, a heading and a button lost in white; after, one wide card, half photo, half action.
+
+**References:** Airbnb's empty "Trips" ("No trips booked… yet", a photo and one button to start searching) and Linear's empty states (one sentence of why, one action). Why ours looked cheaper: empty screens read like errors.
+
+**Three ideas:** (1) one invitation card (photo + why + action) for every empty or signed-out screen. (2) Redirect signed-out users to the wallet step. (3) Show the demo's sample data to signed-out visitors.
+**Discarded:** (2) a link to "My rentals" that silently jumps elsewhere is disorienting. (3) showing someone else's rentals as if they were yours is false.
+
+**Chosen, (1):** [My bikes, empty](rounds/89-owner-empty.jpg), [My rentals, signed out](rounds/89-rentals-signed-out.jpg), [My bikes, signed out](rounds/89-bikes-signed-out.jpg). The receipt keeps its centred column.
+
+**Test, "another screen at a glance?"** Yes: text on white became a card with a photo and a way in.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1257,5 +1278,5 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Owner: Confirm a return | 76 |
 | Add a bike | 74 |
 | Verify | 71 |
-| Empty, loading and error states | 83 |
+| Empty, loading and error states | 89 |
 | Design | 72 |

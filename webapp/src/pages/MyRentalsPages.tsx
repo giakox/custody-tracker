@@ -42,7 +42,7 @@ function Page({ children }: { children: React.ReactNode }) {
   return (
     <div className="page">
       <SiteHeader />
-      <main className="rent">{children}</main>
+      <main className="rent rent-wide">{children}</main>
       <SiteFooter />
       <DemoSwitcher />
     </div>
@@ -56,8 +56,13 @@ export function MyRentalsPage() {
     return (
       <Page>
         <h1>Your <em>rentals</em>.</h1>
-        <p className="lead">Connect the wallet you rent with to see your rentals and receipts.</p>
-        <div className="actions"><button type="button" className="btn btn-primary" onClick={connect}>Connect wallet</button></div>
+        <section className="invite">
+          <img className="invite-photo" src="./img/day/unlock-phone.jpg" alt="Hands holding a phone next to a parked city bike" />
+          <div className="invite-body">
+            <p>Your rentals and receipts are tied to the wallet you rent with: Sharify keeps no account of its own.</p>
+            <div className="actions"><button type="button" className="btn btn-primary btn-lg" onClick={connect}>Connect wallet</button><a className="btn btn-secondary btn-lg" href={href("bikes")}>Find a bike</a></div>
+          </div>
+        </section>
       </Page>
     );
   }

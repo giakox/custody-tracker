@@ -55,10 +55,15 @@ export function MyObjectsPage() {
   const { connect } = useViewer();
   if (ready && !account) {
     return (
-      <Page>
-        <h1>Your <em>bikes</em>.</h1>
-        <p className="lead">Connect the wallet you rent out with to see your bikes, returns to confirm and what you earned.</p>
-        <div className="actions"><button type="button" className="btn btn-primary" onClick={connect}>Connect wallet</button></div>
+      <Page wide>
+        <header className="host-head"><p className="host-kicker">Your bikes</p><h1>Connect the wallet you <em>lend</em> with.</h1></header>
+        <section className="invite">
+          <img className="invite-photo" src="./img/day/owner-shop.jpg" alt="A bike shop owner standing in his doorway, bikes parked outside" />
+          <div className="invite-body">
+            <p>Your bikes, the returns waiting for you and what you earned are tied to your wallet: Sharify keeps no account of its own.</p>
+            <div className="actions"><button type="button" className="btn btn-primary btn-lg" onClick={connect}>Connect wallet</button><a className="btn btn-secondary btn-lg" href={href("add/1")}>Add a bike</a></div>
+          </div>
+        </section>
       </Page>
     );
   }
@@ -71,7 +76,7 @@ export function MyObjectsPage() {
     <Page wide>
       <header className="host-head">
         <p className="host-kicker">Your bikes</p>
-        <h1>{returns.length === 0 ? <>Nothing needs <em>you</em> right now.</> : returns.length === 1 ? <>One return to <em>confirm</em>.</> : <>{returns.length} returns to <em>confirm</em>.</>}</h1>
+        <h1>{owned && owned.length === 0 ? <>Your first bike, in <em>three steps</em>.</> : returns.length === 0 ? <>Nothing needs <em>you</em> right now.</> : returns.length === 1 ? <>One return to <em>confirm</em>.</> : <>{returns.length} returns to <em>confirm</em>.</>}</h1>
       </header>
       {loading && <p className="lead">Loading your bikes…</p>}
 
@@ -87,11 +92,16 @@ export function MyObjectsPage() {
       ))}
 
       {owned && owned.length === 0 && (
-        <section className="empty-invite">
+        <section className="invite">
           <img className="invite-photo" src="./img/day/owner-shop.jpg" alt="A bike shop owner standing in his doorway, bikes parked outside" />
-          <h2>Rent out your first <em>bike</em>.</h2>
-          <p>You set the hourly price and the deposit. If a renter drops it, the rule you both accepted decides the fee: no argument at the counter.</p>
-          <a className="btn btn-primary btn-lg" href={href("add/1")}>Add your first bike</a>
+          <div className="invite-body">
+            <ol className="owner-steps">
+              <li><b>Fix a recorder to the frame.</b> A small sealed box; you pair it with your bike from your phone.</li>
+              <li><b>Set your price and your rule.</b> The hourly price, the deposit and what each kind of knock costs.</li>
+              <li><b>Confirm when it's back.</b> The deposit settles by itself, by the rule you set.</li>
+            </ol>
+            <a className="btn btn-primary btn-lg" href={href("add/1")}>Add your first bike</a>
+          </div>
         </section>
       )}
 
