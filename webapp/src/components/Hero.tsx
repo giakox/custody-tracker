@@ -4,6 +4,11 @@ import { day, hm, inSentence, TEST_MONEY, when, nameOf, objectName, possessive, 
 import { href } from "../ui/router";
 import { relation, useViewer } from "../ui/viewer";
 import { CASE_IMAGE } from "./ObjectImage";
+import { FleetMap } from "./FleetMap";
+import { useQuery } from "@tanstack/react-query";
+import { getFleet } from "../data/api";
+import { BOCCONI } from "../data/mock/fleet";
+import { metres, walkText } from "../ui/geo";
 import { RuleTiers } from "./RuleTiers";
 import { StateLine } from "./StateLine";
 
@@ -151,6 +156,21 @@ export function ListingIntro({ d }: { d: ObjectDetail }) {
 }
 
 /** The card that stays beside the story: price, deposit, the one action and the rule (Airbnb's booking card). */
+/** Where the bike waits, as a small map under the booking card (the café's "Getting here"). Only while it is free:
+ *  a rented bike's position is never shown. */
+function Parked({ d }: { d: ObjectDetail }) {
+  const fleet = useQuery({ queryKey: ["fleet"], queryFn: getFleet, refetchInterval: 10_000 });
+  const b = fleet.data?.find((x) => x.objectId === d.id);
+  if (!b || d.status !== "available") return null;
+  const m = metres(BOCCONI, b);
+  return (
+    <section className="parked" aria-label="Where it is parked">
+      <div className="parked-map"><FleetMap bikes={[b]} center={b} me={null} selected={b.key} onSelect={() => {}} padding={{ top: 12, bottom: 12, left: 0 }} /></div>
+      <p className="parked-text"><b>Parked outside Bocconi</b><span>{walkText(m)} from Bocconi. When it's out on a ride, it isn't on the map.</span></p>
+    </section>
+  );
+}
+
 export function BookCard({ d }: { d: ObjectDetail }) {
   const { account } = useViewer();
   // On a phone the rule folds under the price and the button; on a desktop it is open beside the story.
@@ -170,6 +190,7 @@ export function BookCard({ d }: { d: ObjectDetail }) {
           <p className="book-note">The hardest knock of your ride decides how much comes back. {TEST_MONEY}</p>
         </details>
       </div>
+      <Parked d={d} />
     </aside>
   );
 }

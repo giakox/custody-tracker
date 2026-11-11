@@ -163,3 +163,18 @@
 .l-col .ledger tbody tr:nth-child(even):not(.gap) td { background: var(--surface); }
 .l-col .ledger tr.gap td { border: 0; }
 .l-col .contracts { border-top: 0; padding: 20px; border-radius: var(--radius); background: var(--surface); gap: 16px; }
+
+/* ---------- Round 107: composition of the bike page: the pictures edge to edge, where it's parked, an evening close ---------- */
+.page { overflow-x: clip; }
+@media (min-width: 900px) {
+  .l-gallery { margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); height: clamp(420px, 44vw, 640px); border-radius: 0; gap: 6px; }
+}
+.listing .journey { margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); }
+.parked { margin-top: 16px; border-radius: var(--radius); background: var(--bg); box-shadow: var(--elev-1), inset 0 0 0 1px var(--line); overflow: hidden; }
+.parked-map { height: 168px; }
+.parked-map .fleet-map, .parked-map > div { height: 100%; }
+.parked-map .leaflet-control-zoom { display: none; }
+.parked-text { display: grid; gap: 2px; padding: 14px 16px 16px; font-size: 14px; color: var(--mist); }
+.parked-text b { font-size: 15px; font-weight: 650; color: var(--ink); }
+.page:has(.listing .journey) footer.site-end { margin-top: 0; background: #222528; }
+.listing { padding-bottom: 0; }

@@ -60,7 +60,7 @@ export function ObjectPage({ id }: { id: number }) {
           </div>
           <BookCard d={d} />
         </div>
-        <Moments title="How renting works" designLink />
+        <Moments title="How renting works" journey />
         <StickyAction d={d} />
       </div>
     );

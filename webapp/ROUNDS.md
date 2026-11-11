@@ -1608,6 +1608,28 @@ Each group has a short heading. On a phone the carousel is unchanged (one card a
 
 **Test on the blurred shots:** a small change by design; the header now has a third mass beside the logo.
 
+## Round 107 · Composition: the bike page as a place
+
+**A composition round**, judged on the whole bike page: [blurred, before and after](rounds/107-bike-full-blur.jpg), [sharp](rounds/107-bike-full-sharp.jpg).
+
+**Hierarchy audit (the page):** title → a boxed mosaic → record and booking card → three light portrait cards ("How renting works") → footer. Everything inside the same 1,144 px column; one temperature; the bike was shown but nowhere placed.
+
+**What changed:**
+- **The pictures go edge to edge** (on desktops): the mosaic breaks out of the column and fills the width, 44 vw tall, so the bike stands in a street, not in a frame.
+- **Where it's parked**, under the booking card: a small map with the bike's pin and "Parked outside Bocconi, 2 min walk from Bocconi. When it's out on a ride, it isn't on the map." Shown only while the bike is free (a rented bike's position is never published).
+- **The page ends in the evening:** the three moments become the dark journey (as on the Home), joined to a dark footer one shade lighter.
+
+**Café test:** the café's "Getting here" card (a small map with the walk) is now ours too, and the page has the café's light-then-dark rhythm. Still missing: a scene for the owners, and the warmth of the type.
+
+**References:** the café's visit section (map card with the walk time); Airbnb's room page ("Where you'll be", a map under the booking details).
+
+**Three ideas:** (1) edge-to-edge pictures, a parked map, an evening close. (2) The whole page on a single full-bleed photograph. (3) A street-level photo strip of the area around the bike.
+**Discarded:** (2) the record and the booking card need a quiet background to be read. (3) we have no honest photographs of that exact street.
+
+**Chosen, (1):** [the parked map under the booking card](rounds/107-bike-parked.jpg).
+
+**Test on the blurred shots:** yes: the top is a band of photograph wall to wall, and the bottom third is dark; before, a boxed page on white.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1616,7 +1638,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 |---|---|
 | Home: hero | 78 |
 | Home: journey (dark band) | 102 |
-| Bike page: "how it works" band | 70 |
+| Bike page: "how it works" band | 107 (dark journey) |
 | Home: owners band | 80 |
 | Home: try the rule (and Rule step) | 104 |
 | Home: find a bike (grid + map) | 103 |
@@ -1624,7 +1646,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Page transitions | 88 |
 | Live rental strip | 94 |
 | Footer | 102 (dark) |
-| Bike page | 84 (proof mode: 100) |
+| Bike page | 107 (proof mode: 100) |
 | Rent flow: Rule, Deposit | 86 |
 | Rent flow: Wallet | 92 |
 | Rent flow: Ride, Return, Waiting | 67 |
