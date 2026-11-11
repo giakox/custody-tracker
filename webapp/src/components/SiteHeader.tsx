@@ -22,7 +22,7 @@ export function SiteHeader() {
       <nav className={`site-nav ${open ? "open" : ""}`} aria-label="Main">
         <a className="nav-link" href={href("add/1")}>Rent out your bike</a>
         {account && <a className="nav-link" href={href("my-rentals")}>My rentals</a>}
-        {account && <a className="nav-link" href={href("my-objects")}>My objects</a>}
+        {account && <a className="nav-link" href={href("my-objects")}>My bikes</a>}
         <a className="nav-link" href={href("design")}>How it works</a>
       </nav>
       <div className="site-wallet">

@@ -12,9 +12,9 @@ function label(s: TxStep, deposit: string, viewer: "renter" | "owner") {
     case "approve": return "You allow deposits from this wallet (once)";
     case "deposit": return `You leave the ${deposit} deposit`;
     case "settle": return "Your deposit comes back by the rule";
-    case "register": return "You register the recorder's key";
-    case "create": return "You create the object, owned by you";
-    case "setTerms": return "You set the deposit and the rules";
+    case "register": return "You link the recorder to you";
+    case "create": return "You add your bike";
+    case "setTerms": return "You publish the deposit and the rules";
   }
 }
 
