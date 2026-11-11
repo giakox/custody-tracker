@@ -1907,6 +1907,25 @@ Rounds 111–119 rotated through the screens that had gone longest untouched and
 
 **Test on the blurred shots:** yes: two pale cuts disappear; the second half of the page is one continuous run of dark, sand, photo, dark.
 
+## Round 123 · 10 to 15 minutes' walk: a lead bike beside a short list, never three in a row and an orphan
+
+**Hierarchy audit (Home, finder, below the fold):** the near band is one large card, the far band two compact sand rows, but the middle band was three identical cards in a row and a fourth alone on the next line (Vigentina road bike), with half a row of white beside it: the one place in the finder that looked like a template and like a mistake.
+
+**What changed:** the first bike of the band is the lead (half width, 4:3 photo); the others stack beside it as compact rows (square thumbnail, name, walk, price), sand on hover and when selected on the map. The lead's height spans the list (`--rest`, up to four rows). A band of one bike is just the lead, on the left. Checked with the filters (City, E-bike, Up to 2 dollars): lead on the left, list on the right, never an empty left half.
+
+**Separation without lines:** the band title and the change of shape (one photo vs. a list) separate the bands; no rules.
+
+**Café test:** a café's display has one cake on a stand and the rest in a row behind the glass: one thing first. Still missing: the finder still reads cooler than the photographs around it.
+
+**References:** Airbnb's "Inspiration" grid (one large card, then a list); Apple Maps' place guides (lead photo, then compact rows).
+
+**Three ideas:** (1) lead plus list. (2) Two per row (span 3 each). (3) A horizontal strip.
+**Discarded:** (2) two rows of two identical cards, which the protocol forbids. (3) a strip hides bikes behind a scroll on desktop, where the map already shows them all.
+
+**Chosen, (1):** [before and after](rounds/123-finder-mid.jpg). Phone unchanged (it has its own peek cards).
+
+**Test on the blurred shots:** yes: a row of three equal blocks and an orphan became one big block beside three small ones.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1918,7 +1937,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Bike page: "how it works" band | 107 (dark journey) |
 | Home: owners band | 108 |
 | Home: try the rule (and Rule step) | 104 (bands joined: 122) |
-| Home: find a bike (grid + map) | 103 |
+| Home: find a bike (grid + map) | 123 |
 | Header | 106 |
 | Page transitions | 88 |
 | Live rental strip | 94 |

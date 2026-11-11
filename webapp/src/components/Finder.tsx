@@ -104,7 +104,8 @@ export function Finder({ bikes, me, locating, onLocate, live, rentingIt, loaded 
               {!phone && !b.live && (i === 0 || shown[i - 1].b.live || band(shown[i - 1].d) !== band(d)) && (
                 <li className="fgroup"><p>{BAND_NAMES[band(d)]}</p></li>
               )}
-              <li data-band={b.live ? "live" : band(d)} ref={(el) => { if (el) cards.current.set(b.key, el); else cards.current.delete(b.key); }}
+              <li data-band={b.live ? "live" : band(d)} data-lead={!b.live && band(d) === "mid" && (i === 0 || band(shown[i - 1].d) !== "mid" || shown[i - 1].b.live) ? "" : undefined}
+                style={!b.live && band(d) === "mid" ? { ["--rest" as string]: Math.max(1, Math.min(4, shown.filter((x) => !x.b.live && band(x.d) === "mid").length - 1)) } : undefined} ref={(el) => { if (el) cards.current.set(b.key, el); else cards.current.delete(b.key); }}
                 className={`fcard ${b.key === selected ? "is-selected" : ""} ${b.live ? "is-live" : ""}`}
                 onMouseEnter={() => setHover(b.key)} onMouseLeave={() => setHover(null)}>
                 <button type="button" className="fcard-hit" onClick={() => { select(b.key); if (phone) setSheet("peek"); }} aria-label={`${b.label}, ${b.pricePerHour} dollars an hour, ${distanceText(d)}`}>
