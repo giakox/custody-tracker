@@ -2180,6 +2180,25 @@ Block 121–130 worked through the oldest screens in the register and two compos
 
 **Test on the blurred shots:** yes: the pale cut between two black slabs became a white band with two blocks of text.
 
+## Round 138 · Your live ride floats under the header; it never pushes the page down
+
+**Hierarchy audit (live rental pill, untouched since 94):** when you're riding, the pill "Riding the demo bike · 22 min · a medium knock · Open" sat in the page's flow: on the Home it pushed the hero photo down and left a 140 px white strip above it (the page put its header padding back just for the pill), so the one page designed to run under the floating header became a white band with a photo below. Everywhere else it was fine.
+
+**What changed:** the pill is fixed under the header, like the header is fixed over the page: the Home hero runs under both again; on other pages the top padding grows by the pill's height (52 px) only when the pill is shown (checked on the bike page: pill ends at 132 px, content starts at 140; on My rentals, where the pill hides because the page is the ride, no extra padding).
+
+**Separation without lines:** the pill is a frosted surface with its orange inner ring on a knock, over the photo; nothing between it and the header but 4 px of air.
+
+**Café test:** your order number stays on the screen above the counter, it doesn't push the counter away. Still missing: the pill's middle can have an empty stretch on wide screens when there's no knock text.
+
+**References:** Uber's "your ride" bar (floats over the map, never reflows the page); Apple's Live Activities (a floating capsule over whatever is under it).
+
+**Three ideas:** (1) fixed pill with conditional padding. (2) Merge the pill into the header's status chip. (3) Show the pill only from the second screen down.
+**Discarded:** (2) on phones the header has no room for a status; the pill is what keeps the ride one tap away there. (3) the ride is the most important state you can be in; hiding it on the first screen is backwards.
+
+**Chosen, (1):** [before and after](rounds/138-live-pill.jpg), [phone](rounds/138-live-pill-375.jpg).
+
+**Test on the blurred shots:** yes: on the Home the white strip at the top is gone; the photo is under the header and the pill again.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -2194,7 +2213,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Home: find a bike (grid + map) | 123 |
 | Header | 106 |
 | Page transitions | 136 (shared photo) |
-| Live rental strip | 94 |
+| Live rental strip | 138 |
 | Footer | 120 (wordmark only on reading pages) |
 | Bike page | 107 (proof mode: 100) |
 | Rent flow: Rule | 125 (step back) |

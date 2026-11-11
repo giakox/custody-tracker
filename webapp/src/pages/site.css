@@ -255,3 +255,8 @@ footer.site-end .site-end-nav a:hover { color: #fff; }
 /* ---------- Round 120: a step back: the wordmark signs off the pages you read, not the screens you work in ---------- */
 .page:has(main.rent) .site-end-name, .page:has(main.verify) .site-end-name { display: none; }
 .page:has(main.rent) .site-end-inner, .page:has(main.verify) .site-end-inner { padding-bottom: clamp(40px, 5vw, 64px); }
+
+/* ---------- Round 138: your live ride floats under the header like the header floats over the page: it never pushes the page down ---------- */
+.live-rental-bar, .live-rental-bar.has-shock { position: fixed; left: 0; right: 0; top: calc(var(--hdr-space) - 4px); margin: 0 auto; }
+.page:has(.live-rental-bar):not(:has(.welcome)):not(:has(.now-card)) { padding-top: calc(var(--hdr-space) + 52px); }
+.page:has(.welcome) { padding-top: 0; }
