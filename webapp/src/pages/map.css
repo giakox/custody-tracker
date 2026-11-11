@@ -1,7 +1,7 @@
 /* Home map: dark tiles tinted toward Midnight Black, pins in Electric Blue, orange only for recent drops. */
 
 .leaflet-container { font-family: var(--ui); }
-.leaflet-control-attribution { background: var(--overlay) !important; color: var(--dim) !important; font-size: 10px; }
+.leaflet-control-attribution { background: var(--overlay) !important; color: var(--dim) !important; font-size: 13px; }
 .leaflet-control-attribution a { color: var(--fog) !important; }
 .leaflet-bar a { background: var(--bg) !important; color: var(--ink) !important; border-color: var(--line-strong) !important; }
 
@@ -15,11 +15,11 @@
 .me-dot { display: block; width: 14px; height: 14px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 3px var(--blue); }
 
 /* badges and black-box line */
-.badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.badge { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
 .badge-live { color: var(--on-blue); background: var(--blue); }
 .badge-live i { width: 6px; height: 6px; border-radius: 50%; background: var(--bg); }
 .badge-sample { color: var(--fog); border: 1px dashed var(--line-strong); }
-.bb-line { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: baseline; gap: 10px; font: 12px/1.45 var(--ui); color: var(--mist); }
+.bb-line { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: baseline; gap: 10px; font: 13px/1.45 var(--ui); color: var(--mist); }
 .bb-line .tier-name { display: none; }
 .bb-line .shock { color: var(--orange-ink); }
 

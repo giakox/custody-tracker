@@ -43,7 +43,7 @@
 .bike-top h2.rule-title { margin-top: 40px; font-size: clamp(24px, 2.2vw, 30px); line-height: 1.15; color: var(--ink); max-width: 22ch; }
 
 .rule-row { grid-template-columns: 104px minmax(0, 1fr) minmax(0, 1fr); font-family: var(--ui); }
-.rule-row small { font-size: 12px; color: var(--dim); margin-left: 6px; }
+.rule-row small { font-size: 13px; color: var(--dim); margin-left: 6px; }
 
 .no-proof .proof-only, .no-proof .tx { display: none; }
 .no-proof .event { grid-template-columns: 56px minmax(0, 1fr); }
@@ -261,7 +261,7 @@ p, li, dd { text-wrap: pretty; }
 @keyframes scan-sweep { from { transform: translateY(0); } to { transform: translateY(calc(100cqh - 34px)); } }
 .scan-frame { container-type: size; }
 @media (prefers-reduced-motion: reduce) { .scan-frame.is-scanning::after { animation: none; top: 50%; } }
-.sim-ticks span { font-size: 12px; top: -20px; }
+.sim-ticks span { font-size: 13px; top: -20px; }
 .sim .rule-tiers, .try-rule .rule-tiers { max-width: none; }
 .rule-row { grid-template-columns: 112px minmax(0, 1fr) minmax(0, 1fr); }
 
@@ -380,7 +380,7 @@ p, li, dd { text-wrap: pretty; }
 @media (max-width: 640px) {
   .nearest { grid-template-columns: 64px minmax(0, 1fr) auto; gap: 12px; }
   .nearest-photo, .nearest .bike-photo { width: 64px; height: 64px; }
-  .nearest-k { font-size: 12px; }
+  .nearest-k { font-size: 13px; }
 }
 @media (max-width: 640px) { .nearest .wide-only { display: none; } }
 

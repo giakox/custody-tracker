@@ -1158,6 +1158,21 @@ Also removed: the estimator's styles in map.css, which matched the earnings card
 
 **Test, "another screen at a glance?"** Partly: the first screen is the same; the second is now the record instead of a table.
 
+## Round 85 · A step back: no text under 13 px, fewer sizes
+
+**Hierarchy audit (type across the site):** 22 different font sizes were in use. Ten of them sat below 13 px (10, 11 and 12 px: 39 places: transaction labels, tags, step numbers, tick labels, the "paid separately" chips, receipt sub-lines). Tertiary text should be quieter by colour and weight, not by being unreadable; at 11 px on a projector or a phone in the sun it simply disappears. Neighbouring sizes (21 and 22, 30 and 32, 34 and 36) were differences nobody can see but that make the scale look accidental.
+
+**Levels after:** 13 px is the floor for everything (tertiary is 13 px in --fog); the scale is now 13 · 14 · 15 · 16 · 17 · 18 · 19 · 20 · 22 · 24 · 26 · 28 · 32 · 36 · 40 · 44, plus the fluid headings. **Squint test:** not the point of a step back; what changes is that the small print on the receipt, the proof rows and the signatures can be read.
+
+**References:** Apple's Human Interface Guidelines put the smallest text style at 11 pt on a phone only for captions and recommend larger for body; Stripe's dashboard never goes below 13 px for content. Why ours looked cheaper: tiny grey labels read as fine print you're not meant to read.
+
+**Three ideas (what to remove):** (1) every size below 13 px, plus the near-duplicate sizes. (2) Collapse the scale to six steps. (3) Remove the monospace face from the values that remain in it (dates, hashes).
+**Discarded:** (2) would touch every component at once and change line breaks site-wide in one go; this round removes only what is clearly wrong. (3) hashes and contract addresses are the one place where a fixed-width face helps reading.
+
+**Chosen, (1):** 48 declarations changed in eight files; overflow checked at 375 px on eight pages (none). [The receipt's proof, where most of the smallest text was](rounds/85-smallest-text.jpg).
+
+**Test, "another screen at a glance?"** No: a step back. You can read the small print now.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.

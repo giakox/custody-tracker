@@ -7,11 +7,11 @@
 
 .wordmark { display: block; line-height: 0; }
 .wordmark img { height: 28px; width: auto; display: block; }
-.source { display: flex; align-items: center; gap: 10px; color: var(--dim); font-size: 12px; }
+.source { display: flex; align-items: center; gap: 10px; color: var(--dim); font-size: 13px; }
 
 .live { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 3px rgba(2, 151, 222, .18); }
 .live.down { background: transparent; border: 1px solid var(--dim); box-shadow: none; }
-.sample { color: var(--blue-ink); border: 1px solid rgba(2, 151, 222, .5); border-radius: 999px; padding: 1px 9px; font-size: 11px; }
+.sample { color: var(--blue-ink); border: 1px solid rgba(2, 151, 222, .5); border-radius: 999px; padding: 1px 9px; font-size: 13px; }
 
 /* ---------- hero ---------- */
 .hero { position: relative; overflow: hidden; text-align: center; padding: clamp(32px, 4.5vw, 64px) 0 clamp(40px, 5vw, 64px); isolation: isolate; }
@@ -46,7 +46,7 @@
 /* Anchored to the drawing so the light stays under the recorder at every width. */
 
 .device { width: 100%; height: auto; display: block; }
-.device-text { font-family: var(--mono); font-size: 11px; fill: var(--fog); }
+.device-text { font-family: var(--mono); font-size: 13px; fill: var(--fog); }
 .device-text.dim { fill: var(--dim); }
 .led { fill: var(--blue); transition: fill 1.6s ease; }
 .led.alert { fill: var(--orange); }
@@ -72,7 +72,7 @@
 .step.flag .node { border-style: dashed; border-color: var(--ink); box-shadow: none; }
 .step-name { font-size: 18px; color: var(--ink); }
 .step.next .step-name { color: var(--dim); }
-.step-note { font-size: 12px; color: var(--dim); }
+.step-note { font-size: 13px; color: var(--dim); }
 .step.current .step-note { color: var(--mist); }
 
 /* ---------- blocks below the hero ---------- */
@@ -93,7 +93,7 @@
 
 .events { list-style: none; margin: 14px 0 0; padding: 0; }
 .event { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 4px 20px; align-items: baseline; padding: 8px 0; }
-.event time { font-size: 12px; color: var(--dim); }
+.event time { font-size: 13px; color: var(--dim); }
 .event p { font-size: 17px; line-height: 1.5; color: var(--mist); max-width: 64ch; }
 .event .num { font-family: var(--ui); font-size: .86em; color: var(--ink); }
 .event .num.shock { color: var(--orange-ink); font-weight: 500; }
@@ -101,7 +101,7 @@
 .event.gap p { font-style: italic; color: var(--fog); }
 .event.quiet p { color: var(--fog); }
 
-.tx { font-size: 12px; color: var(--dim); text-decoration: none; }
+.tx { font-size: 13px; color: var(--dim); text-decoration: none; }
 /* Electric Blue = you can open it: every transaction, seq and contract link. */
 a.tx { color: var(--blue-ink); }
 a.tx:hover, .seq-link:hover, .ledger .c-tx a:hover, .contracts a:hover { text-decoration: underline; text-decoration-color: currentColor; }
@@ -112,7 +112,7 @@ a.tx:hover, .seq-link:hover, .ledger .c-tx a:hover, .contracts a:hover { text-de
 .tier-bars { display: inline-flex; gap: 2px; }
 .tier-bars i { width: 14px; height: 6px; border: 1px solid var(--line-strong); }
 .tier-bars i.on { background: var(--orange); border-color: var(--orange); }
-.tier-name { font-family: var(--ui); font-size: 11px; color: var(--orange-ink); }
+.tier-name { font-family: var(--ui); font-size: 13px; color: var(--orange-ink); }
 .tier-0 .tier-name { color: var(--dim); }
 
 /* ---------- ledger (solid black, no glow) ---------- */
@@ -134,7 +134,7 @@ a.tx:hover, .seq-link:hover, .ledger .c-tx a:hover, .contracts a:hover { text-de
 .ledger td.c-peak .shock { color: var(--orange-ink); font-weight: 500; }
 .ledger .c-root { color: var(--dim); }
 .ledger .c-tx a { color: var(--blue-ink); text-decoration: none; }
-.late-note { display: block; font-size: 11px; color: var(--fog); margin-top: 2px; white-space: normal; max-width: 20ch; }
+.late-note { display: block; font-size: 13px; color: var(--fog); margin-top: 2px; white-space: normal; max-width: 20ch; }
 .ledger tr.gap td {
   font-family: var(--text); font-style: italic; font-size: 15px; color: var(--fog);
   background: repeating-linear-gradient(135deg, transparent 0 6px, var(--line-strong) 6px 7px);
@@ -170,7 +170,7 @@ a.tx:hover, .seq-link:hover, .ledger .c-tx a:hover, .contracts a:hover { text-de
   .hero h1 { margin: 0; max-width: none; }
   .hero-summary { margin-left: 0; }
   .step-name { font-size: 15px; }
-  .step-note { font-size: 11px; text-align: center; }
+  .step-note { font-size: 13px; text-align: center; }
   .event { grid-template-columns: 44px minmax(0, 1fr); gap: 2px 14px; }
   .event .tx { grid-column: 2; }
   

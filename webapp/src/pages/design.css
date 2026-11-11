@@ -40,7 +40,7 @@
 .stage { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); border-radius: var(--radius); overflow: hidden; box-shadow: var(--elev-1); }
 .stage-block { padding: 24px; background: var(--bg); }
 .stage-n { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--blue); color: var(--on-blue); font-size: 15px; font-weight: 700; }
-.stage h3 { margin-top: 14px; font-size: 21px; letter-spacing: -0.02em; }
+.stage h3 { margin-top: 14px; font-size: 22px; letter-spacing: -0.02em; }
 .stage-parts { margin-top: 4px; font-size: 14px; color: var(--fog); }
 .stage-block > p:last-child { margin-top: 10px; font-size: 16px; line-height: 1.5; color: var(--mist); }
 .stage-threat { padding: 24px; background: var(--surface); display: grid; gap: 16px; align-content: start; font-size: 15px; line-height: 1.5; color: var(--mist); }

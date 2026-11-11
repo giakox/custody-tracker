@@ -22,7 +22,7 @@
 .lead { margin-top: 24px; font-size: clamp(18px, 1.5vw, 21px); line-height: 1.5; color: var(--mist); max-width: 46ch; text-wrap: pretty; }
 
 .qr-sticker { width: 100%; height: auto; display: block; }
-.qr-label { font-family: var(--mono); font-size: 10px; fill: var(--midnight); }
+.qr-label { font-family: var(--mono); font-size: 13px; fill: var(--midnight); }
 .qr-label.dim { fill: #5a6973; }
 
 .block-intro h2 em { font-style: var(--em-style); }
@@ -47,9 +47,9 @@
 .bike-top .step-name { font-size: 16px; }
 /* ---------- demo switcher: for the presentation, not part of the product ---------- */
 
-.demo-toggle { background: var(--bg); color: var(--dim); border: 1px solid var(--line-strong); border-radius: 999px; padding: 5px 12px; font-size: 11px; cursor: pointer; opacity: .7; }
+.demo-toggle { background: var(--bg); color: var(--dim); border: 1px solid var(--line-strong); border-radius: 999px; padding: 5px 12px; font-size: 13px; cursor: pointer; opacity: .7; }
 .demo-toggle:hover, .demo.open .demo-toggle { opacity: 1; color: var(--mist); }
-.demo-panel { background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius); padding: 12px 14px; width: 260px; display: grid; gap: 10px; font: 12px/1.4 var(--ui); color: var(--fog); }
+.demo-panel { background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius); padding: 12px 14px; width: 260px; display: grid; gap: 10px; font: 13px/1.4 var(--ui); color: var(--fog); }
 .demo-panel label { display: grid; gap: 4px; }
 .demo-panel select { font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--line-strong); padding: 6px; border-radius: var(--radius); }
 .demo-panel p { color: var(--dim); }
@@ -85,7 +85,7 @@
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: stretch;
 }
  /* three lines: both buttons line up */
-.tube-label { font-family: var(--mono); font-size: 11px; fill: var(--fog); }
+.tube-label { font-family: var(--mono); font-size: 13px; fill: var(--fog); }
 
 /* ---------- demo control: in the empty left margin on wide screens, at the end of the page otherwise ---------- */
 .demo { display: grid; justify-items: start; gap: 8px; padding: 0 var(--gutter) 28px; max-width: var(--max); margin: 0 auto; }
@@ -113,7 +113,7 @@
 .sticky-inner { max-width: var(--max); margin: 0 auto; padding: 12px var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .sticky-text { display: grid; gap: 2px; min-width: 0; }
 .sticky-name { font-size: 18px; color: var(--ink); }
-.sticky-status { font-size: 12px; color: var(--fog); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sticky-status { font-size: 13px; color: var(--fog); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .sticky-btns { display: flex; gap: 8px; flex: none; }
 .sticky-btns .btn { min-height: 44px; }
 .sticky-btns .btn-secondary:not(:first-child) { display: none; } /* one action in the bar */
@@ -134,7 +134,7 @@
 @keyframes lrb { 50% { box-shadow: 0 0 0 7px rgba(2, 151, 222, 0); } }
 .lrb-text { flex: 1; min-width: 0; font-size: 15px; color: var(--mist); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .lrb-text b { font-weight: 400; color: var(--ink); }
-.lrb-peak { font-size: 12px; display: inline-flex; align-items: center; gap: 6px; }
+.lrb-peak { font-size: 13px; display: inline-flex; align-items: center; gap: 6px; }
 .lrb-peak .tier-name { display: none; }
 .lrb-peak .shock { color: var(--orange-ink); }
 @media (max-width: 640px) { .lrb-text { font-size: 14px; } .lrb-peak { display: none; } }
