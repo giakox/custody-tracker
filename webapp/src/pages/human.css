@@ -465,3 +465,7 @@ p, li, dd { text-wrap: pretty; }
 
 /* ---------- Round 122: composition: after the finder the Home is one run of bands that meet edge to edge, no white seams ---------- */
 .journey + .try-rule, .try-rule + .owners-band { margin-top: 0; }
+
+/* ---------- Round 125: a step back: no box inside the simulator's card; the amount sits on the card itself ---------- */
+.sim-money { padding: 20px 0 0; border-radius: 0; background: none; }
+.rule-after { margin-top: 20px; max-width: 64ch; font-size: 15px; line-height: 1.5; color: var(--mist); }

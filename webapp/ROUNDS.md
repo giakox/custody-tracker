@@ -1945,6 +1945,21 @@ Rounds 111–119 rotated through the screens that had gone longest untouched and
 
 **Test on the blurred shots:** yes: four grey slabs became a line of dots with one blue point.
 
+## Round 125 · A step back: the simulator's amount sits on the card, not in a box inside it
+
+**Hierarchy audit (Rule step and Home "What if it gets dropped?", after 121–124 added pieces elsewhere):** the simulator is a white card; inside it, "You'd get back 45 dollars" sat in a sand box: a box in a box, the only one left in the rent flow. Under the card on the Rule step, two grey bullet points (the only browser bullets in the flow), and the lead repeated "Nobody decides it by hand" one clause after "the hardest knock decides".
+
+**What was removed:** the sand box (the amount and its bar now sit on the card, separated by space; on the Home and on the Rule step); the bullets (now one plain sentence under the card); the repeated clause in the lead. Nothing added.
+
+**Café test:** the café's menu board doesn't frame the price inside another frame. What still isn't as welcoming: the Rule step's left column is a long card while the side card is short; that's the next pass on the Rule step.
+
+**Three ideas:** (1) remove the inner box, the bullets and the repeated clause. (2) Remove the rule table under the simulator (the amount says it already). (3) Remove the chips and keep only the slider.
+**Discarded:** (2) the table *is* the rule you accept; the page's title is about it. (3) the chips ("pothole", "falls over") are what make the grams mean something.
+
+**Chosen, (1):** [before and after](rounds/125-rule.jpg). Home checked: same card, cleaner.
+
+**Test on the blurred shots:** yes, slightly: one fewer grey slab inside the card; the amount reads as the card's headline.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1962,7 +1977,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Live rental strip | 94 |
 | Footer | 120 (wordmark only on reading pages) |
 | Bike page | 107 (proof mode: 100) |
-| Rent flow: Rule | 86 |
+| Rent flow: Rule | 125 (step back) |
 | Rent flow: Deposit | 124 |
 | Rent flow: Wallet | 92 |
 | Rent flow: Ride | 116 |

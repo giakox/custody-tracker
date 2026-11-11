@@ -104,12 +104,9 @@ export function RulePage({ id }: { id: number }) {
       </TripCard>
     }>
       <h1>The rule you <em>accept</em>.</h1>
-      <p className="lead">You leave a deposit of {usd(d.terms.collateral)}. When you bring the bike back, the hardest knock of your ride decides how much of it comes back. Nobody decides it by hand. Try it:</p>
+      <p className="lead">You leave a deposit of {usd(d.terms.collateral)}. When you bring the bike back, the hardest knock of your ride decides how much of it comes back. Try it:</p>
       <RuleSimulator terms={d.terms} />
-      <ul className="fine">
-        <li>Only your ride counts: knocks from earlier renters stay on their record.</li>
-        <li>The deposit comes back when the owner confirms the bike is back with them.</li>
-      </ul>
+      <p className="rule-after">Only your ride counts: earlier renters' knocks stay on their record. The deposit comes back when the owner confirms the bike is back.</p>
     </Shell>
   );
 }
