@@ -1630,6 +1630,25 @@ Each group has a short heading. On a phone the carousel is unchanged (one card a
 
 **Test on the blurred shots:** yes: the top is a band of photograph wall to wall, and the bottom third is dark; before, a boxed page on white.
 
+## Round 108 · The owners' band is a scene: the shop fills the section, the card stands in it
+
+**Hierarchy audit (the Home's owners' band):** a photo cropped to the left half, a white card overlapping it, sand around. Like every picture on the site, the shop was a framed thumbnail; the owner was half hidden behind the card.
+
+**What changed:** on a desktop the shop photograph fills the whole section edge to edge (it drifts a little as you scroll, off with reduced motion); the card stands inside the scene on the left, and the owner in his doorway is in full view on the right. A soft shade on the card's side keeps the edge of the photo calm. On a phone the photo stays above the card (a full-bleed photo with a card over it doesn't fit 375 px).
+
+Fixed on the way: an absolutely positioned photo inside a grid takes its grid area as its frame (columns 1–8, without the padding), which first left the photo at 60% width and then a dark strip above it; it now takes the section's whole box.
+
+**Café test:** this is the café's visit section in our terms (a place you could walk into, the content standing in it). With the journey and the dark footer, the Home's second half now has two scenes. Still missing: the warmth of the type, and people (which we can't invent: no fake testimonials).
+
+**References:** the café's "Opens tomorrow 6am" (full-bleed kitchen with a map card standing in it) and Airbnb's host page (a host in their space, the call to action beside them).
+
+**Three ideas:** (1) full-bleed photo, card inside. (2) A split screen (photo half, text half, no card). (3) A short loop of the shop door opening.
+**Discarded:** (2) the split is what we had, minus the overlap. (3) no honest footage exists, and the GPU video model isn't installed (round 62).
+
+**Chosen, (1):** [before and after, 1440](rounds/108-owners-1440.jpg), [phone](rounds/108-owners-375.jpg).
+
+**Test on the blurred shots:** yes: a white block over half a photo became a photograph wall to wall with a white card in it.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1639,7 +1658,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Home: hero | 78 |
 | Home: journey (dark band) | 102 |
 | Bike page: "how it works" band | 107 (dark journey) |
-| Home: owners band | 80 |
+| Home: owners band | 108 |
 | Home: try the rule (and Rule step) | 104 |
 | Home: find a bike (grid + map) | 103 |
 | Header | 106 |
