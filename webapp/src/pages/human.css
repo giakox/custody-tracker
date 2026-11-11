@@ -16,20 +16,15 @@
 .welcome-card p { margin-top: 18px; font-size: clamp(19px, 1.7vw, 23px); line-height: 1.4; color: var(--card-ink); max-width: 32ch; text-wrap: pretty; }
 .welcome-card .actions { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 10px; }
 
-
 /* list rows and detail carry the owner's photo */
 .bike-photo { display: block; object-fit: cover; background: var(--raise); }
 .leaflet-bar a { background: var(--surface) !important; }
-
 
 /* ---------- Home: owners ---------- */
 .owners { max-width: var(--max); margin: 0 auto; padding: clamp(64px, 9vw, 128px) var(--gutter) 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
 .owners h2 { font-size: clamp(32px, 3.4vw, 48px); line-height: 1.05; max-width: 16ch; }
 .owners-copy p { margin-top: 16px; font-size: 19px; color: var(--mist); max-width: 40ch; }
 .own-cta { background: var(--surface); border-color: var(--line); border-radius: var(--radius); }
-.site-foot { font-size: 14px; line-height: 1.5; }
-.site-foot .link { margin-left: 6px; }
-
 
 @media (max-width: 760px) {
   .welcome-photo { height: 50svh; min-height: 320px; object-position: 60% 40%; }
@@ -45,9 +40,9 @@
 .bike-top .object-image img { aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); }
 .bike-top .object-image .glow { inset: -18% -14%; }
 .object-image .glow { opacity: .5; }
-.bike-top .kicker { font-family: var(--ui); font-size: 15px; }
+
 .bike-top h2.rule-title { margin-top: 40px; font-size: clamp(24px, 2.2vw, 30px); line-height: 1.15; color: var(--ink); max-width: 22ch; }
-.rule-sub { margin: 10px 0 14px; font-size: 17px; color: var(--mist); max-width: 44ch; }
+
 .rule-row { grid-template-columns: 104px minmax(0, 1fr) minmax(0, 1fr); font-family: var(--ui); }
 .rule-row small { font-size: 12px; color: var(--dim); margin-left: 6px; }
 
@@ -70,9 +65,6 @@
   .rule-row { grid-template-columns: 96px minmax(0, 1fr); }
 }
 
-.rule-card { margin-top: 40px; padding: clamp(20px, 2.4vw, 28px); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); max-width: 560px; }
-.bike-top .rule-card h2.rule-title { margin-top: 0; }
-
 .tier-bars i { border-radius: 999px; }
 .leaflet-bar { border-radius: var(--radius) !important; overflow: hidden; border: 1px solid var(--line-strong) !important; }
 .leaflet-bar a, .leaflet-bar a:first-child, .leaflet-bar a:last-child { border-radius: 0 !important; }
@@ -91,17 +83,6 @@
 .proof-details { margin-top: 20px; border-top: 1px solid var(--line); padding-top: 14px; }
 .proof-details summary { cursor: pointer; color: var(--blue-ink); font-size: 15px; }
 .tx-proof { color: var(--blue-ink); }
-.past-row { padding: 18px 0; font-size: 15px; }
-.past-name { font-size: 19px; }
-.past-row { grid-template-columns: 72px minmax(0, 1fr) auto auto auto; gap: 8px 20px; text-decoration: none; }
-.past-photo { width: 72px; height: 54px; object-fit: cover; border-radius: var(--radius); }
-.past-what { display: grid; gap: 2px; min-width: 0; }
-.past-when { font-size: 14px; color: var(--fog); }
-@media (max-width: 640px) {
-  .past-row { grid-template-columns: 72px minmax(0, 1fr); }
-  .past-photo { grid-row: span 3; }
-  .past-shock, .past-back, .past-row .link { grid-column: 2; grid-row: auto; }
-}
 
 /* ---------- Owner pages ---------- */
 .empty-invite { display: grid; gap: 14px; }
@@ -120,8 +101,7 @@
 .bike-top { align-items: start; }
 .bike-side { display: grid; gap: 20px; position: sticky; top: 20px; align-self: start; }
 .bike-side .object-image { margin-top: 0; }
-.bike-side .rule-card { margin-top: 0; max-width: none; }
-.bike-side .rule-card h2.rule-title { font-size: clamp(22px, 2vw, 26px); }
+
 @media (max-width: 860px) { .bike-side { position: static; } .bike-top .object-image { order: 0; } }
 
 /* Round 11: owners get a full-width band with a face (the shop owner), not a card at the bottom of the page. */
@@ -143,10 +123,7 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 
 .check-it { margin-left: 6px; font-size: .92em; white-space: nowrap; }
 .event .num { font-size: 1em; font-weight: 600; }
-.price-line { margin-top: 12px; font-size: 16px; color: var(--mist); }
-.price-line b { color: var(--ink); font-weight: 600; }
-.price-note { margin-top: 14px; font-size: 17px; color: var(--mist); }
-.price-note b { color: var(--ink); font-weight: 600; }
+
 .action-note { align-self: center; font-size: 16px; color: var(--fog); }
 
 .live-line { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; font-size: 16px; color: var(--card-ink); text-decoration: none; }
@@ -157,16 +134,6 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 
 /* Round 22: the owner's bikes as photo cards, not table rows. */
 .objects ol { border-top: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 20px; }
-.obj-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; align-items: center; padding: 0 0 16px; border: 1px solid var(--line-strong); border-radius: var(--radius); overflow: hidden; text-decoration: none; background: var(--bg); transition: box-shadow .15s ease; }
-.obj-row:hover { background: var(--bg); box-shadow: var(--elev-2); }
-.obj-photo { grid-column: 1 / -1; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-.obj-name, .obj-status, .obj-shock { padding-left: 16px; }
-.obj-name { grid-column: 1 / -1; font-size: 21px; margin-top: 8px; }
-.obj-status { grid-column: 1 / -1; font-size: 15px; }
-.obj-shock { grid-column: 1; font-size: 14px; }
-.obj-count { grid-column: 2; padding-right: 16px; font-size: 14px; color: var(--fog); }
-.obj-shock .none { font-size: 14px; }
-@media (max-width: 760px) { .obj-shock { grid-column: 1; grid-row: auto; } .obj-count { grid-column: 2; } .obj-status { grid-column: 1 / -1; } }
 
 /* ---------- shadow scale ---------- */
 :root { --elev-1: 0 2px 8px var(--shadow); --elev-2: 0 12px 32px var(--shadow); --elev-3: 0 28px 70px rgba(23, 25, 27, .22); }
@@ -175,14 +142,16 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 @media (max-width: 760px) { .welcome-photo { height: 58svh; min-height: 340px; } }
 
 /* ---------- Round 26: an editorial type scale ---------- */
-:root { --t-display: clamp(44px, 5.2vw, 78px); --t-h1: clamp(40px, 5.2vw, 80px); --t-h2: clamp(32px, 3.8vw, 56px); --t-lead: clamp(19px, 1.6vw, 24px); }
+:root { --t-display: clamp(44px, 5.2vw, 78px); --t-h1: clamp(40px, 5.2vw, 80px); --t-app: clamp(32px, 3.6vw, 52px); --t-h2: clamp(32px, 3.8vw, 56px); --t-lead: clamp(19px, 1.6vw, 24px); }
 h1, h2, h3 { text-wrap: balance; }
 p, li, dd { text-wrap: pretty; }
-.mono, .num, dd, .sim-peak, .sim-back, .price-line b { font-variant-numeric: tabular-nums; }
+.mono, .num, dd, .sim-peak, .sim-back { font-variant-numeric: tabular-nums; }
 .welcome-card { width: min(640px, calc(100% - 2 * var(--gutter))); padding: clamp(28px, 3.2vw, 48px); }
 .welcome-card h1 { font-size: var(--t-display); line-height: .95; max-width: 12ch; }
 .welcome-card p { font-size: var(--t-lead); max-width: 30ch; }
-.bike-top h1, .rent h1, .design .d-head h1, .verify h1 { font-size: var(--t-h1); line-height: .96; }
+.bike-top h1, .design .d-head h1 { font-size: var(--t-h1); line-height: .96; }
+/* round 75: screens you work in get a calmer title, so their content leads */
+.rent h1, .verify h1 { font-size: var(--t-app); line-height: 1.02; letter-spacing: -0.035em; }
 .moments h2, .try-rule h2, .owners h2 { font-size: var(--t-h2); line-height: 1; letter-spacing: -0.04em; }
 .lead, .hero-summary { font-size: var(--t-lead); line-height: 1.45; }
 @media (max-width: 760px) { .welcome-card h1 { font-size: 40px; max-width: none; } }
@@ -193,7 +162,7 @@ p, li, dd { text-wrap: pretty; }
 .btn-primary:hover { box-shadow: var(--elev-1); }
 .btn-secondary:hover { background: var(--surface); }
 :focus-visible { outline: 3px solid var(--blue-ink); outline-offset: 3px; border-radius: var(--radius); }
-.obj-row:hover { transform: translateY(-3px); box-shadow: var(--elev-2); }
+
 .pin-price { cursor: pointer; }
 .pin-wrap:hover { z-index: 9999 !important; }
 .pin:hover .pin-price { transform: scale(1.12); box-shadow: var(--elev-2); }
@@ -228,8 +197,6 @@ p, li, dd { text-wrap: pretty; }
 /* ---------- Round 31: on the bike page the rule card overlaps the photo ---------- */
 .bike-side { gap: 0; }
 .bike-side .object-image img { aspect-ratio: 5 / 4; box-shadow: var(--elev-2); }
-.bike-side .rule-card { margin: -72px 20px 0; position: relative; background: var(--bg); border: 0; box-shadow: var(--elev-3); }
-@media (max-width: 860px) { .bike-side .rule-card { margin: -48px 12px 0; } }
 
 /* ---------- Round 32: pages arrive, they don't pop ---------- */
 @media (prefers-reduced-motion: no-preference) {
@@ -253,8 +220,6 @@ p, li, dd { text-wrap: pretty; }
 }
 @keyframes hero-drift { from { transform: translateY(0) scale(1); } to { transform: translateY(10%) scale(1.08); } }
 @keyframes hero-card { from { transform: translateY(0); } to { transform: translateY(-48px); } }
-
-/* ---------- Round 37: the selected bike's panel opens on a full-bleed photo ---------- */
 
 /* ---------- Round 38: progress as a segmented bar ---------- */
 .rent-top { width: 100%; }
@@ -312,10 +277,10 @@ p, li, dd { text-wrap: pretty; }
 .try-rule { align-items: start; }
 .try-rule > div:first-child { padding-top: clamp(0px, 3vw, 40px); }
 /* one spacing scale in the bike page's text column: 12 / 20 / 28 / 14 / 40 */
-.bike-copy .kicker { margin-bottom: 12px; }
+
 .bike-copy .hero-summary { margin: 20px 0 0; }
 .bike-copy .actions { margin-top: 28px; }
-.bike-copy .price-line { margin-top: 14px; }
+
 .bike-copy .stateline { margin-top: 40px; }
 
 /* ---------- Round 46: the slider drives the whole band ---------- */
@@ -354,16 +319,14 @@ p, li, dd { text-wrap: pretty; }
 @media (max-width: 900px) { .add-grid { grid-template-columns: minmax(0, 1fr); } .listing-preview { position: static; order: -1; } .preview-card img, .preview-empty { aspect-ratio: 16 / 9; } }
 
 /* ---------- Round 49: one grade for every photograph ---------- */
-.bike-photo, .moment-photo, .welcome-photo, .owners-photo, .object-image img, .d-photo img, .past-photo, .obj-photo, .invite-photo, .step-photo { filter: saturate(1.04) contrast(1.03) sepia(.05); }
+.bike-photo, .moment-photo, .welcome-photo, .owners-photo, .object-image img, .d-photo img, .invite-photo, .step-photo { filter: saturate(1.04) contrast(1.03) sepia(.05); }
 
 /* ---------- Round 51: the receipt is a slip you could tear off ---------- */
 .receipt { border: 0; border-radius: var(--radius) var(--radius) 0 0; background: var(--bg); box-shadow: var(--elev-3); padding: clamp(24px, 3.6vw, 44px) clamp(24px, 3.6vw, 44px) clamp(40px, 5vw, 56px); position: relative;
   -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 22px 51% repeat-x, linear-gradient(#000 0 0) top / 100% calc(100% - 11px) no-repeat;
   mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 22px 51% repeat-x, linear-gradient(#000 0 0) top / 100% calc(100% - 11px) no-repeat; }
 .receipt-lines { border-top: 2px solid var(--ink); }
-.receipt-lines .total { padding: 20px 0 8px; border-bottom: 0; }
-.receipt-lines .total dt { font-size: 20px; font-weight: 650; }
-.receipt-lines .total dd { font-size: clamp(28px, 3.2vw, 40px); font-weight: 650; letter-spacing: -0.03em; }
+
 .receipt-lines dd.sub { font-size: 13px; }
 @media print { .receipt { box-shadow: none; -webkit-mask: none; mask: none; } }
 .receipt { background: var(--surface); box-shadow: none; }
@@ -383,9 +346,6 @@ p, li, dd { text-wrap: pretty; }
 .event.quiet::before { border-color: var(--line-strong); }
 .event p { padding-left: 30px; }
 @media (max-width: 900px) { .events::before { left: 81px; } .event::before { left: 76px; } }
-
-
-/* ---------- Round 57: the wallet step shows what it is for ---------- */
 
 /* ---------- Round 59: bars say what they are on hover and focus ---------- */
 .bars li { position: relative; }

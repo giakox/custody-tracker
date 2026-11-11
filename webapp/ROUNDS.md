@@ -921,6 +921,26 @@ Every section had the same layout (title left, content right) and the same weigh
 
 **Test, "another screen at a glance?"** Yes for steps 1–3 (a centred column became a two-pane builder); steps 4–5 keep their frame with the new checklist and borderless rows.
 
+## Round 75 · A step back: calmer titles on the screens you work in, and the leftovers of ten rebuilds removed
+
+**Hierarchy audit (the app screens: rent steps, My rentals, receipt, My bikes, Add, Verify):**
+
+| Block | Who, when | If it vanished | Verdict |
+|---|---|---|---|
+| The page title at 80 px (same as the marketing pages) | user in the middle of a task | they'd still know where they are from the header and the progress | kept, at 52 px: on a working screen the content (the card, the map, the form) is the primary, the title is a label |
+| CSS for components rebuilt in rounds 64–74 (old bike hero, rule card, ride hero, past-rows, owner rows, KPI strip, record box, old footer, top bar) | nobody: no component uses those classes any more | nothing | removed |
+
+**Levels after:** on working screens the card or the tool is primary, the title secondary. Marketing pages (Home, the bike's listing, Design) keep the big type: there the words are the content. **Squint test:** before, "Your rentals." outweighed the card with the ride in progress; after, the eye lands on the photo card.
+
+**References:** Airbnb's Trips and Stripe's Dashboard: page titles on working screens are half the size of the marketing headlines; the size goes to the data.
+
+**Three ideas (what to remove):** (1) one smaller title size for working screens, plus a sweep of dead CSS. (2) Remove the floating "Demo · sample data" pill from pages with a footer and put the switch in the footer. (3) Remove the "live rental" strip under the header, since My rentals and the ride page say it.
+**Discarded:** (2) the presenter needs the switch on any screen without scrolling to the bottom. (3) the strip is the only thing that tells a renter on another page that their ride is still running.
+
+**Chosen, (1):** [My rentals](rounds/75-rentals.jpg), [the Rule step](rounds/75-rule.jpg), [My bikes](rounds/75-bikes.jpg). About 120 lines of CSS deleted across six files (selectors for classes no component renders); no screen changed except the titles. Overflow checked at 375 px on six pages: none.
+
+**Test, "another screen at a glance?"** No, and it shouldn't be: a step back takes away. What changes at a glance is which thing you look at first.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.

@@ -18,27 +18,15 @@
 .link:hover { text-decoration: underline; }
 
 /* ---------- Home ---------- */
-.home-hero {
-  max-width: var(--max); margin: 0 auto; padding: clamp(24px, 5vw, 72px) var(--gutter) 0;
-  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 32px; align-items: center;
-  position: relative; isolation: isolate;
-}
+
 .lead { margin-top: 24px; font-size: clamp(18px, 1.5vw, 21px); line-height: 1.5; color: var(--mist); max-width: 46ch; text-wrap: pretty; }
-
-
-
 
 .qr-sticker { width: 100%; height: auto; display: block; }
 .qr-label { font-family: var(--mono); font-size: 10px; fill: var(--midnight); }
 .qr-label.dim { fill: #5a6973; }
 
-@media (max-width: 640px), (pointer: coarse) {
-}
-
 .block-intro h2 em { font-style: var(--em-style); }
 .block-intro .link { font-family: var(--ui); font-size: 14px; }
-
-.site-foot { max-width: var(--max); margin: 0 auto; padding: 72px var(--gutter) 40px; color: var(--dim); font-size: 12px; }
 
 /* ---------- bike page top: status and action first ---------- */
 .bike-top {
@@ -47,24 +35,16 @@
   text-align: left; overflow: visible;
 }
 .bike-copy { min-width: 0; }
-.kicker { font-size: 16px; color: var(--fog); margin-bottom: 14px; }
-.kicker .addr { font-size: 12px; color: var(--dim); margin-left: 8px; }
+
 .bike-top h1 { font-size: clamp(40px, 5vw, 72px); line-height: 1.02; letter-spacing: -0.024em; max-width: 14ch; margin: 0; text-wrap: balance; font-variation-settings: "opsz" 72; }
 .bike-top .hero-summary { margin: 18px 0 0; max-width: 46ch; }
 .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
 .action-note { font-size: 16px; color: var(--fog); }
 
-
 .bike-top .stateline { margin: 30px 0 0; padding: 0; max-width: 520px; align-items: start; }
 .bike-top .step { align-content: start; justify-items: start; text-align: left; }
 .bike-top .step + .step::before { right: auto; left: calc(-100% + 6px); width: 100%; }
 .bike-top .step-name { font-size: 16px; }
-/* Blur hides the faint ring where a radial gradient reaches zero (it shows as a band on projectors). */
-
-
-/* ---------- placeholder for pages of later batches ---------- */
-.next-page .btn { margin-right: 16px; margin-top: 24px; }
-
 /* ---------- demo switcher: for the presentation, not part of the product ---------- */
 
 .demo-toggle { background: var(--bg); color: var(--dim); border: 1px solid var(--line-strong); border-radius: 999px; padding: 5px 12px; font-size: 11px; cursor: pointer; opacity: .7; }
@@ -81,11 +61,6 @@
   .actions .btn { flex: 1 1 100%; }
 
 }
-
-/* Phones: status and action before the drawing; demo control sits at the end of the page,
-   so it never covers text. */
-
-
 
 /* ---------- object image: the case render (or the drawing until it exists), right of the heading ---------- */
 .object-image { margin: 0; position: relative; width: 100%; max-width: 400px; justify-self: end; }
@@ -109,7 +84,7 @@
   max-width: var(--max); margin: clamp(32px, 5vw, 64px) auto 0; padding: 0 var(--gutter);
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: stretch;
 }
-.entry-copy p { min-height: 4.6em; } /* three lines: both buttons line up */
+ /* three lines: both buttons line up */
 .tube-label { font-family: var(--mono); font-size: 11px; fill: var(--fog); }
 
 /* ---------- demo control: in the empty left margin on wide screens, at the end of the page otherwise ---------- */
@@ -119,10 +94,10 @@
 }
 
 /* ---------- layout: image right of the heading down to small tablets ---------- */
-.home-hero, .bike-top { grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); }
+ .bike-top { grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); }
 
 @media (max-width: 700px) {
-  .home-hero, .bike-top { grid-template-columns: minmax(0, 1fr); }
+   .bike-top { grid-template-columns: minmax(0, 1fr); }
   .object-image { max-width: 260px; justify-self: center; }
   .rule-row { grid-template-columns: 96px minmax(0, 1fr); gap: 2px 8px; font-size: 13px; padding-left: 6px; }
   .rule-row .rule-out { grid-column: 2; white-space: normal; }

@@ -1,29 +1,11 @@
 /* Owner side: My objects, confirm a return, add an object. Same tokens; no glow. */
 
-.owner-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; }
-.owner-head h1 { margin-bottom: 0; }
 .to-confirm { border-color: rgba(2, 151, 222, .6); }
-.to-confirm .kicker { margin: 0; color: var(--blue-ink); font-size: 13px; }
-.to-confirm h2 { margin-top: 6px; }
 
-.kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin: 36px 0 0; border-top: 1px solid var(--line-strong); }
-.kpis div { padding: 18px 20px 18px 0; }
-.kpis div + div { padding-left: 20px; border-left: 1px solid var(--line); }
-.kpis dt { font-size: 15px; color: var(--fog); }
-.kpis dd { margin: 6px 0 0; font-size: 34px; color: var(--ink); line-height: 1; }
-.kpis dd.sub { font: 13px/1.4 var(--text); color: var(--fog); margin-top: 10px; }
+.to-confirm h2 { margin-top: 6px; }
 
 .objects { margin-top: 40px; }
 .objects ol { list-style: none; margin: 14px 0 0; padding: 0; border-top: 1px solid var(--line-strong); }
-.obj-row { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.6fr) minmax(0, 1fr) auto auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--line); color: inherit; text-decoration: none; }
-.obj-row:hover { background: var(--raise); }
-.obj-name { font-size: 19px; color: var(--ink); }
-.obj-status { font-size: 13px; color: var(--mist); }
-.obj-status.busy { color: var(--blue-ink); }
-.obj-shock { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; }
-.obj-shock .tier-name { display: none; }
-.obj-shock .none, .obj-count { font-size: 12px; color: var(--fog); }
-.obj-row .link { font-size: 12px; }
 
 /* add an object */
 .choice { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 28px; }
@@ -68,12 +50,12 @@ button.choice-opt:hover { border-color: var(--blue); }
 .ready .lead { margin-top: 0; }
 
 @media (max-width: 760px) {
-  .kpis { grid-template-columns: minmax(0, 1fr); }
-  .kpis div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
-  .obj-row { grid-template-columns: minmax(0, 1fr) auto; }
-  .obj-status, .obj-count { grid-column: 1; }
-  .obj-shock { grid-column: 2; grid-row: 1; }
-  .obj-row .link { grid-column: 2; }
+  
+  
+  
+  
+  
+  
   .choice, .mount, .scan, .form, .rule-form, .ready { grid-template-columns: minmax(0, 1fr); }
   .scan-frame, .photo, .qr-print { max-width: 260px; }
 }
