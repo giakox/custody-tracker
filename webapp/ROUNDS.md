@@ -1256,6 +1256,33 @@ Also removed: the estimator's styles in map.css, which matched the earnings card
 
 **Test, "another screen at a glance?"** Yes: text on white became a card with a photo and a way in.
 
+## Round 90 · A step back: the Home's simulator gives the answer, not the whole contract
+
+**Hierarchy audit (the Home's "What if it gets dropped?"):**
+
+| Block | Who, when | If it vanished | Verdict |
+|---|---|---|---|
+| Chips, slider, the knock line | visitor | can't play | kept |
+| "You'd get back 45 dollars" with the split bar | visitor | the answer | kept, primary |
+| The full rule table (four levels, thresholds, amounts) | a renter about to accept the rule | they see it on the Rule step, before any money moves, and on the bike's booking card | removed from the Home; the sentence beside the simulator now says "You'll see the whole rule before you rent." |
+
+**Levels after:** on the Home the simulator is a toy with one answer; the contract lives where you accept it. **Squint test:** before, the card ended in a grey table that looked like fine print; now it ends on the money.
+
+**Three ideas (what to remove):** (1) the table from the Home's simulator. (2) The whole simulator from the Home (it's on the Rule step). (3) The "How renting works" band from the bike page (it's on the Home).
+**Discarded:** (2) the simulator is the Home's one thing you can play with, and the clearest proof of the rule for someone not yet renting. (3) a renter can arrive on the bike page from a QR sticker without ever seeing the Home.
+
+**Chosen, (1):** [1440, before and after](rounds/90-try-rule-1440.jpg), [phone](rounds/90-try-rule-375.jpg). The section is 136 px shorter on a phone; the Home is 4,827 px at 375 (it was 4,964).
+
+**Test, "another screen at a glance?"** No: a step back.
+
+### Block 81 to 90 (summary)
+
+- **Lines in `webapp/src`:** about 7,220, under the cap of 13,517.
+- **Strongest changes:** (1) the rule simulator rebuilt around everyday words and the money (82) and the deposit's button moved under the amount it pays, with a success state in the card (86); (2) the phone map given room with compact cards (81) and the bike page on a phone with the rule folded (84).
+- **States and motion:** error, loading and empty states with a way on (83, 89); one behaviour per state site-wide (87); page changes that start at the top and cross-fade under a still header (88), which also fixed a real bug (new pages opened at the previous scroll position).
+- **Steps back:** round 85 (nothing under 13 px; near-duplicate sizes merged) and round 90 (the Home's simulator without the contract table).
+- **The same picture of money everywhere:** the blue-and-orange split bar now appears on the receipt, on Confirm a return, and in the simulator on the Home and the Rule step.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.

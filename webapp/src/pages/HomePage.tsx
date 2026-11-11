@@ -28,9 +28,9 @@ function TryTheRule({ objectId }: { objectId: number }) {
     <section className="try-rule" aria-labelledby="try-title">
       <div>
         <h2 id="try-title">What if it gets dropped?</h2>
-        <p>Try it. This is the rule on the demo bike, and it's the same for everyone who rides it. Nobody can bend it afterwards.</p>
+        <p>Try it. This is the rule on the demo bike, and it's the same for everyone who rides it. Nobody can bend it afterwards. You'll see the whole rule before you rent.</p>
       </div>
-      <RuleSimulator terms={q.data.terms} />
+      <RuleSimulator terms={q.data.terms} full={false} />
     </section>
   );
 }

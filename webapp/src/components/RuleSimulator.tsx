@@ -14,7 +14,8 @@ const EXAMPLES = [
 const tierOf = (t: Terms, cg: number): Tier => (cg >= t.strongCg ? 3 : cg >= t.mediumCg ? 2 : cg >= t.lightCg ? 1 : 0);
 
 /** "What if it gets dropped?": drag a peak and see what the contract would do, before you lock anything. */
-export function RuleSimulator({ terms }: { terms: Terms }) {
+/** `full`: show the whole rule table under the answer (the Rule step); the Home shows only the answer. */
+export function RuleSimulator({ terms, full = true }: { terms: Terms; full?: boolean }) {
   // the slider moves on a log scale: 1 g to 200 g, so the light/medium thresholds aren't squeezed at the start
   const [pos, setPos] = useState(0.62);
   const cg = Math.round(Math.exp(Math.log(100) + pos * (Math.log(20000) - Math.log(100))) / 10) * 10;
@@ -49,7 +50,7 @@ export function RuleSimulator({ terms }: { terms: Terms }) {
         </div>
         <p className="sim-fee">{tier ? <>{usd(String(fee))} of the {usd(terms.collateral)} deposit goes to the owner, by the rule.</> : <>All of the {usd(terms.collateral)} deposit comes back.</>}</p>
       </div>
-      <RuleTiers terms={terms} highlight={tier} />
+      {full && <RuleTiers terms={terms} highlight={tier} />}
       <p className="hint-line">Examples are indicative peaks from early tests, not measurements of this bike. 1 g is the bike standing still.</p>
     </section>
   );
