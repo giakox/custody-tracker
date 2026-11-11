@@ -1134,6 +1134,30 @@ Also removed: the estimator's styles in map.css, which matched the earnings card
 
 **Test, "another screen at a glance?"** Yes: a heading in the void became a card you can act on.
 
+## Round 84 · The bike page on a phone: price and button first, the rule folds
+
+**Hierarchy audit (bike page, 375 px):**
+
+| Block | Who, when | If it vanished | Verdict |
+|---|---|---|---|
+| Title + swipeable pictures | renter | — | kept |
+| Booking card: price, deposit, Rent | renter | — | primary |
+| The rule table inside the booking card (5 rows) between Rent and the record | renter who wants the detail | the Rule step shows it in full before any money moves | folded under "If it's dropped, this rule decides…" on phones; open on desktops |
+| The record (headline, pills, rental cards) | renter | — | secondary; now reached one screen sooner |
+| Bottom bar: "The demo bike / Available · deposit 50 dollars" in mono | renter scrolling | — | price first, like the card: "2 dollars an hour / 50 dollars deposit, back by the rule" |
+| "See the proof" beside a three-line sentence | — | — | stacked on phones |
+
+**Levels after:** price and Rent primary, the record secondary, the rule and the proof tertiary. **Squint test:** before, the first screen and a half was the card and its table; after, the card ends at its button and the record's headline arrives right after.
+
+**References:** Airbnb's room page on a phone (the price bar at the bottom says the price, not the status; house rules fold into a row you open) and Apple's buy pages (the details fold, the price stays). Why ours looked cheaper: the phone got the desktop's full card, rule and all.
+
+**Three ideas:** (1) fold the rule on phones and make the bar say the price. (2) Move the whole booking card into the bottom bar as a sheet. (3) Put the record before the booking card on phones.
+**Discarded:** (2) a sheet that opens over the page hides the record a renter wants to check. (3) the record first buries the button; the bottom bar alone is too small to be the first action.
+
+**Chosen, (1):** [phone before](rounds/84-bike-phone-before.jpg), [phone after](rounds/84-bike-phone-after.jpg) (three scroll positions each). The fold has a turning chevron and a focus ring; on desktops it is open and not clickable.
+
+**Test, "another screen at a glance?"** Partly: the first screen is the same; the second is now the record instead of a table.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1147,7 +1171,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Home: find a bike (grid + map) | 81 |
 | Header | 77 |
 | Footer | 73 |
-| Bike page | 65 |
+| Bike page | 84 |
 | Rent flow: Rule, Wallet, Deposit | 66 |
 | Rent flow: Ride, Return, Waiting, Outcome | 67 |
 | Receipt and My rentals | 68 |

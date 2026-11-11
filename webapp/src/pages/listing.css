@@ -138,3 +138,18 @@
 .book-card .rule-tiers { border: 0; display: grid; gap: 2px; }
 .book-card .rule-row { border: 0; padding: 8px 10px; border-radius: 10px; }
 .book-card .rule-row.none { background: var(--bg); }
+
+/* ---------- Round 84: the bike page on a phone: price and button first, the rule folds ---------- */
+.book-terms summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.book-terms summary::-webkit-details-marker { display: none; }
+.book-terms summary::after { content: ""; flex: none; width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); transition: transform .2s ease; }
+.book-terms[open] summary::after { transform: rotate(-135deg); }
+.book-terms summary:focus-visible { outline: 2px solid var(--blue-ink); outline-offset: 4px; border-radius: 6px; }
+@media (min-width: 900px) { .book-terms summary { pointer-events: none; } .book-terms summary::after { display: none; } }
+.sticky-name b { font-weight: 700; }
+.sticky-status { font-family: var(--ui); font-size: 13px; color: var(--fog); }
+@media (max-width: 899px) {
+  .l-col .proof-toggle { grid-template-columns: minmax(0, 1fr); row-gap: 10px; }
+  .l-col .proof-toggle .btn, .l-col .proof-toggle p { grid-column: 1; justify-self: start; }
+  .record-facts > span:not(:empty) { font-size: 13px; }
+}

@@ -106,7 +106,7 @@ export function StickyAction({ d }: { d: ObjectDetail }) {
   return (
     <div className={`sticky-action ${shown ? "is-shown" : ""}`} inert={!shown}>
       <div className="sticky-inner">
-        <div className="sticky-text"><span className="sticky-name">{objectName(d)}</span><span className="mono sticky-status">{shortStatus(d, account)}</span></div>
+        <div className="sticky-text"><span className="sticky-name">{d.status === "available" ? <><b>2 dollars</b> an hour</> : objectName(d)}</span><span className="sticky-status">{d.status === "available" ? `${usd(d.terms.collateral)} deposit, back by the rule` : shortStatus(d, account)}</span></div>
         <div className="sticky-btns"><Action d={d} me={account} compact /></div>
       </div>
     </div>
@@ -153,6 +153,9 @@ export function ListingIntro({ d }: { d: ObjectDetail }) {
 /** The card that stays beside the story: price, deposit, the one action and the rule (Airbnb's booking card). */
 export function BookCard({ d }: { d: ObjectDetail }) {
   const { account } = useViewer();
+  // On a phone the rule folds under the price and the button; on a desktop it is open beside the story.
+  const [wide, setWide] = useState(() => window.matchMedia("(min-width: 900px)").matches);
+  useEffect(() => { const m = window.matchMedia("(min-width: 900px)"); const on = () => setWide(m.matches); m.addEventListener("change", on); return () => m.removeEventListener("change", on); }, []);
   return (
     <aside className="l-book" aria-label="Rent it">
       <div className="book-card">
@@ -161,11 +164,11 @@ export function BookCard({ d }: { d: ObjectDetail }) {
         <p className="book-deposit">{usd(d.terms.collateral)} deposit, back by the rule</p>
         <div className="actions">{<Action d={d} me={account} />}</div>
         </div>
-        <div className="book-terms">
-        <h2 className="book-rule">If it's dropped, this rule decides. Not the owner, not us.</h2>
-        <RuleTiers terms={d.terms} highlight={d.activeRental?.current ? d.activeRental.current.tier : undefined} />
-        <p className="book-note">The hardest knock of your ride decides how much comes back. {TEST_MONEY}</p>
-        </div>
+        <details className="book-terms" open={wide}>
+          <summary className="book-rule">If it's dropped, this rule decides. Not the owner, not us.</summary>
+          <RuleTiers terms={d.terms} highlight={d.activeRental?.current ? d.activeRental.current.tier : undefined} />
+          <p className="book-note">The hardest knock of your ride decides how much comes back. {TEST_MONEY}</p>
+        </details>
       </div>
     </aside>
   );
