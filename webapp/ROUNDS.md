@@ -326,3 +326,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Stripe.com and Linear.app: staggered entrances of the first screen: https://stripe.com https://linear.app
 - **Shots:** [1440 px](rounds/32-1440.jpg)
 - **Lines:** 6332
+
+## Round 33 · Verify, dressed as the proof moment
+
+- **What:** The answer card is a raised field of pale blue with a large stamped check that lands with a small bounce, a big headline and the soft shadow; the chart bars are tall pills with a ringed pick.
+- **Why:** Verify is the moment a doubting professor or renter trusts the system. It should feel like an event, not a form.
+- **Reference:** Stripe's payment-success states: one large mark, one big sentence, a small stamp motion: https://stripe.com
+- **Shots:** [1440 px](rounds/33-1440.jpg)
+- **Lines:** 6349
