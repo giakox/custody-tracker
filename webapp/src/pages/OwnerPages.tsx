@@ -329,12 +329,18 @@ function AddShell({ n, title, children, next, onNext, wide = false, aside }: { n
 }
 
 /** What renters will see, updating as the owner types (Airbnb's host preview). */
-function ListingPreview({ d }: { d: Draft }) {
+function ListingPreview({ d, onPhoto }: { d: Draft; onPhoto?: (url: string) => void }) {
   return (
     <aside className="listing-preview" aria-label="How renters will see your bike">
       <p className="preview-k">How renters will see it</p>
       <div className="preview-card">
-        {d.photo ? <img src={d.photo} alt="" /> : <div className="preview-empty">Your photo</div>}
+        {onPhoto ? (
+          <label className={`preview-photo ${d.photo ? "has-photo" : ""}`}>
+            {d.photo ? <img src={d.photo} alt="Your bike" /> : <span className="preview-add"><i aria-hidden="true">+</i><b>Add a photo of your bike</b><span>In daylight, the whole bike, where it's parked.</span></span>}
+            {d.photo && <span className="preview-change">Change photo</span>}
+            <input type="file" accept="image/*" onChange={(e) => { const f = e.target.files?.[0]; if (f) onPhoto(URL.createObjectURL(f)); }} />
+          </label>
+        ) : d.photo ? <img src={d.photo} alt="" /> : <div className="preview-empty">Your photo</div>}
         <div className="preview-body">
           <p className="preview-name">{d.label.trim() || "Your bike"}</p>
           <p className="preview-meta">{d.kind}{d.spot.trim() ? `, ${d.spot.trim()}` : ""}</p>
@@ -411,12 +417,9 @@ export function AddPage({ n }: { n: number }) {
       );
     }
     case 4: return (
-      <AddShell n={4} wide aside={<ListingPreview d={d} />} title={<>Your <em>bike</em>.</>} next="Continue" onNext={d.label.trim() && d.spot.trim() ? () => go(5) : undefined}>
-        <div className="form">
-          <label className="photo">
-            {d.photo ? <img src={d.photo} alt="Your bike" /> : <span className="mono">Add a photo</span>}
-            <input type="file" accept="image/*" onChange={(e) => { const f = e.target.files?.[0]; if (f) set({ photo: URL.createObjectURL(f) }); }} />
-          </label>
+      <AddShell n={4} wide aside={<ListingPreview d={d} onPhoto={(photo) => set({ photo })} />} title={<>Your <em>bike</em>.</>} next="Continue" onNext={d.label.trim() && d.spot.trim() ? () => go(5) : undefined}>
+        <p className="lead">What renters read on the map and on the bike's page. The card shows it as you type.</p>
+        <div className="form form-solo">
           <div className="fields">
             <label className="field"><span>Name</span><input value={d.label} placeholder="Blue city bike" onChange={(e) => set({ label: e.target.value })} /></label>
             <label className="field"><span>Type</span>

@@ -234,3 +234,18 @@ table.levels td:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
 @media (max-width: 520px) { .scan-v2 .facts { grid-template-columns: minmax(0, 1fr); gap: 10px; } .scan-go { min-width: 0; } }
 .scan-v2 .facts { border: 0; box-shadow: none; }
 @media (max-width: 520px) { .scan-say { font-size: 13px; padding: 0 16px; } }
+
+/* ---------- Round 129: the photo is added where renters will see it, in the preview card; the form is just the words ---------- */
+.form-solo { grid-template-columns: minmax(0, 1fr); max-width: 520px; }
+.preview-photo { position: relative; display: block; aspect-ratio: 4 / 3; background: var(--raise); cursor: pointer; overflow: hidden; transition: background-color .2s ease; }
+.preview-photo img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; }
+.preview-photo input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.preview-add { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 6px; padding: 24px; text-align: center; color: var(--mist); font-size: 14px; }
+.preview-add i { display: grid; place-items: center; width: 52px; height: 52px; margin-bottom: 6px; border-radius: 50%; background: var(--ink); color: var(--bg); font: 400 28px/1 var(--ui); font-style: normal; transition: transform .2s cubic-bezier(.2, .7, .2, 1); }
+.preview-add b { font-size: 17px; font-weight: 650; color: var(--ink); }
+.preview-photo:hover { background: var(--line); }
+.preview-photo:hover .preview-add i { transform: scale(1.08); }
+.preview-photo:has(input:focus-visible) { outline: 2px solid var(--blue-ink); outline-offset: -4px; }
+.preview-change { position: absolute; right: 12px; bottom: 12px; padding: 8px 12px; border-radius: 999px; background: var(--overlay); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); font-size: 13px; font-weight: 600; color: var(--ink); box-shadow: var(--elev-2); }
+@media (max-width: 900px) { .preview-photo { aspect-ratio: 16 / 9; } }
+@media (max-width: 900px) { .add-grid:has(.preview-photo) .listing-preview { order: -1; margin: 8px 0 8px; } .add-grid:has(.preview-photo) .preview-k { display: none; } }

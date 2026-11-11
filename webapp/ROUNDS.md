@@ -2015,6 +2015,25 @@ Rounds 111–119 rotated through the screens that had gone longest untouched and
 
 **Test on the blurred shots:** yes: a pale square and a grey button became a dark photographic frame with a blue button in it.
 
+## Round 129 · "Your bike": the photo is added where renters will see it
+
+**Hierarchy audit (Add, step 4):** two empty photo boxes on the same screen: a small dashed "Add a photo" (monospace, dashed border, both leftovers) in the form, and a large "Your photo" placeholder in the preview card on the right. The eye went to the big empty one, which did nothing when clicked; the small one that worked looked like a disabled field.
+
+**What changed:** the photo is added in the preview card itself: its photo area is the upload (a black "+" disc, "Add a photo of your bike", "In daylight, the whole bike, where it's parked."; sand that darkens on hover; a focus ring for the keyboard; "Change photo" as a frosted pill once there is one). The form keeps only the words (name, type, where it's parked) under a one-line lead. On phones the card comes first on this step (the other steps keep it after the form), without its "How renters will see it" label.
+
+**Separation without lines:** the dashed border is gone; the upload is a surface (sand) inside the card.
+
+**Café test:** at the café you put your cake in the window where people will see it, not on a form about the window. Still missing: step 5 (the rules) is the longest form in the site.
+
+**References:** Airbnb's listing editor (the photo is edited on the listing preview); Vinted's "sell" flow (the photo slot is the first, largest thing).
+
+**Three ideas:** (1) upload in the preview card. (2) A large drop zone at the top of the form. (3) Keep both, label the preview "preview only".
+**Discarded:** (2) still two photo areas on screen. (3) a label to explain a confusion is worse than removing it.
+
+**Chosen, (1):** [before and after](rounds/129-yourbike.jpg), [phone](rounds/129-yourbike-375.jpg).
+
+**Test on the blurred shots:** yes: a grey square left of the form disappears; the card's photo area now carries a dark point, so the eye lands on it.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -2043,7 +2062,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | My rentals | 117 |
 | Owner (My bikes) | 114 |
 | Owner: Confirm a return | 121 |
-| Add a bike | 119 (step 2), 128 (step 3) |
+| Add a bike | 119 (step 2), 128 (step 3), 129 (step 4) |
 | Verify | 109 |
 | Empty, loading and error states | 89 |
 | Design | 112 |
