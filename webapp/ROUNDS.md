@@ -785,13 +785,43 @@ Return used a layout whose CSS was deleted in round 66 (the photo spilled over t
 
 **Test, "another screen at a glance?"** Yes: a title, a button and a row of numbers became a sentence, a card to act on, photo tiles and one total.
 
+## Round 70 · A step back: three moments instead of three screens
+
+**Hierarchy audit (Home below the finder, and the end of the bike page):**
+
+| Block | Who, when | If it vanished | Verdict |
+|---|---|---|---|
+| Home: three chapters, each a full-screen photo with a card rising over it, stacked like sheets (2,700 px) | first-time visitor | they wouldn't know how a rental goes | kept, cut to one band of three photo cards (about 800 px) |
+| Bike page: "How it works", three sand cards of text with big numerals | renter on the bike page | same story as Home, in other words | merged: the same band, titled "How renting works", with the link to "How Sharify is designed" |
+| Scroll-driven drift, rise and float on the chapters | — | nothing lost | replaced by one staggered entrance per card (off with reduced motion) |
+
+**Levels after:** the band's title is secondary to the finder above it; each card is photo, then a 24 px title, then one sentence. **Squint test:** before, three screens of photo in a row: the eye stopped on each, the page felt endless. After, one row of three portraits read left to right like a comic strip.
+
+**References:** Apple's product pages put "how it works" in a row of three captioned pictures that you read in one look; Airbnb's "How it works" for hosts does the same with three numbered images. Why ours looked cheaper here: it spent three full screens on three sentences.
+
+**Three ideas (what to remove or merge):** (1) merge the Home chapters and the bike page's text steps into one three-card band used on both pages. (2) Remove the "What if it gets dropped?" simulator from Home, since the Rule step has it. (3) Show six bikes in the finder and hide the rest behind "Show all 10".
+**Discarded:** (2) the simulator is Home's one interactive thing and the clearest proof of the rule for someone who isn't renting yet. (3) ten bikes are already a short list; hiding four adds a click and saves little.
+
+**Chosen, (1):** [Home band, 1440](rounds/70-moments-1440.jpg), [phone, swipe](rounds/70-moments-375.jpg), [the same band on the bike page](rounds/70-bike-1440.jpg), [Home length before and after](rounds/70-home-length.jpg). Home went from 8,656 px to 6,655 px at 1440. One component instead of two; about 50 lines of CSS deleted (the stacked-sheet chapters, their three scroll animations, two generations of "How it works" styles with ruled cells).
+
+**Test, "another screen at a glance?"** Yes for that part of the Home: three screens of photos became one row.
+
+### Block 61 to 70 (summary)
+
+- **Lines in `webapp/src`:** about 6,990, under the cap of 13,517 (+60% over 463f724).
+- **New rules this block:** a written hierarchy audit before every idea; no grey lines to divide zones; nothing is final (the rotation starts again when every screen has had a round); care of motion, scroll, shadows and selection states every round.
+- **Strongest changes:** (1) the bike page as a listing with a booking card (64) and its record as one headline and rental cards (65); (2) the rent flow as a checkout with one card that never changes (66) and the ride as a live map with a status card on it (67).
+- **Lines removed as dividers:** the record counters, chapter rows, rule table rows, signature rows, receipt rows, owner KPIs, the past-rentals list: all now separate by space, surface or tint.
+- **Step back:** round 70 (Home 2,000 px shorter, two "how it works" merged into one).
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
 
 | Screen | Last round |
 |---|---|
-| Home: hero and story | 62 |
+| Home: hero | 62 |
+| Home: "how it works" band (and bike page) | 70 |
 | Home: find a bike (grid + map) | Structure |
 | Header | Structure |
 | Footer | — |

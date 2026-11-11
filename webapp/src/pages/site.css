@@ -35,13 +35,6 @@
 @media (max-width: 640px), (pointer: coarse) {
 }
 
-/* ---------- How it works (Home and bike page) ---------- */
-.how-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line-strong); }
-.how-steps li { padding: 24px 24px 8px 0; }
-.how-steps li + li { padding-left: 24px; border-left: 1px solid var(--line); }
-.how-n { color: var(--blue-ink); font-size: 12px; }
-.how-steps h3 { font-size: 22px; margin: 10px 0 8px; letter-spacing: -0.01em; }
-.how-steps p { font-size: 16px; color: var(--mist); line-height: 1.5; }
 .block-intro h2 em { font-style: var(--em-style); }
 .block-intro .link { font-family: var(--ui); font-size: 14px; }
 
@@ -82,11 +75,7 @@
 .demo-panel p { color: var(--dim); }
 
 /* ---------- small screens ---------- */
-@media (max-width: 900px) {
 
-  .how-steps { grid-template-columns: minmax(0, 1fr); }
-  .how-steps li, .how-steps li + li { padding: 18px 0; border-left: 0; border-bottom: 1px solid var(--line); }
-}
 @media (max-width: 640px) {
 
   .actions .btn { flex: 1 1 100%; }
@@ -131,9 +120,7 @@
 
 /* ---------- layout: image right of the heading down to small tablets ---------- */
 .home-hero, .bike-top { grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); }
-@media (max-width: 900px) {
-  .how-steps { grid-template-columns: minmax(0, 1fr); }
-}
+
 @media (max-width: 700px) {
   .home-hero, .bike-top { grid-template-columns: minmax(0, 1fr); }
   .object-image { max-width: 260px; justify-self: center; }
@@ -176,3 +163,31 @@
 .lrb-peak .tier-name { display: none; }
 .lrb-peak .shock { color: var(--orange-ink); }
 @media (max-width: 640px) { .lrb-text { font-size: 14px; } .lrb-peak { display: none; } }
+
+/* ---------- Round 70: a rental in three moments, one band (Home and bike page) ---------- */
+.moments { max-width: var(--max); margin: clamp(64px, 9vw, 128px) auto 0; padding: 0 var(--gutter); }
+.listing .moments { padding: 0; }
+.moments-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px 24px; flex-wrap: wrap; }
+.moments-head h2 { font-size: clamp(30px, 3.4vw, 48px); line-height: 1.05; letter-spacing: -0.035em; }
+.moments-row { list-style: none; margin: 32px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.moment-pic { position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 5; background: var(--raise); }
+.moment-photo { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
+.moment-inset { position: absolute; right: 16px; bottom: 16px; width: 34%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 10px; box-shadow: var(--elev-3); outline: 4px solid #fff; }
+.moment-n { position: absolute; left: 16px; top: 16px; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--overlay); box-shadow: var(--elev-1); font-weight: 700; font-size: 17px; color: var(--ink); }
+.moment h3 { margin-top: 20px; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.15; letter-spacing: -0.025em; text-wrap: balance; }
+.moment p { margin-top: 8px; font-size: 16px; line-height: 1.5; color: var(--mist); max-width: 38ch; }
+@media (hover: hover) { .moment:hover .moment-photo { transform: scale(1.04); } }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .moment { animation: moment-in linear both; animation-timeline: view(); animation-range: entry 0% entry 60%; }
+    .moment:nth-child(2) { animation-range: entry 8% entry 68%; }
+    .moment:nth-child(3) { animation-range: entry 16% entry 76%; }
+  }
+}
+@keyframes moment-in { from { opacity: 0; transform: translateY(40px); } }
+@media (max-width: 899px) {
+  .moments-row { display: flex; gap: 12px; margin: 24px calc(-1 * var(--gutter)) 0; padding: 0 var(--gutter); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 var(--gutter); scrollbar-width: none; }
+  .moments-row::-webkit-scrollbar { display: none; }
+  .moment { flex: 0 0 78%; scroll-snap-align: start; }
+  .listing .moments-row { margin: 24px calc(-1 * var(--gutter)) 0; }
+}

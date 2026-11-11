@@ -8,7 +8,7 @@ import { Timeline } from "../components/Timeline";
 import { Ledger } from "../components/Ledger";
 import { Sources } from "../components/Sources";
 import { SiteHeader } from "../components/SiteHeader";
-import { HowItWorks } from "../components/HowItWorks";
+import { Moments } from "../components/HowItWorks";
 import { DemoSwitcher } from "../components/DemoSwitcher";
 import "./object-page.css";
 import "./site.css";
@@ -58,7 +58,7 @@ export function ObjectPage({ id }: { id: number }) {
           </div>
           <BookCard d={d} />
         </div>
-        <HowItWorks />
+        <Moments title="How renting works" designLink />
         <StickyAction d={d} />
       </div>
     );
