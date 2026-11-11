@@ -68,7 +68,7 @@ export function VerifyPage({ id, seq: seqParam }: { id: number; seq: number | nu
                   return (
                     <li key={r.index}>
                       <button type="button" className={`bar ${t > 0 ? "is-shock" : ""} ${r.index === index ? "is-picked" : ""}`} onClick={() => pick(r.index)}
-                        aria-label={`Reading ${r.index + 1}: ${g(r.peakCg)} at ${hms(r.t)}`} aria-pressed={r.index === index}>
+                        aria-label={`Reading ${r.index + 1}: ${g(r.peakCg)} at ${hms(r.t)}`} data-tip={`${g(r.peakCg)}, ${hms(r.t)}`} aria-pressed={r.index === index}>
                         <i style={{ height: `${Math.max(6, (Math.log(r.peakCg) / Math.log(Math.max(maxPeak, 200))) * 100)}%` }} />
                       </button>
                     </li>

@@ -483,3 +483,9 @@ p, li, dd { text-wrap: pretty; }
 .wallet-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 72px); align-items: center; }
 .wallet-photo { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); box-shadow: var(--elev-3); filter: saturate(1.04) contrast(1.03) sepia(.05); }
 @media (max-width: 860px) { .wallet-grid { grid-template-columns: minmax(0, 1fr); } .wallet-photo { aspect-ratio: 16 / 10; order: -1; } }
+
+/* ---------- Round 59: bars say what they are on hover and focus ---------- */
+.bars li { position: relative; }
+.bar::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translate(-50%, 6px); padding: 6px 10px; border-radius: var(--radius); background: var(--ink); color: var(--bg); font-size: 13px; font-weight: 600; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .15s ease, transform .15s ease; z-index: 3; }
+.bar:hover::after, .bar:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
+.bar { position: relative; }

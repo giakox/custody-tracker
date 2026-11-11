@@ -548,3 +548,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Airbnb's check-out instructions: the photo of the place beside the steps: https://www.airbnb.com
 - **Shots:** none
 - **Lines:** 6545
+
+## Round 59 · Bars say what they are
+
+- **What:** On Verify each second of the ride is a bar; hovering or focusing one now raises a small dark label with its knock strength and time.
+- **Why:** A chart you cannot read is decoration. The proof page is the one place a user will poke at the data.
+- **Reference:** Linear and Vercel charts: a plain dark tooltip on hover, no legend: https://vercel.com/analytics
+- **Shots:** none
+- **Lines:** 6551
