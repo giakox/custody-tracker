@@ -296,3 +296,17 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Wise's calculator and Stripe's pricing sliders on tinted fields: https://wise.com https://stripe.com/pricing
 - **Shots:** [1440 px](rounds/29-1440.jpg)
 - **Lines:** 6316
+
+### Block 21 to 30 (summary)
+
+- **Lines in `webapp/src`:** about 6,320 (cap 7,392; commit 463f724 had 5,280).
+- **Strongest changes:** (1) Home as a story in chapters with big photos, cards rising over them and scroll-driven drift (round 24), with the translucent header over the photos (round 25); (2) the rule on a field of colour with the largest numbers on the site (round 29), and the editorial type scale (round 26).
+- **Direction change (round 24 on):** at least four rounds in five are visual design, as asked by Edoardo; the taste skill's bans on soft corners and shadows are not followed where they conflict with his pinned direction (one rounded radius, one shadow scale, a translucent header).
+
+## Round 30 · A step back: the Home as a whole
+
+- **What:** Read the whole Home top to bottom as a stranger. The first chapter ("Find a bike a few minutes away") repeated the map directly above it, so it went. The story now starts where the map ends: unlock, ride, return.
+- **Why:** Every section after a map should add something new. Three chapters keep the rhythm and cut a screen of scrolling.
+- **Reference:** Apple's product pages: each chapter introduces one new idea, none repeats the one before: https://www.apple.com/iphone/
+- **Shots:** none
+- **Lines:** 6314

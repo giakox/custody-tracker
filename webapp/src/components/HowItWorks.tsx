@@ -1,9 +1,7 @@
 import { href } from "../ui/router";
 
-/** The rental as a story in four chapters: a big photo each, a card that rises over it, the movement driven by the scroll. */
+/** The rental as a story in three chapters: a big photo each, a card that rises over it, the movement driven by the scroll. */
 const CHAPTERS = [
-  { id: "find", img: "./img/day/bocconi-park.jpg", alt: "A grey city bike parked at a rack outside Bocconi, students walking past", side: "left",
-    title: "Find a bike a few minutes away.", text: "Every pin on the map is a price. Bikes that are out on a ride never show: where they are is where someone is." },
   { id: "unlock", img: "./img/day/unlock-phone.jpg", alt: "Hands holding a phone next to a parked city bike", side: "right",
     title: "Scan the sticker on the frame.", text: "You see the price, the deposit and the rule for drops before you pay anything." },
   { id: "ride", img: "./img/day/friends-ride.jpg", alt: "Two friends riding city bikes down a sunny, tree-lined street", side: "left", inset: "./img/day/recorder-hand.jpg", insetAlt: "The recorder, a small black box with a blue light, held in a hand",
