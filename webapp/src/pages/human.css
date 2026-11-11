@@ -418,3 +418,13 @@ p, li, dd { text-wrap: pretty; }
 .try-rule .sim2 p.sim-k { margin-top: 0; font-size: 15px; color: var(--ink); max-width: none; }
 .try-rule .sim2 p.sim-back { margin-top: 4px; max-width: none; }
 .try-rule .sim2 .hint-line { margin-top: 0; font-size: 13px; max-width: none; }
+
+/* ---------- Round 87: selection, links and secondary buttons, one behaviour each ---------- */
+::selection { background: rgba(2, 151, 222, .22); color: inherit; }
+.btn-secondary, .btn-secondary:hover { border-color: var(--line-strong); }
+.btn-secondary { background: var(--bg); box-shadow: inset 0 0 0 1px transparent; }
+.btn-secondary:hover { background: var(--surface); color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); border-color: var(--ink); }
+.link { text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; text-decoration-thickness: 1.5px; transition: text-decoration-color .15s ease, color .15s ease; }
+.link:hover { text-decoration-color: currentColor; }
+.link:active { color: var(--ink); }
+.btn:disabled, .btn.is-off { box-shadow: none; transform: none; }

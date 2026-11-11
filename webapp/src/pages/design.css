@@ -87,3 +87,5 @@
   .d-photo figcaption { position: static; box-shadow: none; padding: 12px 0 0; background: none; }
   .minute li { font-size: 18px; }
 }
+/* round 87: "you are here" is the same everywhere: sand with an ink edge, as in the header and the account menu */
+.d-toc a[aria-current] { background: var(--raise); color: var(--ink); box-shadow: inset 3px 0 0 var(--ink); }

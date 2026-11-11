@@ -1195,6 +1195,27 @@ Also removed: the estimator's styles in map.css, which matched the earnings card
 
 **Test, "another screen at a glance?"** For the moment of paying, yes: the button moved to the money, and success has its own card.
 
+## Round 87 · One behaviour for each kind of state: selection, links, secondary buttons, "you are here"
+
+**Hierarchy audit (interaction states across the site):** keyboard focus already shows a ring on every interactive element on the Home (checked by tabbing through 40 of them; the only miss is the header's button while it is hidden on the first screen). What was inconsistent:
+
+| State | Before | After |
+|---|---|---|
+| Text selection | the browser's default blue | the brand blue at 22% under the ink, readable on white and sand |
+| "You are here" | dark pill in the Design contents, sand pill in the header, sand with an ink edge in the account menu | sand with an ink edge everywhere |
+| Secondary buttons | a grey border that turned blue on hover with blue text (looked like a link) | a hairline that turns ink on hover over sand; the text stays ink |
+| Text links | no underline until hover, then a hard one | the underline fades in at 4 px offset |
+| Disabled buttons | dimmed but still lifting on hover | flat, no lift, no press |
+
+**References:** Linear (one selected-state treatment reused across sidebar, menus and tabs) and Stripe (secondary buttons are neutral, links are the only blue text). Why ours looked cheaper: four ways to say "selected" and blue text that might or might not be clickable.
+
+**Three ideas:** (1) one treatment per state, applied site-wide. (2) A visible "keyboard mode" with large focus rings. (3) Remove secondary buttons in favour of links.
+**Discarded:** (2) the rings are already visible and sized; louder ones would fight the one primary per screen. (3) "Back to your rental" and "Print" are actions, not navigation; links would mislead.
+
+**Chosen, (1):** [selection](rounds/87-selection.jpg), [the Design contents with the new "you are here"](rounds/87-selection-toc.jpg), [secondary button on Return](rounds/87-secondary.jpg).
+
+**Test, "another screen at a glance?"** No: a care round. The difference shows when you interact.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
