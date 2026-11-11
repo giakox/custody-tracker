@@ -153,3 +153,13 @@
   .l-col .proof-toggle .btn, .l-col .proof-toggle p { grid-column: 1; justify-self: start; }
   .record-facts > span:not(:empty) { font-size: 13px; }
 }
+
+/* ---------- Round 100: the proof, lighter: five columns, rows told apart by tint, not by rules ---------- */
+.l-col .table-wrap { border-top: 0; border-radius: var(--radius); background: var(--bg); box-shadow: inset 0 0 0 1px var(--line); overflow: hidden; }
+.l-col .ledger table { font-size: 14px; }
+.l-col .ledger th { border-bottom: 0; background: var(--surface); padding: 12px 16px; font-family: var(--ui); font-weight: 600; color: var(--fog); }
+.l-col .ledger td { border-bottom: 0; padding: 10px 16px; font-variant-numeric: tabular-nums; }
+.l-col .ledger th:first-child, .l-col .ledger td:first-child { padding-left: 16px; }
+.l-col .ledger tbody tr:nth-child(even):not(.gap) td { background: var(--surface); }
+.l-col .ledger tr.gap td { border: 0; }
+.l-col .contracts { border-top: 0; padding: 20px; border-radius: var(--radius); background: var(--surface); gap: 16px; }

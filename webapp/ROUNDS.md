@@ -1450,6 +1450,36 @@ Also a step towards one shadow scale: the three hand-written shadows left (the p
 
 **Test, "another screen at a glance?"** For My rentals' first line, yes; for the site, the point was that every screen now looks like the same product.
 
+## Round 100 · A step back: the proof, lighter
+
+**Hierarchy audit (the bike page with "See the proof" open):**
+
+| Block | Who, when | If it vanished | Verdict |
+|---|---|---|---|
+| The ledger: 7 columns (seq, anchored, custodian, readings, peak, root, transaction) in ruled rows, inside the 700 px story column, the transaction column cut by the edge | professors, auditors | the proof | kept, five columns: seq, anchored, custodian, peak, transaction. "Readings" (16 in almost every row) and "root" (checked on Verify, one click away) go |
+| Rules between every row | — | — | rows told apart by a sand tint on every other one; the table sits in one rounded frame |
+| "Where this comes from": contracts in a ruled list | the same readers | — | on a sand block, no rules |
+
+**Levels after:** in proof mode the transaction (the thing you click to check) is now fully visible at the end of each row. **Squint test:** before, a dense grid of hairlines; after, banded rows with one orange value where the knock is and one hatched band where batches are missing.
+
+**Three ideas (what to remove):** (1) two columns and every row rule. (2) The ledger itself (Verify covers one reading). (3) The "Where this comes from" section.
+**Discarded:** (2) the ledger is the only place that shows the whole sequence, gaps included, which is the argument of the project. (3) the contract addresses are how a professor checks we're reading the real chain.
+
+**Chosen, (1):** [before and after](rounds/100-proof-ledger.jpg). On a phone the table still scrolls sideways inside its frame; no page overflow.
+
+**Test, "another screen at a glance?"** No: a step back; the proof is easier to read.
+
+### Block 91 to 100 (summary)
+
+- **Lines in `webapp/src`:** about 7,320, under the cap of 13,517 (+60% over 463f724); visual code only.
+- **Strongest changes:** (1) the end of a rental as a trip summary with the map of the ride (91) and the wallet step that says what the wallet will ask next (92); (2) the live rental as a pill that docks under the header (94) and "Near me" moved onto the map (96).
+- **Things found by looking, not by guessing:** the receipt printed without its amount because a print rule from another screen hid every title (97); 14 stray radii (95); four hand-written shadows (96); five decorative loops ignoring reduced motion (98). Contrast measured on every rebuilt page: everything passes except the logotype, which is exempt (98). No overflow on any of 18 routes at 375 and 1024 px (99).
+- **Steps back:** rounds 95 (one radius) and 100 (a lighter proof).
+
+### Rounds 58 to 100 (the whole run)
+
+Every screen was rebuilt at least once with the same method (a written hierarchy audit, two real references, three structural ideas and two discarded, before and after side by side), and the most important ones twice: the finder (structure, 79, 81, 96), the bike page (64, 65, 84), the rent flow (66, 67, 86, 91, 92), the header (structure, 77), the Home's first screen (78) and its rule simulator (82, 90). The site now has one system: a floating header, working screens with a calm title and a white card on the right, documents with big type, sand surfaces instead of ruled lines, one radius, one shadow scale, one picture of money (the blue and orange split bar) wherever a deposit is divided, and states (loading, empty, error, success) that always leave a way on.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1465,7 +1495,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Page transitions | 88 |
 | Live rental strip | 94 |
 | Footer | 73 |
-| Bike page | 84 |
+| Bike page | 84 (proof mode: 100) |
 | Rent flow: Rule, Deposit | 86 |
 | Rent flow: Wallet | 92 |
 | Rent flow: Ride, Return, Waiting | 67 |

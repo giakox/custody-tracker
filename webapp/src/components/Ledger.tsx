@@ -16,9 +16,7 @@ function Row({ b, d, explorer }: { b: Batch; d: ObjectDetail; explorer: string |
         {nameOf(b.custodian)}
         {b.recordedBeforeHandoff && <span className="late-note">recorded before the return</span>}
       </td>
-      <td className="c-count">{b.count}</td>
       <td className="c-peak"><span className="peak-cell"><span className={tier > 0 ? "shock" : ""}>{g(b.maxPeakCg)}</span><TierMeter tier={tier} /></span></td>
-      <td className="c-root" title={b.root}>{shortHex(b.root, 6, 4)}</td>
       <td className="c-tx">{url ? <a href={url} target="_blank" rel="noreferrer">{shortHex(b.anchor.tx)}</a> : shortHex(b.anchor.tx)}</td>
     </tr>
   );
@@ -28,7 +26,7 @@ function GapRow({ from, to, missing }: { from: number; to: number; missing: numb
   return (
     <tr className="gap">
       <td className="c-seq">{from === to ? from : `${from}–${to}`}</td>
-      <td colSpan={6}>{missing === 1 ? "1 batch" : `${missing} batches`} missing from the record</td>
+      <td colSpan={4}>{missing === 1 ? "1 batch" : `${missing} batches`} missing from the record</td>
     </tr>
   );
 }
@@ -53,9 +51,7 @@ export function Ledger({ d, explorer }: { d: ObjectDetail; explorer: string | nu
               <th scope="col" className="c-seq">Seq</th>
               <th scope="col" className="c-time">Anchored</th>
               <th scope="col" className="c-who">Custodian</th>
-              <th scope="col" className="c-count">Readings</th>
               <th scope="col" className="c-peak">Peak</th>
-              <th scope="col" className="c-root">Root</th>
               <th scope="col" className="c-tx">Transaction</th>
             </tr>
           </thead>
