@@ -163,31 +163,6 @@
   .sticky-btns .btn { padding: 0 20px; flex: none !important; }
 }
 
-/* Round 4: the record at a glance above the story. */
-.record { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin: 0; border: 1px solid var(--line-strong); border-radius: var(--radius); }
-.record div { padding: 14px 16px; }
-.record div + div { border-left: 1px solid var(--line); }
-.record dt { font-size: 13px; color: var(--fog); }
-.record dd { margin: 6px 0 0; font-size: 22px; color: var(--ink); display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; }
-.record dd.gap { color: var(--ink); text-decoration: underline dashed var(--line-strong); text-underline-offset: 6px; }
-.record-drop { display: inline-flex; align-items: center; gap: 6px; }
-.record-drop .tier-name { display: none; }
-.record-note { margin: 10px 0 18px; font-size: 14px; color: var(--fog); }
-.chapters { border-top: 0 !important; }
-.chapters > .chapter:first-of-type { border-top: 1px solid var(--line-strong); }
-@media (max-width: 900px) {
-  .record { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .record div:nth-child(4) { border-left: 0; }
-  .record div:nth-child(n + 4) { border-top: 1px solid var(--line); }
-}
-@media (max-width: 520px) {
-  .record { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .record div:nth-child(odd) { border-left: 0; }
-  .record div:nth-child(4) { border-left: 1px solid var(--line); }
-  .record div:nth-child(n + 3) { border-top: 1px solid var(--line); }
-  .record dd { font-size: 19px; }
-}
-
 /* Round 6: your rental, on every page. */
 .live-rental-bar { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--blue-wash); position: relative; z-index: 2; }
 .live-rental-bar.has-shock { background: var(--orange-wash); }

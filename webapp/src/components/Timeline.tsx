@@ -53,65 +53,89 @@ function sentence(e: StoryEvent, id: number): { text: ReactNode; extra?: ReactNo
   }
 }
 
-function ChapterBlock({ c, d, explorer }: { c: Chapter; d: ObjectDetail; explorer: string | null }) {
+/** What a chapter came to, in one line: the thing a renter actually wants to know about each rental. */
+function outcome(c: Chapter): { text: ReactNode; tier: number } {
+  const settled = c.events.find((e) => e.kind === "settled");
+  if (settled && settled.kind === "settled") {
+    return settled.tier === 0
+      ? { text: <>No drops. All {usd(settled.refund)} back.</>, tier: 0 }
+      : { text: <>A <span className="shock">{TIER_NAMES[settled.tier]}</span> knock. {usd(settled.fee)} kept, {usd(settled.refund)} back.</>, tier: settled.tier };
+  }
+  const shocks = c.events.filter((e) => e.kind === "shock" || e.kind === "late") as Extract<StoryEvent, { tier: number }>[];
+  const top = shocks.reduce((m, e) => Math.max(m, e.tier), 0);
+  if (c.isRental && c.end === null) return { text: top ? <>Riding now. A <span className="shock">{TIER_NAMES[top]}</span> knock so far.</> : <>Riding now. No drops so far.</>, tier: top };
+  if (c.events.some((e) => e.kind === "registered")) return { text: <>Joined Sharify with its recorder.</>, tier: 0 };
+  return { text: top ? <>A <span className="shock">{TIER_NAMES[top]}</span> knock while with {c.custodian.role === "owner" ? "the owner" : nameOf(c.custodian)}.</> : <>Nothing happened worth noting.</>, tier: top };
+}
+
+/** One rental as a card: who, when, what it came to; the steps sit behind a tap (Linear's changelog). */
+function ChapterCard({ c, d, explorer, open }: { c: Chapter; d: ObjectDetail; explorer: string | null; open: boolean }) {
   const who = c.isRental ? `${possessive(c.custodian)} rental` : c.custodian.role === "owner" ? "With the owner" : `With ${nameOf(c.custodian)}`;
-  const peak = c.maxPeakCg === null ? "no readings" : c.batchCount === 1 ? "1 batch" : `${c.batchCount} batches`; // proof only
-  const quiet = c.events.length === 0;
+  const o = outcome(c);
+  const gap = c.events.find((e) => e.kind === "gap");
+  const live = c.isRental && c.end === null;
   return (
-    <section className={`chapter ${c.isRental ? "rental" : ""} ${quiet ? "quiet" : ""}`} aria-label={who}>
-      <header className="chapter-head">
-        <h3>{who}</h3>
-        <p className="mono">
-          {c.end ? <>{whenShort(c.start)}, for {span(c.start, c.end)}</> : <>{span(c.start, null)} so far</>}<span className="proof-only"> <span className="sep" aria-hidden="true">/</span> {day(c.start)}, {hm(c.start)}{c.end ? `–${hm(c.end)}` : ", now"}</span>
-          <span className="proof-only"><span className="sep" aria-hidden="true">/</span> {peak}{c.maxPeakCg !== null && c.maxPeakCg < d.terms.lightCg ? `, nothing above ${g(d.terms.lightCg)}` : ""}</span>
-        </p>
-      </header>
-      {!quiet && (
-        <ol className="events">
-          {c.events.map((e, i) => {
-            const s = sentence(e, d.id);
-            return (
-              <li key={i} className={`event ${s.tone ?? ""}`}>
-                <time className="mono" dateTime={new Date(e.at.at).toISOString()} title={`${day(e.at.at)}, ${hm(e.at.at)}`}>{whenShort(e.at.at)}</time>
-                <p>{s.text}{s.extra && <span className="event-extra">{s.extra}</span>}</p>
-                <Tx explorer={explorer} tx={e.at.tx} />
-              </li>
-            );
-          })}
-        </ol>
+    <li className={`rcard ${o.tier ? "is-shock" : ""} ${live ? "is-live" : ""}`}>
+      <div className="rcard-top">
+        <span className="rcard-face" aria-hidden="true">{c.isRental ? nameOf(c.custodian).slice(0, 1) : "S"}</span>
+        <div>
+          <h3>{who}</h3>
+          <p className="rcard-when">{c.end ? <>{whenShort(c.start)}, for {span(c.start, c.end)}</> : <>{span(c.start, null)} so far</>}<span className="proof-only"> · {day(c.start)}, {hm(c.start)}{c.end ? `–${hm(c.end)}` : ", now"}</span></p>
+        </div>
+        <span className="rcard-meter"><TierMeter tier={o.tier as 0 | 1 | 2 | 3} showNone /></span>
+      </div>
+      <p className="rcard-outcome">{o.text}</p>
+      {gap && gap.kind === "gap" && <p className="rcard-gap">{gap.missing === 1 ? "A page of its diary never arrived." : `${gap.missing} pages of its diary never arrived.`} The hole stays visible.</p>}
+      {c.events.length > 0 && (
+        <details className="rcard-steps" open={open}>
+          <summary>{open ? "Every step" : `Every step (${c.events.length})`}</summary>
+          <ol className="events">
+            {c.events.map((e, i) => {
+              const s = sentence(e, d.id);
+              return (
+                <li key={i} className={`event ${s.tone ?? ""}`}>
+                  <time className="mono" dateTime={new Date(e.at.at).toISOString()} title={`${day(e.at.at)}, ${hm(e.at.at)}`}>{whenShort(e.at.at)}</time>
+                  <p>{s.text}</p>
+                  <span className="proof-only"><Tx explorer={explorer} tx={e.at.tx} /></span>
+                </li>
+              );
+            })}
+          </ol>
+        </details>
       )}
-    </section>
+    </li>
   );
 }
 
-/** The record at a glance, before the details (Carfax's report summary): counts, not verdicts. */
-function RecordSummary({ d }: { d: ObjectDetail }) {
+/** The record in one sentence, before any detail: Airbnb's "4.64 · 28 reviews" line, in words. */
+function headline(d: ObjectDetail) {
   const settled = d.rentals.filter((r) => r.settlement);
-  const drops = [1, 2, 3].map((t) => ({ t: t as 1 | 2 | 3, n: settled.filter((r) => r.settlement!.tier === t).length })).filter((x) => x.n > 0);
-  const missing = d.gaps.reduce((s, x) => s + x.missing, 0);
-  return (
-    <dl className="record">
-      <div><dt>Rentals</dt><dd className="mono">{settled.length}{d.activeRental ? " + 1 now" : ""}</dd></div>
-      <div><dt>Drops</dt><dd className="mono">{drops.length === 0 ? "none" : drops.map((x) => <span key={x.t} className="record-drop"><TierMeter tier={x.t} />{x.n}</span>)}</dd></div>
-      <div><dt>Holes in the diary</dt><dd className={`mono ${missing ? "gap" : ""}`}>{missing || "none"}</dd></div>
-      <div><dt>On Sharify since</dt><dd className="mono">{day(d.created.at)}</dd></div>
-      <div className="proof-only"><dt>Batches signed</dt><dd className="mono">{d.batches.length}</dd></div>
-    </dl>
-  );
+  const n = settled.length;
+  const knocks = settled.filter((r) => r.settlement!.tier > 0);
+  if (n === 0) return d.activeRental ? "Its first rental is under way." : "Nobody has rented it yet.";
+  const rentals = n === 1 ? "1 rental" : `${n} rentals`;
+  if (knocks.length === 0) return `${rentals}, never dropped.`;
+  const worst = Math.max(...knocks.map((r) => r.settlement!.tier));
+  return `${rentals}, dropped ${knocks.length === 1 ? "once" : `${knocks.length} times`}. The hardest: a ${TIER_NAMES[worst]} knock.`;
 }
 
-export function Timeline({ d, explorer }: { d: ObjectDetail; explorer: string | null }) {
+export function Timeline({ d, explorer, proof = false }: { d: ObjectDetail; explorer: string | null; proof?: boolean }) {
+  const missing = d.gaps.reduce((s, x) => s + x.missing, 0);
+  // Rentals, and any stretch with the owner where something happened (a knock, a hole); joining is in the facts.
+  const chapters = buildStory(d).filter((c) => c.isRental || c.events.some((e) => e.kind !== "registered"));
   return (
-    <section className="block timeline" aria-labelledby="timeline-title">
-      <div className="block-intro">
-        <h2 id="timeline-title">Its story</h2>
-        <p>Newest first. Every line is kept where nobody can rewrite it. <span className="proof-only">Each one links to the transaction that proves it.</span></p>
-      </div>
-      <div className="chapters">
-        <RecordSummary d={d} />
-        <p className="record-note">What the box recorded, not a verdict on the bike. A knock is a jolt, not proof of damage.</p>
-        {buildStory(d).map((c) => <ChapterBlock key={c.period} c={c} d={d} explorer={explorer} />)}
-      </div>
+    <section className="record-zone" aria-labelledby="timeline-title">
+      <h2 id="timeline-title" className="record-kicker">Its record</h2>
+      <p className="record-head">{headline(d)}</p>
+      <p className="record-facts">
+        <span>On Sharify since {day(d.created.at)}</span>
+        {missing > 0 && <span className="record-gap">{missing === 1 ? "1 page" : `${missing} pages`} of its diary missing</span>}
+        <span className="proof-only">{d.batches.length} batches signed</span>
+      </p>
+      <ol className="rcards">
+        {chapters.map((c) => <ChapterCard key={c.period} c={c} d={d} explorer={explorer} open={proof} />)}
+      </ol>
+      <p className="record-note">Newest first. A knock is what the box felt, not proof of damage.</p>
     </section>
   );
 }

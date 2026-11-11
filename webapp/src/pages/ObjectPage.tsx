@@ -45,7 +45,7 @@ export function ObjectPage({ id }: { id: number }) {
           <div className="l-col">
             <ListingIntro d={d} />
             <div className={proof ? "proof" : "no-proof"}>
-              <Timeline d={d} explorer={net.data.explorer} />
+              <Timeline d={d} explorer={net.data.explorer} proof={proof} />
               <div className="proof-toggle">
                 <button type="button" className="btn btn-secondary" aria-expanded={proof} onClick={() => setProof(!proof)}>{proof ? "Hide the proof" : "See the proof"}</button>
                 <p>{proof ? "Transactions, batch numbers and where the data comes from." : "Every line above can be checked on a public blockchain, without asking us."}</p>

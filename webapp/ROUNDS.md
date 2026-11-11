@@ -629,6 +629,40 @@ Edoardo: the header was flat, a thin full-width strip with a small logo, the "Sa
 - **Craft:** one radius for mosaic, card and photo crops; card on --elev-2; spacing only from 8/12/16/24/32/48/64; the pictures arrive once with a short clip-path reveal (off with reduced motion), and grow 3% on hover with a pointer.
 - **Test, "is it another screen at a glance?"** Yes: the first screen is now a title over a picture mosaic, not a two-column hero; below, a card on the right instead of a gutter on the left.
 
+## Round 65 · The bike's record: one headline, one card per rental
+
+Edoardo, on the left column of the bike page: «l'occhio non sa dove guardare… sembrano tutte cose inutili e ugualmente importanti. Serve gerarchia, posizionamento e perfezione.»
+
+**Hierarchy audit (before):**
+
+| Block | Who needs it, when | If it vanished | Verdict |
+|---|---|---|---|
+| Summary sentence ("The last rental, Bob's, ended…") | renter deciding | the title already says "available"; the last rental is in the record | shown only while something is happening (rented, handed over) |
+| State line (Available → Rented → Returned → Settled, with times) | nobody at rest: it replays the last rental | nothing lost | shown only while something is happening |
+| "Its story" + "Newest first…" | — | — | heading becomes a small label; the note goes to the end |
+| Four counters in a ruled box (Rentals, Drops, Holes, Since) | renter: "has it been treated well?" | the most useful fact on the page disappears | merged into one sentence, the primary: "2 rentals, dropped once. The hardest: a medium knock." |
+| "Since" and "holes in the diary" | the careful renter | small loss | secondary, two pills under the headline |
+| "With the owner" rows (27 min so far, for 10 min) | nobody | nothing | removed, unless something happened (a knock or a hole) while with the owner |
+| Each rental: header + 4–6 timed steps with transaction hashes, all open | renter wants the outcome; a judge wants the steps | outcome lost | the outcome is the card's headline; steps sit behind "Every step"; hashes only in proof mode |
+| "See the proof" + its sentence | professors, auditors | the proof | tertiary, last |
+
+**Levels after:** primary = the record headline (38 px, 700). Secondary = the rental cards, each with its own outcome line (19 px, 600) and the two fact pills. Tertiary = when/for how long, the steps, the note, the proof button.
+
+**Squint test:** [before and after, blurred](rounds/65-squint.jpg). Before, the eye found no anchor: the counters box, the state line and the step rows were the same grey weight. After, it lands on the dark headline, drops to the two cards (the medium knock's orange meter pulls to the second), and leaves the note last.
+
+**References:** Airbnb's room page puts the whole verdict in one line under the title ("★ 4.64 · 28 reviews") and the reviews below as cards, avatar first; Linear's changelog keeps the details of each release behind a row you open. Why ours looked cheaper: we showed everything at once, every row at the same size, and boxed and ruled every group.
+
+**Three ideas:** (1) a headline verdict, then one card per rental, outcome first, steps behind a tap. (2) One continuous vertical timeline of every event with a bigger axis. (3) A table of rentals (date, who, length, hardest knock, deposit back).
+**Discarded:** (2) is the old page with a thicker line: still every event at the same level. (3) a table is rows divided by lines, cramped on a phone, and it still has no primary.
+
+**Chosen, (1):** [before and after, 1440](rounds/65-record-1440.jpg), [phone](rounds/65-record-375.jpg), [a card opened, with focus ring](rounds/65-steps-open.jpg).
+
+**Dividing without lines:** the ruled counters box, the lines between chapters and between rule rows are gone. Rentals are sand cards on --elev-1 with 16 px between them (more space between cards than inside them). The booking card is split by surface, not by a rule: white for price and button, sand for the rule; the rule's rows separate by padding, the "no drops" row sits on white. The only line left is the axis of the steps, which is content.
+
+**States:** "Every step" is a pill with a chevron that turns, hover sand, pressed 97%, a visible focus ring; the steps fade in when opened (off with reduced motion). A rental in progress gets a blue ring.
+
+**Test, "is it another screen at a glance?"** Yes: a big sentence and two cards where there were four boxed counters, a state line and two pages of identical rows.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -639,7 +673,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Home: find a bike (grid + map) | Structure |
 | Header | Structure |
 | Footer | — |
-| Bike page | 64 |
+| Bike page | 65 |
 | Rent flow | — |
 | Receipt and My rentals | — |
 | Owner (My bikes) | — |

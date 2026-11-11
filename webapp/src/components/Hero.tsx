@@ -140,6 +140,8 @@ export function ListingTop({ d }: { d: ObjectDetail }) {
 
 /** What the page says first, under the pictures: the last thing that happened and the state line. */
 export function ListingIntro({ d }: { d: ObjectDetail }) {
+  // Only when something is happening now: at rest, the record below already says it.
+  if (d.status === "available" && !d.pendingHandoff) return null;
   return (
     <section className="l-intro" aria-label="Where it stands">
       <p className="l-summary"><Summary d={d} /></p>
@@ -154,12 +156,16 @@ export function BookCard({ d }: { d: ObjectDetail }) {
   return (
     <aside className="l-book" aria-label="Rent it">
       <div className="book-card">
+        <div className="book-buy">
         <p className="book-price"><b>2 dollars</b> an hour</p>
         <p className="book-deposit">{usd(d.terms.collateral)} deposit, back by the rule</p>
         <div className="actions">{<Action d={d} me={account} />}</div>
+        </div>
+        <div className="book-terms">
         <h2 className="book-rule">If it's dropped, this rule decides. Not the owner, not us.</h2>
         <RuleTiers terms={d.terms} highlight={d.activeRental?.current ? d.activeRental.current.tier : undefined} />
         <p className="book-note">The hardest knock of your ride decides how much comes back. {TEST_MONEY}</p>
+        </div>
       </div>
     </aside>
   );
