@@ -131,3 +131,10 @@
 .invite-photo, .step-photo { display: block; width: 100%; max-width: 640px; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius); }
 .step-photo { margin: 8px 0 20px; }
 .empty-invite .btn { justify-self: start; }
+
+/* ---------- Home: try the rule ---------- */
+.try-rule { max-width: var(--max); margin: 0 auto; padding: clamp(64px, 9vw, 128px) var(--gutter) 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+.try-rule h2 { font-size: clamp(32px, 3.4vw, 48px); line-height: 1.05; max-width: 16ch; }
+.try-rule p { margin-top: 16px; font-size: 19px; color: var(--mist); max-width: 38ch; }
+.try-rule .sim { margin-top: 0; }
+@media (max-width: 860px) { .try-rule { grid-template-columns: minmax(0, 1fr); } }

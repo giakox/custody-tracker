@@ -101,3 +101,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** the Bean There Coffee site from Nate Herk's video (warm tones, big real photos, few words).
 - **Shots:** [Home A/B/C](rounds/temi-home.jpg) · [bike page A/B/C](rounds/temi-bike.jpg) (1440 and 375 px)
 - **Open:** the bike page photo is still a blue-hour shot; a daylight photo of the demo bike would fit better.
+
+## Round 7 · The rule, playable on Home
+
+- **What:** A section on Home, "What if it gets dropped?", with the rule simulator on the live bike: drag how hard it was dropped and see what comes back. Reuses the simulator from the rental page.
+- **Why:** The whole promise is that a public rule decides, so the visitor can try the rule in ten seconds, before reading anything or creating an account.
+- **Reference:** Wise's fee calculator on its home page: https://wise.com
+- **Shots:** [375 px](rounds/07-375.jpg)
+- **Lines:** 6157

@@ -1,11 +1,12 @@
 import { useCallback, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getFleet, listObjects } from "../data/api";
+import { getFleet, getObject, listObjects } from "../data/api";
 import { useViewer } from "../ui/viewer";
 import { SiteHeader } from "../components/SiteHeader";
 import { Moments } from "../components/HowItWorks";
 import { DemoSwitcher } from "../components/DemoSwitcher";
 import { FleetMap, type LatLon } from "../components/FleetMap";
+import { RuleSimulator } from "../components/RuleSimulator";
 import { BikeDetail, BikePhoto, BlackBoxLine, LiveBadge } from "../components/BikeCard";
 import { BOCCONI } from "../data/mock/fleet";
 import { href } from "../ui/router";
@@ -30,6 +31,21 @@ function Earnings() {
       <p className="earn-note">Your price times your hours: an estimate, not a promise. If someone drops your bike, the rule you set decides what you get from their deposit.</p>
       <a className="btn btn-primary" href={href("add/1")}>Rent out your bike</a>
     </div>
+  );
+}
+
+/** The rule, playable: drag "how hard it was dropped" and see what comes back (Wise's calculator on its home page). */
+function TryTheRule({ objectId }: { objectId: number }) {
+  const q = useQuery({ queryKey: ["object", objectId], queryFn: () => getObject(objectId) });
+  if (!q.data) return null;
+  return (
+    <section className="try-rule" aria-labelledby="try-title">
+      <div>
+        <h2 id="try-title">What if it gets dropped?</h2>
+        <p>Try it. This is the rule on the demo bike, and it's the same for everyone who rides it. Nobody can bend it afterwards.</p>
+      </div>
+      <RuleSimulator terms={q.data.terms} />
+    </section>
   );
 }
 
@@ -158,6 +174,7 @@ export function HomePage() {
         </section>
 
         <Moments />
+        {live && live.b.objectId !== null && <TryTheRule objectId={live.b.objectId} />}
 
         <section className="owners" aria-labelledby="owners-title">
           <div className="owners-copy">
