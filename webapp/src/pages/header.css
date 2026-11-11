@@ -121,3 +121,11 @@ html.menu-open { overflow: hidden; }
 .hdr-status { margin-right: 0; }
 @media (max-width: 1240px) { .hdr-status span { display: none; } .hdr-status { padding: 0; width: 36px; justify-content: center; } }
 @media (max-width: 860px) { .hdr-status { display: none; } }
+
+/* ---------- Round 115: a step back: on the Home's first screen the hero's bike card says it; the header's status waits ---------- */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 861px) {
+    .page:has(.welcome) .hdr-status { animation: hdr-action linear both; animation-timeline: scroll(root); animation-range: 380px 560px; }
+  }
+}
+@media (prefers-reduced-motion: reduce) { .page:has(.welcome) .hdr-status { display: none; } }

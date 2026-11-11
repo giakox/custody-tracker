@@ -1765,6 +1765,19 @@ Fixed on the way: an absolutely positioned photo inside a grid takes its grid ar
 
 **Test on the blurred shots:** yes: a dark band now separates the title from the tiles.
 
+## Round 115 · A step back: one "the demo bike is free" at a time
+
+**Hierarchy audit (the Home's first screen):** since round 106 the header's status pill said "The demo bike is free, outside Bocconi" while the hero's bike card, a few centimetres below, said "Free now, 2 min walk from Bocconi". Two ways to say the same thing on one screen, the smaller one in the header competing with the hero.
+
+**What changed:** on the Home, the header's status waits until the hero has scrolled away (it fades in with the header's "Find a bike", 380 to 560 px); with reduced motion it stays out of the Home's header altogether. Every other page keeps it from the start. [Top of the Home, then scrolled](rounds/115-status-waits.jpg).
+
+**Three ideas (what to remove):** (1) the status on the Home's first screen. (2) The hero's bike card. (3) The status everywhere.
+**Discarded:** (2) the bike card is the Home's concrete proof, with its photo and price. (3) on every other page the status is the only place that says what the real bike is doing.
+
+**Café test:** the café's header has one line of status and the page never repeats it next to itself; neither do we now.
+
+**Test:** a step back; on the first screen the header is lighter by one pill.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
