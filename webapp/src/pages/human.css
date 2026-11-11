@@ -176,3 +176,4 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 .live-line i { width: 10px; height: 10px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 4px var(--blue-wash); }
 .live-line:hover { text-decoration: underline; }
 .live-line i { flex: none; }
+.wallet-opt.primary { border-color: var(--blue); background: var(--blue-wash); }

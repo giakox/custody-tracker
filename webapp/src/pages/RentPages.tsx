@@ -83,6 +83,7 @@ export function RulePage({ id }: { id: number }) {
 // ---------- 2 · wallet ----------
 export function WalletPage({ id }: { id: number }) {
   const { d } = useBike(id);
+  const isMock = !!useQuery({ queryKey: ["network"], queryFn: getNetwork, staleTime: Infinity }).data?.isMock;
   const { connect } = useViewer();
   const [busy, setBusy] = useState(false);
   const go = async () => { setBusy(true); await connect(); window.location.hash = `#/rent/${id}/deposit`; };
@@ -91,10 +92,14 @@ export function WalletPage({ id }: { id: number }) {
       <h1>Connect a <em>wallet</em>.</h1>
       <p className="lead">A wallet is the app that holds your money. The deposit leaves from it and comes back to it: Sharify never holds your money or your keys.</p>
       <div className="wallets">
-        <button type="button" className="wallet-opt" onClick={go} disabled={busy}><b>MetaMask</b><span>Browser extension or mobile app</span></button>
-        <button type="button" className="wallet-opt" onClick={go} disabled={busy}><b>Another wallet</b><span>WalletConnect</span></button>
+        {isMock
+          ? <button type="button" className="wallet-opt primary" onClick={go} disabled={busy}><b>Use a test wallet</b><span>One tap. It comes with test money; nothing real is used.</span></button>
+          : <>
+            <button type="button" className="wallet-opt" onClick={go} disabled={busy}><b>MetaMask</b><span>Browser extension or mobile app</span></button>
+            <button type="button" className="wallet-opt" onClick={go} disabled={busy}><b>Another wallet</b><span>WalletConnect</span></button>
+          </>}
       </div>
-      <p className="hint-line">{busy ? "Waiting for your wallet…" : "You need a little free test money for network fees (Base Sepolia, a test network)."}</p>
+      <p className="hint-line">{busy ? "Waiting for your wallet…" : isMock ? "In the live version you connect your own wallet." : "You need a little free test money for network fees (Base Sepolia, a test network)."}</p>
     </Shell>
   );
 }

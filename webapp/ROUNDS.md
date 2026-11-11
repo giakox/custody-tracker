@@ -224,3 +224,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Google Maps: legend only for the one layer that needs it: https://maps.google.com
 - **Shots:** [1440 px](rounds/20-1440.jpg)
 - **Lines:** 6192
+
+## Round 21 · One tap to a test wallet
+
+- **What:** In the sample version the wallet step is a single button, "Use a test wallet", with the test money already in it, instead of two wallet brands that both did the same thing. A line says the live version connects your own wallet.
+- **Why:** The wallet page was the steepest step for anyone not in crypto, and two buttons were pretending to be a choice.
+- **Reference:** Coinbase's "Try demo mode" before connecting a wallet: https://www.coinbase.com
+- **Shots:** [1440 px](rounds/21-1440.jpg)
+- **Lines:** 6198
