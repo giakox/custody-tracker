@@ -757,6 +757,34 @@ Return used a layout whose CSS was deleted in round 66 (the photo spilled over t
 
 **Test, "another screen at a glance?"** Yes, both: the receipt is a big number with a coloured bar; My rentals is a photo card and tiles.
 
+## Round 69 · My bikes says what needs you first
+
+**Hierarchy audit (before):**
+
+| Block | Who, when | If it vanished | Verdict |
+|---|---|---|---|
+| H1 "Your bikes." + "Add your bike" button on the right | owner | the page is still "your bikes" | the H1 now says what needs the owner ("One return to confirm." / "Nothing needs you right now."); "Your bikes" becomes a small label |
+| Return to confirm (sand panel) | owner, when someone hands back | the deposit waits forever | primary when present: a white card with the photo and one button |
+| Three equal KPIs in ruled cells (income, kept, bikes: 1) | owner, now and then | "Bikes: 1" repeats the grid | income and kept merged into one total ("Earned with Sharify: 21 dollars") with the two parts under it; the bike count goes, the "out with a renter" count becomes a sentence |
+| "Your bikes" heading again | — | — | removed (it repeated the H1) |
+| Bike card with a border, status as a word under the name | owner | can't reach the bike | tiles: photo first, the status as a pill on the photo (dark when busy) |
+| "Add your bike" (button in the corner) | owner with a second bike | small loss | the last tile of the grid, where the next bike will go |
+
+**Levels after:** primary = the H1 sentence and, when present, the return card. Secondary = the bike tiles and the earnings card. Tertiary = counts, notes, test money. **Squint test:** before, the eye split between the H1, the blue button in the corner and three same-size numbers. After, the sentence, then the return card with its blue button, then the tiles on the left and the white earnings card on the right.
+
+**References:** Airbnb Hosting's "Today" (what needs you first, then your listings as photo tiles with a status pill on the photo) and Stripe's dashboard home (one large number, its parts small under it, in a card). Why ours looked cheaper: three numbers of the same size told the owner nothing first; the page title repeated the section title.
+
+**Three ideas:** (1) a host "Today": the H1 is the to-do, then tiles and one earnings card. (2) One wide row per bike with its own earnings and status. (3) An account statement: a table of every rental and fee.
+**Discarded:** (2) one row per bike is a ruled list again and hides the photo. (3) a statement belongs on a receipt page, not on the owner's home.
+
+**Chosen, (1):** [My bikes, 1440, focus on the add tile](rounds/69-bikes-1440.jpg), [with a return to confirm](rounds/69-return-1440.jpg), [phone](rounds/69-bikes-375.jpg). On a phone the earnings card comes first, then the tiles.
+
+**Without lines:** the ruled KPI strip is gone; the earnings card is white on top, sand below; tiles separate by space.
+
+**States:** tiles lift on hover, press at 99%, focus ring offset 4 px; the add tile darkens its sand on hover.
+
+**Test, "another screen at a glance?"** Yes: a title, a button and a row of numbers became a sentence, a card to act on, photo tiles and one total.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -771,7 +799,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Rent flow: Rule, Wallet, Deposit | 66 |
 | Rent flow: Ride, Return, Waiting, Outcome | 67 |
 | Receipt and My rentals | 68 |
-| Owner (My bikes) | — |
+| Owner (My bikes) | 69 |
 | Add a bike | 63 |
 | Verify | — |
 | Design | — |

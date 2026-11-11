@@ -64,20 +64,23 @@ export function MyObjectsPage() {
   const settled = (owned ?? []).flatMap((d) => d.rentals.filter((r) => r.settlement).map((r) => ({ d, r })));
   const income = sum(settled.map(({ d, r }) => priceOf(r, d).amount));
   const fees = sum(settled.map(({ r }) => r.settlement!.fee));
+  const out = (owned ?? []).filter((d) => d.custodian.address.toLowerCase() !== d.owner.address.toLowerCase()).length;
   return (
     <Page wide>
-      <div className="owner-head">
-        <h1>Your <em>bikes</em>.</h1>
-        {owned && owned.length > 0 && <a className="btn btn-primary" href={href("add/1")}>Add your bike</a>}
-      </div>
+      <header className="host-head">
+        <p className="host-kicker">Your bikes</p>
+        <h1>{returns.length === 0 ? <>Nothing needs <em>you</em> right now.</> : returns.length === 1 ? <>One return to <em>confirm</em>.</> : <>{returns.length} returns to <em>confirm</em>.</>}</h1>
+      </header>
       {loading && <p className="lead">Loading your bikes…</p>}
 
       {returns.map((d) => (
-        <section key={d.id} className="panel to-confirm">
-          <p className="kicker">Return to confirm</p>
-          <h2>{nameOf(d.pendingHandoff!.from)} wants to return {objectName(d, false)}.</h2>
-          <p>Returned {when(d.pendingHandoff!.anchor.at)}. Check it's back with you, then confirm: the deposit is settled by the rule, by itself.</p>
-          <div className="actions"><a className="btn btn-primary" href={href(`confirm-return/${d.id}`)}>Confirm you have it back</a></div>
+        <section key={d.id} className="to-confirm">
+          {CASE_IMAGE && <img className="to-confirm-photo" src={CASE_IMAGE.src} alt="" />}
+          <div className="to-confirm-body">
+            <h2>{nameOf(d.pendingHandoff!.from)} is returning {objectName(d, false)}.</h2>
+            <p>Handed back {when(d.pendingHandoff!.anchor.at)}. Check it's back with you, then confirm: the deposit is settled by the rule, by itself.</p>
+            <div className="actions"><a className="btn btn-primary" href={href(`confirm-return/${d.id}`)}>Confirm you have it back</a></div>
+          </div>
         </section>
       ))}
 
@@ -91,20 +94,26 @@ export function MyObjectsPage() {
       )}
 
       {owned && owned.length > 0 && (
-        <>
-          <dl className="kpis">
-            <div><dt>Rental income</dt><dd className="mono">{usd(income)}</dd><dd className="sub">{settled.length} rentals at 2 dollars an hour, paid to you separately</dd></div>
-            <div><dt>Kept for knocks</dt><dd className="mono">{usd(fees)}</dd><dd className="sub">From renters' deposits, by the rule. Already in your wallet.</dd></div>
-            <div><dt>Bikes</dt><dd className="mono">{owned.length}</dd><dd className="sub">{owned.filter((d) => d.custodian.address.toLowerCase() !== d.owner.address.toLowerCase()).length} with a renter now</dd></div>
-          </dl>
-
-          <section className="objects">
-            <h2>Your bikes</h2>
-            <ol>
+        <div className="host-body">
+          <section className="host-bikes" aria-labelledby="bikes-title">
+            <h2 id="bikes-title" className="sr-only">Your bikes</h2>
+            <ol className="bike-tiles">
               {owned.map((d) => <ObjectRow key={d.id} d={d} />)}
+              <li><a className="add-tile" href={href("add/1")}><span className="add-plus" aria-hidden="true">+</span><span>Add a bike</span><small>A recorder, a price, a deposit. About two minutes.</small></a></li>
             </ol>
           </section>
-        </>
+          <aside className="earn" aria-label="What you earned">
+            <div className="earn-top">
+              <p className="earn-k">Earned with Sharify</p>
+              <p className="earn-big">{usd(sum([income, fees]))}</p>
+            </div>
+            <dl className="earn-lines">
+              <div><dt>Rental price</dt><dd>{usd(income)}</dd><dd className="sub">{settled.length} rentals at 2 dollars an hour, paid to you separately</dd></div>
+              <div><dt>Kept for knocks</dt><dd>{usd(fees)}</dd><dd className="sub">From renters' deposits, by the rule. Already in your wallet.</dd></div>
+            </dl>
+            <p className="earn-note">{out === 0 ? "All your bikes are with you." : out === 1 ? "1 bike is out with a renter." : `${out} bikes are out with renters.`} {TEST_MONEY}</p>
+          </aside>
+        </div>
       )}
     </Page>
   );
@@ -113,17 +122,19 @@ export function MyObjectsPage() {
 function ObjectRow({ d }: { d: ObjectDetail }) {
   const last = d.rentals.filter((r) => r.settlement && r.settlement.tier > 0).at(-1)?.settlement ?? null;
   const status = d.pendingHandoff?.to.role === "owner" ? `${nameOf(d.pendingHandoff.from)} is returning it`
-    : d.status === "rented" ? `Out with ${nameOf(d.custodian)}, ${span(d.activeRental!.started.at, null)}`
+    : d.status === "rented" ? `Out with ${nameOf(d.custodian)}`
       : d.status === "handoff-pending" ? `Offered to ${nameOf(d.pendingHandoff!.to)}`
-        : d.status === "held-without-deposit" ? `${nameOf(d.custodian)} has it without a deposit` : "Available";
+        : d.status === "held-without-deposit" ? `${nameOf(d.custodian)} has it, no deposit` : "Available";
   return (
     <li>
-      <a className="obj-row" href={href(`object/${d.id}`)}>
-        {CASE_IMAGE && <img className="obj-photo" src={CASE_IMAGE.src} alt="" />}
-        <span className="obj-name">{objectName(d)}</span>
-        <span className={`obj-status ${d.status === "available" ? "" : "busy"}`}>{status}</span>
-        <span className="obj-shock">{last ? <><TierMeter tier={last.tier} /><span className="shock">last a {TIER_NAMES[last.tier]} knock</span></> : <span className="none">never dropped</span>}</span>
-        <span className="obj-count">{d.rentals.length === 1 ? "1 rental" : `${d.rentals.length} rentals`}</span>
+      <a className="bike-tile" href={href(`object/${d.id}`)}>
+        <span className="bike-tile-photo">
+          {CASE_IMAGE && <img src={CASE_IMAGE.src} alt="" />}
+          <span className={`bike-tile-status ${d.status === "available" ? "" : "busy"}`}>{status}</span>
+        </span>
+        <span className="bike-tile-name">{objectName(d)}</span>
+        <span className="bike-tile-meta">{d.rentals.length === 1 ? "1 rental" : `${d.rentals.length} rentals`}</span>
+        <span className="bike-tile-knock">{last ? <><TierMeter tier={last.tier} /><span>last a <span className="shock">{TIER_NAMES[last.tier]}</span> knock</span></> : <><TierMeter tier={0} showNone /><span>never dropped</span></>}</span>
       </a>
     </li>
   );

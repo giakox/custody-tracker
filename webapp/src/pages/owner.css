@@ -91,3 +91,54 @@ button.choice-opt:hover { border-color: var(--blue); }
 .empty-invite p { margin: 16px 0 28px; font-size: 18px; color: var(--mist); max-width: 52ch; }
 .btn-lg { min-height: 56px; padding: 0 28px; font-size: 16px; }
 @media (max-width: 960px) { .qr-print.qr-big { justify-self: start; max-width: 260px; } }
+
+/* ---------- Round 69: My bikes as a host's "Today" (Airbnb Hosting, Stripe Dashboard) ---------- */
+.host-head { margin-top: 8px; }
+.host-kicker { font-size: 15px; font-weight: 600; color: var(--fog); }
+.rent .host-head h1 { margin-top: 8px; max-width: 20ch; }
+.to-confirm { margin-top: 32px; display: grid; grid-template-columns: 240px minmax(0, 1fr); border-radius: var(--radius); overflow: hidden; background: var(--bg); box-shadow: var(--elev-2); }
+.to-confirm-photo { width: 100%; height: 100%; min-height: 200px; object-fit: cover; display: block; }
+.to-confirm-body { padding: 24px 28px; display: grid; align-content: center; gap: 8px; }
+.to-confirm-body h2 { font-size: 24px; letter-spacing: -0.025em; }
+.to-confirm-body p { color: var(--mist); max-width: 56ch; }
+.to-confirm-body .actions { margin-top: 8px; }
+
+.host-body { margin-top: 48px; display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 48px; align-items: start; }
+.bike-tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 24px; }
+.bike-tile, .add-tile { display: grid; gap: 4px; color: inherit; text-decoration: none; border-radius: var(--radius); }
+.bike-tile-photo { position: relative; display: block; margin-bottom: 8px; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 3; background: var(--raise); transition: transform .3s cubic-bezier(.2, .7, .2, 1), box-shadow .3s ease; }
+.bike-tile-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bike-tile-status { position: absolute; left: 12px; top: 12px; padding: 6px 12px; border-radius: 999px; background: var(--overlay); box-shadow: var(--elev-1); font-size: 13px; font-weight: 600; color: var(--ink); }
+.bike-tile-status.busy { background: var(--ink); color: var(--bg); }
+.bike-tile:hover .bike-tile-photo { transform: translateY(-3px); box-shadow: var(--elev-2); }
+.bike-tile:active .bike-tile-photo { transform: scale(.99); }
+.bike-tile:focus-visible, .add-tile:focus-visible { outline: 2px solid var(--blue-ink); outline-offset: 4px; }
+.bike-tile-name { font-size: 17px; font-weight: 650; letter-spacing: -0.015em; color: var(--ink); }
+.bike-tile-meta { font-size: 14px; color: var(--fog); }
+.bike-tile-knock { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--mist); }
+.bike-tile-knock .tier-name { display: none; }
+.add-tile { align-content: center; justify-items: start; padding: 24px; aspect-ratio: 4 / 3; background: var(--surface); transition: background-color .2s ease, transform .12s ease; }
+.add-tile:hover { background: var(--raise); }
+.add-tile:active { transform: scale(.99); }
+.add-plus { display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 8px; border-radius: 50%; background: var(--ink); color: var(--bg); font-size: 24px; line-height: 1; }
+.add-tile > span:nth-child(2) { font-size: 17px; font-weight: 650; color: var(--ink); }
+.add-tile small { font-size: 14px; color: var(--fog); }
+
+.earn { position: sticky; top: calc(var(--hdr-space) + 8px); border-radius: var(--radius); background: var(--surface); box-shadow: var(--elev-2); overflow: hidden; }
+.earn-top { background: var(--bg); padding: 24px 24px 20px; }
+.earn-k { font-size: 15px; color: var(--fog); }
+.earn-big { margin-top: 4px; font-size: 44px; font-weight: 700; letter-spacing: -0.04em; line-height: 1.05; color: var(--ink); }
+.earn-lines { margin: 0; padding: 20px 24px; background: var(--surface); display: grid; gap: 16px; }
+.earn-lines div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; }
+.earn-lines dt { font-size: 15px; color: var(--mist); }
+.earn-lines dd { margin: 0; font-size: 15px; font-weight: 600; color: var(--ink); }
+.earn-lines dd.sub { grid-column: 1 / -1; font-size: 13px; font-weight: 400; color: var(--fog); }
+.earn-note { margin: 0; padding: 0 24px 20px; background: var(--surface); font-size: 13px; color: var(--fog); }
+@media (max-width: 960px) {
+  .host-body { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .earn { position: static; order: -1; }
+}
+@media (max-width: 640px) {
+  .to-confirm { grid-template-columns: minmax(0, 1fr); }
+  .to-confirm-photo { min-height: 0; aspect-ratio: 16 / 9; }
+}
