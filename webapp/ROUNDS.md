@@ -240,3 +240,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Airbnb's host listings page: a card with a photo per listing: https://www.airbnb.com/hosting
 - **Shots:** [1440 px](rounds/22-1440.jpg)
 - **Lines:** 6212
+
+## Round 23 · Honest test wallet, and a title per page
+
+- **What:** The test-wallet step now says plainly that it is a demo wallet with test money, not the user's own, and that in the live version it is their wallet and Sharify never holds money or keys. Also: each page sets its own browser tab title.
+- **Why:** Round 21 sat next to the sentence "Sharify never holds your keys", which is false for a demo wallet. The thesis is that nobody controls it alone: the demo must not blur that.
+- **Reference:** Stripe test mode docs: test is labelled as test everywhere: https://stripe.com/docs/testing
+- **Shots:** none
+- **Lines:** 6219

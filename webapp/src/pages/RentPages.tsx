@@ -90,10 +90,12 @@ export function WalletPage({ id }: { id: number }) {
   return (
     <Shell d={d} stage="Deposit">
       <h1>Connect a <em>wallet</em>.</h1>
-      <p className="lead">A wallet is the app that holds your money. The deposit leaves from it and comes back to it: Sharify never holds your money or your keys.</p>
+      <p className="lead">{isMock
+        ? "A wallet is the app that holds your money. For this demo we made you a test wallet, with test money only. In the live version it is your own wallet: the deposit leaves from it and comes back to it, and Sharify never holds your money or your keys."
+        : "A wallet is the app that holds your money. The deposit leaves from it and comes back to it: Sharify never holds your money or your keys."}</p>
       <div className="wallets">
         {isMock
-          ? <button type="button" className="wallet-opt primary" onClick={go} disabled={busy}><b>Use a test wallet</b><span>One tap. It comes with test money; nothing real is used.</span></button>
+          ? <button type="button" className="wallet-opt primary" onClick={go} disabled={busy}><b>Use the demo test wallet</b><span>Test money only. Nothing real is used, and it is not your wallet.</span></button>
           : <>
             <button type="button" className="wallet-opt" onClick={go} disabled={busy}><b>MetaMask</b><span>Browser extension or mobile app</span></button>
             <button type="button" className="wallet-opt" onClick={go} disabled={busy}><b>Another wallet</b><span>WalletConnect</span></button>

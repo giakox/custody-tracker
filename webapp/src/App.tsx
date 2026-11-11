@@ -6,15 +6,20 @@ import { AddPage, ConfirmReturnPage, MyObjectsPage } from "./pages/OwnerPages";
 import { VerifyPage } from "./pages/VerifyPage";
 import { DesignPage } from "./pages/DesignPage";
 import { DataPreview } from "./dev/DataPreview";
+import { useEffect } from "react";
 import { useRoute } from "./ui/router";
 import { Wireframes } from "./wireframes/Wireframes";
 
+
+/** The tab and history read as plain words: "Rent: the rule · Sharify". */
+const TITLES: Record<string, string> = { object: "The bike", rent: "Rent a bike", "my-rentals": "Your rentals", "my-objects": "Your bikes", "confirm-return": "Confirm a return", add: "Add your bike", receipt: "Receipt", verify: "Check a reading", design: "How Sharify is designed" };
 
 const num = (v: string | undefined, fallback = 1) => { const n = Number(v); return Number.isFinite(n) && n > 0 ? n : fallback; };
 
 export function App() {
   const parts = useRoute();
   const [page, a, b] = parts;
+  useEffect(() => { document.title = page && TITLES[page] ? `${TITLES[page]} · Sharify` : "Sharify: borrow a bike, the rule decides"; }, [page]);
   if (page === "dev") return <DataPreview />;
   if (page === "wireframes") return <Wireframes parts={parts.slice(1)} />;
   if (page === "object") return <ObjectPage id={num(a)} />;
