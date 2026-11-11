@@ -249,3 +249,17 @@ table.levels td:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
 
 /* ---------- Round 130: a step back: on a phone Confirm a return has one "Confirm it's back", the bar's ---------- */
 @media (max-width: 899px) { main.rent:has(.confirm-sticky) .rent-side .trip-act { display: none; } }
+
+/* ---------- Round 131: the rules step: the card shows the rule renters will accept, each row says its dollars ---------- */
+table.levels { border-spacing: 0; margin-top: 28px; }
+table.levels th { border: 0; padding: 0 12px 8px 0; }
+table.levels td { border: 0; background: none; padding: 8px 12px 8px 0; }
+table.levels tbody tr:nth-child(2) td { padding-block: 12px; }
+table.levels tbody tr td:first-child { width: 34%; }
+.levels-usd { font-weight: 650; color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
+table.levels tbody tr:last-child .levels-usd { color: var(--orange-ink); }
+.rule-preview .preview-card { padding: 4px 0 8px; }
+.rule-preview-top { padding: 20px 20px 8px; }
+.rule-preview .rule-tiers { margin: 8px 8px 0; max-width: none; }
+.rule-preview .notice { margin: 12px 20px; }
+@media (max-width: 640px) { table.levels th:nth-child(4), .levels-usd { display: none; } table.levels tbody tr td:first-child { width: auto; } }

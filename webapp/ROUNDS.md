@@ -2053,6 +2053,25 @@ Rounds 111–119 rotated through the screens that had gone longest untouched and
 
 Block 121–130 worked through the oldest screens in the register and two composition passes. Confirm a return starts at the rack (121). The Home's bands after the finder meet edge to edge (122). The finder's middle band is a lead bike beside a list (123). The wallet's confirmations are one rail, numbered as the sentence counts them (124). The simulator lost its box in a box (125, step back). Connect a wallet has its action in the card, and every rent step keeps its action reachable on a phone (126). The bike page ends sand-then-dark (127). Pairing is a viewfinder (128). The bike's photo is added in the preview card (129). This round cleaned up after them. Lines in `src`: about 7,860 of the 10,560 cap. Next: My bikes and the Add flow's rules step (owner side, whitest part of the site), Home hero (78), page transitions (88), states (89), the live rental pill (94).
 
+## Round 131 · "Your rules": the card shows the rule renters will accept; each row says its dollars
+
+**Hierarchy audit (Add, step 5, the longest form):** price and deposit; three sand rows of inputs (identical boxes); a grey hint; then "What renters will see" and the same rule again as a table, below the inputs; and on the right the listing preview with its empty "Your photo" block, which has nothing to do with the rules. The owner typed percentages and had to scroll to learn what they meant in dollars.
+
+**What changed:** the right card on this step is the rule as renters will see it (bike name, price and deposit, the four tiers in dollars), live as you type; when the levels are wrong it shows the error there. In the form each knock row ends with its dollars ("That is 20 dollars", strong in orange), so the percentage is never alone. The rows lost their sand boxes (inputs on the page, spacing between them); the duplicated table under the form is gone. On phones the dollars column hides (the card follows the form and shows them), checked: no horizontal overflow at 375.
+
+**Separation without lines:** the table's header and cell borders stay off; rows are separated by the inputs' own height and 12 px.
+
+**Café test:** the café's price board shows the price you'll pay, not the margin; the owner now sees dollars, not only percentages. Still missing: an image; this is the one owner step without a picture, and it's fine as a form.
+
+**References:** Stripe's pricing editor (the customer-facing price preview beside the inputs); Airbnb's pricing step (your input on the left, "guest pays" on the right).
+
+**Three ideas:** (1) rule card on the right, dollars in each row. (2) A single slider per tier. (3) Presets ("gentle", "standard", "strict") instead of numbers.
+**Discarded:** (2) the levels have to go up (light < medium < strong): three sliders that can cross each other make the error easier, not harder. (3) presets would invent a policy the contracts don't name; the suggested numbers already come from the bike's type.
+
+**Chosen, (1):** [before and after](rounds/131-rules.jpg).
+
+**Test on the blurred shots:** yes: three grey slabs on the left and an empty block on the right became a clean column of inputs and a card with four orange marks.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -2081,7 +2100,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | My rentals | 117 |
 | Owner (My bikes) | 114 |
 | Owner: Confirm a return | 121 |
-| Add a bike | 119 (step 2), 128 (step 3), 129 (step 4) |
+| Add a bike | 119 (step 2), 128 (step 3), 129 (step 4), 131 (step 5) |
 | Verify | 109 |
 | Empty, loading and error states | 89 |
 | Design | 112 |

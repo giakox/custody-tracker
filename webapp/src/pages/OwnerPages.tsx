@@ -439,26 +439,35 @@ export function AddPage({ n }: { n: number }) {
       const lv = (i: number, v: string) => { const a = [...d.levels] as [number, number, number]; a[i] = Number(v); set({ levels: a }); };
       const bp = (i: number, v: string) => { const a = [...d.bps] as [number, number, number]; a[i] = Number(v); set({ bps: a }); };
       return (
-        <AddShell n={5} wide aside={<ListingPreview d={d} />} title={<>Your <em>rules</em>.</>} next="Save the rules" onNext={err ? undefined : () => go(6)}>
+        <AddShell n={5} wide aside={
+          <aside className="listing-preview rule-preview" aria-label="How renters will see the rule">
+            <p className="preview-k">How renters will see the rule</p>
+            <div className="preview-card">
+              <div className="rule-preview-top"><p className="preview-name">{d.label.trim() || "Your bike"}</p><p className="preview-price"><b>{d.price || "0"} dollars</b> an hour · {d.deposit || "0"} dollars deposit</p></div>
+              {err ? <p className="notice error">{err}</p> : <RuleTiers terms={terms} />}
+            </div>
+          </aside>
+        } title={<>Your <em>rules</em>.</>} next="Save the rules" onNext={err ? undefined : () => go(6)}>
           <p className="lead">Renters accept these before they unlock. You can't change them during a rental. <span className="test-money">{TEST_MONEY}</span></p>
           <div className="rule-form">
             <label className="field"><span>Price per hour</span><span className="unit"><input inputMode="decimal" value={d.price} onChange={(e) => set({ price: e.target.value })} /> dollars</span><span className="tag">paid to you separately</span></label>
             <label className="field"><span>Deposit</span><span className="unit"><input inputMode="decimal" value={d.deposit} onChange={(e) => set({ deposit: e.target.value })} /> dollars</span></label>
           </div>
           <table className="levels">
-            <thead><tr><th>Knock</th><th>From</th><th>You keep</th></tr></thead>
+            <thead><tr><th>Knock</th><th>From</th><th>You keep</th><th>That is</th></tr></thead>
             <tbody>
               {(["light", "medium", "strong"] as const).map((name, i) => (
                 <tr key={name}>
                   <td><TierMeter tier={(i + 1) as 1 | 2 | 3} /></td>
                   <td><span className="unit"><input inputMode="decimal" value={d.levels[i]} onChange={(e) => lv(i, e.target.value)} aria-label={`${name} level in g`} /> g</span></td>
                   <td><span className="unit"><input inputMode="decimal" value={d.bps[i]} onChange={(e) => bp(i, e.target.value)} aria-label={`${name}: share of the deposit you keep`} /> %</span></td>
+                  <td className="levels-usd">{usd(String(Math.round(Number(d.deposit || 0) * d.bps[i]) / 100))}</td>
                 </tr>
               ))}
             </tbody>
           </table>
           <p className="hint-line">Suggested for a {d.kind.toLowerCase()} from early tests, not measured on your bike. Knocks are in g: 1 g is the bike standing still, a pothole is about 15 g.</p>
-          {err ? <p className="notice error">{err}</p> : <><p className="rule-title">What renters will see</p><RuleTiers terms={terms} /></>}
+          {err && <p className="notice error">{err}</p>}
         </AddShell>
       );
     }
