@@ -92,7 +92,7 @@ export function HomePage() {
         </section>
 
         <div id="bikes" className="bikes-anchor" />
-        <Finder bikes={bikes} me={me} locating={locating} onLocate={locate} live={live} rentingIt={rentingIt} loaded={!!fleet.data} />
+        <Finder bikes={bikes} me={me} locating={locating} onLocate={locate} live={live} rentingIt={rentingIt} loaded={!!fleet.data} failed={!fleet.data && fleet.failureCount > 0} onRetry={() => fleet.refetch()} />
 
         <Moments journey />
         {live && live.b.objectId !== null && <TryTheRule objectId={live.b.objectId} />}

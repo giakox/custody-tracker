@@ -2110,6 +2110,23 @@ Block 121–130 worked through the oldest screens in the register and two compos
 
 **Test on the blurred shots:** yes: one big white block became a block and a small frosted one; more photograph in the top half.
 
+## Round 134 · States: when the chain doesn't answer, the finder says so
+
+**Hierarchy audit (states across the site, untouched since 89):** checked loading (bike page skeleton: fine), the bike page's chain error (a clear card: fine), empty fleet, and the Home finder with the chain down. The last one was wrong: "0 free to borrow, nearest first" and "No bike matches. Show all bikes", a filter message with a button that did nothing, for an outage. On a phone the sheet said "0 bikes". While the first requests were retrying it showed the same "0" for several seconds.
+
+**What changed:** the finder has four distinct states, each with its own words. Loading: "Looking for bikes near you…". Down (from the first failed attempt, not after all retries): the sentence under the title says the map reads the bikes from the blockchain and it isn't answering; a sand card with the orange state dot says "No bikes to show until it answers", that we don't show a copy from our own server, that it retries by itself, and has "Try again now" (the query's refetch); the map's legend and "Near me" hide. No match for a filter: the old message, now only when a filter is on. Nothing free: "No bike is free right now. Bikes come back on the map when their ride ends." The phone sheet's handle says "No connection to the chain" or "Looking for bikes…" instead of "0 bikes". Normal state checked unchanged ("10 free to borrow…").
+
+**Café test:** when the café's machine is broken, there's a note on it, not an empty cup. Still missing: the down state has no picture; the bike page's error card has the same shape, which is at least consistent.
+
+**References:** Citymapper's "live times unavailable" (says the source is down, keeps the map); Stripe's dashboard degraded-service card (what's down, that it retries, a retry button).
+
+**Three ideas:** (1) four honest states in the finder. (2) Show the last known fleet with a "may be out of date" label. (3) Hide the finder entirely when down.
+**Discarded:** (2) the site's promise is to show only what the chain says (the same reason the bike page refuses a cached copy). (3) the Home would lose its middle without explaining why.
+
+**Chosen, (1):** [before and after, chain down](rounds/134-finder-down.jpg).
+
+**Test on the blurred shots:** yes: an empty column became a sand card with an orange point and a blue button.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -2140,5 +2157,5 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Owner: Confirm a return | 121 |
 | Add a bike | 119 (step 2), 128 (step 3), 129 (step 4), 131 (step 5) |
 | Verify | 109 |
-| Empty, loading and error states | 89 |
+| Empty, loading and error states | 134 (finder) |
 | Design | 112 |

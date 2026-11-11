@@ -205,3 +205,11 @@
   .fcard[data-band="mid"]:not([data-lead]) .fcard-price { margin-top: 2px; font-size: 14px; }
   .fcard[data-band="mid"]:not([data-lead]) .fcard-hit:hover, .fcard[data-band="mid"].is-selected:not([data-lead]) .fcard-hit { background: var(--surface); }
 }
+
+/* ---------- Round 134: when the chain doesn't answer, the finder says so, instead of "no bike matches" ---------- */
+.finder-down { grid-column: 1 / -1; display: grid; justify-items: start; gap: 14px; margin-top: 8px; padding: 24px; border-radius: var(--radius); background: var(--surface); max-width: 560px; }
+.finder-down .state-dot { background: var(--orange); }
+.finder-down p { font-size: 16px; line-height: 1.5; color: var(--mist); }
+.finder-down b { display: block; margin-bottom: 4px; font-size: 18px; font-weight: 650; color: var(--ink); }
+.finder:has(.finder-down) .map-legend, .finder:has(.finder-down) .map-locate { display: none; }
+@media (max-width: 899px) { .finder-down { margin: 4px 16px 0; padding: 20px; } }

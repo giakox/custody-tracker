@@ -24,9 +24,9 @@ function useMedia(q: string) {
 const band = (m: number) => { const min = Math.round(m / 80); return min <= 5 ? "near" : min <= 15 ? "mid" : "far"; };
 const BAND_NAMES: Record<string, string> = { near: "Under 5 minutes' walk", mid: "10 to 15 minutes' walk", far: "A longer walk" };
 
-export function Finder({ bikes, me, locating, onLocate, live, rentingIt, loaded }: {
+export function Finder({ bikes, me, locating, onLocate, live, rentingIt, loaded, failed = false, onRetry }: {
   bikes: Entry[]; me: (LatLon & { accuracy: number }) | null; locating: "idle" | "asking" | "denied"; onLocate: () => void;
-  live: Entry | undefined; rentingIt: boolean; loaded: boolean;
+  live: Entry | undefined; rentingIt: boolean; loaded: boolean; failed?: boolean; onRetry?: () => void;
 }) {
   const phone = useMedia("(max-width: 899px)");
   const [kind, setKind] = useState<FleetBike["kind"] | null>(null);
@@ -77,7 +77,7 @@ export function Finder({ bikes, me, locating, onLocate, live, rentingIt, loaded 
         <div className="finder-title-row">
           <h2 id="finder-title">{title}</h2>
         </div>
-          <p>{shown.length} free to borrow, nearest first. Bikes out on a ride never show: where they are is where someone is.</p>
+          <p>{failed ? "The map reads the bikes from the blockchain, and it isn't answering right now." : !loaded ? "Looking for bikes near you…" : <>{shown.length} free to borrow, nearest first. Bikes out on a ride never show: where they are is where someone is.</>}</p>
         </div>
         <div className="finder-chips" role="group" aria-label="Filter the bikes">
           <button type="button" className="chip" aria-pressed={!kind && !cheap} onClick={() => { setKind(null); setCheap(false); }}>All</button>
@@ -93,9 +93,16 @@ export function Finder({ bikes, me, locating, onLocate, live, rentingIt, loaded 
             onClick={() => setSheet(sheet === "peek" ? "full" : "peek")}
             onPointerDown={(e) => { drag.current = e.clientY; }}
             onPointerUp={(e) => { if (drag.current === null) return; const dy = e.clientY - drag.current; drag.current = null; if (dy < -30) setSheet("full"); else if (dy > 30) setSheet("peek"); }}>
-            <i aria-hidden="true" /><span>{shown.length} bikes</span>
+            <i aria-hidden="true" /><span>{failed ? "No connection to the chain" : !loaded ? "Looking for bikes…" : `${shown.length} bikes`}</span>
           </button>
-          {shown.length === 0 && <p className="finder-empty">No bike matches. <button type="button" className="link-btn" onClick={() => { setKind(null); setCheap(false); }}>Show all bikes</button></p>}
+          {failed ? (
+            <div className="finder-down" role="status">
+              <span className="state-dot" aria-hidden="true" />
+              <p><b>No bikes to show until it answers.</b> We don't show a copy from our own server instead. It asks again every few seconds by itself.</p>
+              {onRetry && <button type="button" className="btn btn-primary" onClick={onRetry}>Try again now</button>}
+            </div>
+          ) : loaded && shown.length === 0 && (kind || cheap) ? <p className="finder-empty">No bike matches. <button type="button" className="link-btn" onClick={() => { setKind(null); setCheap(false); }}>Show all bikes</button></p>
+            : loaded && shown.length === 0 ? <p className="finder-empty">No bike is free right now. Bikes come back on the map when their ride ends.</p> : null}
           <ul ref={list} className="finder-grid" onScroll={onScroll}>
             {shown.map(({ b, d }, i) => (<Fragment key={b.key}>
               {!b.live && i > 0 && shown[i - 1].b.live && (
