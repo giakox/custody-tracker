@@ -586,3 +586,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Airbnb and Aesop heroes with slow Ken Burns drift: https://aesop.com
 - **Shots:** none
 - **Lines:** 6557
+
+## Round 63 · Fields that feel like part of the page
+
+- **What:** Text fields and selects are 48 px tall, sand-filled with the site's one radius, darken their border on hover and take a clear 3 px blue ring on focus; labels are bolder; checkboxes are blue and larger.
+- **Why:** The Add-your-bike form was the one place with browser-default-looking controls.
+- **Reference:** Stripe Elements and Linear forms: tall fields, one focus ring: https://stripe.com/docs/elements
+- **Shots:** none
+- **Lines:** 6565

@@ -495,3 +495,11 @@ p, li, dd { text-wrap: pretty; }
   .welcome-photo { animation: hero-drift linear both, hero-breathe 26s ease-in-out infinite alternate; animation-timeline: scroll(root), auto; animation-range: 0 100svh, normal; }
 }
 @keyframes hero-breathe { from { scale: 1; translate: 0 0; } to { scale: 1.07; translate: -1.2% 0.8%; } }
+
+/* ---------- Round 63: fields that feel like part of the page ---------- */
+.field input, .field select, .levels input, .demo-panel select { background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius); min-height: 48px; padding: 0 14px; font-size: 17px; transition: border-color .15s ease, background-color .15s ease; }
+.field input:hover, .field select:hover, .levels input:hover { border-color: #8f897f; }
+.field input:focus, .field select:focus, .levels input:focus { outline: 3px solid var(--blue-ink); outline-offset: 2px; background: var(--bg); box-shadow: none; border-color: var(--blue-ink); }
+.field > span:first-child { font-size: 15px; font-weight: 600; color: var(--ink); }
+.field input::placeholder { color: var(--dim); }
+.check input { accent-color: var(--blue-ink); width: 20px; height: 20px; }
