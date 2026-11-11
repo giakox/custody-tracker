@@ -1778,6 +1778,23 @@ Fixed on the way: an absolutely positioned photo inside a grid takes its grid ar
 
 **Test:** a step back; on the first screen the header is lighter by one pill.
 
+## Round 116 · The ride card shows the money the way the receipt will
+
+**Hierarchy audit (ride, status card):** title (what would be kept), then a grey line "50 dollars deposit · the bike last reported 21 minutes ago", then Return. The consequence was only in words; the picture of the money (blue back, orange kept) that the receipt, the confirm screen and the simulator all use was missing at the one moment it changes live.
+
+**What changed:** between the title and the button, a small sand block "If you returned it now" with the split bar and its legend ("30 dollars back · 20 dollars kept"); the line under it keeps the meter and when the bike last reported. With no knock the bar is all blue.
+
+**Café test:** the café's order bar at the bottom ("2 items, $6.75 · +1 punch") keeps the running total in view as you choose; ours keeps the running outcome in view as you ride.
+
+**References:** the café's floating order bar; Uber's in-trip fare estimate (what it would cost if the trip ended now).
+
+**Three ideas:** (1) the split bar, "if you returned it now". (2) A countdown or a running clock of the rental. (3) A live chart of the knocks so far.
+**Discarded:** (2) the deposit doesn't run out with time; a ticking clock would suggest a meter. (3) the hardest knock is all that counts; a chart of every bump would mislead.
+
+**Chosen, (1):** [before (round 67) and after](rounds/116-ride-money.jpg), [phone](rounds/116-ride-375.jpg).
+
+**Test on the blurred shots:** a change inside the card: a coloured bar now sits in it; the screen as a whole is the same, as intended.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1797,7 +1814,8 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Bike page | 107 (proof mode: 100) |
 | Rent flow: Rule, Deposit | 86 |
 | Rent flow: Wallet | 92 |
-| Rent flow: Ride, Waiting | 67 |
+| Rent flow: Ride | 116 |
+| Rent flow: Waiting | 67 |
 | Rent flow: Return | 111 |
 | Rent flow: Outcome | 91 |
 | Receipt | 113 (print: 97) |

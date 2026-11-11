@@ -381,3 +381,10 @@ i.split-kept { background: var(--orange); }
 @media print { .receipt-stage { background: none; box-shadow: none; clip-path: none; padding: 0; } .receipt-stage .receipt.slip { transform: none; -webkit-mask: none; mask: none; } }
 @media (max-width: 640px) { .receipt-stage { padding: 32px 0 48px; } .receipt-stage .receipt.slip { transform: none; } }
 @media print { .receipt-stage .receipt.slip { box-shadow: none !important; border: 1px solid #999; animation: none !important; } }
+
+/* ---------- Round 116: the ride card shows the money as the receipt will ---------- */
+.ride-money { margin-top: 16px; padding: 14px 16px; border-radius: var(--radius); background: var(--surface); }
+.ride-money-k { font-size: 13px; font-weight: 600; color: var(--fog); }
+.ride-money .split { margin-top: 10px; height: 10px; }
+.ride-money .split-legend { margin-top: 8px; font-size: 14px; }
+.ride-card .ride-meta { margin-top: 12px; font-size: 13px; }

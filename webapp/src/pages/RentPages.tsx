@@ -257,7 +257,14 @@ export function ActivePage({ id }: { id: number }) {
               ? <>No readings <em>yet</em>.</>
               : alert ? <>A {TIER_NAMES[c.tier]} knock: {usd(c.wouldWithhold)} would be <em>kept</em>.</>
                 : <>No knocks: all {usd(r.collateral)} would come <em>back</em>.</>}</h1>
-            <p className="ride-meta"><TierMeter tier={c.peakCg === null ? 0 : c.tier} showNone /><span>{usd(r.collateral)} deposit · the bike last reported {lastBatch ? when(lastBatch.anchor.at) : "a moment ago"}</span></p>
+            {(() => { const dep = Number(r.collateral); const kept = c.tier ? Number(c.wouldWithhold) : 0; const back = dep - kept; return (
+              <div className="ride-money">
+                <p className="ride-money-k">If you returned it now</p>
+                <div className="split" aria-hidden="true">{back > 0 && <i className="split-back" style={{ flexGrow: back }} />}{kept > 0 && <i className="split-kept" style={{ flexGrow: kept }} />}</div>
+                <p className="split-legend"><span><i className="split-back" /><span>{usd(String(back))} back</span></span>{kept > 0 && <span><i className="split-kept" /><span>{usd(String(kept))} kept</span></span>}</p>
+              </div>
+            ); })()}
+            <p className="ride-meta"><TierMeter tier={c.peakCg === null ? 0 : c.tier} showNone /><span>the bike last reported {lastBatch ? when(lastBatch.anchor.at) : "a moment ago"}</span></p>
             <div className="actions"><a className="btn btn-primary" href={href(`rent/${id}/return`)}>Return the bike</a></div>
           </div>
         </div>
