@@ -459,3 +459,14 @@ p, li, dd { text-wrap: pretty; }
 .fleet-map-wrap::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 450; box-shadow: inset 0 0 80px rgba(60, 40, 15, .14); }
 .pin-price { box-shadow: 0 6px 16px rgba(60, 40, 15, .22); }
 .leaflet-control-attribution { border-radius: var(--radius) 0 0 0; }
+
+/* ---------- Round 54: the story has a spine ---------- */
+.events { position: relative; }
+.events::before { content: ""; position: absolute; left: 95px; top: 22px; bottom: 22px; width: 2px; border-radius: 2px; background: var(--line-strong); }
+.event { position: relative; }
+.event::before { content: ""; position: absolute; left: 90px; top: 18px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 2px solid var(--fog); }
+.event.shock::before { border-color: var(--orange); background: var(--orange); }
+.event.gap::before { border-style: dashed; }
+.event.quiet::before { border-color: var(--line-strong); }
+.event p { padding-left: 30px; }
+@media (max-width: 900px) { .events::before { left: 81px; } .event::before { left: 76px; } }

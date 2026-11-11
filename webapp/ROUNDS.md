@@ -508,3 +508,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Aesop's store locator and Kinfolk's maps: a map tinted to the brand paper colour: https://aesop.com
 - **Shots:** [1440 px](rounds/53-1440.jpg)
 - **Lines:** 6511
+
+## Round 54 · The story has a spine
+
+- **What:** The bike's story now runs on a thin vertical line with a dot per event: hollow for ordinary lines, dashed for a missing piece of the diary, solid orange at the knock.
+- **Why:** A list of lines reads as a log; a line with dots reads as a story, and the orange dot is the one thing the eye finds first.
+- **Reference:** Linear's issue history and GitHub's timeline: a spine with markers: https://github.com
+- **Shots:** [1440 px](rounds/54-1440.jpg)
+- **Lines:** 6522
