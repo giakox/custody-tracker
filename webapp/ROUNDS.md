@@ -2381,6 +2381,25 @@ The owner side and the system's edges. "Your rules" shows the rule renters will 
 
 **Test on the blurred shots:** at a glance the card looks the same size; what changed is what it says, and that it's true right now.
 
+## Round 149 · "Publish your bike": the summary is the same card as on every other step
+
+**Hierarchy audit (Add, step 6, untouched since 74; and its "A step is missing" state):** the missing-step state is plain and right (the question, the reason, one button to the step). The publish state: the left column is the wallet rail (124), fine; the right summary was from another era: a sand box with a grey border, grey ruled lines between Deposit / Rental price / Recorder (the dividers the protocol forbids), monospace values, and a white square with the word "City bike" where the photo goes. After five steps with a white preview card on the right, the last step's card looked like a different product.
+
+**What changed:** the summary is the preview card's language: white, the shadow scale's top step, no border; the photo (or a sand "No photo yet") on top, the bike's name and place, the deposit large, price and recorder side by side, then the rule renters accept. No ruled lines, no monospace. Same content, same order as before.
+
+**Separation without lines:** space and type size between deposit, price and rule.
+
+**Café test:** the last thing you see before paying looks like everything before it. Still missing: none on this step.
+
+**References:** Airbnb's "Review your listing" (the listing card exactly as guests see it); Stripe Checkout's summary column.
+
+**Three ideas:** (1) restyle as the preview card. (2) Reuse the step 5 rule card. (3) Drop the summary (steps 4 and 5 already showed it).
+**Discarded:** (2) it lacks the photo and the recorder line, which belong in the final check. (3) the last step before publishing is where people check everything once more.
+
+**Chosen, (1):** [before and after](rounds/149-publish.jpg).
+
+**Test on the blurred shots:** yes: a beige box with lines became a white card with a photo slot, the same shape as on the five steps before.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -2409,7 +2428,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | My rentals | 142 |
 | Owner (My bikes) | 132, 135 (step back) |
 | Owner: Confirm a return | 121 |
-| Add a bike | 119 (step 2), 128 (step 3), 129 (step 4), 131 (step 5) |
+| Add a bike | 119 (step 2), 128 (step 3), 129 (step 4), 131 (step 5), 149 (step 6) |
 | Verify | 137 |
 | Empty, loading and error states | 134 (finder) |
 | Design | 144, 145 (step back), 146 |

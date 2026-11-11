@@ -545,15 +545,15 @@ function AddReady({ d, account, connect }: { d: Draft; account: boolean; connect
         ) : (
           <aside className="deposit-summary" aria-label="What renters will see">
             <div className="sum-bike">
-              <div className="sum-photo">{d.photo ? <img src={d.photo} alt="" /> : <span className="mono">{d.kind}</span>}</div>
+              <div className="sum-photo">{d.photo ? <img src={d.photo} alt="" /> : <span>No photo yet</span>}</div>
               <div>
                 <p className="sum-name">{d.label || "Your bike"}</p>
-                <p className="mono sum-owner">{d.kind} · {d.spot}</p>
+                <p className="sum-owner">{d.kind}, {d.spot}</p>
               </div>
             </div>
             <dl className="sum-lines">
-              <div><dt>Deposit</dt><dd className="mono big">{usd(d.deposit)}</dd></div>
-              <div><dt>Rental price</dt><dd className="mono">{usd(d.price)} an hour</dd><dd className="tag">paid to you separately</dd></div>
+              <div><dt>Deposit</dt><dd className="big">{usd(d.deposit)}</dd></div>
+              <div><dt>Rental price</dt><dd>{usd(d.price)} an hour</dd><dd className="tag">paid to you separately</dd></div>
               <div><dt>Recorder</dt><dd>{d.recorder ? "paired" : "not paired"}</dd></div>
             </dl>
             <p className="rule-title">The rule renters accept</p>

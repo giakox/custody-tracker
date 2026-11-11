@@ -282,3 +282,17 @@ table.levels tbody tr:last-child .levels-usd { color: var(--orange-ink); }
 .day-tick::after { background: var(--line); }
 .day-now { background: var(--ink); }
 .day-now::after { color: var(--ink); font-weight: 600; }
+
+/* ---------- Round 149: "Publish your bike": the summary is the same white card as the preview on steps 1–5, no ruled lines ---------- */
+.deposit-summary { border: 0; background: var(--bg); box-shadow: var(--elev-3); padding: 0 0 20px; overflow: hidden; }
+.deposit-summary .sum-bike { grid-template-columns: minmax(0, 1fr); gap: 0; }
+.deposit-summary .sum-photo { aspect-ratio: 16 / 9; display: grid; place-items: center; background: var(--raise); color: var(--fog); font-size: 14px; border-radius: 0; overflow: hidden; }
+.deposit-summary .sum-photo img { width: 100%; height: 100%; object-fit: cover; }
+.deposit-summary .sum-bike > div:last-child { padding: 18px 20px 0; }
+.deposit-summary .sum-name { font-weight: 650; letter-spacing: -0.02em; }
+.sum-lines { margin: 16px 20px 0; border: 0; display: grid; grid-template-columns: auto auto; justify-content: start; gap: 4px 32px; }
+.sum-lines div { padding: 0; border: 0; }
+.sum-lines div:first-child { grid-column: 1 / -1; margin-bottom: 8px; }
+.sum-lines dd.big { font-weight: 700; letter-spacing: -0.03em; }
+.deposit-summary .rule-title, .deposit-summary .rule-tiers, .deposit-summary .hint-line { margin-left: 20px; margin-right: 20px; }
+.deposit-summary .rule-title { margin-top: 24px; font-size: 15px; font-weight: 650; color: var(--ink); }
