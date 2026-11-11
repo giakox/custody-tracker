@@ -41,10 +41,17 @@ export function SiteHeader() {
         {ready && !account && <button type="button" className="nav-link nav-phone" onClick={() => { setOpen(false); connect(); }}>Connect wallet</button>}
         {open && (
           <div className="menu-foot">
-            <a className="menu-card" href={href("bikes")} onClick={() => { setOpen(false); toFinder(); }}>
-              <img src="./img/day/friends-ride.jpg" alt="" />
-              <span>See the bikes near Bocconi on the map</span>
-            </a>
+            {status ? (
+              <a className={`menu-card menu-live ${status.on ? "is-on" : ""}`} href={href(status.to)} onClick={() => setOpen(false)}>
+                <img src="./img/day/bocconi-park.jpg" alt="" />
+                <span><i aria-hidden="true" />{status.text}</span>
+              </a>
+            ) : (
+              <a className="menu-card" href={href("bikes")} onClick={() => { setOpen(false); toFinder(); }}>
+                <img src="./img/day/friends-ride.jpg" alt="" />
+                <span>See the bikes near Bocconi on the map</span>
+              </a>
+            )}
             <p>{account ? <>Test wallet {shortHex(account.address)}. </> : null}A course project on a test network: no real money moves.</p>
           </div>
         )}

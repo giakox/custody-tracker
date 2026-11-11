@@ -2362,6 +2362,25 @@ The owner side and the system's edges. "Your rules" shows the rule renters will 
 
 **Test on the blurred shots:** yes: three dark bands with white cuts became one dark field with a white slip on it.
 
+## Round 148 · The phone menu shows the demo bike, live
+
+**Hierarchy audit (menu and footer on phones):** the footer on a phone is fine (grouped links, the wordmark under the sticky action on the bike page). The menu: four big links, then a stock photo of two people cycling with "See the bikes near Bocconi on the map", a second "Find a bike" under the first. Meanwhile the one live fact the header shows on desktop ("The demo bike is free, outside Bocconi" / "out on a ride") has no room in the phone header and appeared nowhere on a phone.
+
+**What changed:** the menu's picture is the demo bike at its rack, with its live status on it (blue pulsing dot when free, white when out), linking to the bike's page; before the fleet has loaded it falls back to the old card. The text sits on a darker gradient (the first version was hard to read over the bright pavement; fixed and re-shot).
+
+**Separation without lines:** the card is a photograph under the type-only links; nothing between them but space.
+
+**Café test:** the café's door sign says "open" or "closed", not "come and see our tables". Still missing: nothing in the menu.
+
+**References:** Uber's app menu (your current trip or status at the top of the drawer); Apple Maps' place card (photo plus "open now").
+
+**Three ideas:** (1) the live bike in the menu. (2) A status line under the logo in the phone header. (3) Remove the card.
+**Discarded:** (2) the phone header has the logo and the menu button only, on purpose (106); a line there would crowd it at 375. (3) the menu would lose its only picture and the live fact would still be missing.
+
+**Chosen, (1):** [before and after](rounds/148-menu-375.jpg).
+
+**Test on the blurred shots:** at a glance the card looks the same size; what changed is what it says, and that it's true right now.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -2374,7 +2393,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Home: owners band | 108 |
 | Home: try the rule (and Rule step) | 104 (bands joined: 122) |
 | Home: find a bike (grid + map) | 123 |
-| Header | 140 (no echo on the bike page) |
+| Header | 140 (no echo on the bike page), 148 (phone menu) |
 | Page transitions | 136 (shared photo) |
 | Live rental strip | 138 |
 | Footer | 120 (wordmark only on reading pages) |
