@@ -221,7 +221,7 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 
 - **What:** Read the map as a stranger. The price pins explain themselves, so the legend lost the "sample bikes" entry and is down to two: the real bike and the orange "dropped this week" dot.
 - **Why:** A legend that explains what is already obvious is noise. The orange dot is the only thing that needed a word.
-- **Reference:** Google Maps: legend only for the one layer that needs it: https://maps.google.com
+- **Reference:** Tufte's data-ink ratio: remove ink that explains nothing: https://en.wikipedia.org/wiki/Data-ink_ratio
 - **Shots:** [1440 px](rounds/20-1440.jpg)
 - **Lines:** 6192
 
@@ -229,6 +229,6 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 
 - **What:** In the sample version the wallet step is a single button, "Use a test wallet", with the test money already in it, instead of two wallet brands that both did the same thing. A line says the live version connects your own wallet.
 - **Why:** The wallet page was the steepest step for anyone not in crypto, and two buttons were pretending to be a choice.
-- **Reference:** Coinbase's "Try demo mode" before connecting a wallet: https://www.coinbase.com
+- **Reference:** Stripe's test mode: the whole flow with test money and no real card: https://stripe.com/docs/testing
 - **Shots:** [1440 px](rounds/21-1440.jpg)
 - **Lines:** 6198
