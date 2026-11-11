@@ -197,7 +197,7 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .tale-photo > img:first-child { animation: tale-drift linear both; animation-timeline: view(); }
-    .tale-card { animation: tale-rise linear both; animation-timeline: view(); animation-range: entry 5% cover 38%; }
+    .tale-card { animation: tale-rise linear both; animation-timeline: view(); animation-range: entry 20% entry 95%; }
     .tale-inset { animation: tale-float linear both; animation-timeline: view(); }
   }
 }
@@ -371,3 +371,13 @@ p, li, dd { text-wrap: pretty; }
 .scan-frame { container-type: size; }
 @media (prefers-reduced-motion: reduce) { .scan-frame.is-scanning::after { animation: none; top: 50%; } }
 .sim-ticks span { font-size: 12px; top: -20px; }
+.sim .rule-tiers, .try-rule .rule-tiers { max-width: none; }
+.rule-row { grid-template-columns: 112px minmax(0, 1fr) minmax(0, 1fr); }
+
+/* ---------- Round 44: the chapters stack like sheets ---------- */
+.tale { gap: 0; margin-top: clamp(64px, 9vw, 128px); }
+.tale .tale-chapter { position: sticky; top: 0; min-height: 100svh; border-radius: var(--radius) var(--radius) 0 0; box-shadow: 0 -24px 60px rgba(23, 25, 27, .22); }
+.tale .tale-chapter:first-child { box-shadow: none; }
+.tale-card { margin-bottom: clamp(48px, 9vh, 96px); }
+@media (max-width: 760px) { .tale .tale-chapter { min-height: 100svh; } }
+@media (prefers-reduced-motion: reduce) { .tale .tale-chapter { position: relative; min-height: min(80svh, 720px); box-shadow: none; } }

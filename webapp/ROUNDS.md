@@ -421,3 +421,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** WebAIM contrast checker, the WCAG 2.1 method: https://webaim.org/resources/contrastchecker/
 - **Shots:** none
 - **Lines:** 6401
+
+## Round 44 · The chapters stack like sheets
+
+- **What:** Each chapter of the Home story is now a full screen that pins to the top while the next one slides up over it, with rounded top edges and a soft shadow above, like turning pages. The card reveal only plays as the chapter arrives, so it never stays half-faded while pinned. Static (no stacking) with reduced motion.
+- **Why:** The first critique of the Home said it was one layer of cards on photos. Sticky stacking is the cheapest true layering: it makes scroll the way you move through the story.
+- **Reference:** Apple's AirPods Pro and Aesop's story pages: full-screen panels that stack as you scroll: https://www.apple.com/airpods-pro/
+- **Shots:** [375 px](rounds/44-375.jpg)
+- **Lines:** 6411
