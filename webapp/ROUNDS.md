@@ -437,3 +437,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Refactoring UI, spacing scale and hierarchy chapters: https://www.refactoringui.com
 - **Shots:** [1440 px](rounds/45-1440.jpg)
 - **Lines:** 6426
+
+## Round 46 · The slider drives the whole band
+
+- **What:** On Home, dragging the knock in "What if it gets dropped?" now changes the whole full-width band: pale blue while nothing is kept, pale orange from a light knock and deeper at a strong one. The numbers are the biggest type on the site, stacked so they never touch.
+- **Why:** Orange only ever meant a knock. Letting the whole field carry that meaning makes the rule felt, not just read.
+- **Reference:** Apple's colour-changing product configurators: the stage recolours with your choice: https://www.apple.com/shop/buy-iphone
+- **Shots:** [1440 px](rounds/46-1440.jpg)
+- **Lines:** 6439

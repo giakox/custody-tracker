@@ -396,3 +396,16 @@ p, li, dd { text-wrap: pretty; }
 .bike-copy .actions { margin-top: 28px; }
 .bike-copy .price-line { margin-top: 14px; }
 .bike-copy .stateline { margin-top: 40px; }
+
+/* ---------- Round 46: the slider drives the whole band ---------- */
+.try-rule, .try-rule { transition: background-color .5s ease, box-shadow .5s ease; }
+.try-rule:has(.sim.tier-1), .try-rule:has(.sim.tier-2), .try-rule:has(.sim.tier-3) { background: var(--orange-wash); box-shadow: 0 0 0 100vmax var(--orange-wash); }
+.try-rule:has(.sim.tier-3) { background: #fbd9cb; box-shadow: 0 0 0 100vmax #fbd9cb; }
+.try-rule .sim-peak { font-size: clamp(72px, 8.4vw, 136px); line-height: .9; }
+.try-rule .sim-back { font-size: clamp(48px, 5.2vw, 84px); line-height: .95; }
+.try-rule .sim-top { align-items: end; padding-bottom: 8px; }
+.try-rule .sim { padding: clamp(28px, 3.4vw, 52px); }
+.try-rule .sim-top { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+.try-rule .sim-out { text-align: left; }
+.try-rule .sim-peak { font-size: clamp(64px, 7vw, 112px); }
+.try-rule .sim-back { font-size: clamp(44px, 4.6vw, 72px); }
