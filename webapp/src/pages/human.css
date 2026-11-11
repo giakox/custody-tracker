@@ -210,3 +210,16 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
   .chapter-inset { width: 120px; top: 16px; right: 16px; border-width: 4px; }
   .chapter-right .chapter-inset { left: auto; right: 16px; }
 }
+
+/* ---------- Round 25: a translucent header that floats over the photos ---------- */
+.site-header { position: sticky; top: 0; z-index: 900; max-width: none; padding-inline: max(var(--gutter), calc((100% - var(--max)) / 2 + var(--gutter))); background: rgba(255, 255, 255, .74); -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5); }
+.map-shell { isolation: isolate; }
+.welcome { margin-top: -64px; }
+.welcome-photo { height: min(86svh, 860px); }
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .site-header { animation: header-lift linear both; animation-timeline: scroll(root); animation-range: 0 160px; }
+  }
+}
+@keyframes header-lift { from { box-shadow: 0 0 0 transparent; background: rgba(255, 255, 255, .5); } to { box-shadow: var(--elev-1); background: rgba(255, 255, 255, .86); } }
+@media (max-width: 760px) { .welcome-photo { height: 58svh; min-height: 340px; } }

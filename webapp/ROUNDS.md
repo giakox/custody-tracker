@@ -256,3 +256,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Linear's changelog and Apple product pages: full-bleed chapters with cards and scroll-driven reveals: https://linear.app/changelog and https://www.apple.com/iphone/
 - **Shots:** [375 px](rounds/24-375.jpg)
 - **Lines:** 6244
+
+## Round 25 · A translucent header over the photos
+
+- **What:** The header is now sticky and frosted: the hero photo and the map slide under it. It starts almost clear on the photo and gains a soft shadow after 160 px of scroll (scroll-driven, off with reduced motion). The hero photo runs up behind it and the hero is taller.
+- **Why:** Edoardo wanted layers that overlap. A flat white bar cut the photo off from the page; a frosted one makes the photo the page.
+- **Reference:** Airbnb and Apple: sticky translucent headers that blur what is under them: https://www.apple.com
+- **Shots:** [1440 px](rounds/25-1440.jpg)
+- **Lines:** 6257
