@@ -108,3 +108,16 @@ html.menu-open { overflow: hidden; }
 @keyframes vt-out { to { opacity: 0; transform: translateY(-6px); } }
 @keyframes vt-in { from { opacity: 0; transform: translateY(10px); } }
 @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
+
+/* ---------- Round 106: the header says what the real bike is doing now ---------- */
+.hdr-status { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; margin-right: 6px; padding: 0 14px 0 12px; border-radius: 999px; background: var(--surface); font: 600 13px/1 var(--ui); color: var(--mist); text-decoration: none; white-space: nowrap; transition: background-color .15s ease, color .15s ease; }
+.hdr-status i { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--fog); }
+.hdr-status.is-on i { background: var(--blue); }
+@media (prefers-reduced-motion: no-preference) { .hdr-status.is-on i::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: inherit; animation: pulse-ring 2.4s ease-out infinite; } }
+.hdr-status:hover { background: var(--raise); color: var(--ink); }
+.hdr-status:focus-visible { outline: 2px solid var(--blue-ink); outline-offset: 2px; }
+
+.hdr-left { justify-self: start; display: flex; align-items: center; gap: 14px; min-width: 0; }
+.hdr-status { margin-right: 0; }
+@media (max-width: 1240px) { .hdr-status span { display: none; } .hdr-status { padding: 0; width: 36px; justify-content: center; } }
+@media (max-width: 860px) { .hdr-status { display: none; } }

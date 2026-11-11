@@ -3,6 +3,8 @@ import { shortHex } from "../ui/format";
 import { href, useRoute } from "../ui/router";
 import { useViewer } from "../ui/viewer";
 import { LiveRental } from "./LiveRental";
+import { useQuery } from "@tanstack/react-query";
+import { getFleet } from "../data/api";
 
 /** A floating bar: the logo, the sections in the middle, one filled action on the right (Find a bike, or your
  *  wallet once it is connected) and one quiet one. On phones: the logo and a round menu button that opens a
@@ -15,14 +17,21 @@ export function SiteHeader() {
   useEffect(() => { setOpen(false); }, [page]);
   useEffect(() => { document.documentElement.classList.toggle("menu-open", open); }, [open]);
   const toFinder = () => { if (page === "bikes") document.getElementById("bikes")?.scrollIntoView(); };
+  // What the real bike is doing right now (the café's "Closed, opens tomorrow at 6am"): free on the map, or out.
+  const fleet = useQuery({ queryKey: ["fleet"], queryFn: getFleet, refetchInterval: 10_000 });
+  const real = fleet.data?.find((b) => b.live);
+  const status = fleet.isSuccess ? (real ? { on: true, text: "The demo bike is free, outside Bocconi", to: real.objectId !== null ? `object/${real.objectId}` : "bikes" } : { on: false, text: "The demo bike is out on a ride", to: "object/1" }) : null;
   const find = <a className="btn btn-primary hdr-primary" href={href("bikes")} onClick={toFinder}>Find a bike</a>;
   return (
     <>
     <header className={`site-header ${open ? "is-open" : ""}`}>
-      <a className="wordmark" href={href("")} aria-label="Sharify, home">
+      <div className="hdr-left">
+        <a className="wordmark" href={href("")} aria-label="Sharify, home">
         {/* 3× of the 28 px display height: the original is 1216 px wide and 157 KB. */}
         <img src="./brand/sharify-logo-light-header.png" alt="Sharify" width="111" height="30" />
       </a>
+        {status && <a className={`hdr-status ${status.on ? "is-on" : ""}`} href={href(status.to)} title={status.text} aria-label={status.text}><i aria-hidden="true" /><span>{status.text}</span></a>}
+      </div>
       <nav className={`site-nav ${open ? "open" : ""}`} aria-label="Main">
         <a className="nav-link nav-phone" href={href("bikes")} onClick={() => { setOpen(false); toFinder(); }} aria-current={at("bikes", "object")}>Find a bike</a>
         <a className="nav-link" href={href("add/1")} aria-current={at("add", "my-objects", "confirm-return")}>Rent out your bike</a>

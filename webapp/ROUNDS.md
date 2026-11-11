@@ -1591,6 +1591,23 @@ Each group has a short heading. On a phone the carousel is unchanged (one card a
 
 **Test:** a step back: on the blurred shots the photos are calmer; not another screen, and not meant to be.
 
+## Round 106 · The header says what the real bike is doing now
+
+**Hierarchy audit (the header):** logo, two sections, the account or "Connect wallet", "Find a bike". Correct and timeless in the bad sense: nothing in it changes during the day. The café's header says "Closed, opens tomorrow at 6am", then "Order, ready by 6:05am": the shop is alive before you scroll.
+
+**What changed:** beside the logo, a small status pill about the one real bike, read from the same data as the map: "● The demo bike is free, outside Bocconi" (blue dot, slow pulse) or "● The demo bike is out on a ride" (grey dot). It links to the bike. From 860 to 1240 px it shrinks to the dot (with the sentence as its name and tooltip); on phones it's hidden (the Home's first card says the same).
+
+**Levels:** tertiary: small, sand, beside the logo; "Find a bike" stays the only filled button. **Café test:** closer: the site now has a "now". Still missing a place with a street name on the Home, and a scene-like owners' band.
+
+**References:** the café's opening-hours pill; Linear's header changelog pill (a small live note beside the logo, never louder than the action).
+
+**Three ideas:** (1) a live status pill for the real bike. (2) Opening hours of the owner's shop. (3) A ticker of recent rentals.
+**Discarded:** (2) we have no hours to show: inventing them would be false. (3) a ticker of activity in a demo with one bike would be noise pretending to be traffic.
+
+**Chosen, (1):** [free, out on a ride, connected, at 1024](rounds/106-header-status.jpg). First tried on the right, beside the buttons: it collided with the sections and squeezed "Find a bike" onto three lines; it went to the left, where the logo's column has room.
+
+**Test on the blurred shots:** a small change by design; the header now has a third mass beside the logo.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1603,7 +1620,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Home: owners band | 80 |
 | Home: try the rule (and Rule step) | 104 |
 | Home: find a bike (grid + map) | 103 |
-| Header | 77 |
+| Header | 106 |
 | Page transitions | 88 |
 | Live rental strip | 94 |
 | Footer | 102 (dark) |
