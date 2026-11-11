@@ -350,3 +350,12 @@ p, li, dd { text-wrap: pretty; }
 .sticky-inner { padding: 12px 14px 12px 22px; }
 .sticky-name { font-weight: 650; letter-spacing: -0.02em; }
 .page:has(.sticky-action.is-shown) .demo { margin-bottom: 84px; }
+
+/* ---------- Round 41: a designed close ---------- */
+.site-end { margin-top: clamp(64px, 9vw, 128px); background: var(--surface); overflow: clip; }
+.site-end-inner { max-width: var(--max); margin: 0 auto; padding: clamp(40px, 6vw, 80px) var(--gutter) 28px; }
+.site-end-name { font-family: var(--display); font-weight: 700; font-size: clamp(88px, 21vw, 320px); line-height: .8; letter-spacing: -0.07em; color: var(--blue); margin: 0 0 12px -0.04em; user-select: none; }
+.site-end-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 40px; padding-top: 28px; font-size: 15px; color: var(--fog); }
+.site-end-row p { max-width: 46ch; }
+.site-end-row nav { display: flex; gap: 24px; flex-wrap: wrap; }
+.site-end-row .link { font-size: 15px; }

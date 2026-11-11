@@ -2,6 +2,7 @@
 // Content is the approved wireframe's (src/wireframes/SystemDiagram.tsx is the single source of the scheme).
 import { SiteHeader } from "../components/SiteHeader";
 import { DemoSwitcher } from "../components/DemoSwitcher";
+import { SiteFooter } from "../components/SiteFooter";
 import { LIMITS, STAGES } from "../wireframes/SystemDiagram";
 import "./object-page.css";
 import "./site.css";
@@ -123,6 +124,7 @@ export function DesignPage() {
           <dl className="numbers">{NUMBERS.map((n) => <div key={n.l}><dt className="mono">{n.v}<span>{n.u}</span></dt><dd>{n.l}</dd></div>)}</dl>
         </section>
       </main>
+      <SiteFooter />
       <DemoSwitcher />
     </div>
   );

@@ -5,6 +5,7 @@ import { useViewer } from "../ui/viewer";
 import { SiteHeader } from "../components/SiteHeader";
 import { Moments } from "../components/HowItWorks";
 import { DemoSwitcher } from "../components/DemoSwitcher";
+import { SiteFooter } from "../components/SiteFooter";
 import { FleetMap, type LatLon } from "../components/FleetMap";
 import { RuleSimulator } from "../components/RuleSimulator";
 import { BikeDetail, BikePhoto, BlackBoxLine, LiveBadge } from "../components/BikeCard";
@@ -188,7 +189,7 @@ export function HomePage() {
           </section>
         </div>
       </main>
-      <footer className="site-foot">Sharify is a course project at Bocconi (30518). It runs on a test network: no real money moves. <a className="link" href={href("design")}>How Sharify is designed</a></footer>
+      <SiteFooter />
     </div>
   );
 }

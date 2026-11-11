@@ -397,3 +397,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Chrome DevTools' CSS coverage tool (unused rules): https://developer.chrome.com/docs/devtools/coverage
 - **Shots:** none
 - **Lines:** 6361
+
+## Round 41 · The name comes back at full width
+
+- **What:** The footer of Home and of the design page is now a warm band with the name set huge in the brand blue, the honest test-network sentence and the two ways on underneath, instead of a grey line of small type.
+- **Why:** A page should end on its name, like a book's last page. It is also the most memorable pixel after the hero.
+- **Reference:** Linear.app and Resend.com footers: the wordmark scaled to the full container width: https://resend.com
+- **Shots:** [1440 px](rounds/41-1440.jpg)
+- **Lines:** 6389
