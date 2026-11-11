@@ -15,7 +15,7 @@
 .source .fresh { color: var(--dim); }
 .live { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 3px rgba(2, 151, 222, .18); }
 .live.down { background: transparent; border: 1px solid var(--dim); box-shadow: none; }
-.sample { color: var(--blue-ink); border: 1px solid rgba(2, 151, 222, .5); border-radius: var(--radius); padding: 1px 9px; font-size: 11px; }
+.sample { color: var(--blue-ink); border: 1px solid rgba(2, 151, 222, .5); border-radius: 999px; padding: 1px 9px; font-size: 11px; }
 
 /* ---------- hero ---------- */
 .hero { position: relative; overflow: hidden; text-align: center; padding: clamp(32px, 4.5vw, 64px) 0 clamp(40px, 5vw, 64px); isolation: isolate; }

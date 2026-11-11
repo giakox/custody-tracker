@@ -16,7 +16,15 @@ export const objectName = (o: { id: number; label: string | null }, start = true
 };
 
 export const g = (cg: number) => `${(cg / 100).toFixed(1)}\u00a0g`; // never split "41.2" from "g"
-export const usd = (s: string) => `${s} dUSD`;
+/** Money for people: "50 dollars". It's test money (dUSD on Base Sepolia); each page says so once.
+ *  The token name "dUSD" stays only where the contract is the subject (Verify, Design, receipt footnote). */
+export const usd = (s: string) => {
+  const n = Number(s);
+  const v = Number.isInteger(n) ? String(n) : n.toFixed(2);
+  return `${v} ${n === 1 ? "dollar" : "dollars"}`;
+};
+export const dusd = (s: string) => `${s} dUSD`;
+export const TEST_MONEY = "Test money: no real dollars move.";
 
 const timeFmt = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit" });
 const secFmt = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
@@ -32,8 +40,27 @@ export function ago(ms: number, now = Date.now()) {
   return m < 60 ? `${m} min ago` : `${Math.round(m / 60)} h ago`;
 }
 
+/** For sentences: "just now", "12 minutes ago", "3 hours ago", "yesterday", "on 9 Nov". */
+export function when(ms: number, now = Date.now()) {
+  const m = Math.round((now - ms) / 60_000);
+  if (m < 1) return "just now";
+  if (m < 60) return m === 1 ? "a minute ago" : `${m} minutes ago`;
+  const h = Math.round(m / 60);
+  if (h < 24) return h === 1 ? "an hour ago" : `${h} hours ago`;
+  return h < 48 ? "yesterday" : `on ${day(ms)}`;
+}
+/** For narrow columns: "now", "12 min ago", "3 h ago", "9 Nov". */
+export function whenShort(ms: number, now = Date.now()) {
+  const m = Math.round((now - ms) / 60_000);
+  if (m < 1) return "now";
+  if (m < 60) return `${m} min ago`;
+  const h = Math.round(m / 60);
+  return h < 24 ? `${h} h ago` : day(ms);
+}
+
 export function span(fromMs: number, toMs: number | null) {
   const mins = Math.round(((toMs ?? Date.now()) - fromMs) / 60_000);
+  if (mins < 1) return "under a minute";
   return mins < 60 ? `${mins} min` : `${Math.floor(mins / 60)} h ${mins % 60} min`;
 }
 

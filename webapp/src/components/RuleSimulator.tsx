@@ -27,23 +27,23 @@ export function RuleSimulator({ terms }: { terms: Terms }) {
     <section className={`sim tier-${tier}`} aria-label="Try the rule">
       <div className="sim-top">
         <div>
-          <p className="sim-k mono">If the worst shock of your rental were</p>
+          <p className="sim-k">If the hardest knock of your ride were</p>
           <p className={`sim-peak mono ${tier ? "shock" : ""}`}>{g(cg)}</p>
         </div>
         <div className="sim-out">
-          <p className="sim-k mono">you'd get back</p>
+          <p className="sim-k">you'd get back</p>
           <p className="sim-back mono">{usd(String(c - fee))}</p>
-          <p className="sim-fee mono">{tier ? `${usd(String(fee))} withheld · ${TIER_NAMES[tier]}` : "nothing withheld"}</p>
+          <p className="sim-fee">{tier ? `${usd(String(fee))} kept for a ${TIER_NAMES[tier]} knock` : "nothing kept"}</p>
         </div>
       </div>
       <div className="sim-track">
         <input type="range" min={0} max={1} step={0.001} value={pos} onChange={(e) => setPos(Number(e.target.value))}
-          aria-label="Worst shock of the rental" aria-valuetext={`${g(cg)}, ${TIER_NAMES[tier]}, ${usd(String(c - fee))} back`} />
+          aria-label="Hardest knock of the ride" aria-valuetext={`${g(cg)}, ${TIER_NAMES[tier]}, ${usd(String(c - fee))} back`} />
         <div className="sim-ticks" aria-hidden="true">
           {[terms.lightCg, terms.mediumCg, terms.strongCg].map((t) => <i key={t} style={{ left: `${toPos(t) * 100}%` }}><span className="mono">{g(t)}</span></i>)}
         </div>
         <div className="sim-examples">
-          {EXAMPLES.map((e) => <button key={e.label} type="button" className="mono" style={{ left: `${toPos(e.cg) * 100}%` }} onClick={() => setPos(toPos(e.cg))}>{e.label}</button>)}
+          {EXAMPLES.map((e) => <button key={e.label} type="button" style={{ left: `${toPos(e.cg) * 100}%` }} onClick={() => setPos(toPos(e.cg))}>{e.label}</button>)}
         </div>
       </div>
       <RuleTiers terms={terms} highlight={tier} />

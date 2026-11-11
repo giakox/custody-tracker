@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import type { ObjectDetail } from "../data/types";
 import { buildStory, type Chapter, type StoryEvent } from "../ui/story";
-import { day, g, hm, inSentence, nameOf, possessive, shortHex, span, TIER_NAMES, txUrl, usd } from "../ui/format";
+import { day, g, hm, inSentence, nameOf, possessive, shortHex, span, TIER_NAMES, txUrl, usd, whenShort } from "../ui/format";
 import { TierMeter } from "./TierMeter";
 
 function Tx({ explorer, tx }: { explorer: string | null; tx: string }) {
@@ -61,7 +61,7 @@ function ChapterBlock({ c, d, explorer }: { c: Chapter; d: ObjectDetail; explore
       <header className="chapter-head">
         <h3>{who}</h3>
         <p className="mono">
-          {day(c.start)}, {hm(c.start)}{c.end ? `–${hm(c.end)}` : ", now"} <span className="sep" aria-hidden="true">/</span> {span(c.start, c.end)}
+          {c.end ? <>{whenShort(c.start)}, for {span(c.start, c.end)}</> : <>{span(c.start, null)} so far</>}<span className="proof-only"> <span className="sep" aria-hidden="true">/</span> {day(c.start)}, {hm(c.start)}{c.end ? `–${hm(c.end)}` : ", now"}</span>
           <span className="proof-only"><span className="sep" aria-hidden="true">/</span> {peak}{c.maxPeakCg !== null && c.maxPeakCg < d.terms.lightCg ? `, nothing above ${g(d.terms.lightCg)}` : ""}</span>
         </p>
       </header>
@@ -71,7 +71,7 @@ function ChapterBlock({ c, d, explorer }: { c: Chapter; d: ObjectDetail; explore
             const s = sentence(e);
             return (
               <li key={i} className={`event ${s.tone ?? ""}`}>
-                <time className="mono" dateTime={new Date(e.at.at).toISOString()}>{hm(e.at.at)}</time>
+                <time className="mono" dateTime={new Date(e.at.at).toISOString()} title={`${day(e.at.at)}, ${hm(e.at.at)}`}>{whenShort(e.at.at)}</time>
                 <p>{s.text}{s.extra && <span className="event-extra">{s.extra}</span>}</p>
                 <Tx explorer={explorer} tx={e.at.tx} />
               </li>

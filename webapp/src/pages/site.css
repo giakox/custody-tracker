@@ -10,14 +10,12 @@
 }
 .site-header .wordmark { display: block; line-height: 0; }
 .site-header .wordmark img { height: 28px; width: auto; display: block; }
-.site-header .wordmark .logo-light { display: var(--logo-light); }
-.site-header .wordmark .logo-dark { display: var(--logo-dark); }
-.site-header .sample { color: var(--blue-ink); border: 1px solid rgba(2, 151, 222, .5); border-radius: var(--radius); padding: 1px 9px; font-size: 11px; white-space: nowrap; }
+.site-header .sample { color: var(--blue-ink); border: 1px solid rgba(2, 151, 222, .5); border-radius: 999px; padding: 1px 9px; font-size: 11px; white-space: nowrap; }
 .site-nav { margin-left: auto; display: flex; align-items: center; gap: 22px; }
 .site-nav + .site-wallet { margin-left: 8px; }
 .nav-link { font-size: 16px; color: var(--mist); text-decoration: none; }
 .nav-link:hover { color: var(--ink); }
-.acct { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--mist); border: 1px solid var(--line-strong); border-radius: var(--radius); padding: 5px 12px; }
+.acct { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--mist); border: 1px solid var(--line-strong); border-radius: 999px; padding: 5px 12px; }
 .acct i { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
 
 /* ---------- buttons: blue is "you can act"; text on blue is always Midnight Black ---------- */
@@ -103,7 +101,7 @@
 
 /* ---------- demo switcher: for the presentation, not part of the product ---------- */
 
-.demo-toggle { background: var(--bg); color: var(--dim); border: 1px solid var(--line-strong); border-radius: var(--radius); padding: 5px 12px; font-size: 11px; cursor: pointer; opacity: .7; }
+.demo-toggle { background: var(--bg); color: var(--dim); border: 1px solid var(--line-strong); border-radius: 999px; padding: 5px 12px; font-size: 11px; cursor: pointer; opacity: .7; }
 .demo-toggle:hover, .demo.open .demo-toggle { opacity: 1; color: var(--mist); }
 .demo-panel { background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius); padding: 12px 14px; width: 260px; display: grid; gap: 10px; font: 12px/1.4 var(--ui); color: var(--fog); }
 .demo-panel label { display: grid; gap: 4px; }

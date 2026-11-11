@@ -12,12 +12,12 @@ export function Moments() {
           <p>You see the price, the deposit and the rule for drops before you pay anything.</p>
         </li>
         <li>
-          <img src="./img/recorder-product.jpg" alt="The Sharify recorder: a small black box with a blue light, and its strap" loading="lazy" />
+          <img src="./img/day/recorder-hand.jpg" alt="A hand holding the Sharify recorder, a small black box with a blue light, next to a bike" loading="lazy" />
           <h3>Ride. A small box rides along.</h3>
           <p>It notes every hard knock and seals each note, so nobody can change it afterwards: not you, not the owner, not us.</p>
         </li>
         <li>
-          <img src="./img/fleet/s5.jpg" alt="A green city bike with a wicker basket, parked by the canal" loading="lazy" />
+          <img src="./img/day/return-smile.jpg" alt="A young woman hands a bike back to its owner, both smiling, outside a bike shop" loading="lazy" />
           <h3>Bring it back.</h3>
           <p>When the owner confirms it's back, your deposit comes back by itself: all of it, or minus what the rule says for a drop.</p>
         </li>

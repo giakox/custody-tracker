@@ -10,7 +10,7 @@ export const LiveBadge = ({ live }: { live: boolean }) =>
 
 /** The owner's photo of the bike (one per bike in public/img/fleet; the live bike is "demo"). */
 export function BikePhoto({ b, className = "" }: { b: FleetBike; className?: string }) {
-  const src = `./img/fleet/${b.live ? "demo" : b.key}.jpg`;
+  const src = b.live ? "./img/day/bocconi-park.jpg" : `./img/fleet/${b.key}.jpg`;
   return <img className={`bike-photo ${className}`} src={src} alt={`${b.label}, parked`} loading="lazy" />;
 }
 
@@ -64,8 +64,8 @@ export function BikeDetail({ b, distance, onClose, onShowLive }: { b: FleetBike;
         </div>
       </div>
       <dl className="bike-facts">
-        <div><dt>Price</dt><dd className="mono">{b.pricePerHour} dUSD an hour</dd></div>
-        <div><dt>Deposit</dt><dd className="mono">{b.deposit} dUSD</dd></div>
+        <div><dt>Price</dt><dd className="mono">{b.pricePerHour} dollars an hour</dd></div>
+        <div><dt>Deposit</dt><dd className="mono">{b.deposit} dollars</dd></div>
       </dl>
       <div className="bb">
         <p className="bb-title">Its record</p>

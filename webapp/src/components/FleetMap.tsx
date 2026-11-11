@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import L from "leaflet";
-import { tileLayers } from "../ui/theme";
+import { TILES } from "../ui/tiles";
 import "leaflet/dist/leaflet.css";
 import type { FleetBike } from "../data/types";
 
@@ -33,12 +33,7 @@ export function FleetMap({ bikes, center, me, selected, onSelect, padding }: {
     if (!el.current || map.current) return;
     const m = L.map(el.current, { zoomControl: false, attributionControl: true, maxZoom: 16, zoomSnap: 0.25 }).setView([center.lat, center.lon], 15);
     L.control.zoom({ position: "bottomright" }).addTo(m);
-    // Night: Esri's dark grey canvas (no API key; CARTO now needs one, and a key in a public front-end
-    // would be a secret in the repo). Light themes: OpenStreetMap, warmed by the theme's CSS filter.
-    for (const t of tileLayers()) {
-      L.tileLayer(t.url, { maxZoom: 16, attribution: t.attribution }).addTo(m);
-      if (t.overlay) L.tileLayer(t.overlay, { maxZoom: 16, pane: "overlayPane" }).addTo(m);
-    }
+    L.tileLayer(TILES.url, { maxZoom: 16, attribution: TILES.attribution }).addTo(m);
     m.on("click", () => onSelect(null));
     meLayer.current = L.layerGroup().addTo(m);
     map.current = m;

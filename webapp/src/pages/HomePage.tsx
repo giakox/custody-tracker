@@ -24,9 +24,9 @@ function Earnings() {
   return (
     <div className="own-cta earn">
       <h3>What could your bike earn?</h3>
-      <label className="earn-row"><span>Price per hour</span><input type="range" min={1} max={4} step={0.5} value={price} onChange={(e) => setPrice(Number(e.target.value))} /><b className="mono">{price} dUSD</b></label>
+      <label className="earn-row"><span>Price per hour</span><input type="range" min={1} max={4} step={0.5} value={price} onChange={(e) => setPrice(Number(e.target.value))} /><b className="mono">{price} dollars</b></label>
       <label className="earn-row"><span>Hours rented a week</span><input type="range" min={1} max={40} step={1} value={hours} onChange={(e) => setHours(Number(e.target.value))} /><b className="mono">{hours} h</b></label>
-      <p className="earn-out"><span className="mono">≈ {month} dUSD</span> a month</p>
+      <p className="earn-out"><span className="mono">≈ {month} dollars</span> a month</p>
       <p className="earn-note">Your price times your hours: an estimate, not a promise. If someone drops your bike, the rule you set decides what you get from their deposit.</p>
       <a className="btn btn-primary" href={href("add/1")}>Rent out your bike</a>
     </div>
@@ -69,7 +69,7 @@ export function HomePage() {
     <div className="fleet-list">
       <div className="fleet-list-head">
         <h2>{bikes.length} bikes free {me ? "near you" : "around Bocconi"}</h2>
-        <p className="muted">Nearest first. Bikes out on a ride aren't shown: where they are is where someone is.</p>
+        <p className="muted">Nearest first. Bikes out on a ride aren't shown: where they are is where someone is. Prices are in test dollars: no real money moves.</p>
         {!live && fleet.data && <p className="note">{rentingIt ? "You have the live bike right now, so it isn't on the map." : "The live bike is out on a rental right now, so it isn't on the map."}</p>}
       </div>
       <ol>
@@ -79,7 +79,7 @@ export function HomePage() {
               <BikePhoto b={b} className="row-photo" />
               <span className="row-body">
                 <span className="row-top"><span className="row-name">{b.label}</span><span className="mono row-dist">{distanceText(d)}</span></span>
-                <span className="row-meta"><LiveBadge live={b.live} /><span className="mono">{b.pricePerHour} dUSD an hour</span></span>
+                <span className="row-meta"><LiveBadge live={b.live} /><span className="mono">{b.pricePerHour} dollars an hour</span></span>
                 <BlackBoxLine b={b} />
               </span>
             </button>
@@ -135,7 +135,7 @@ export function HomePage() {
                   <button type="button" className="nearest-info" onClick={() => select(live.b.key)}>
                     <span className="nearest-k mono">Nearest · {distanceText(live.d)} · {walkText(live.d)}</span>
                     <span className="nearest-name">{live.b.label}</span>
-                    <span className="nearest-meta mono"><LiveBadge live />{live.b.pricePerHour} dUSD an hour · {live.b.deposit} dUSD deposit</span>
+                    <span className="nearest-meta mono"><LiveBadge live />{live.b.pricePerHour} dollars an hour · deposit {live.b.deposit}</span>
                   </button>
                   <div className="nearest-actions">
                     <a className="btn btn-primary" href={href(`rent/${live.b.objectId}`)}>Rent</a>

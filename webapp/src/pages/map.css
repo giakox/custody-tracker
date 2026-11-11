@@ -15,7 +15,7 @@
 .pin { position: relative; display: grid; place-items: center; width: 36px; height: 36px; }
 .pin-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 3px var(--overlay), 0 0 0 4px rgba(2, 151, 222, .55); transition: transform .15s ease; }
 .pin-live .pin-dot { width: 18px; height: 18px; background: var(--ink); box-shadow: 0 0 0 3px var(--blue), 0 0 0 9px rgba(2, 151, 222, .25); }
-.pin-tag { position: absolute; left: 30px; top: 9px; font: 500 10px/1 var(--ui); color: var(--on-blue); background: var(--blue); padding: 3px 5px; border-radius: var(--radius); white-space: nowrap; }
+.pin-tag { position: absolute; left: 30px; top: 9px; font: 500 10px/1 var(--ui); color: var(--on-blue); background: var(--blue); padding: 3px 5px; border-radius: 999px; white-space: nowrap; }
 .pin-drop { position: absolute; right: 6px; top: 6px; width: 7px; height: 7px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 2px var(--bg); }
 .pin.is-selected .pin-dot { transform: scale(1.45); }
 .me-dot { display: block; width: 14px; height: 14px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 3px var(--blue); }
@@ -48,7 +48,7 @@
 .row-meta { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; font-size: 12px; color: var(--fog); }
 
 /* badges and black-box line */
-.badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; padding: 2px 8px; border-radius: var(--radius); white-space: nowrap; }
+.badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
 .badge-live { color: var(--on-blue); background: var(--blue); }
 .badge-live i { width: 6px; height: 6px; border-radius: 50%; background: var(--bg); }
 .badge-sample { color: var(--fog); border: 1px dashed var(--line-strong); }
@@ -58,7 +58,7 @@
 
 /* detail (panel on desktop, sheet on phones) */
 .bike-detail { position: relative; padding: 22px; }
-.sheet-close { position: absolute; top: 16px; right: 16px; background: none; border: 1px solid var(--line-strong); color: var(--mist); border-radius: var(--radius); padding: 4px 10px; font-size: 11px; cursor: pointer; }
+.sheet-close { position: absolute; top: 16px; right: 16px; background: none; border: 1px solid var(--line-strong); color: var(--mist); border-radius: 999px; padding: 4px 10px; font-size: 11px; cursor: pointer; }
 .bike-detail-top { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; align-items: center; margin-top: 8px; }
 .bike-thumb { width: 120px; height: auto; background: var(--raise); border: 1px solid var(--line); border-radius: var(--radius); padding: 8px; }
 .bike-detail h2 { font-size: 26px; line-height: 1.1; margin-top: 8px; letter-spacing: -0.01em; }
@@ -99,7 +99,7 @@
   .leaflet-control-zoom { display: none; } /* pinch to zoom; the buttons would sit under the sheet */
   .sheet { display: block; position: absolute; left: 0; right: 0; bottom: 0; z-index: 800; max-height: 72%; overflow-y: auto;
     background: var(--bg); border-top: 1px solid var(--line-strong); border-radius: var(--radius) var(--radius) 0 0; box-shadow: 0 -12px 40px var(--shadow); }
-  .sheet::before { content: ""; display: block; width: 40px; height: 4px; border-radius: var(--radius); background: var(--line-strong); margin: 8px auto 0; }
+  .sheet::before { content: ""; display: block; width: 40px; height: 4px; border-radius: 999px; background: var(--line-strong); margin: 8px auto 0; }
   .bike-detail-top { grid-template-columns: 88px minmax(0, 1fr); }
   .bike-thumb { width: 88px; }
   .bike-detail h2 { font-size: 22px; }
@@ -137,7 +137,7 @@
   .strip { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 4px 12px; position: absolute; left: 0; right: 0; bottom: 0; z-index: 700;
     background: var(--bg); border: 0; border-top: 1px solid var(--line-strong); border-radius: var(--radius) var(--radius) 0 0; padding: 18px var(--gutter) 16px; color: var(--ink); font: 17px/1.2 var(--text); text-align: left; cursor: pointer; }
   .strip b { font-weight: 400; }
-  .strip-grip { position: absolute; top: 7px; left: 50%; width: 40px; height: 4px; margin-left: -20px; border-radius: var(--radius); background: var(--line-strong); }
+  .strip-grip { position: absolute; top: 7px; left: 50%; width: 40px; height: 4px; margin-left: -20px; border-radius: 999px; background: var(--line-strong); }
   .strip-cta { font-size: 12px; color: var(--blue-ink); }
 }
 
@@ -170,7 +170,7 @@
 /* Round 5: the owner's entry is an estimate they control. */
 .earn { display: grid; gap: 14px; }
 .earn h3 em { font-style: var(--em-style); }
-.earn-row { display: grid; grid-template-columns: 150px minmax(0, 1fr) 72px; gap: 14px; align-items: center; font-size: 15px; color: var(--mist); }
+.earn-row { display: grid; grid-template-columns: 150px minmax(0, 1fr) 96px; gap: 14px; align-items: center; font-size: 15px; color: var(--mist); }
 .earn-row input { accent-color: var(--blue); width: 100%; }
 .earn-row b { font-weight: 400; color: var(--ink); text-align: right; }
 .earn-out { font-size: 18px; color: var(--mist); margin: 4px 0 0 !important; }
@@ -178,7 +178,7 @@
 .earn-note { font-size: 14px !important; color: var(--fog) !important; margin: 0 !important; }
 .earn .btn { justify-self: start; }
 @media (max-width: 640px) {
-  .earn-row { grid-template-columns: minmax(0, 1fr) 64px; }
+  .earn-row { grid-template-columns: minmax(0, 1fr) 96px; }
   .earn-row span { grid-column: 1 / -1; }
   .earn-out .mono { font-size: 32px; }
 }

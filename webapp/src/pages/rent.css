@@ -11,7 +11,7 @@
 .back { font-size: 13px; }
 .back::before { content: "‹ "; }
 .rent-progress { list-style: none; margin: 0; padding: 0; display: flex; gap: 4px; counter-reset: s; }
-.rent-progress li { counter-increment: s; font: 12px/1 var(--ui); color: var(--dim); padding: 7px 10px; border: 1px solid var(--line); border-radius: var(--radius); }
+.rent-progress li { counter-increment: s; font: 12px/1 var(--ui); color: var(--dim); padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; }
 .rent-progress li::before { content: counter(s) " "; color: var(--dim); }
 .rent-progress li.done { color: var(--fog); border-color: var(--line-strong); }
 .rent-progress li.current { color: var(--on-blue); background: var(--blue); border-color: var(--blue); }
@@ -23,7 +23,7 @@
 .facts dd { margin: 4px 0 0; font-size: 18px; color: var(--ink); }
 .facts dd.tag { font-size: 11px; color: var(--dim); }
 .facts dd.shock, .shock { color: var(--orange-ink); }
-.tag { font-size: 11px; color: var(--dim); border: 1px dashed var(--line-strong); border-radius: var(--radius); padding: 1px 8px; white-space: nowrap; }
+.tag { font-size: 11px; color: var(--dim); border: 1px solid var(--line-strong); border-radius: 999px; padding: 1px 8px; white-space: nowrap; }
 .facts dd.tag { border: 0; padding: 0; }
 .rent .rule-tiers { max-width: none; margin-top: 18px; }
 .fine { margin: 18px 0 0; padding-left: 18px; color: var(--fog); font-size: 15px; display: grid; gap: 6px; }
@@ -34,7 +34,7 @@
 .btn.is-off { opacity: .35; cursor: not-allowed; }
 .btn:disabled { opacity: .5; cursor: progress; }
 .hint-line { margin-top: 10px; font-size: 14px; color: var(--fog); }
-.notice { margin-top: 24px; padding: 14px 16px; border: 1px solid var(--line-strong); border-left: 2px solid var(--blue); font-size: 16px; color: var(--mist); }
+.notice { margin-top: 24px; padding: 14px 16px; border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--surface); font-size: 16px; color: var(--mist); }
 .notice.error { border-left-color: var(--ink); color: var(--ink); }
 
 .wallets { display: grid; gap: 10px; margin-top: 28px; max-width: 420px; }
@@ -124,7 +124,7 @@
   .actions .btn { flex: 1 1 100%; }
 }
 @media print {
-  :root, :root[data-theme] { --bg: #fff; --surface: #fff; --ink: #000; --mist: #222; --fog: #444; --dim: #555; --line: #ccc; --line-strong: #999; --raise: #f4f4f4; }
+  :root { --bg: #fff; --surface: #fff; --ink: #000; --mist: #222; --fog: #444; --dim: #555; --line: #ccc; --line-strong: #999; --raise: #f4f4f4; }
   .site-header, .demo, .actions, .back { display: none !important; }
   body { background: #fff; }
 }
@@ -185,7 +185,7 @@
 .sim.tier-1 .sim-track input, .sim.tier-2 .sim-track input, .sim.tier-3 .sim-track input { accent-color: var(--orange); }
 .sim-ticks i { position: absolute; top: -4px; width: 1px; height: 36px; background: var(--line-strong); }
 .sim-ticks span { position: absolute; top: -16px; left: 4px; font-size: 10px; color: var(--dim); white-space: nowrap; }
-.sim-examples button { position: absolute; top: 36px; transform: translateX(-50%); background: none; border: 1px solid var(--line); border-radius: var(--radius); padding: 3px 8px; font-size: 11px; color: var(--fog); cursor: pointer; white-space: nowrap; }
+.sim-examples button { position: absolute; top: 36px; transform: translateX(-50%); background: none; border: 1px solid var(--line); border-radius: 999px; padding: 3px 8px; font-size: 11px; color: var(--fog); cursor: pointer; white-space: nowrap; }
 .sim-examples button:hover { border-color: var(--blue); color: var(--ink); }
 .sim .rule-tiers { margin-top: 0; }
 .sim .hint-line { font-size: 13px; }

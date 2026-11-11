@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { ObjectDetail, Party, Rental } from "../data/types";
-import { hm, inSentence, nameOf, objectName, possessive, shortHex, usd, TIER_NAMES } from "../ui/format";
+import { day, hm, inSentence, TEST_MONEY, when, nameOf, objectName, possessive, shortHex, usd, TIER_NAMES } from "../ui/format";
 import { href } from "../ui/router";
 import { relation, useViewer } from "../ui/viewer";
 import { ObjectImage } from "./ObjectImage";
@@ -22,32 +22,33 @@ function Title({ d }: { d: ObjectDetail }) {
 function Summary({ d }: { d: ObjectDetail }) {
   const r: Rental | null = d.activeRental;
   if (d.pendingHandoff && d.pendingHandoff.to.role !== "owner") {
-    return <>Offered at <T ms={d.pendingHandoff.anchor.at} />. The rental starts when {nameOf(d.pendingHandoff.to)} accepts and leaves the {usd(d.terms.collateral)} deposit.</>;
+    return <>Offered <T ms={d.pendingHandoff.anchor.at} />. The rental starts when {nameOf(d.pendingHandoff.to)} accepts and leaves a deposit of {usd(d.terms.collateral)}.</>;
   }
   if (d.pendingHandoff) {
-    return <>Handed back at <T ms={d.pendingHandoff.anchor.at} />. When the owner confirms, the deposit is settled by itself.</>;
+    return <>Handed back <T ms={d.pendingHandoff.anchor.at} />. When the owner confirms, the deposit is settled by itself.</>;
   }
   if (d.status === "held-without-deposit") {
     return <>{nameOf(d.custodian)} took the bike but no deposit arrived. Drops are still recorded under {nameOf(d.custodian)}'s name.</>;
   }
   if (r?.current) {
     const c = r.current;
-    if (c.peakCg === null || c.tier === 0) return <>Since <T ms={r.started.at} />, with a {usd(r.collateral)} deposit. No drops so far: all of it would come back.</>;
-    return <>Since <T ms={r.started.at} />, with a {usd(r.collateral)} deposit. It was dropped: a <strong className="shock">{TIER_NAMES[c.tier]}</strong> knock, so {usd(c.wouldWithhold)} would be kept.</>;
+    if (c.peakCg === null || c.tier === 0) return <>Rented <T ms={r.started.at} />, with a deposit of {usd(r.collateral)}. No drops so far: all of it would come back.</>;
+    return <>Rented <T ms={r.started.at} />, with a deposit of {usd(r.collateral)}. It was dropped: a <strong className="shock">{TIER_NAMES[c.tier]}</strong> knock, so {usd(c.wouldWithhold)} would be kept.</>;
   }
   const last = d.rentals.filter((x) => x.settlement).at(-1);
   if (last?.settlement) {
     const s = last.settlement;
     return s.tier === 0
-      ? <>The last rental, {possessive(last.renter)}, ended at <T ms={s.anchor.at} /> with no drops. The whole {usd(last.collateral)} deposit went back.</>
-      : <>The last rental, {possessive(last.renter)}, ended at <T ms={s.anchor.at} /> with a <strong className="shock">{TIER_NAMES[s.tier]}</strong> knock. {Number(s.refund) === 0
+      ? <>The last rental, {possessive(last.renter)}, ended <T ms={s.anchor.at} /> with no drops. The whole deposit of {usd(last.collateral)} went back.</>
+      : <>The last rental, {possessive(last.renter)}, ended <T ms={s.anchor.at} /> with a <strong className="shock">{TIER_NAMES[s.tier]}</strong> knock. {Number(s.refund) === 0
         ? <>By the rule, the whole {usd(s.fee)} was kept.</>
         : <>By the rule, {usd(s.fee)} was kept and {usd(s.refund)} went back.</>}</>;
   }
-  return <>On Sharify since <T ms={d.created.at} />. Nobody has rented it yet.</>;
+  return <>Joined Sharify <T ms={d.created.at} />. Nobody has rented it yet.</>;
 }
 
-const T = ({ ms }: { ms: number }) => <time dateTime={new Date(ms).toISOString()}>{hm(ms)}</time>;
+/** Relative time in sentences ("12 minutes ago"); the clock time is in the tooltip. */
+const T = ({ ms }: { ms: number }) => <time dateTime={new Date(ms).toISOString()} title={`${day(ms)}, ${hm(ms)}`}>{when(ms)}</time>;
 
 /** The action at the top depends on who is looking (approved wireframe). */
 export function Action({ d, me, compact = false }: { d: ObjectDetail; me: Party | null; compact?: boolean }) {
@@ -66,7 +67,7 @@ export function Action({ d, me, compact = false }: { d: ObjectDetail; me: Party 
     return <p className="action-note">Come back later, or ask the owner for another bike.</p>;
   }
   if (r.isOwner) return <a className="btn btn-secondary" href={href("my-objects")}>Manage</a>;
-  return <a className="btn btn-primary" href={href(`rent/${id}`)}>{compact ? "Rent" : <>Rent this bike · {deposit} deposit</>}</a>;
+  return <a className="btn btn-primary" href={href(`rent/${id}`)}>{compact ? "Rent" : "Rent this bike"}</a>;
 }
 
 /** Title for this viewer: the italic word is who has it, or what is missing. */
@@ -88,7 +89,7 @@ function shortStatus(d: ObjectDetail, me: Party | null) {
   if (r.isCustodian && c) return !c.tier ? "Out with you · no drops so far" : `Out with you · a ${TIER_NAMES[c.tier]} knock`;
   if (d.pendingHandoff?.to.role === "owner") return "Being returned";
   if (d.status === "rented") return `Rented by ${nameOf(d.custodian)}`;
-  return `Available · ${usd(d.terms.collateral)} deposit`;
+  return `Available · deposit ${usd(d.terms.collateral)}`;
 }
 
 /** Keeps the page's one action in reach once the top block has scrolled away (Airbnb's pinned "Reserve"). */
@@ -126,12 +127,12 @@ export function Hero({ d }: { d: ObjectDetail }) {
         <div className="actions"><Action d={d} me={account} /></div>
         <div className="rule-card">
           <h2 className="rule-title">If it's dropped, this rule decides. Not the owner, not us.</h2>
-          <p className="rule-sub">You leave a {usd(d.terms.collateral)} deposit. The hardest knock of your ride decides how much comes back.</p>
+          <p className="rule-sub">You leave a deposit of {usd(d.terms.collateral)}. The hardest knock of your ride decides how much comes back. <span className="test-money">{TEST_MONEY}</span></p>
           <RuleTiers terms={d.terms} highlight={d.activeRental?.current ? d.activeRental.current.tier : undefined} />
         </div>
         <StateLine d={d} />
       </div>
-      <ObjectImage src="./img/fleet/demo.jpg" alt={`${objectName(d)}, parked in the street`} alert={alert} deviceId={d.deviceId} />
+      <ObjectImage alert={alert} deviceId={d.deviceId} />
       {alert && <p className="sr-only">Shock level of the current rental: {inSentence(d.custodian)}, {TIER_NAMES[tier]}.</p>}
     </section>
   );

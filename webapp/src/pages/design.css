@@ -34,7 +34,7 @@
 .test thead th { font: 13px var(--mono); color: var(--fog); padding: 10px 0; }
 .test tbody th { font-weight: 400; color: var(--ink); padding-right: 28px; width: 48%; }
 .test td { color: var(--mist); }
-.yn { display: inline-block; min-width: 44px; margin-right: 12px; font-size: 13px; padding: 2px 8px; border-radius: var(--radius); text-align: center; }
+.yn { display: inline-block; min-width: 44px; margin-right: 12px; font-size: 13px; padding: 2px 8px; border-radius: 999px; text-align: center; }
 .yn.yes { background: var(--blue); color: var(--on-blue); }
 .yn.no { border: 1px solid var(--ink); color: var(--ink); }
 .verdict { font-size: clamp(22px, 2.2vw, 28px); color: var(--ink); margin-top: 6px; }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getObject, listObjects } from "../data/api";
-import { g, objectName, span } from "../ui/format";
+import { objectName, span, TIER_NAMES } from "../ui/format";
 import { href, useRoute } from "../ui/router";
 import { useViewer } from "../ui/viewer";
 import { TierMeter } from "./TierMeter";
@@ -33,7 +33,7 @@ export function LiveRental() {
         <span className="lrb-dot" aria-hidden="true" />
         <span className="lrb-text">
           <b>{returning ? "Returning" : "Your rental"}</b> · {objectName(d)} · {span(r.started.at, null)}
-          {c && c.peakCg !== null && <span className="lrb-peak mono"> · worst {c.tier ? <span className="shock">{g(c.peakCg)}</span> : g(c.peakCg)} {c.tier > 0 && <TierMeter tier={c.tier} />}</span>}
+          {c && <span className="lrb-peak"> · {c.tier ? <><span className="shock">a {TIER_NAMES[c.tier]} knock</span> <TierMeter tier={c.tier} /></> : "no knocks so far"}</span>}
         </span>
         <a className="btn btn-primary btn-sm" href={href(`rent/${d.id}/${returning ? "waiting" : "active"}`)}>{returning ? "See where it stands" : "Open"}</a>
       </div>

@@ -16,8 +16,7 @@ export function SiteHeader() {
     <header className="site-header">
       <a className="wordmark" href={href("")}>
         {/* 3× of the 28 px display height: the original is 1216 px wide and 157 KB. */}
-        <img className="logo-light" src="./brand/sharify-logo-light-header.png" alt="Sharify" width="104" height="28" />
-        <img className="logo-dark" src="./brand/sharify-logo-dark-header.png" alt="" width="104" height="28" />
+        <img src="./brand/sharify-logo-light-header.png" alt="Sharify" width="104" height="28" />
       </a>
       {net.data?.isMock && <span className="sample mono" title="Sample data: not read from the blockchain">Sample<span className="wide-only"> data</span></span>}
       <nav className={`site-nav ${open ? "open" : ""}`} aria-label="Main">

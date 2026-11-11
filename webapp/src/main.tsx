@@ -3,12 +3,9 @@ import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./styles/tokens.css";
 import "./styles/base.css";
-import { applyTheme } from "./ui/theme";
 import { App } from "./App";
 // Last on purpose: the everyday layer overrides page CSS of equal specificity.
 import "./pages/human.css";
-
-applyTheme();
 
 const queryClient = new QueryClient({ defaultOptions: { queries: { refetchOnWindowFocus: false } } });
 

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import L from "leaflet";
-import { tileLayers } from "../ui/theme";
+import { TILES } from "../ui/tiles";
 import "leaflet/dist/leaflet.css";
 import type { Reading } from "../data/types";
 
@@ -13,7 +13,7 @@ export function RideMap({ readings, lightCg }: { readings: Reading[]; lightCg: n
   useEffect(() => {
     if (!el.current) return;
     const m = L.map(el.current, { zoomControl: false, attributionControl: true, maxZoom: 16, zoomSnap: 0.25, scrollWheelZoom: false });
-    for (const t of tileLayers()) L.tileLayer(t.url, { maxZoom: 16, attribution: t.attribution }).addTo(m);
+    L.tileLayer(TILES.url, { maxZoom: 16, attribution: TILES.attribution }).addTo(m);
     layer.current = L.layerGroup().addTo(m);
     m.setView([45.4504, 9.1897], 15);
     map.current = m;

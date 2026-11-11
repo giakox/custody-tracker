@@ -1,141 +1,44 @@
-@import "@fontsource-variable/newsreader/opsz.css";
-@import "@fontsource-variable/newsreader/opsz-italic.css";
 @import "@fontsource/ibm-plex-mono/400.css";
 @import "@fontsource/ibm-plex-mono/500.css";
 @import "@fontsource-variable/figtree";
-@import "@fontsource-variable/bricolage-grotesque";
 
-/* Palette fixed by Edoardo: Electric Blue #0297DE, Midnight #02070A, orange only for shocks.
-   Four themes for the comparison (default: paper). Contrast in brackets is against --bg.
-   On light themes the full blue is for fills (buttons, dots, glow) with dark text on it;
-   text and links use --blue-ink, a darker blue that passes 4.5:1. */
+/* Sharify, light and warm (theme B "Day", chosen by Edoardo, Nov 2026).
+   Palette fixed by Edoardo: Electric Blue #0297DE, Midnight #02070A, orange only for shocks.
+   The full blue is for fills (buttons, dots, glow) with dark text on it; text and links use --blue-ink,
+   a darker blue that passes 4.5:1. Contrast in brackets is against --bg (white). */
 :root {
   --midnight: #02070a;
   --blue: #0297de;
   --orange: #fc734d;
   --on-blue: #02070a;       /* text on a blue fill: 6.3:1. Never white (3.2:1). */
 
-  --serif: "Newsreader Variable", "Newsreader", Georgia, serif;
-  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
-  --sans: "Figtree Variable", "Figtree", -apple-system, "Segoe UI", sans-serif;
-  --grotesk: "Bricolage Grotesque Variable", "Figtree Variable", sans-serif;
-  --gutter: clamp(16px, 4vw, 48px);
-  --max: 1240px;
-}
-
-/* A · Paper: warm ivory, dark ink, editorial. */
-:root, :root[data-theme="paper"] {
-  --radius: 12px;           /* the one corner radius: cards, photos, buttons, fields, map panels. Pills (badges, chips) are fully round. */
-  --card-bg: var(--bg); --card-ink: var(--ink); --card-shadow: 0 18px 50px rgba(60, 40, 15, .2);
-
-  --display: var(--serif); --display-weight: 400; --display-tracking: -0.01em; --em-style: italic;
-  --text: var(--serif); --ui: var(--sans);
-
-  --bg: #f5efe4;
-  --surface: #fbf8f1;
-  --raise: #ede5d6;
-  --ink: #1d1813;           /* 15.4:1 */
-  --mist: #3d362d;          /* 10.4:1 · body */
-  --fog: #574f44;           /* 7.0:1 */
-  --dim: #6b6255;           /* 5.2:1 · smallest text */
-  --line: #e2d8c7;
-  --line-strong: #cdbfa8;
-  --blue-ink: #0270a6;      /* 4.7:1 */
-  --blue-hover: #18a3e6;
-  --orange-ink: #a63b16;    /* 5.6:1 · shock text (5.2:1 on --orange-wash) */
-  --blue-wash: #e3eef0;
-  --orange-wash: #f7e2d6;
-  --overlay: rgba(251, 248, 241, .94);
-  --shadow: rgba(60, 40, 15, .16);
-  --tile-filter: sepia(.22) saturate(.8) brightness(1.02);
-  --logo-dark: none; --logo-light: block;
-  color-scheme: light;
-}
-
-/* B · Day: bright white, a warm sand neutral, a clean everyday app. */
-:root[data-theme="day"] {
-  --radius: 14px;           /* the one corner radius: cards, photos, buttons, fields, map panels. Pills (badges, chips) are fully round. */
-  --card-bg: #ffffff; --card-ink: var(--ink); --card-shadow: 0 18px 50px rgba(23, 25, 27, .16);
-
-  --display: var(--sans); --display-weight: 650; --display-tracking: -0.025em; --em-style: normal;
-  --text: var(--sans); --ui: var(--sans);
-
   --bg: #ffffff;
-  --surface: #faf8f5;
+  --surface: #faf8f5;       /* warm sand: cards, panels */
   --raise: #f3efe9;
-  --ink: #17191b;
-  --mist: #3b3f43;
-  --fog: #565b60;
-  --dim: #6b6862;           /* 5.6:1 */
+  --ink: #17191b;           /* 17.6:1 */
+  --mist: #3b3f43;          /* 10.6:1 · body */
+  --fog: #565b60;           /* 6.9:1 */
+  --dim: #6b6862;           /* 5.6:1 · smallest text */
   --line: #ece8e2;
   --line-strong: #d9d3ca;
   --blue-ink: #016b9f;      /* 5.8:1 */
   --blue-hover: #18a3e6;
-  --orange-ink: #b4441e;
+  --orange-ink: #b4441e;    /* 5.6:1 · shock text */
   --blue-wash: #eaf5fb;
   --orange-wash: #fdebe4;
   --overlay: rgba(255, 255, 255, .96);
   --shadow: rgba(23, 25, 27, .12);
   --tile-filter: saturate(.75) brightness(1.03);
-  --logo-dark: none; --logo-light: block;
-  color-scheme: light;
-}
 
-/* C · Sticker: the site looks like the blue sticker on the bike you scan.
-   Warm stone page, the brand blue used as a surface for the moments that matter, black type on it. */
-:root[data-theme="sticker"] {
-  --radius: 20px;           /* the one corner radius: cards, photos, buttons, fields, map panels. Pills (badges, chips) are fully round. */
-  --card-bg: var(--blue); --card-ink: var(--on-blue); --card-shadow: none;
+  --radius: 14px;           /* the one corner radius: cards, photos, buttons, fields, map panels. Pills (badges, chips) are fully round. */
+  --card-bg: #ffffff; --card-ink: var(--ink); --card-shadow: 0 18px 50px rgba(23, 25, 27, .16);
 
-  --display: var(--grotesk); --display-weight: 700; --display-tracking: -0.035em; --em-style: normal;
+  --sans: "Figtree Variable", "Figtree", -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;   /* proof only: hashes, batch numbers */
+  --display: var(--sans); --display-weight: 650; --display-tracking: -0.025em; --em-style: normal;
   --text: var(--sans); --ui: var(--sans);
 
-  --bg: #efebe4;
-  --surface: #f8f6f2;
-  --raise: #e4dfd6;
-  --ink: #0d0f10;
-  --mist: #2c2f31;
-  --fog: #4a4d4f;
-  --dim: #5f5a52;           /* 5.8:1 */
-  --line: #ddd7cc;
-  --line-strong: #bdb5a7;
-  --blue-ink: #015f8d;      /* 5.9:1 */
-  --blue-hover: #18a3e6;
-  --orange-ink: #a83c17;
-  --blue-wash: #d9ecf6;
-  --orange-wash: #f6dfd3;
-  --overlay: rgba(248, 246, 242, .95);
-  --shadow: rgba(13, 15, 16, .16);
-  --tile-filter: grayscale(.55) sepia(.12) contrast(1.02);
-  --logo-dark: none; --logo-light: block;
+  --gutter: clamp(16px, 4vw, 48px);
+  --max: 1240px;
   color-scheme: light;
-}
-
-/* Night: the previous dark site, kept only to compare. */
-:root[data-theme="night"] {
-  --radius: 6px;           /* the one corner radius: cards, photos, buttons, fields, map panels. Pills (badges, chips) are fully round. */
-  --card-bg: var(--bg); --card-ink: var(--ink); --card-shadow: none;
-
-  --display: var(--serif); --display-weight: 400; --display-tracking: 0; --em-style: italic;
-  --text: var(--serif); --ui: var(--mono);
-
-  --bg: #02070a;
-  --surface: #061017;
-  --raise: #061017;
-  --ink: #e6edf1;
-  --mist: #aebbc3;
-  --fog: #9aa7af;
-  --dim: #84929b;
-  --line: #12202a;
-  --line-strong: #1d2f3b;
-  --blue-ink: #0297de;
-  --blue-hover: #22a9ea;
-  --orange-ink: #fc734d;
-  --blue-wash: #04111a;
-  --orange-wash: #170b07;
-  --overlay: rgba(2, 7, 10, .9);
-  --shadow: rgba(0, 0, 0, .55);
-  --tile-filter: brightness(.62) contrast(1.12);
-  --logo-dark: block; --logo-light: none;
-  color-scheme: dark;
 }

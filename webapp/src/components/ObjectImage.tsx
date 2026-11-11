@@ -5,7 +5,7 @@ import { DeviceFigure } from "./DeviceFigure";
  * object later. Put the file in public/media/ and set CASE_IMAGE; until then the line drawing stands in.
  * The glow sits under the image and carries the state (blue at rest, orange with a shock).
  */
-export const CASE_IMAGE: { src: string; alt: string } | null = null;
+export const CASE_IMAGE: { src: string; alt: string } | null = { src: "./img/day/bocconi-park.jpg", alt: "The demo bike, parked by a railing outside Bocconi, people walking past" };
 
 export function ObjectImage({ src = CASE_IMAGE?.src, alt = CASE_IMAGE?.alt ?? "", alert = false, deviceId, glow = true }: {
   src?: string; alt?: string; alert?: boolean; deviceId: string; glow?: boolean;

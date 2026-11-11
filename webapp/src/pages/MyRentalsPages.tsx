@@ -4,14 +4,15 @@ import type { ObjectDetail, Rental } from "../data/types";
 import { SiteHeader } from "../components/SiteHeader";
 import { DemoSwitcher } from "../components/DemoSwitcher";
 import { TierMeter } from "../components/TierMeter";
-import { day, g, hm, objectName, shortHex, span, TIER_NAMES, txUrl, usd } from "../ui/format";
+import { CASE_IMAGE } from "../components/ObjectImage";
+import { day, g, hm, objectName, shortHex, span, TEST_MONEY, TIER_NAMES, txUrl, usd, when } from "../ui/format";
 import { href } from "../ui/router";
 import { useViewer } from "../ui/viewer";
 import "./object-page.css";
 import "./site.css";
 import "./rent.css";
 
-const PRICE_PER_HOUR = 2; // dUSD, not in today's contract
+const PRICE_PER_HOUR = 2; // test dollars, paid outside today's contract
 
 /** Price of a rental, billed per started quarter hour (a sample pricing rule, not in today's contract). */
 export function priceOf(r: Rental, d: ObjectDetail) {
@@ -63,15 +64,15 @@ export function MyRentalsPage() {
   return (
     <Page>
       <h1>Your <em>rentals</em>.</h1>
-      {loading && <p className="lead">Reading your rentals from the chain…</p>}
+      {loading && <p className="lead">Loading your rentals…</p>}
       {active.map(({ d, r }) => {
         const waiting = d.pendingHandoff?.to.role === "owner";
         return (
           <section key={`${d.id}-${r.period}`} className="panel live-rental">
             <p className="kicker">In progress</p>
             <h2>{objectName(d)}</h2>
-            <p className="mono meta">since {hm(r.started.at)} · {span(r.started.at, null)} · {usd(r.collateral)} locked{waiting ? " · waiting for the owner" : ""}</p>
-            {r.current && r.current.tier > 0 && <p className="bb-line"><TierMeter tier={r.current.tier} /><span>worst shock so far <span className="shock">{g(r.current.peakCg ?? 0)}</span></span></p>}
+            <p className="meta">{span(r.started.at, null)} so far · deposit {usd(r.collateral)}{waiting ? " · waiting for the owner to confirm" : ""}</p>
+            {r.current && r.current.tier > 0 && <p className="bb-line"><TierMeter tier={r.current.tier} /><span>a <span className="shock">{TIER_NAMES[r.current.tier]}</span> knock so far</span></p>}
             <div className="actions"><a className="btn btn-primary" href={href(`rent/${d.id}/${waiting ? "waiting" : "active"}`)}>Open</a></div>
           </section>
         );
@@ -86,11 +87,11 @@ export function MyRentalsPage() {
               return (
                 <li key={`${d.id}-${r.period}`}>
                   <a className="past-row" href={href(`receipt/${d.id}/${r.period}`)}>
-                    <span className="past-name">{objectName(d)}</span>
-                    <span className="mono past-when">{day(r.started.at)}, {hm(r.started.at)}–{hm(s.anchor.at)}</span>
-                    <span className="past-shock"><TierMeter tier={s.tier} showNone /><span className={`mono ${s.tier ? "shock" : ""}`}>{g(s.peakCg)}</span></span>
-                    <span className="mono past-back">{s.refund} of {usd(r.collateral)} back</span>
-                    <span className="mono link">Receipt</span>
+                    {CASE_IMAGE && <img className="past-photo" src={CASE_IMAGE.src} alt="" />}
+                    <span className="past-what"><span className="past-name">{objectName(d)}</span><span className="past-when">{when(r.started.at)}, for {span(r.started.at, s.anchor.at)}</span></span>
+                    <span className="past-shock"><TierMeter tier={s.tier} showNone /><span className={s.tier ? "shock" : ""}>{s.tier ? `${TIER_NAMES[s.tier]} knock` : "no knocks"}</span></span>
+                    <span className="past-back">{s.refund} of {usd(r.collateral)} back</span>
+                    <span className="link">Receipt</span>
                   </a>
                 </li>
               );
@@ -107,7 +108,7 @@ export function ReceiptPage({ id, period }: { id: number; period: number }) {
   const net = useQuery({ queryKey: ["network"], queryFn: getNetwork, staleTime: Infinity });
   const d = q.data;
   const r = d?.rentals.find((x) => x.period === period);
-  if (!d || !r) return <Page><p className="lead">{q.isPending ? "Reading the receipt from the chain…" : "There is no such rental."}</p></Page>;
+  if (!d || !r) return <Page><p className="lead">{q.isPending ? "Loading the receipt…" : "There is no such rental."}</p></Page>;
   const s = r.settlement;
   const price = priceOf(r, d);
   const cause = s?.causeSeq != null ? d.batches.find((b) => b.seq === s.causeSeq) : null;
@@ -119,30 +120,32 @@ export function ReceiptPage({ id, period }: { id: number; period: number }) {
   };
   return (
     <Page>
-      <p><a className="link mono back" href={href("my-rentals")}>My rentals</a></p>
+      <p><a className="link back" href={href("my-rentals")}>My rentals</a></p>
       <article className="receipt">
         <header>
           <h1>Receipt</h1>
-          <p className="mono meta">{objectName(d)} · from {d.ownerName ?? shortHex(d.owner.address)} · {day(r.started.at)}, {hm(r.started.at)}–{returned ? hm(returned.at) : "now"}</p>
+          <p className="meta">{objectName(d)}, lent by {d.ownerName ?? shortHex(d.owner.address)} · {day(r.started.at)}, {hm(r.started.at)}–{returned ? hm(returned.at) : "now"}</p>
         </header>
         <dl className="receipt-lines">
-          <div><dt>Rental price</dt><dd className="mono">{usd(price.amount)}</dd><dd className="sub mono">{price.mins} min, billed per started 15 min at 2 dUSD/hour · paid outside the contract today</dd></div>
+          <div><dt>Rental price</dt><dd className="mono">{usd(price.amount)}</dd><dd className="sub">{price.mins} min, billed per started quarter hour at 2 dollars an hour · paid to the owner, separately</dd></div>
           <div><dt>Deposit</dt><dd className="mono">{usd(r.collateral)}</dd></div>
-          <div><dt>Worst shock</dt><dd className={`mono ${s && s.tier ? "shock" : ""}`}>{s ? `${g(s.peakCg)} · ${TIER_NAMES[s.tier]}` : "rental in progress"}</dd>{cause && <dd className="sub mono">at {hm(cause.anchor.at)}, batch {cause.seq}</dd>}</div>
-          <div><dt>Damage fee</dt><dd className="mono">{s ? (s.tier ? `${usd(s.fee)} (${(Number(s.fee) / Number(r.collateral)) * 100}% of the deposit)` : "none") : "—"}</dd></div>
+          <div><dt>Hardest knock</dt><dd className={s && s.tier ? "shock" : ""}>{s ? (s.tier ? TIER_NAMES[s.tier] : "none") : "rental in progress"}</dd></div>
+          <div><dt>Kept for the knock</dt><dd className="mono">{s ? (s.tier ? `${usd(s.fee)} (${(Number(s.fee) / Number(r.collateral)) * 100}% of the deposit)` : "nothing") : "—"}</dd></div>
           <div className="total"><dt>Deposit back to you</dt><dd className="mono">{s ? usd(s.refund) : "—"}</dd></div>
         </dl>
-        <section>
-          <h2>Transactions</h2>
+        <p className="fine-print">Nobody decided this by hand: the rule did. {TEST_MONEY}</p>
+        <details className="proof-details">
+          <summary>See the proof</summary>
+          <p className="fine-print">Each step below is a public transaction on Base Sepolia, a test blockchain. Amounts there are in dUSD, a test token where 1 dUSD stands for 1 dollar.{cause && <> The knock is in batch {cause.seq}, recorded at {hm(cause.anchor.at)} ({g(s?.peakCg ?? 0)}).</>}</p>
           <ul className="tx-list">
             {tx("Deposit", r.started.tx)}
-            {cause && tx("Shock recorded", cause.anchor.tx)}
+            {cause && tx("Knock recorded", cause.anchor.tx)}
             {returned && tx("Return", returned.tx)}
-            {s && tx("Settlement", s.anchor.tx)}
+            {s && tx("Deposit settled", s.anchor.tx)}
           </ul>
-        </section>
+        </details>
         <div className="actions">
-          {cause && <a className="btn btn-secondary" href={href(`verify/${id}/${cause.seq}`)}>Verify the shock reading</a>}
+          {cause && <a className="btn btn-secondary" href={href(`verify/${id}/${cause.seq}`)}>Check that knock yourself</a>}
           <button type="button" className="btn btn-secondary" onClick={() => window.print()}>Print</button>
         </div>
       </article>
