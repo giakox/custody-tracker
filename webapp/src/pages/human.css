@@ -323,3 +323,12 @@ p, li, dd { text-wrap: pretty; }
 }
 @keyframes hero-drift { from { transform: translateY(0) scale(1); } to { transform: translateY(10%) scale(1.08); } }
 @keyframes hero-card { from { transform: translateY(0); } to { transform: translateY(-48px); } }
+
+/* ---------- Round 37: the selected bike's panel opens on a full-bleed photo ---------- */
+.bike-detail { padding: 0 0 22px; }
+.bike-detail > .detail-photo { width: 100%; aspect-ratio: 4 / 3; margin: 0; border-radius: 0; }
+.bike-detail > .bike-detail-top, .bike-detail > .bike-facts, .bike-detail > .bb, .bike-detail > .actions, .bike-detail > .sample-note { margin-left: 22px; margin-right: 22px; }
+.bike-detail .sheet-close { top: 14px; right: 14px; z-index: 2; background: var(--overlay); box-shadow: var(--elev-1); }
+.bike-detail .bike-detail-top { margin-top: 18px; }
+.bike-detail h2 { font-size: 34px; letter-spacing: -0.04em; line-height: 1; }
+.bike-detail .bike-facts dd { font-size: 20px; font-weight: 600; }

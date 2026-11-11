@@ -358,3 +358,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Airbnb's and Apple's hero parallax: photo and text layer moving at different rates: https://www.apple.com/macbook-air/
 - **Shots:** [1440 px](rounds/36-1440.jpg)
 - **Lines:** 6370
+
+## Round 37 · The selected bike opens on its photo
+
+- **What:** Tapping a bike on the map opens a panel whose photo runs edge to edge at the top, then a big name, big figures for price and deposit, and the two buttons; the close button floats on the photo.
+- **Why:** The panel was a form with a thumbnail. A bike you might ride should arrive as a picture first.
+- **Reference:** Airbnb's map card: the listing photo first, price second: https://www.airbnb.com
+- **Shots:** [1440 px](rounds/37-1440.jpg)
+- **Lines:** 6379
