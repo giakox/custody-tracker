@@ -2271,6 +2271,25 @@ The owner side and the system's edges. "Your rules" shows the rule renters will 
 
 **Test on the blurred shots:** yes: under the dark card a small sand row with a photo; the page ends on something to do.
 
+## Round 143 · The three moments climb the band instead of leaving holes
+
+**Hierarchy audit (Home journey, untouched since 102; the bike page shares it in sand since 127):** the staggered layout pushed step 1 down 160 px and step 3 down 220 px, so the band had an empty dark corner top-right (beside the heading), a 300 px hole under step 2, and a third column three grid units wide where "Bring it back. The deposit follows the rule." broke into three lines. 1,235 px tall for three photos and three sentences.
+
+**What changed (≥1,100 px):** the steps climb from bottom-left to top-right: step 1 under the heading, step 2 a step higher, step 3 rising into the empty corner beside the heading (4:5 photo). All three columns are equal (four units each), so step 3's title fits in two lines. The band is 1,006 px (−229) with the same content; the dotted path follows. Phones unchanged (one column). Measured: no overlap (the heading ends at 182 px; step 3 starts at x = 929, right of it).
+
+**Separation without lines:** the dotted path joins the steps; nothing divides them.
+
+**Café test:** the café's stairs go up to the terrace; you see where you're going. Still missing: the band's photos are stock-like scenes; the recorder inset is the only "our thing" in them.
+
+**References:** Apple's "how it works" bands (staggered tiles that fill their frame); Stripe Press's book pages (an ascending sequence of images).
+
+**Three ideas:** (1) the climbing stair. (2) A straight row of three. (3) A horizontal scroll strip.
+**Discarded:** (2) three equal cards in a row, which the protocol forbids. (3) hides two of three moments behind a gesture on desktop.
+
+**Chosen, (1):** [before and after](rounds/143-journey.jpg).
+
+**Test on the blurred shots:** yes: three photos at three heights with dark holes became a rising diagonal that fills the band.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -2278,7 +2297,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Screen | Last round |
 |---|---|
 | Home: hero | 133 |
-| Home: journey (dark band) | 102 |
+| Home: journey (dark band) | 143 |
 | Bike page: "how it works" band | 127 (sand journey) |
 | Home: owners band | 108 |
 | Home: try the rule (and Rule step) | 104 (bands joined: 122) |
