@@ -492,3 +492,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Stripe's receipts and Apple Store receipts: one big total, calm lines: https://stripe.com/docs/receipts
 - **Shots:** [1440 px](rounds/51-1440.jpg)
 - **Lines:** 6498
+
+## Round 52 · The phone menu is a page of big words
+
+- **What:** On a phone, Menu opens a full-height white page under the header with each destination set in large, tight type (41 px) that slides in one after the other.
+- **Why:** A small dropdown is the most generic thing on a phone site; a page of big words is editorial and easy to hit with a thumb.
+- **Reference:** Stripe's and Linear's mobile menus: full-screen, large type: https://linear.app
+- **Shots:** none
+- **Lines:** 6506
