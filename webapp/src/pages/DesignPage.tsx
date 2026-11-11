@@ -56,6 +56,7 @@ const ids = TOC.map((t) => t.id);
 
 export function DesignPage() {
   const on = useSpy(ids);
+  useEffect(() => { document.querySelector(`.d-toc a[href="#${on}"]`)?.scrollIntoView({ block: "nearest", inline: "nearest" }); }, [on]);
   const go = (id: string) => (e: React.MouseEvent) => { e.preventDefault(); document.getElementById(id)?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); };
   return (
     <div className="page">

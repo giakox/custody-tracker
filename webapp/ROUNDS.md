@@ -1328,6 +1328,21 @@ Also removed: the estimator's styles in map.css, which matched the earnings card
 
 **Test, "another screen at a glance?"** Yes: a photo page became a choice with a plan.
 
+## Round 93 · The Design page on a phone: the contents become one row that follows you
+
+**Hierarchy audit (Design, 375 px):** the five contents items wrapped into three rows of pills plus a full-width "Download" pill, about 200 px of navigation that then scrolled away, so on a long document the reader lost the map exactly when they needed it. Verify on a phone was checked too (the card stacks, the answer replaces the button) and needed nothing.
+
+**Levels after:** the reading is primary; the contents a thin secondary strip that stays under the header, scrolls sideways, and keeps the current section's pill (dark) in view as you read.
+
+**References:** Apple's product pages on a phone (a sticky row of section links under the global header) and Stripe's docs on mobile (the "On this page" control stays reachable). Why ours looked cheaper: a block of pills that behaved like a header on a desktop and like clutter on a phone.
+
+**Three ideas:** (1) a sticky, scrollable one-row strip with scroll-spy. (2) A "Contents" button that opens a sheet. (3) No contents on phones.
+**Discarded:** (2) one more tap to see where you are. (3) the document is 5,500 px long; a map matters more on a phone, not less.
+
+**Chosen, (1):** [before, after at the top, after jumping to "Do we need a blockchain?"](rounds/93-design-phone.jpg). The strip is solid with a soft shadow at its edge; sections stop below it when you jump.
+
+**Test, "another screen at a glance?"** For the top of the page on a phone, yes: three rows of pills became one line.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1353,4 +1368,4 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Add a bike | 74 |
 | Verify | 71 |
 | Empty, loading and error states | 89 |
-| Design | 72 |
+| Design | 93 |

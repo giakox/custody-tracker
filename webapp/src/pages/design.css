@@ -89,3 +89,18 @@
 }
 /* round 87: "you are here" is the same everywhere: sand with an ink edge, as in the header and the account menu */
 .d-toc a[aria-current] { background: var(--raise); color: var(--ink); box-shadow: inset 3px 0 0 var(--ink); }
+
+/* ---------- Round 93: on a phone the contents are one sticky row that follows you ---------- */
+@media (max-width: 1000px) {
+  .d-toc { position: sticky; top: calc(var(--hdr-space) - 4px); z-index: 50; display: flex; align-items: center; gap: 8px; margin: 0 calc(-1 * var(--gutter)); padding: 8px var(--gutter); background: linear-gradient(var(--bg) 75%, rgba(255, 255, 255, 0)); overflow-x: auto; scrollbar-width: none; }
+  .d-toc::-webkit-scrollbar { display: none; }
+  .d-toc ol { display: flex; flex-wrap: nowrap; gap: 8px; }
+  .d-toc li { flex: none; }
+  .d-toc a { white-space: nowrap; }
+  .d-toc .d-toc-dl { flex: none; white-space: nowrap; background: none; padding: 8px 4px; }
+  .d-toc a[aria-current] { background: var(--ink); color: var(--bg); box-shadow: none; }
+}
+@media (max-width: 1000px) {
+  .d-toc { background: var(--bg); box-shadow: 0 10px 16px -12px rgba(23, 25, 27, .18); }
+  .d-sec { scroll-margin-top: calc(var(--hdr-space) + 64px); }
+}
