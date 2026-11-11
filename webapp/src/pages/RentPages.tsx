@@ -88,7 +88,9 @@ export function WalletPage({ id }: { id: number }) {
   const [busy, setBusy] = useState(false);
   const go = async () => { setBusy(true); await connect(); window.location.hash = `#/rent/${id}/deposit`; };
   return (
-    <Shell d={d} stage="Deposit">
+    <Shell d={d} stage="Deposit" wide>
+      <div className="wallet-grid">
+        <div>
       <h1>Connect a <em>wallet</em>.</h1>
       <p className="lead">{isMock
         ? "A wallet is the app that holds your money. For this demo we made you a test wallet, with test money only. In the live version it is your own wallet: the deposit leaves from it and comes back to it, and Sharify never holds your money or your keys."
@@ -102,6 +104,9 @@ export function WalletPage({ id }: { id: number }) {
           </>}
       </div>
       <p className="hint-line">{busy ? "Waiting for your wallet…" : isMock ? "In the live version you connect your own wallet." : "You need a little free test money for network fees (Base Sepolia, a test network)."}</p>
+        </div>
+        <img className="wallet-photo" src="./img/day/unlock-phone.jpg" alt="Hands holding a phone next to a parked city bike" />
+      </div>
     </Shell>
   );
 }

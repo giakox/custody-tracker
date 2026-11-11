@@ -532,3 +532,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Stripe Press and Notion's marketing pages: big numerals over short sentences on soft cards: https://press.stripe.com
 - **Shots:** [1440 px](rounds/56-1440.jpg)
 - **Lines:** 6530
+
+## Round 57 · The wallet step shows what it is for
+
+- **What:** The wallet page is two columns: the plain explanation and the one button on the left, a tall photo of hands holding a phone next to a bike on the right (stacked above the text on a phone).
+- **Why:** The step where a non-crypto visitor is most likely to leave was a paragraph and a box. A photo of the person doing it makes it an ordinary thing.
+- **Reference:** Apple Pay setup pages: the device in a hand beside one clear action: https://www.apple.com/apple-pay/
+- **Shots:** none
+- **Lines:** 6540
