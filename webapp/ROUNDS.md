@@ -1343,6 +1343,29 @@ Also removed: the estimator's styles in map.css, which matched the earnings card
 
 **Test, "another screen at a glance?"** For the top of the page on a phone, yes: three rows of pills became one line.
 
+## Round 94 · The rental in progress is a live pill that docks under the header
+
+**Hierarchy audit (the strip shown on every page during a ride):**
+
+| Block | Before | After |
+|---|---|---|
+| Container | a full-width tinted band with ruled lines above and below, under a floating rounded header: two languages stacked | a floating pill, the header's own material (white, blur, hairline, one shadow from the scale), 560 px wide and centred |
+| Position | scrolled away with the page | sticky: it docks just under the header and stays while you read |
+| Words | "Your rental · The demo bike · 21 min · a medium knock" | "Riding the demo bike  21 min · a medium knock" (the verb first; the time in a quieter tone) |
+| A knock | the whole band turned pink | a thin orange ring and the orange dot; the meter stays |
+| Action | a small square "Open" | a round "Open" that matches the pill |
+
+**Levels after:** the page's content stays primary; the pill is a calm, always-there secondary. **Squint test:** before, a pink stripe across every page during a ride; after, a small white pill under the bar.
+
+**References:** iOS Live Activities and the Dynamic Island (a running task as a small pill that stays put, a tint only when something needs you), and Uber's in-trip banner. Why ours looked cheaper: a full-width coloured band is how sites shout about cookies.
+
+**Three ideas:** (1) a sticky floating pill under the header. (2) The ride's status inside the header itself, replacing the centre links during a ride. (3) A pill at the bottom of the screen.
+**Discarded:** (2) the centre links would vanish just when a renter might want "How it works" or their rentals. (3) the bike page and the rent steps already use the bottom for their own bar.
+
+**Chosen, (1):** [1440](rounds/94-live-1440.jpg), [docked while scrolling](rounds/94-live-scrolled.jpg), [phone](rounds/94-live-375.jpg).
+
+**Test, "another screen at a glance?"** For the chrome during a ride, yes: a band became a pill.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1356,6 +1379,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Home: find a bike (grid + map) | 81 |
 | Header | 77 |
 | Page transitions | 88 |
+| Live rental strip | 94 |
 | Footer | 73 |
 | Bike page | 84 |
 | Rent flow: Rule, Deposit | 86 |

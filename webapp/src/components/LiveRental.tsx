@@ -32,7 +32,7 @@ export function LiveRental() {
       <div className="lrb-inner">
         <span className="lrb-dot" aria-hidden="true" />
         <span className="lrb-text">
-          <b>{returning ? "Returning" : "Your rental"}</b> · {objectName(d)} · {span(r.started.at, null)}
+          <b>{returning ? "Returning" : "Riding"} {objectName(d, false)}</b> <span className="lrb-time">{span(r.started.at, null)}</span>
           {c && <span className="lrb-peak"> · {c.tier ? <><span className="shock">a {TIER_NAMES[c.tier]} knock</span> <TierMeter tier={c.tier} /></> : "no knocks so far"}</span>}
         </span>
         <a className="btn btn-primary btn-sm" href={href(`rent/${d.id}/${returning ? "waiting" : "active"}`)}>{returning ? "See where it stands" : "Open"}</a>
