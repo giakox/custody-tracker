@@ -104,3 +104,22 @@
   .d-toc { background: var(--bg); box-shadow: var(--elev-1); }
   .d-sec { scroll-margin-top: calc(var(--hdr-space) + 64px); }
 }
+
+/* ---------- Round 112: composition: the numbers on a dark band across the page, the verdict as a statement ---------- */
+@media (min-width: 1001px) {
+  #numbers { position: relative; padding: 56px 0; }
+  #numbers::before { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: calc(-220px - 64px - (100vw - min(100vw, var(--max))) / 2 - var(--gutter)); width: 100vw; background: var(--ink); }
+}
+#numbers { isolation: isolate; }
+#numbers > h2 { color: #fff; }
+#numbers .numbers { background: transparent; padding: 0; margin-top: 32px; gap: 32px; }
+#numbers .numbers dt { color: #fff; font-size: clamp(44px, 4.6vw, 64px); }
+#numbers .numbers dt span { color: rgba(244, 241, 236, .7); }
+#numbers .numbers dd { color: rgba(244, 241, 236, .8); }
+@media (max-width: 1000px) { #numbers { padding: 40px 20px; border-radius: var(--radius); background: var(--ink); } }
+.verdict { margin-top: 40px; padding: 32px; border-radius: var(--radius); background: var(--ink); color: #fff; font-size: clamp(26px, 2.8vw, 38px); letter-spacing: -0.03em; }
+.verdict em { font-style: normal; color: #7cc8ef; }
+@media (min-width: 1001px) {
+  .d-toc { z-index: 5; padding: 12px; margin-left: -12px; border-radius: var(--radius); background: var(--bg); box-shadow: var(--elev-1); }
+  .d-toc .d-toc-dl { padding: 0 12px 4px; }
+}

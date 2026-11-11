@@ -1707,6 +1707,28 @@ Fixed on the way: an absolutely positioned photo inside a grid takes its grid ar
 
 **Test on the blurred shots:** yes: three grey tiles became a picture-and-map band over the tiles.
 
+## Round 112 · Composition: the Design page gets its two loud moments
+
+**A composition round**, judged on the whole Design page: [blurred, before and after](rounds/112-design-full-blur.jpg), [sharp](rounds/112-design-full-sharp.jpg).
+
+**Hierarchy audit (the page):** a long, even white document: a photo, a list, four small numbers on sand, seven scheme pairs, five yes/no tiles and a one-line verdict in bold, folded questions. Every section the same weight, so the two things a professor should remember (how small and cheap the system is; why it needs a public blockchain) were the quietest.
+
+**What changed:**
+- **The numbers** cross the page on an ink band, set at 64 px in white (1600/s, ±200 g, 16, ~145k gas): the page's first dark beat.
+- **The verdict** of the blockchain test ("Result: a public, permissionless blockchain.") is a statement on ink that closes its section.
+- **The contents** became a small floating white card, so they stay readable when the dark band passes under them.
+
+**Café test:** the café's long page is paced by its espresso bands; this document now has two dark beats where the argument lands.
+
+**References:** Apple's spec pages (numbers in large type on a dark band) and Stripe's annual-letter pages (one statement set apart after a long argument).
+
+**Three ideas:** (1) dark bands for the numbers and the verdict. (2) Split the page into tabs per audience. (3) Put the scheme on a dark chapter.
+**Discarded:** (2) the professors read it top to bottom, projected. (3) seven text-heavy pairs read best on white.
+
+**Chosen, (1):** [the numbers band](rounds/112-design-numbers.jpg), [the verdict](rounds/112-design-verdict.jpg).
+
+**Test on the blurred shots:** yes: a uniform grey column became one with a dark band near the top and a dark bar mid-page.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1736,4 +1758,4 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Add a bike | 74 |
 | Verify | 109 |
 | Empty, loading and error states | 89 |
-| Design | 93 |
+| Design | 112 |
