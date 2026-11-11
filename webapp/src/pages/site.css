@@ -171,3 +171,25 @@
   .rule-row, .deposit-summary .rule-row { grid-template-columns: 52px minmax(0, 1fr) auto; gap: 8px; }
   .rule-row .rule-out { grid-column: auto; white-space: nowrap; text-align: right; }
 }
+
+/* ---------- Round 83: empty, loading and error states with a way on ---------- */
+.state-page { max-width: var(--max); margin: 0 auto; padding: clamp(48px, 8vw, 120px) var(--gutter) 0; min-height: 52vh; display: grid; place-items: center; }
+.state-card { width: min(640px, 100%); padding: clamp(28px, 4vw, 48px); border-radius: var(--radius); background: var(--bg); box-shadow: var(--elev-2); display: grid; gap: 14px; justify-items: start; }
+.state-card h1, .state-card h2 { font-size: clamp(28px, 3.4vw, 44px); line-height: 1.05; letter-spacing: -0.035em; text-wrap: balance; }
+.state-card p { font-size: 17px; line-height: 1.5; color: var(--mist); max-width: 52ch; }
+.state-card .actions { margin-top: 8px; }
+.state-dot { position: relative; width: 14px; height: 14px; border-radius: 50%; background: var(--blue); }
+.tone-down .state-dot, .vc-off .state-dot { background: var(--orange); }
+@media (prefers-reduced-motion: no-preference) { .state-dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: inherit; animation: pulse-ring 1.8s ease-out infinite; } }
+.vc-off { margin-top: 40px; width: auto; max-width: 720px; }
+
+/* the skeleton has the shape of the page it waits for */
+.listing[aria-busy] .sk { display: block; border-radius: var(--radius); background: var(--raise); animation: sk-pulse 1.4s ease-in-out infinite; }
+.listing[aria-busy] .sk-s { height: 16px; width: 220px; margin-top: 8px; }
+.listing[aria-busy] .sk-title { height: 52px; width: min(560px, 80%); margin-top: 12px; }
+.listing[aria-busy] .l-gallery .sk { border-radius: 0; height: 100%; }
+.listing[aria-busy] .l-gallery .sk:first-child { grid-row: span 2; }
+.listing[aria-busy] .sk-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 32px; }
+.listing[aria-busy] .sk-cards .sk { height: 180px; }
+.listing[aria-busy] .sk-book { height: 420px; }
+@media (prefers-reduced-motion: reduce) { .listing[aria-busy] .sk { animation: none; } }

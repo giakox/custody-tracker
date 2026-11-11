@@ -1112,6 +1112,28 @@ Also removed: the estimator's styles in map.css, which matched the earnings card
 
 **Test, "another screen at a glance?"** Yes: a giant orange number became a row of choices and a bar of money.
 
+## Round 83 · Empty, loading and error states with a way on
+
+**Hierarchy audit (states):**
+
+| State | Before | Verdict |
+|---|---|---|
+| Loading the bike | a two-column skeleton shaped like the bike page before round 64 | a skeleton in the listing's shape: kicker, title, the three-picture mosaic, the record and the booking card |
+| Chain not answering | a centred 80 px title and a sentence, no action, no sign that it keeps trying | a card: a pulsing orange dot (it keeps asking), the title, what still holds, "Try again now" and "Why we don't show a copy" |
+| No such bike | the same centred text, "object 99" | "There is no bike number 99 here.", with "See the bikes on the map" and "Open the demo bike" |
+| Verify with the relayer offline | a grey note in a bordered box, then an empty page | a card: what's missing, what still comes from the chain, "Try again" and "Back to the bike" |
+
+**Levels:** in every state the title says what happened (primary), one sentence says what still works (secondary), and there is always a blue way on. **Squint test:** before, a lonely heading in white space; after, one card with a coloured dot and a blue button.
+
+**References:** Stripe's error pages and Linear's empty states: one card, one sentence of cause, one primary way out, never a dead end. Why ours looked cheaper: the states were afterthoughts with no action, and the skeleton promised a layout the page no longer had.
+
+**Three ideas:** (1) one state card for every failure, with actions, and a skeleton in the real shape. (2) A full-page illustration per state. (3) Toasts over the last good page.
+**Discarded:** (2) illustrations in one family would be a new asset set for four rare screens. (3) showing a stale copy is exactly what this product refuses to do.
+
+**Chosen, (1):** [the four states, before and after](rounds/83-states.jpg): chain down, no such bike, relayer offline on Verify, loading. "Try again" refetches at once; the dot's pulse stops with reduced motion.
+
+**Test, "another screen at a glance?"** Yes: a heading in the void became a card you can act on.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1133,4 +1155,5 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Owner: Confirm a return | 76 |
 | Add a bike | 74 |
 | Verify | 71 |
+| Empty, loading and error states | 83 |
 | Design | 72 |

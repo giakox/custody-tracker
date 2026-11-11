@@ -56,7 +56,15 @@ export function VerifyPage({ id, seq: seqParam }: { id: number; seq: number | nu
         <p className="lead">Pick one second of the ride and ask the blockchain whether it is really part of what the recorder signed. You don't have to trust Sharify.</p>
 
         {readings.isError && (
-          <p className="notice">The raw readings are kept by the relayer, which is offline right now. The proof needs them; everything else on the bike page still comes from the chain.</p>
+          <section className="state-card vc-off" aria-live="polite">
+            <span className="state-dot" aria-hidden="true" />
+            <h2>The raw readings are offline right now.</h2>
+            <p>They are kept by the relayer, which isn't answering. A check needs them; the bike's record and the rule still come straight from the chain.</p>
+            <div className="actions">
+              <button type="button" className="btn btn-primary" onClick={() => readings.refetch()} disabled={readings.isFetching}>{readings.isFetching ? "Asking again…" : "Try again"}</button>
+              {d && <a className="btn btn-secondary" href={href(`object/${d.id}`)}>Back to the bike</a>}
+            </div>
+          </section>
         )}
 
         {batch && readings.data && d && (

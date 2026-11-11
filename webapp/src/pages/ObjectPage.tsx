@@ -10,18 +10,20 @@ import { Sources } from "../components/Sources";
 import { SiteHeader } from "../components/SiteHeader";
 import { Moments } from "../components/HowItWorks";
 import { DemoSwitcher } from "../components/DemoSwitcher";
+import { href } from "../ui/router";
 import "./object-page.css";
 import "./site.css";
 import "./listing.css";
 
-/** Loading and failure states. The glow means "the chain is answering", so failures get none. */
-function Message({ title, children, glow = false }: { title: React.ReactNode; children: React.ReactNode; glow?: boolean }) {
+/** Failure states: what happened, what still works, and a way on (Stripe's and Linear's error pages). */
+function Message({ title, children, tone = "info", actions }: { title: React.ReactNode; children: React.ReactNode; tone?: "info" | "down"; actions?: React.ReactNode }) {
   return (
-    <section className="hero message">
-      {glow && <div className="glow" aria-hidden="true"><i className="glow-blue" /><i className="grain" /></div>}
-      <div className="hero-head">
+    <section className={`state-page tone-${tone}`} aria-live="polite">
+      <div className="state-card">
+        <span className="state-dot" aria-hidden="true" />
         <h1>{title}</h1>
-        <p className="hero-summary">{children}</p>
+        <p>{children}</p>
+        {actions && <div className="actions">{actions}</div>}
       </div>
     </section>
   );
@@ -63,19 +65,20 @@ export function ObjectPage({ id }: { id: number }) {
       </div>
     );
   } else if (err?.code === "not-found") {
-    body = <Message title={<>There is no <em>object {id}</em> on this network.</>}>Check the number on the label of the recorder, or open the page from its QR code.</Message>;
+    body = <Message title={<>There is no bike number <em>{id}</em> here.</>} actions={<><a className="btn btn-primary" href={href("bikes")}>See the bikes on the map</a><a className="btn btn-secondary" href={href("object/1")}>Open the demo bike</a></>}>Check the number on the recorder's label, or open the page from its QR code.</Message>;
   } else if (obj.isError) {
     body = (
-      <Message title={<>The blockchain is <em>not answering</em>.</>}>
-        Nothing on this page can be shown without it, and we will not show a copy from our own server instead. It retries every few seconds.
+      <Message tone="down" title={<>The blockchain is <em>not answering</em>.</>}
+        actions={<><button type="button" className="btn btn-primary" onClick={() => obj.refetch()} disabled={obj.isFetching}>{obj.isFetching ? "Asking again…" : "Try again now"}</button><a className="btn btn-secondary" href={href("design")}>Why we don't show a copy</a></>}>
+        This page shows only what the chain says, and we won't show a copy from our own server instead. It asks again every few seconds by itself.
       </Message>
     );
   } else {
     body = (
-      <section className="hero bike-top skeleton-hero" aria-busy="true" aria-label="Loading the bike">
-        <div className="bike-copy"><i className="sk sk-s" /><i className="sk sk-xl" /><i className="sk sk-xl sk-w60" /><i className="sk sk-m" /><i className="sk sk-btn" /></div>
-        <div className="bike-side"><i className="sk sk-photo" /></div>
-      </section>
+      <div className="listing" aria-busy="true" aria-label="Loading the bike from the blockchain">
+        <div className="l-head"><i className="sk sk-s" /><i className="sk sk-title" /><div className="l-gallery"><i className="sk" /><i className="sk" /><i className="sk" /></div></div>
+        <div className="l-body"><div className="l-col"><i className="sk sk-s" /><i className="sk sk-title" /><div className="sk-cards"><i className="sk" /><i className="sk" /></div></div><div className="l-book"><i className="sk sk-book" /></div></div>
+      </div>
     );
   }
 
