@@ -1649,6 +1649,23 @@ Fixed on the way: an absolutely positioned photo inside a grid takes its grid ar
 
 **Test on the blurred shots:** yes: a white block over half a photo became a photograph wall to wall with a white card in it.
 
+## Round 109 · Verify: the check happens on a dark stage, and the answer lights up
+
+**Hierarchy audit (Verify):** the round-71 sheet was clear, but the page was white top to bottom, and the moment of proof (the one the professors watch) had no more presence than a settings form.
+
+**What changed:** the check sheet sits on a full-width ink stage between the explanation above and the values below. When the contract says yes, the sheet's edge lights up with a soft blue glow (fading in; instant with reduced motion), on top of the check mark that already pops. The rest of the page stays light, so the dark band reads as "this is the moment".
+
+**Café test:** the café's chalkboard is its dark, focused moment in a cream page; this is ours. It adds the evening tone to a screen that had none.
+
+**References:** the café's chalkboard section; Apple's keynote-style product reveals (one object on a dark stage, lit).
+
+**Three ideas:** (1) a dark stage under the sheet, a glow on success. (2) The whole page dark. (3) A full-screen "Verified" moment.
+**Discarded:** (2) the explanation and the proof values read better on white, and Theme B is light. (3) hides the reading that was verified, which is what the answer refers to.
+
+**Chosen, (1):** [before (round 71) and after, verified](rounds/109-verify-stage.jpg), [phone](rounds/109-verify-375.jpg). A first try with a negative-z pseudo-element painted behind the page and showed nothing; the stage is now its own element.
+
+**Test on the blurred shots:** yes: a white page with a card became a white page with a dark band and a lit card in it.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1675,6 +1692,6 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Owner (My bikes) | 69 |
 | Owner: Confirm a return | 76 |
 | Add a bike | 74 |
-| Verify | 71 |
+| Verify | 109 |
 | Empty, loading and error states | 89 |
 | Design | 93 |

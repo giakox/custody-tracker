@@ -69,6 +69,7 @@ export function VerifyPage({ id, seq: seqParam }: { id: number; seq: number | nu
 
         {batch && readings.data && d && (
           <>
+            <div className="verify-stage">
             <section className={`vc state-${check.state}`} aria-label="Check one reading">
               <div className="vc-reading">
                 <p className="vc-kicker">Batch {batch.seq} · {readings.data.length} seconds of {possessive(batch.custodian)} ride · signed {day(batch.anchor.at)}, {hm(batch.anchor.at)}</p>
@@ -130,6 +131,7 @@ export function VerifyPage({ id, seq: seqParam }: { id: number; seq: number | nu
                 {check.state !== "asking" && check.state !== "idle" && <button type="button" className="link-btn again" onClick={() => setCheck({ state: "idle" })}>Check another second</button>}
               </div>
             </section>
+            </div>
 
             {check.result && (
               <section className="v-proof">

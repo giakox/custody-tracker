@@ -61,3 +61,10 @@
   .v-mark { width: 48px; height: 48px; font-size: 24px; }
   .v-hex div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
 }
+
+/* ---------- Round 109: the check happens on a dark band, where the answer lights up (the café's chalkboard) ---------- */
+.verify-stage { position: relative; margin-top: 56px; padding: 64px 0; background: var(--ink); box-shadow: 0 0 0 100vmax var(--ink); clip-path: inset(0 -100vmax); }
+.verify-stage .vc { margin-top: 0; box-shadow: 0 30px 80px rgba(0, 0, 0, .45); }
+.verify-stage .vc.state-done { box-shadow: 0 0 0 1px rgba(2, 151, 222, .45), 0 0 90px rgba(2, 151, 222, .35), 0 30px 80px rgba(0, 0, 0, .45); transition: box-shadow .6s ease; }
+.verify-stage + .v-proof { margin-top: 64px; }
+.verify-stage .state-card { margin-top: 0; }
