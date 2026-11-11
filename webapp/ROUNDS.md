@@ -178,3 +178,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Apple Pay's checkout sheet: only what you are about to confirm: https://www.apple.com/apple-pay/
 - **Shots:** [1440 px](rounds/15-1440.jpg)
 - **Lines:** 6183
+
+## Round 16 · A dead end becomes a way forward
+
+- **What:** When a bike is out on a ride, its page no longer ends with "come back later": the main button is "See free bikes nearby", back to the map.
+- **Why:** A visitor who lands on a rented bike (from a shared link or a QR) had nowhere to go. One button keeps them in the product.
+- **Reference:** Booking.com's "no availability" page: it moves you to other places straight away: https://www.booking.com
+- **Shots:** [375 px](rounds/16-375.jpg)
+- **Lines:** 6184

@@ -64,7 +64,7 @@ export function Action({ d, me, compact = false }: { d: ObjectDetail; me: Party 
   if (d.status === "rented" || d.status === "held-without-deposit") {
     if (r.isCustodian) return <><a className="btn btn-primary" href={href(`rent/${id}/return`)}>Return</a><a className="btn btn-secondary" href={href(`rent/${id}/active`)}>Rental details</a></>;
     if (r.isOwner) return <a className="btn btn-secondary" href={href("my-objects")}>Manage</a>;
-    return <p className="action-note">Come back later, or ask the owner for another bike.</p>;
+    return <><a className="btn btn-primary" href={href("")}>See free bikes nearby</a><p className="action-note">This one is out on a ride right now.</p></>;
   }
   if (r.isOwner) return <a className="btn btn-secondary" href={href("my-objects")}>Manage</a>;
   return <a className="btn btn-primary" href={href(`rent/${id}`)}>{compact ? "Rent" : "Rent this bike"}</a>;
