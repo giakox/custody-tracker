@@ -965,6 +965,29 @@ Every section had the same layout (title left, content right) and the same weigh
 
 **Test, "another screen at a glance?"** Yes: a photo page with a form under it became a decision with its consequence drawn.
 
+## Round 77 · The header again: your wallet is a chip, "Find a bike" stays the one blue button
+
+**Hierarchy audit (header, connected):**
+
+| Block | Who, when | If it vanished | Verdict |
+|---|---|---|---|
+| The wallet address as the filled blue button | — | the address is not an action; the blue said "press me" on something that did nothing | a quiet chip with a colour face from the address; it opens your pages |
+| "Find a bike" | renter | the main action disappeared once connected | back as the only filled button, connected or not |
+| "My rentals" in the centre nav, "My bikes" as a text link | the connected user | — | moved into the chip's menu ("Your rentals", "Your bikes", "Rent out a bike"), so the centre is the same for everyone |
+| Active section as a black pill | — | it was the darkest thing in the bar, darker than the action | a sand pill: you see where you are without it shouting |
+| Phone menu: big words over ruled lines, half the screen empty | phone user | — | no lines; a photo card to the map and the test-network note fill the bottom |
+
+**Levels after:** "Find a bike" primary; the chip and the sections secondary. **Squint test:** before, two dark shapes (the black pill, the blue address) competed; after, one blue button at the end of a quiet bar.
+
+**References:** Airbnb's profile menu (a round face plus menu, never a primary button), Linear's header (one filled action; the account lives in a menu). Why ours looked cheaper: our loudest element was a hex string.
+
+**Three ideas:** (1) the wallet as a chip with a menu; "Find a bike" stays primary; quieter active state; a fuller phone menu. (2) A header that turns into the step bar during renting. (3) A header that hides when you scroll down.
+**Discarded:** (2) the rent steps already have their progress right under the header; two progress bars. (3) the header carries the live-rental strip and the main action; hiding it hides both.
+
+**Chosen, (1):** [header connected, with the menu open](rounds/77-header-1440.jpg), [phone menu, before and after](rounds/77-menu-375.jpg). The chip menu closes on Escape or a click outside, marks the page you're on, and opens with a short drop (off with reduced motion).
+
+**Test, "another screen at a glance?"** For the bar, yes when connected: the blue moved from your address to the action.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -974,7 +997,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Home: hero | 62 |
 | Home: "how it works" band (and bike page) | 70 |
 | Home: find a bike (grid + map) | Structure |
-| Header | Structure |
+| Header | 77 |
 | Footer | 73 |
 | Bike page | 65 |
 | Rent flow: Rule, Wallet, Deposit | 66 |
