@@ -1854,7 +1854,7 @@ Fixed on the way: an absolutely positioned photo inside a grid takes its grid ar
 
 **Hierarchy audit (every page, dark surfaces counted):** a probe of large dark surfaces per page: Home has three (journey, owners band, footer), the others two at most. The one surface repeated everywhere is the footer, and at its foot a 180 px blue "Sharify" wordmark: on the Home and the bike page it signs off a page you read top to bottom; on My bikes, the Add steps and Verify it is the heaviest block on a screen where you came to do one thing, and on a short page like My bikes it outweighs the work above it.
 
-**What changed:** on working screens (`main.rent`, owner pages included, and Verify) the wordmark is hidden and the footer closes on the links (492 px → 279 px). Home, bike page, receipt, My rentals and Design keep it. One CSS rule, nothing added.
+**What changed:** on working screens (`main.rent`, owner pages included, and Verify) the wordmark is hidden and the footer closes on the links (492 px → 279 px). Home, bike page, receipt and Design keep it. (Correction, round 142: My rentals renders inside the same `main.rent` and loses the wordmark too; it is a personal screen, so that stays.) One CSS rule, nothing added.
 
 **Café test:** the café's sign is over the door, not on every table; the counter where you pay has just the menu. Still missing: the café's warmth on the owner screens, which are still white on white with one sand tile.
 
@@ -2254,6 +2254,23 @@ The owner side and the system's edges. "Your rules" shows the rule renters will 
 
 **Test on the blurred shots:** yes: a long white rectangle running off the screen became a whole slip with a jagged foot and two small dark buttons beside it.
 
+## Round 142 · Composition: My rentals ends on the next ride
+
+**Hierarchy audit (My rentals, full page at 1440, one settled rental):** title, the dark "last ride" card (map and split), then 96 px of white and the footer. The page answered "what happened" and stopped: the obvious next step (the same bike is free again) was only reachable through the header. Also found: the round 120 log said My rentals keeps the footer wordmark; it doesn't (it's a `main.rent` screen). The log is corrected; the behaviour stays.
+
+**What changed:** when the bike of your last ride is free again (available, nobody returning it), a row follows the card: its photo, "Free again" with the blue dot, "Ride the demo bike again", "50 dollars deposit, the rule shown before you rent", linking to the bike's page. It uses the same shape as the Home's "Free now" card, so it reads as the same kind of thing. It isn't shown when the bike is out or being returned. Wording checked: no "same rule as last time", since the owner can change the rule between rentals.
+
+**Café test:** the café asks "the usual?" only when the usual is on the counter. Still missing: with several past rentals, the page is a list after the card; fine for now.
+
+**References:** Uber's "Ride again" row under the last trip; Citymapper's "Go again" on a past journey.
+
+**Three ideas:** (1) a "ride again" row when it's true. (2) A full finder under My rentals. (3) A big "Find a bike" button.
+**Discarded:** (2) the finder has its page; repeating it makes My rentals a second Home. (3) a generic button where a specific, true sentence is possible.
+
+**Chosen, (1):** [full page before, after, blurred](rounds/142-myrentals-full.jpg).
+
+**Test on the blurred shots:** yes: under the dark card a small sand row with a photo; the page ends on something to do.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -2279,7 +2296,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Rent flow: Return | 111 |
 | Rent flow: Outcome | 139 |
 | Receipt | 141 (print: 97) |
-| My rentals | 117 |
+| My rentals | 142 |
 | Owner (My bikes) | 132, 135 (step back) |
 | Owner: Confirm a return | 121 |
 | Add a bike | 119 (step 2), 128 (step 3), 129 (step 4), 131 (step 5) |

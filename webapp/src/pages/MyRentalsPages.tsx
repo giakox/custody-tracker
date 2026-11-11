@@ -98,6 +98,17 @@ export function MyRentalsPage() {
         );
       })}
       {featured && <LastRide d={past[0].d} r={past[0].r} />}
+      {featured && past[0].d.status === "available" && !past[0].d.pendingHandoff && (
+        <a className="nearest again-row" href={href(`object/${past[0].d.id}`)}>
+          {CASE_IMAGE && <img className="nearest-photo" src={CASE_IMAGE.src} alt="" />}
+          <span className="nearest-body">
+            <span className="nearest-k"><i aria-hidden="true" />Free again</span>
+            <span className="nearest-name">Ride {objectName(past[0].d, false)} again</span>
+            <span className="nearest-price">{usd(past[0].d.terms.collateral)} deposit, the rule shown before you rent</span>
+          </span>
+          <span className="nearest-go" aria-hidden="true">›</span>
+        </a>
+      )}
       {rows && (past.length === 0 || earlier.length > 0) && (
         <section className="history-list" aria-labelledby="past-title">
           <h2 id="past-title">{featured ? "Earlier rentals" : "Past rentals"}</h2>

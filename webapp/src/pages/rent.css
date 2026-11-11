@@ -479,3 +479,6 @@ i.split-kept { background: var(--orange); }
 .receipt-desk { position: absolute; left: calc(100% + 40px); top: 88px; width: 240px; padding-top: 0; }
 .desk-btn { white-space: nowrap; }
 @media (max-width: 1180px) { .receipt-desk { position: static; width: auto; margin: 28px auto 0; max-width: 640px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); } }
+
+/* ---------- Round 142: composition: My rentals ends on the next ride, not on the footer ---------- */
+.again-row { margin-top: 20px; max-width: 560px; }
