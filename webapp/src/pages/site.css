@@ -82,7 +82,6 @@
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: stretch;
 }
  /* three lines: both buttons line up */
-.tube-label { font-family: var(--mono); font-size: 13px; fill: var(--fog); }
 
 /* ---------- demo control: in the empty left margin on wide screens, at the end of the page otherwise ---------- */
 .demo { display: grid; justify-items: start; gap: 8px; padding: 0 var(--gutter) 28px; max-width: var(--max); margin: 0 auto; }

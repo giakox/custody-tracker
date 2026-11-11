@@ -12,7 +12,6 @@ import { TierMeter } from "../components/TierMeter";
 import { CASE_IMAGE } from "../components/ObjectImage";
 import { TxSteps } from "../components/TxSteps";
 import { RuleTiers } from "../components/RuleTiers";
-import { TubeRecorder } from "../components/TubeRecorder";
 import { hm, nameOf, objectName, span, TEST_MONEY, TIER_NAMES, usd, when } from "../ui/format";
 import { href } from "../ui/router";
 import { useViewer } from "../ui/viewer";
@@ -354,14 +353,14 @@ export function AddPage({ n }: { n: number }) {
     case 2: return (
       <AddShell n={2} aside={<ListingPreview d={d} />} title={<>Fix it to the <em>frame</em>.</>} next="Continue" onNext={mounted ? () => go(3) : undefined}>
         <div className="mount">
-          <div className="mount-art" aria-hidden="true"><TubeRecorder /></div>
-          <ol className="numbered">
-            <li>Rigid to the frame, with the clamps in the box. Never on foam or tape: it would feel less than the bike does.</li>
-            <li>Any orientation works.</li>
-            <li>Keep the USB-C port reachable for charging.</li>
+          <img className="mount-photo" src="./img/day/recorder-hand.jpg" alt="The recorder, a small black box, held against a bike's frame" />
+          <ol className="numbered tiles">
+            <li><span><b>Rigid to the frame</b>, with the clamps in the box. Never on foam or tape: it would feel less than the bike does.</span></li>
+            <li><span><b>Any orientation</b> works.</span></li>
+            <li><span><b>Keep the USB-C port reachable</b> for charging.</span></li>
           </ol>
         </div>
-        <label className="check"><input type="checkbox" checked={mounted} onChange={(e) => setMounted(e.target.checked)} /> <span>It's fixed and doesn't move by hand.</span></label>
+        <label className={`check-tile ${mounted ? "is-on" : ""}`}><input type="checkbox" checked={mounted} onChange={(e) => setMounted(e.target.checked)} /><span className="check-box" aria-hidden="true" /><span><b>It's fixed and doesn't move by hand.</b><small>Give it a firm push: nothing should wobble.</small></span></label>
       </AddShell>
     );
     case 3: {

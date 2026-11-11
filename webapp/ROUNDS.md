@@ -1833,6 +1833,23 @@ Fixed on the way: an absolutely positioned photo inside a grid takes its grid ar
 
 **Test on the blurred shots:** yes: three grey tiles and a panel became a line of dots and a dark block.
 
+## Round 119 · Mounting the recorder: the real box, the steps as tiles, "it's fixed" as a tile you can't miss
+
+**Hierarchy audit (Add, step 2):** a crude line drawing of a box on a tube with "Sharify" in a monospace face (left over from an earlier theme), a default numbered list beside it, and a tiny browser checkbox for the one thing the step needs ("It's fixed and doesn't move by hand"), with "Continue" greyed out until you find it.
+
+**What changed:** the drawing gives way to the photograph of the recorder against a frame (wide crop); the three instructions are numbered tiles like the Return step's; the confirmation is a large tile with its own box, a second line ("Give it a firm push: nothing should wobble."), a blue ring and tick when on, and a focus ring for the keyboard. The drawing's component and styles are deleted.
+
+**Café test:** the café shows its real machines, not diagrams; so do we now.
+
+**References:** Apple's setup guides (a real photo of the device, then numbered steps); Stripe's onboarding confirmations (a full-width checkable row, not a 13 px box).
+
+**Three ideas:** (1) photo, tiles, a check tile. (2) A short looping clip of fixing the box. (3) An illustration redrawn in the house style.
+**Discarded:** (2) no footage exists. (3) a drawing of something we have a photograph of is a step away from the real thing.
+
+**Chosen, (1):** [before and after (check ticked)](rounds/119-mount.jpg), [phone](rounds/119-mount-375.jpg).
+
+**Test on the blurred shots:** yes: a dark diagonal drawing and a list became a wide photo over three tiles and a blue-ringed tile.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1860,7 +1877,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | My rentals | 117 |
 | Owner (My bikes) | 114 |
 | Owner: Confirm a return | 76 |
-| Add a bike | 74 |
+| Add a bike | 119 (step 2) |
 | Verify | 109 |
 | Empty, loading and error states | 89 |
 | Design | 112 |
