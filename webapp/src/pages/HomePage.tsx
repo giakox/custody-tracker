@@ -92,7 +92,7 @@ export function HomePage() {
         <div id="bikes" className="bikes-anchor" />
         <Finder bikes={bikes} me={me} locating={locating} onLocate={locate} live={live} rentingIt={rentingIt} loaded={!!fleet.data} />
 
-        <Moments />
+        <Moments journey />
         {live && live.b.objectId !== null && <TryTheRule objectId={live.b.objectId} />}
 
         <div className="owners-band">

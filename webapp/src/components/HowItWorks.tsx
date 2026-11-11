@@ -11,7 +11,8 @@ const MOMENTS = [
     title: "Bring it back. The deposit follows the rule.", text: "When the owner confirms, your deposit comes back by itself: all of it, or minus what the rule says for a drop." },
 ] as const;
 
-export function Moments({ title = "A rental, in three moments", designLink = false }: { title?: string; designLink?: boolean }) {
+export function Moments({ title = "A rental, in three moments", designLink = false, journey = false }: { title?: string; designLink?: boolean; journey?: boolean }) {
+  if (journey) return <Journey title={title} />;
   return (
     <section className="moments" aria-labelledby="moments-title">
       <div className="moments-head">
@@ -31,6 +32,37 @@ export function Moments({ title = "A rental, in three moments", designLink = fal
           </li>
         ))}
       </ol>
+    </section>
+  );
+}
+
+/** The Home's version (round 102): the same three moments as a journey on a deep band, three pictures of different
+ *  sizes joined by a dotted path, like a route. Light and dark alternate down the page (the café's rhythm). */
+function Journey({ title }: { title: string }) {
+  return (
+    <section className="journey" aria-labelledby="journey-title">
+      <div className="journey-inner">
+        <div className="journey-head">
+          <h2 id="journey-title">{title}</h2>
+          <p>From the sticker on the frame to the deposit coming back. About as long as the ride itself.</p>
+        </div>
+        <svg className="journey-path" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true"><path d="M60 330 C 260 330, 260 90, 470 120 S 760 360, 950 210" /></svg>
+        <ol className="journey-stops">
+          {MOMENTS.map((m, i) => (
+            <li key={m.id} className={`stop stop-${i + 1}`}>
+              <div className="stop-pic">
+                <img src={m.img} alt={m.alt} loading="lazy" />
+                {"inset" in m && <img className="stop-inset" src={m.inset} alt={m.insetAlt} loading="lazy" />}
+              </div>
+              <div className="stop-text">
+                <span className="stop-n" aria-hidden="true">{i + 1}</span>
+                <h3>{m.title}</h3>
+                <p>{m.text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
     </section>
   );
 }

@@ -209,3 +209,49 @@
 @media (prefers-reduced-motion: reduce) {
   .tx-step .tx-dot, .lrb-dot, .sk, .led-halo, .scan-frame.is-scanning::after, .pulse::after, .state-dot::after { animation: none !important; }
 }
+
+/* ---------- Round 102: the Home breathes in light and dark; the three moments become a journey ---------- */
+.journey { margin-top: clamp(64px, 9vw, 128px); background: var(--ink); color: #f4f1ec; overflow: clip; }
+.journey-inner { position: relative; max-width: var(--max); margin: 0 auto; padding: clamp(64px, 8vw, 112px) var(--gutter); }
+.journey-head { max-width: 560px; }
+.journey-head h2 { font-size: var(--t-h2); line-height: 1; letter-spacing: -0.04em; color: #fff; }
+.journey-head p { margin-top: 16px; font-size: 19px; line-height: 1.5; color: rgba(244, 241, 236, .78); }
+.journey-path { position: absolute; left: var(--gutter); right: var(--gutter); top: 300px; width: calc(100% - 2 * var(--gutter)); height: 520px; pointer-events: none; }
+.journey-path path { fill: none; stroke: rgba(244, 241, 236, .35); stroke-width: 2; stroke-dasharray: 2 10; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.journey-stops { position: relative; list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 48px; align-items: start; }
+.stop-1 { grid-column: 1 / 5; margin-top: 160px; }
+.stop-2 { grid-column: 5 / 10; }
+.stop-3 { grid-column: 10 / 13; margin-top: 220px; }
+.stop-pic { position: relative; border-radius: var(--radius); overflow: hidden; box-shadow: var(--elev-3); }
+.stop-pic > img:first-child { display: block; width: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
+.stop-1 .stop-pic > img:first-child { aspect-ratio: 1; }
+.stop-2 .stop-pic > img:first-child { aspect-ratio: 4 / 3; }
+.stop-3 .stop-pic > img:first-child { aspect-ratio: 3 / 4; }
+.stop-inset { position: absolute; right: 16px; bottom: 16px; width: 30%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); outline: 4px solid #fff; box-shadow: var(--elev-3); }
+.stop-text { margin-top: 20px; display: grid; grid-template-columns: 36px minmax(0, 1fr); column-gap: 14px; }
+.stop-n { grid-row: span 2; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--blue); color: var(--on-blue); font-weight: 700; font-size: 15px; }
+.stop-text h3 { font-size: clamp(19px, 1.6vw, 22px); line-height: 1.2; letter-spacing: -0.02em; color: #fff; }
+.stop-text p { margin-top: 6px; font-size: 15px; line-height: 1.5; color: rgba(244, 241, 236, .78); max-width: 40ch; }
+@media (hover: hover) { .stop:hover .stop-pic > img:first-child { transform: scale(1.04); } }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .stop { animation: moment-in linear both; animation-timeline: view(); animation-range: entry 0% entry 55%; }
+    .journey-path path { stroke-dashoffset: 400; animation: path-draw linear both; animation-timeline: view(); animation-range: entry 10% cover 60%; }
+  }
+}
+@keyframes path-draw { to { stroke-dashoffset: 0; } }
+@media (max-width: 899px) {
+  .journey-path { display: none; }
+  .journey-stops { grid-template-columns: minmax(0, 1fr); row-gap: 40px; margin-top: 32px; }
+  .stop-1, .stop-2, .stop-3 { grid-column: 1; margin-top: 0; }
+  .stop-1 { width: 78%; } .stop-3 { width: 78%; justify-self: end; }
+}
+
+/* the close is dark too: the page ends in the evening */
+footer.site-end { background: var(--ink); color: rgba(244, 241, 236, .78); }
+footer.site-end .site-end-note { color: rgba(244, 241, 236, .78); }
+footer.site-end .site-end-h { color: #fff; }
+footer.site-end .site-end-nav a { color: rgba(244, 241, 236, .78); }
+footer.site-end .site-end-nav a:hover { color: #fff; }
+.site-end-nav a:focus-visible { outline-color: #7cc8ef; }
+.site-end-name { color: var(--blue); }

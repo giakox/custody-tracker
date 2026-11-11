@@ -1518,6 +1518,26 @@ Every screen was rebuilt at least once with the same method (a written hierarchy
 
 **Test:** none: a study round. The next rounds have to close this distance, and each one says in writing how much is left.
 
+## Round 102 · Composition: the Home breathes in light and dark
+
+**A composition round** (protocol: one in five): judged on the whole Home, top to bottom, sharp and blurred: [blurred, before and after](rounds/102-home-full-blur.jpg), [sharp](rounds/102-home-full-sharp.jpg).
+
+**Hierarchy audit (the Home as a page):** hero (light photo) → finder (white, three screens) → three moments (white, three equal portraits) → try the rule (pink) → owners (sand) → footer (sand). Every section the same temperature; the only change of tone was the pink band. The three moments were the most template-like row on the site (protocol: no rows of identical cards).
+
+**What changed:**
+- **"A rental, in three moments" becomes a journey on a deep ink band**: three photographs of different sizes and shapes (square, landscape, portrait) set along a dotted route that draws itself as you scroll (static with reduced motion), each with its number, title and one sentence; the recorder inset on the ride. On a phone the three stack, staggered left and right.
+- **The footer turns dark**, so the page ends in the evening: light, light, dark, light, light, dark. The blue wordmark on ink measures 5:1.
+- On the bike page the same three moments keep the light band (a working page doesn't need the evening).
+
+**Café test, "is it as welcoming as the café? what's missing?"** Closer in rhythm: the café alternates cream and espresso, and now so do we, in our own ink. Still missing: (1) the finder is three screens of the same card shape, the opposite of the café's varied objects; (2) no section is yet an object from the bike's world (the café's receipt, punch card, shelf, chalkboard); (3) no place has a street or an hour. Those are the next rounds.
+
+**References:** the café frames (the espresso bands and the dark footer) and Apple's product pages (dark and light chapters alternate to pace a long page).
+
+**Three ideas:** (1) a deep band for the journey and a dark footer. (2) Make the whole Home dark. (3) A full-bleed photo with hotspots for the three moments.
+**Discarded:** (2) Theme B is light; a dark site is another theme. (3) one photo can't honestly show three different moments (the sticker, the ride, the return) at once.
+
+**Test, "another screen at a glance?" on the blurred shots:** yes for the bottom half (a dark block appears where there was a row of three, and the page now ends dark); **no** for the top half, which is unchanged: the finder still reads as a long grid. That part is the next composition target.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1525,14 +1545,15 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Screen | Last round |
 |---|---|
 | Home: hero | 78 |
-| Home: "how it works" band (and bike page) | 70 |
+| Home: journey (dark band) | 102 |
+| Bike page: "how it works" band | 70 |
 | Home: owners band | 80 |
 | Home: try the rule (and Rule step) | 82 |
 | Home: find a bike (grid + map) | 96 |
 | Header | 77 |
 | Page transitions | 88 |
 | Live rental strip | 94 |
-| Footer | 73 |
+| Footer | 102 (dark) |
 | Bike page | 84 (proof mode: 100) |
 | Rent flow: Rule, Deposit | 86 |
 | Rent flow: Wallet | 92 |
