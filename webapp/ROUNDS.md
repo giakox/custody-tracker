@@ -264,3 +264,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Airbnb and Apple: sticky translucent headers that blur what is under them: https://www.apple.com
 - **Shots:** [1440 px](rounds/25-1440.jpg)
 - **Lines:** 6257
+
+## Round 26 · An editorial type scale
+
+- **What:** One scale for the whole site (display, h1, h2, lead) set tighter and heavier: titles at -0.04em with balanced line breaks, text wrapping to avoid orphans, tabular figures for amounts. The hero title is now 78 px in a narrower card, so the rider stays in view.
+- **Why:** The titles were the same size as the body's neighbours. A big, tight headline is what makes a page feel designed, and the first version of the bigger hero hid the rider, so the card was narrowed.
+- **Reference:** Stripe and Linear headlines: tight tracking, heavy weight, balanced lines: https://stripe.com https://linear.app
+- **Shots:** [1440 px](rounds/26-1440.jpg)
+- **Lines:** 6270

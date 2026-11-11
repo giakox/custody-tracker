@@ -223,3 +223,16 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 }
 @keyframes header-lift { from { box-shadow: 0 0 0 transparent; background: rgba(255, 255, 255, .5); } to { box-shadow: var(--elev-1); background: rgba(255, 255, 255, .86); } }
 @media (max-width: 760px) { .welcome-photo { height: 58svh; min-height: 340px; } }
+
+/* ---------- Round 26: an editorial type scale ---------- */
+:root { --t-display: clamp(44px, 5.2vw, 78px); --t-h1: clamp(40px, 5.2vw, 80px); --t-h2: clamp(32px, 3.8vw, 56px); --t-lead: clamp(19px, 1.6vw, 24px); }
+h1, h2, h3 { text-wrap: balance; }
+p, li, dd { text-wrap: pretty; }
+.mono, .num, dd, .sim-peak, .sim-back, .price-line b { font-variant-numeric: tabular-nums; }
+.welcome-card { width: min(640px, calc(100% - 2 * var(--gutter))); padding: clamp(28px, 3.2vw, 48px); }
+.welcome-card h1 { font-size: var(--t-display); line-height: .95; max-width: 12ch; }
+.welcome-card p { font-size: var(--t-lead); max-width: 30ch; }
+.bike-top h1, .rent h1, .design .d-head h1, .verify h1 { font-size: var(--t-h1); line-height: .96; }
+.moments h2, .try-rule h2, .owners h2 { font-size: var(--t-h2); line-height: 1; letter-spacing: -0.04em; }
+.lead, .hero-summary { font-size: var(--t-lead); line-height: 1.45; }
+@media (max-width: 760px) { .welcome-card h1 { font-size: 40px; max-width: none; } }

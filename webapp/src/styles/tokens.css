@@ -35,7 +35,7 @@
 
   --sans: "Figtree Variable", "Figtree", -apple-system, "Segoe UI", sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;   /* proof only: hashes, batch numbers */
-  --display: var(--sans); --display-weight: 650; --display-tracking: -0.025em; --em-style: normal;
+  --display: var(--sans); --display-weight: 680; --display-tracking: -0.04em; --em-style: normal;
   --text: var(--sans); --ui: var(--sans);
 
   --gutter: clamp(16px, 4vw, 48px);
