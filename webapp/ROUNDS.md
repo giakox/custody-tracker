@@ -334,3 +334,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Stripe's payment-success states: one large mark, one big sentence, a small stamp motion: https://stripe.com
 - **Shots:** [1440 px](rounds/33-1440.jpg)
 - **Lines:** 6349
+
+## Round 34 · A photograph for the technical page
+
+- **What:** "How Sharify is designed" opens with a wide photo of the recorder in a hand, with a caption card on it, before the three plain sentences and the technical scheme.
+- **Why:** The technical page was all text. The whole project is one small object; the professors should see it first.
+- **Reference:** Teenage Engineering and Oura product pages: the object in a hand, large, before any specification: https://www.oura.com
+- **Shots:** [1440 px](rounds/34-1440.jpg)
+- **Lines:** 6359

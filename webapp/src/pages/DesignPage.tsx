@@ -38,6 +38,11 @@ export function DesignPage() {
           <p className="lead">Today the record of what happened to a rented object belongs to whoever has the most power: the rental desk, the courier, the seller. Sharify moves it to a path where every step can be checked by anyone. For each step: who could cheat, and why it doesn't work.</p>
         </header>
 
+        <figure className="d-photo">
+          <img src="./img/day/recorder-hand.jpg" alt="A hand holding the Sharify recorder, a small black box with one blue light, next to a bike frame" />
+          <figcaption>The recorder: a small sealed box that rides on the frame and notes every hard knock.</figcaption>
+        </figure>
+
         <section className="oneminute" aria-labelledby="one-title">
           <h2 id="one-title">In one minute</h2>
           <ol>

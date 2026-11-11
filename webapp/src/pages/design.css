@@ -78,3 +78,8 @@
 .oneminute li b { color: var(--ink); font-weight: 600; }
 .oneminute .d-sub { grid-column: 2; }
 @media (max-width: 900px) { .oneminute { grid-template-columns: minmax(0, 1fr); } .oneminute .d-sub { grid-column: 1; } }
+
+.d-photo { margin: clamp(32px, 5vw, 64px) 0 0; position: relative; }
+.d-photo img { display: block; width: 100%; aspect-ratio: 21 / 9; object-fit: cover; object-position: 50% 62%; border-radius: var(--radius); box-shadow: var(--elev-2); }
+.d-photo figcaption { position: absolute; left: clamp(16px, 3vw, 40px); bottom: clamp(16px, 3vw, 40px); max-width: 34ch; padding: 14px 18px; background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--elev-3); font-size: 16px; line-height: 1.4; color: var(--ink); }
+@media (max-width: 700px) { .d-photo img { aspect-ratio: 4 / 3; } .d-photo figcaption { position: static; box-shadow: none; padding: 12px 0 0; background: none; } }
