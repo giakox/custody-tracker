@@ -1424,6 +1424,19 @@ Also a step towards one shadow scale: the three hand-written shadows left (the p
 
 **Test, "another screen at a glance?"** On paper, yes.
 
+## Round 98 · Checked, not assumed: contrast on every rebuilt page, and motion that respects "reduce"
+
+**Contrast audit:** a script walked every text node on eight pages (Home, the bike page, the Rule step, a receipt, My bikes, Verify, the ride, Design) at 1440 px and three of them at 375 px, measured text against its real background (walking up to the first opaque surface) and flagged anything under 4.5:1 (3:1 for large text). Result: every text passes, including the new tinted surfaces of rounds 64–97 (sand, blue wash, the knock tints, the live pill). The one flag is the footer's "Sharify" wordmark (2.83:1, blue on the footer's sand): it is the logotype, hidden from screen readers, and WCAG exempts logotypes; it stays the brand blue. [The footer it refers to](rounds/98-footer-logotype.jpg).
+
+**Reduced motion:** a second script listed every animation outside a `prefers-reduced-motion: no-preference` guard. Five decorative loops were still running for people who asked the system to reduce motion: the signature tile's pulse, the live pill's dot, the skeleton shimmer, the recorder LED's breathing, the QR scan sweep, plus the pulsing dots. They now stop. The spinners keep turning: they are the only sign that something is still working, which is the exception the guideline allows.
+
+**Three ideas:** (1) measure, then fix only what fails. (2) Raise every grey one step darker "to be safe". (3) A high-contrast toggle.
+**Discarded:** (2) flattens the hierarchy that tertiary grey exists for. (3) a toggle for a site that already passes is a feature nobody needs.
+
+**Chosen, (1).** Nothing changes at a glance; nothing is assumed either.
+
+**Test, "another screen at a glance?"** No: a verification round.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.

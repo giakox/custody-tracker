@@ -204,3 +204,8 @@
 .lrb-peak { margin-left: 4px; }
 .live-rental-bar .btn-sm { border-radius: 999px; min-height: 36px; padding: 0 16px; }
 @media (max-width: 640px) { .lrb-inner { padding-left: 14px; } }
+
+/* ---------- Round 98: with reduced motion, no decorative loop keeps running (spinners stay: they say "working") ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .tx-step .tx-dot, .lrb-dot, .sk, .led-halo, .scan-frame.is-scanning::after, .pulse::after, .state-dot::after { animation: none !important; }
+}
