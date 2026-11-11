@@ -288,3 +288,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Squarespace and Webflow showcase sites: a card overlapping the hero photograph: https://www.squarespace.com
 - **Shots:** [375 px](rounds/28-375.jpg)
 - **Lines:** 6309
+
+## Round 29 · The rule on a field of colour
+
+- **What:** "What if it gets dropped?" now sits on a full-width pale-blue field, the simulator is a raised white card with the biggest numbers on the site (the knock and what comes back).
+- **Why:** The rule is the product, so it gets the loudest moment on the page: a change of colour, a floating card and the numbers set large.
+- **Reference:** Wise's calculator and Stripe's pricing sliders on tinted fields: https://wise.com https://stripe.com/pricing
+- **Shots:** [1440 px](rounds/29-1440.jpg)
+- **Lines:** 6316
