@@ -2127,6 +2127,21 @@ Block 121–130 worked through the oldest screens in the register and two compos
 
 **Test on the blurred shots:** yes: an empty column became a sand card with an orange point and a blue button.
 
+## Round 135 · A step back: "Today" loses its black slab
+
+**Hierarchy audit (My bikes, after 132 made the bike the poster):** the "Today" ribbon was still a full-width black slab above the photo; on the blurred shot it was the first and heaviest thing, on a screen whose title says "Nothing needs you right now." Round 120 decided that on working screens the only dark surface is the footer; the ribbon was the exception.
+
+**What was removed:** the black: the ribbon is sand, the track white with a hairline edge, the hour ticks and "now" in ink. The marks (blue rides, orange knocks) are now the only colour in it. Nothing added, nothing moved.
+
+**Café test:** the café's day sheet hangs on the wall; it doesn't block the window. Still missing: when there are no rides today, the ribbon is an empty track (it was 114's choice to keep it; still right, the empty day is information).
+
+**Three ideas:** (1) sand ribbon. (2) Hide the ribbon on quiet days. (3) Move it under the bike.
+**Discarded:** (2) "no rides today" is something the owner wants to know. (3) the ribbon is the page's answer to "what happened today", which comes before the inventory.
+
+**Chosen, (1):** [before and after](rounds/135-today.jpg) (before reconstructed by re-applying the old colours in the browser).
+
+**Test on the blurred shots:** yes: the black band at the top is gone; the bike photo is the darkest, largest thing on the page.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -2153,7 +2168,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Rent flow: Outcome | 91 |
 | Receipt | 113 (print: 97) |
 | My rentals | 117 |
-| Owner (My bikes) | 132 |
+| Owner (My bikes) | 132, 135 (step back) |
 | Owner: Confirm a return | 121 |
 | Add a bike | 119 (step 2), 128 (step 3), 129 (step 4), 131 (step 5) |
 | Verify | 109 |
