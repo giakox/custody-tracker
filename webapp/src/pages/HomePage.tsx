@@ -20,23 +20,6 @@ import "./map.css";
 
 type Me = LatLon & { accuracy: number };
 
-/** "What could your bike earn?" (Airbnb's host estimator): your price × your hours, nothing invented. */
-function Earnings() {
-  const [price, setPrice] = useState(2);
-  const [hours, setHours] = useState(10);
-  const month = Math.round(price * hours * 52 / 12);
-  return (
-    <div className="own-cta earn">
-      <h3>What could your bike earn?</h3>
-      <label className="earn-row"><span>Price per hour</span><input type="range" min={1} max={4} step={0.5} value={price} onChange={(e) => setPrice(Number(e.target.value))} /><b className="mono">{price} dollars</b></label>
-      <label className="earn-row"><span>Hours rented a week</span><input type="range" min={1} max={40} step={1} value={hours} onChange={(e) => setHours(Number(e.target.value))} /><b className="mono">{hours} h</b></label>
-      <p className="earn-out"><span className="mono">≈ {month} dollars</span> a month</p>
-      <p className="earn-note">Your price times your hours: an estimate, not a promise. If someone drops your bike, the rule you set decides what you get from their deposit.</p>
-      <a className="btn btn-primary" href={href("add/1")}>Rent out your bike</a>
-    </div>
-  );
-}
-
 /** The rule, playable: drag "how hard it was dropped" and see what comes back (Wise's calculator on its home page). */
 function TryTheRule({ objectId }: { objectId: number }) {
   const q = useQuery({ queryKey: ["object", objectId], queryFn: () => getObject(objectId) });
@@ -119,7 +102,12 @@ export function HomePage() {
               <h2 id="owners-title">Your bike sits still most of the week.</h2>
               <p>Lend it to people nearby. You set the price, the deposit and what a drop costs; the rule is public before anyone rides.</p>
             </div>
-            <Earnings />
+            <ol className="owner-steps">
+              <li><b>Fix a recorder to the frame.</b> A small sealed box; you pair it with your bike from your phone.</li>
+              <li><b>Set your price and your rule.</b> The hourly price, the deposit and what each kind of knock costs.</li>
+              <li><b>Confirm when it's back.</b> The deposit settles by itself, by the rule you set.</li>
+            </ol>
+            <a className="btn btn-primary btn-lg" href={href("add/1")}>Rent out your bike</a>
           </section>
         </div>
       </main>

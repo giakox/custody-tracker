@@ -1036,6 +1036,38 @@ Every section had the same layout (title left, content right) and the same weigh
 
 **Test, "another screen at a glance?"** Yes for the list: a uniform grid became one bike and a sample grid.
 
+## Round 80 · A step back: the owners' band says what an owner does, not what they might earn
+
+**Hierarchy audit (the owners' band on the Home):**
+
+| Block | Who, when | If it vanished | Verdict |
+|---|---|---|---|
+| H1 "Your bike sits still most of the week." + one sentence | owners | the invitation | kept, primary |
+| "What could your bike earn?": two sliders and "≈ 87 dollars a month", in a bordered sand card inside the white card | owners | nothing true is lost: the 10 hours a week was our guess, and a monthly figure reads as a promise | removed |
+| (missing) what an owner actually has to do | owners deciding | — | added: three numbered steps (fix the recorder, set price and rule, confirm returns), the order is the content |
+| "Rent out your bike" | owners | the way in | kept, now directly under the steps |
+
+Also removed: the estimator's styles in map.css, which matched the earnings card on My bikes by class name and gave it uneven gaps (a cause of the white stripes fixed by hand in round 69).
+
+**Levels after:** title, then the three steps, then the button. **Squint test:** before, the eye went to "≈ 87 dollars", the biggest number on the Home; after, to the title and down the three dark numerals to the button.
+
+**References:** Airbnb's "Airbnb it" page leads with an estimate but backs it with real nearby data; we have none, so we follow Stripe's onboarding pages instead: what you'll do, in three steps, then one button.
+
+**Three ideas (what to remove):** (1) the estimator, replaced by the three steps. (2) The whole owners' band (owners have the header link). (3) The photo of the shop owner.
+**Discarded:** (2) the Home would never tell a visitor that they can lend their own bike, which is half of the product. (3) it's the only picture of an owner on the site.
+
+**Chosen, (1):** [1440](rounds/80-owners-1440.jpg), [phone](rounds/80-owners-375.jpg). No card inside a card any more.
+
+**Test, "another screen at a glance?"** Not meant to be; what you see first is no longer a number we made up.
+
+### Block 71 to 80 (summary)
+
+- **Lines in `webapp/src`:** about 7,080, under the cap of 13,517.
+- **Strongest changes:** (1) Verify as one sheet whose action turns into the answer (71) and the Design page as a document with contents that follow you (72); (2) the owner's side as a "Today" dashboard (69, in the last block) carried through to Confirm a return with the split drawn before the click (76), and the Add flow beside a preview that ticks as you go (74).
+- **Second passes (nothing is final):** the header (77: the wallet is a chip, the blue goes back to the action), the Home's first screen (78: one action, the real bike as a card), the finder (79: the real bike leads, the samples under their own name).
+- **Steps back:** round 75 (calmer titles on working screens, about 120 lines of dead CSS removed) and round 80 (the earnings estimate removed, stray styles that leaked into My bikes removed).
+- **Next in the rotation:** the try-the-rule section on the Home, the bike page's booking card on a phone, the phone map's crowded pins, empty and error states.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1044,6 +1076,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 |---|---|
 | Home: hero | 78 |
 | Home: "how it works" band (and bike page) | 70 |
+| Home: owners band | 80 |
 | Home: find a bike (grid + map) | 79 |
 | Header | 77 |
 | Footer | 73 |

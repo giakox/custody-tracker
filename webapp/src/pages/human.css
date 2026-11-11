@@ -24,7 +24,6 @@
 .owners { max-width: var(--max); margin: 0 auto; padding: clamp(64px, 9vw, 128px) var(--gutter) 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
 .owners h2 { font-size: clamp(32px, 3.4vw, 48px); line-height: 1.05; max-width: 16ch; }
 .owners-copy p { margin-top: 16px; font-size: 19px; color: var(--mist); max-width: 40ch; }
-.own-cta { background: var(--surface); border-color: var(--line); border-radius: var(--radius); }
 
 @media (max-width: 760px) {
   .welcome-photo { height: 50svh; min-height: 320px; object-position: 60% 40%; }
@@ -108,7 +107,6 @@
 .owners-band { margin-top: clamp(64px, 9vw, 128px); background: var(--surface); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
 .owners-photo { width: 100%; height: 100%; min-height: 420px; object-fit: cover; }
 .owners-band .owners { max-width: none; margin: 0; padding: clamp(40px, 6vw, 88px) var(--gutter); grid-template-columns: minmax(0, 1fr); gap: 28px; align-items: start; }
-.owners-band .own-cta { background: var(--bg); }
 @media (max-width: 860px) { .owners-band { grid-template-columns: minmax(0, 1fr); } .owners-photo { min-height: 0; aspect-ratio: 4 / 3; } }
 
 /* Sliders: a thin warm track and a blue handle, not the browser's dark default. */
@@ -180,7 +178,6 @@ p, li, dd { text-wrap: pretty; }
 .owners-band { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: center; padding: clamp(40px, 6vw, 96px) 0; background: var(--surface); }
 .owners-photo { grid-column: 1 / 8; grid-row: 1; min-height: clamp(420px, 46vw, 680px); border-radius: 0 var(--radius) var(--radius) 0; }
 .owners-band .owners { grid-column: 6 / 12; grid-row: 1; background: var(--bg); border-radius: var(--radius); box-shadow: var(--elev-3); padding: clamp(28px, 3.6vw, 56px); margin-right: var(--gutter); position: relative; }
-.owners-band .own-cta { background: var(--surface); }
 @media (max-width: 960px) {
   .owners-band { grid-template-columns: minmax(0, 1fr); padding: 0 0 32px; }
   .owners-photo { grid-column: 1; border-radius: 0; min-height: 0; aspect-ratio: 4 / 3; }
@@ -386,3 +383,10 @@ p, li, dd { text-wrap: pretty; }
   .nearest-k { font-size: 12px; }
 }
 @media (max-width: 640px) { .nearest .wide-only { display: none; } }
+
+/* ---------- Round 80: the owners' band says what an owner does, not what they might earn ---------- */
+.owner-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; counter-reset: os; }
+.owner-steps li { counter-increment: os; position: relative; padding-left: 48px; font-size: 17px; line-height: 1.5; color: var(--mist); }
+.owner-steps li::before { content: counter(os); position: absolute; left: 0; top: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--ink); color: var(--bg); display: grid; place-items: center; font-size: 15px; font-weight: 700; }
+.owner-steps b { display: block; color: var(--ink); font-weight: 650; }
+.owners-band .owners > .btn { justify-self: start; }

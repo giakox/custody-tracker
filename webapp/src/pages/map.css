@@ -41,18 +41,3 @@
 /* Esri's dark grey is lighter than Midnight Black: darken the tiles so map and header read as one surface. */
 .fleet-map .leaflet-tile-pane, .ride-map .leaflet-tile-pane { filter: var(--tile-filter); }
 .fleet-map, .ride-map { background: var(--bg) !important; }
-/* Round 5: the owner's entry is an estimate they control. */
-.earn { display: grid; gap: 14px; }
-.earn h3 em { font-style: var(--em-style); }
-.earn-row { display: grid; grid-template-columns: 150px minmax(0, 1fr) 96px; gap: 14px; align-items: center; font-size: 15px; color: var(--mist); }
-.earn-row input { accent-color: var(--blue); width: 100%; }
-.earn-row b { font-weight: 400; color: var(--ink); text-align: right; }
-.earn-out { font-size: 18px; color: var(--mist); margin: 4px 0 0 !important; }
-.earn-out .mono { font-size: 40px; color: var(--ink); margin-right: 6px; }
-.earn-note { font-size: 14px !important; color: var(--fog) !important; margin: 0 !important; }
-.earn .btn { justify-self: start; }
-@media (max-width: 640px) {
-  .earn-row { grid-template-columns: minmax(0, 1fr) 96px; }
-  .earn-row span { grid-column: 1 / -1; }
-  .earn-out .mono { font-size: 32px; }
-}
