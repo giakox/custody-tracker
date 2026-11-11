@@ -125,13 +125,11 @@
 /* Deposit: what you lock sits beside the signatures it takes. */
 .deposit { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .85fr); gap: 48px; align-items: start; }
 .deposit .tx-steps { margin-top: 26px; }
-.deposit-summary { position: sticky; top: 20px; margin-top: 26px; border: 1px solid var(--line-strong); border-radius: var(--radius); padding: 20px 22px; background: var(--raise); }
+.deposit-summary { position: sticky; top: 20px; margin-top: 26px; border-radius: var(--radius); }
 .sum-bike { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; align-items: center; }
 .sum-bike .object-image { max-width: 120px; justify-self: start; }
 .sum-name { font-size: 22px; color: var(--ink); line-height: 1.15; }
 .sum-owner { font-size: 13px; color: var(--fog); margin-top: 4px; }
-.sum-lines { margin: 18px 0 0; border-top: 1px solid var(--line-strong); }
-.sum-lines div { padding: 12px 0; border-bottom: 1px solid var(--line); }
 .sum-lines dt { font-size: 14px; color: var(--fog); }
 .sum-lines dd { margin: 4px 0 0; font-size: 16px; color: var(--ink); }
 .sum-lines dd.big { font-size: 32px; }

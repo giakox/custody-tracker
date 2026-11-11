@@ -2400,6 +2400,29 @@ The owner side and the system's edges. "Your rules" shows the rule renters will 
 
 **Test on the blurred shots:** yes: a beige box with lines became a white card with a photo slot, the same shape as on the five steps before.
 
+## Round 150 · A step back: checks across the site, and the rules the last block left dead
+
+**Hierarchy audit (the site after 141–149):** three checks rather than one screen. (1) Contrast on the pages this block touched (receipt on the dark counter, Design, Verify, My bikes, the finder's chain-down state): no failures; the only flags are the Design numbers band, whose dark ground is a pseudo-element the audit can't see (known since 112; the text is white on ink). (2) Grey horizontal dividers: a probe of every bordered element wider than 200 px on seven main pages finds only buttons' own outlines, no zone divided by a rule (tables and the printed proof list keep their row rules, which are data, not layout). (3) Dead CSS: the summary card's old ruled lines and border (replaced in 149) were still in rent.css, overridden.
+
+**What was removed:** those rules (pixel-diffed: the Publish step renders identically). Nothing added.
+
+**Café test:** at closing time the café wipes the tables it already cleared. Still missing: the 20 legacy border rules left in the CSS are all overridden or on data tables today; a future clean-up could delete the overridden ones outright.
+
+**Three ideas:** (1) checks + remove the dead rules. (2) Delete every legacy border rule now. (3) A last visual change somewhere.
+**Discarded:** (2) several are still the base for tables and print; deleting blind risks the printed receipt. (3) the last round of a block is a step back.
+
+**Chosen, (1).** No sheet: nothing visible changed.
+
+**Test on the blurred shots:** not applicable; the probes are the test.
+
+## Block 141 to 150 (summary)
+
+The receipt became a slip with its actions on the counter (141), then the whole page became the counter (147, which also fixed the printed slip's tilt). My rentals ends on "ride it again" when that's true (142). The Home journey climbs its band instead of leaving holes (143). The Design page's argument is one path, not six cards (144); its verdict is a sentence (145); its blockchain test is five answers on the page (146, with a first, wrong highlight caught and undone). The phone menu shows the demo bike live (148). Publishing a bike ends on the same card as every step before (149). This round checked contrast and dividers across the site and removed dead rules.
+
+## Rounds 101 to 150, in one paragraph
+
+Fifty rounds under PROTOCOL.md: every screen in the rotation register was touched at least once more (the oldest now is round 116), five composition rounds per block were judged on the full page and the blurred shot, every fifth round removed instead of added. Real bugs found and fixed on the way: "walkfrom" in the hero (133), "no bike matches" during a chain outage (134), the phone's fixed buttons painted under Leaflet maps (139), a printed receipt tilted (147), a duplicate confirm button on phones (130). Lines in `src`: about 8,080 of the 10,560 cap. Nothing pushed; everything is on `webapp-edoardo`, one local commit per round.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
