@@ -461,3 +461,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Airbnb's host onboarding: a live preview card of your listing: https://www.airbnb.com/host/homes
 - **Shots:** [1440 px](rounds/48-1440.jpg)
 - **Lines:** 6483
+
+## Round 49 · Daylight bikes, one grade
+
+- **What:** The nine sample bikes are now photographed in the same warm afternoon light as the rest of the site (generated locally, checked one by one; two were redone because the frames showed invented lettering), and every photograph on the site gets the same light grade (slightly warmer, a touch more contrast).
+- **Why:** The critique said the set did not look like one shoot: a warm hero, cool blue-hour bikes. One light, one grade.
+- **Reference:** Kinfolk and Aesop: a single colour grade across all photography: https://aesop.com
+- **Shots:** [1440 px](rounds/49-1440.jpg)
+- **Lines:** 6486

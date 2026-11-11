@@ -431,3 +431,6 @@ p, li, dd { text-wrap: pretty; }
 .preview-price { font-size: 16px; color: var(--mist); margin-top: 6px; }
 .preview-price b { color: var(--ink); font-weight: 650; }
 @media (max-width: 900px) { .add-grid { grid-template-columns: minmax(0, 1fr); } .listing-preview { position: static; order: -1; } .preview-card img, .preview-empty { aspect-ratio: 16 / 9; } }
+
+/* ---------- Round 49: one grade for every photograph ---------- */
+.bike-photo, .tale-photo > img, .welcome-photo, .owners-photo, .object-image img, .d-photo img, .past-photo, .obj-photo, .invite-photo, .step-photo { filter: saturate(1.04) contrast(1.03) sepia(.05); }
