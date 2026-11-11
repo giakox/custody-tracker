@@ -439,9 +439,6 @@ p, li, dd { text-wrap: pretty; }
 @media (max-width: 900px) { .how-steps li, .how-steps li + li { padding: 22px; } }
 
 /* ---------- Round 57: the wallet step shows what it is for ---------- */
-.wallet-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 72px); align-items: center; }
-.wallet-photo { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); box-shadow: var(--elev-3); filter: saturate(1.04) contrast(1.03) sepia(.05); }
-@media (max-width: 860px) { .wallet-grid { grid-template-columns: minmax(0, 1fr); } .wallet-photo { aspect-ratio: 16 / 10; order: -1; } }
 
 /* ---------- Round 59: bars say what they are on hover and focus ---------- */
 .bars li { position: relative; }

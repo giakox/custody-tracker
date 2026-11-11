@@ -199,3 +199,55 @@
   .sim-examples button { position: static; transform: none; font-size: 11px; }
   .sim-out { text-align: left; width: 100%; }
 }
+
+/* ---------- Round 66: every step beside the same card (Stripe Checkout, Airbnb "Confirm and pay") ---------- */
+.rent-frame { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 380px); gap: 64px; align-items: start; margin-top: 8px; }
+.rent-step { min-width: 0; max-width: 720px; }
+.rent-side { position: sticky; top: calc(var(--hdr-space) + 8px); margin-top: 32px; }
+.trip { border-radius: var(--radius); background: var(--bg); box-shadow: var(--elev-2); overflow: hidden; }
+.trip-bike { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 16px; align-items: center; padding: 16px; }
+.trip-photo { width: 96px; aspect-ratio: 1; object-fit: cover; border-radius: 10px; display: block; }
+.trip-name { font-size: 19px; font-weight: 650; letter-spacing: -0.02em; color: var(--ink); }
+.trip-owner { margin-top: 2px; font-size: 14px; color: var(--fog); }
+.trip-big { display: grid; gap: 2px; padding: 4px 20px 16px; }
+.trip-big span { font-size: 14px; color: var(--fog); }
+.trip-big b { font-size: 36px; font-weight: 700; letter-spacing: -0.035em; color: var(--ink); line-height: 1.05; }
+.trip-lines { margin: 0; padding: 16px 20px 4px; background: var(--surface); display: grid; gap: 8px; }
+.trip-lines div { display: flex; justify-content: space-between; gap: 16px; }
+.trip-lines dt { font-size: 15px; color: var(--mist); }
+.trip-lines dd { margin: 0; font-size: 15px; font-weight: 600; color: var(--ink); }
+.trip-note { padding: 8px 20px 16px; background: var(--surface); font-size: 13px; line-height: 1.5; color: var(--fog); }
+.trip-act { padding: 20px; display: grid; gap: 8px; }
+.trip-act .btn { width: 100%; justify-content: center; }
+.trip-act .hint-line { margin: 0; font-size: 13px; }
+.trip-act .notice { margin: 0; }
+.rent-step .sim { margin-top: 32px; }
+.rent-step .fine { margin-top: 24px; }
+.rent-step .wallets { max-width: 480px; }
+
+/* the signatures: a stepper on sand, no ruled rows */
+.tx-steps { border-top: 0; gap: 8px; }
+.tx-step, .tx-step + .tx-step { border-bottom: 0; padding: 14px 16px; border-radius: var(--radius); background: var(--surface); transition: background-color .25s ease, box-shadow .25s ease; }
+.tx-step.signing, .tx-step.pending { background: var(--blue-wash); box-shadow: inset 0 0 0 2px var(--blue); }
+.tx-step.confirmed { background: var(--bg); box-shadow: var(--elev-1); }
+.tx-step.failed { box-shadow: inset 0 0 0 2px var(--ink); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .rent-step > * { animation: page-in .5s cubic-bezier(.2, .7, .2, 1) backwards; }
+  .rent-step > *:nth-child(2) { animation-delay: .05s; } .rent-step > *:nth-child(3) { animation-delay: .1s; }
+  .rent-side { animation: page-in .55s cubic-bezier(.2, .7, .2, 1) .12s backwards; }
+}
+@media (max-width: 960px) {
+  .rent-frame { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .rent-side { position: static; margin-top: 0; }
+}
+.rent-step .sim { border: 0; background: var(--surface); }
+.wallet-opt { border: 0; background: var(--bg); box-shadow: var(--elev-1), inset 0 0 0 1px var(--line); padding: 18px 20px; transition: box-shadow .2s ease, transform .12s ease; }
+.wallet-opt.primary { background: var(--blue-wash); box-shadow: inset 0 0 0 2px var(--blue); }
+.wallet-opt b { font-weight: 650; }
+.wallet-opt span { font-size: 14px; color: var(--mist); }
+.wallet-opt:hover { box-shadow: var(--elev-2), inset 0 0 0 1px var(--blue); }
+.wallet-opt.primary:hover { box-shadow: var(--elev-2), inset 0 0 0 2px var(--blue-ink); }
+.wallet-opt:active { transform: scale(.985); }
+.wallet-opt:focus-visible { outline: 2px solid var(--blue-ink); outline-offset: 3px; }
+.rent-step .step-photo { display: block; width: 100%; max-width: 720px; aspect-ratio: 16 / 9; object-fit: cover; margin-top: 32px; border-radius: var(--radius); box-shadow: var(--elev-1); }

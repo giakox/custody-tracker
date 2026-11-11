@@ -10,7 +10,7 @@ import { RuleTiers } from "../components/RuleTiers";
 import { RuleSimulator } from "../components/RuleSimulator";
 import { TxSteps } from "../components/TxSteps";
 import { RideMap } from "../components/RideMap";
-import { ObjectImage } from "../components/ObjectImage";
+import { CASE_IMAGE, ObjectImage } from "../components/ObjectImage";
 import { day, hm, objectName, shortHex, span, TEST_MONEY, TIER_NAMES, usd, when } from "../ui/format";
 import { href } from "../ui/router";
 import { relation, useViewer } from "../ui/viewer";
@@ -21,22 +21,45 @@ import "./rent.css";
 const STAGES = ["Rule", "Deposit", "Ride", "Return", "Deposit back"] as const;
 type Stage = (typeof STAGES)[number];
 
-/** Frame shared by every step: header, the bike, where you are in the path. */
-function Shell({ d, stage, children, wide = false }: { d?: ObjectDetail; stage: Stage; children: ReactNode; wide?: boolean }) {
+/** Frame shared by every step: header, the bike, where you are in the path. With `side`, the step sits
+ *  beside a card that stays in view and holds what you are renting (Stripe Checkout, Airbnb "Confirm and pay"). */
+function Shell({ d, stage, children, wide = false, side }: { d?: ObjectDetail; stage: Stage; children: ReactNode; wide?: boolean; side?: ReactNode }) {
   const at = STAGES.indexOf(stage);
   return (
     <div className="page">
       <SiteHeader />
-      <main className={`rent ${wide ? "rent-wide" : ""}`}>
+      <main className={`rent ${wide || side ? "rent-wide" : ""}`}>
         <div className="rent-top">
           {d && <a className="link back" href={href(`object/${d.id}`)}>{objectName(d)}</a>}
           <ol className="rent-progress" aria-label="Rental steps">
             {STAGES.map((s, i) => <li key={s} className={i < at ? "done" : i === at ? "current" : ""} aria-current={i === at ? "step" : undefined}>{s}</li>)}
           </ol>
         </div>
-        {children}
+        {side ? <div className="rent-frame"><div className="rent-step">{children}</div><aside className="rent-side" aria-label="Your rental">{side}</aside></div> : children}
       </main>
       <DemoSwitcher />
+    </div>
+  );
+}
+
+/** What you are renting, always the same card: the bike, who lends it, the money; the step's action goes inside. */
+function TripCard({ d, lead, children }: { d: ObjectDetail; lead?: ReactNode; children?: ReactNode }) {
+  return (
+    <div className="trip">
+      <div className="trip-bike">
+        {CASE_IMAGE && <img className="trip-photo" src={CASE_IMAGE.src} alt="" />}
+        <div>
+          <p className="trip-name">{objectName(d)}</p>
+          <p className="trip-owner">lent by {d.ownerName ?? shortHex(d.owner.address)}</p>
+        </div>
+      </div>
+      {lead}
+      <dl className="trip-lines">
+        {!lead && <div><dt>Deposit</dt><dd>{usd(d.terms.collateral)}</dd></div>}
+        <div><dt>Price</dt><dd>2 dollars an hour</dd></div>
+      </dl>
+      <p className="trip-note">The price is paid to the owner, separately. The deposit comes back by the rule. {TEST_MONEY}</p>
+      {children && <div className="trip-act">{children}</div>}
     </div>
   );
 }
@@ -57,25 +80,25 @@ export function RulePage({ id }: { id: number }) {
   const r = relation(d, account);
   const busy = d.status !== "available" && !r.isOfferedToMe;
   return (
-    <Shell d={d} stage="Rule">
+    <Shell d={d} stage="Rule" side={
+      <TripCard d={d}>
+        {busy ? (
+          <p className="notice">This bike is not available right now. <a className="link" href={href("")}>Find another one on the map</a></p>
+        ) : (
+          <>
+            <a className="btn btn-primary btn-lg" href={href(account ? `rent/${id}/deposit` : `rent/${id}/wallet`)}>Accept the rule and continue</a>
+            <p className="hint-line">You can still back out before you leave the deposit.</p>
+          </>
+        )}
+      </TripCard>
+    }>
       <h1>The rule you <em>accept</em>.</h1>
-      <p className="lead">You leave a deposit of {usd(d.terms.collateral)}. When you bring the bike back, the hardest knock of your ride decides how much of it comes back, by this table. Nobody decides it by hand. <span className="test-money">{TEST_MONEY}</span></p>
-      <p className="price-note">Rental price: <b>2 dollars an hour</b>, paid to the owner separately from the deposit.</p>
+      <p className="lead">You leave a deposit of {usd(d.terms.collateral)}. When you bring the bike back, the hardest knock of your ride decides how much of it comes back. Nobody decides it by hand. Try it:</p>
       <RuleSimulator terms={d.terms} />
       <ul className="fine">
         <li>Only your ride counts: knocks from earlier renters stay on their record.</li>
         <li>The deposit comes back when the owner confirms the bike is back with them.</li>
       </ul>
-      {busy ? (
-        <p className="notice">This bike is not available right now. <a className="link" href={href("")}>Find another one on the map</a></p>
-      ) : (
-        <>
-          <div className="actions">
-            <a className="btn btn-primary btn-lg" href={href(account ? `rent/${id}/deposit` : `rent/${id}/wallet`)}>Accept the rule and continue</a>
-          </div>
-          <p className="hint-line">By continuing you accept this rule for this rental. You can still back out before you leave the deposit.</p>
-        </>
-      )}
     </Shell>
   );
 }
@@ -88,9 +111,7 @@ export function WalletPage({ id }: { id: number }) {
   const [busy, setBusy] = useState(false);
   const go = async () => { setBusy(true); await connect(); window.location.hash = `#/rent/${id}/deposit`; };
   return (
-    <Shell d={d} stage="Deposit" wide>
-      <div className="wallet-grid">
-        <div>
+    <Shell d={d} stage="Deposit" side={d && <TripCard d={d} />}>
       <h1>Connect a <em>wallet</em>.</h1>
       <p className="lead">{isMock
         ? "A wallet is the app that holds your money. For this demo we made you a test wallet, with test money only. In the live version it is your own wallet: the deposit leaves from it and comes back to it, and Sharify never holds your money or your keys."
@@ -104,9 +125,7 @@ export function WalletPage({ id }: { id: number }) {
           </>}
       </div>
       <p className="hint-line">{busy ? "Waiting for your wallet…" : isMock ? "In the live version you connect your own wallet." : "You need a little free test money for network fees (Base Sepolia, a test network)."}</p>
-        </div>
-        <img className="wallet-photo" src="./img/day/unlock-phone.jpg" alt="Hands holding a phone next to a parked city bike" />
-      </div>
+      <img className="step-photo" src="./img/day/unlock-phone.jpg" alt="Hands holding a phone next to a parked city bike" />
     </Shell>
   );
 }
@@ -147,15 +166,22 @@ export function DepositPage({ id }: { id: number }) {
   const shown = steps.length ? steps : planned;
   const signatures = shown.filter((s) => s.viaWallet).length;
   return (
-    <Shell d={d} stage="Deposit" wide>
+    <Shell d={d} stage="Deposit" side={
+      <TripCard d={d} lead={<p className="trip-big"><span>You leave</span><b>{deposit}</b></p>}>
+        <p className="hint-line">It comes back by the rule you accepted. <a className="link" href={href(`rent/${id}`)}>Read it again</a></p>
+      </TripCard>
+    }>
       <h1>{state === "done" ? <>Unlocked. Enjoy the <em>ride</em>.</> : <>Leave the <em>deposit</em>.</>}</h1>
+      {!account ? <>
+        <p className="lead">The deposit leaves from a wallet and comes back to it. Connect one first.</p>
+        <div className="actions"><a className="btn btn-primary" href={href(`rent/${id}/wallet`)}>Connect a wallet</a></div>
+      </> : <>
       <p className="lead">{state === "done"
         ? `Your ${deposit} are held by the rule, not by the owner. From now on, knocks are recorded under your name.`
         : ready.data
           ? `Your wallet is already set up: it will ask you to confirm ${signatures} times, a few seconds each. Keep this page open.`
-          : `First rental from this wallet: it will ask you to confirm ${signatures} times, a few seconds each. Next time it's two. Keep this page open.`} <span className="test-money">{TEST_MONEY}</span></p>
-      <div className="deposit">
-        <div className="deposit-main">
+          : `First rental from this wallet: it will ask you to confirm ${signatures} times, a few seconds each. Next time it's two. Keep this page open.`}</p>
+      <div className="deposit-main">
           {shown.length > 0 && <TxSteps steps={shown} deposit={deposit} explorer={explorer} />}
           {error && <p className="notice error">{error === "You rejected the request in your wallet." ? "You rejected the request in your wallet. Nothing was sent: try again when you're ready." : error}</p>}
           <div className="actions">
@@ -164,21 +190,7 @@ export function DepositPage({ id }: { id: number }) {
               : <button type="button" className="btn btn-primary" onClick={run} disabled={state === "running"}>{state === "running" ? "Working…" : state === "error" ? "Try again"   : `Leave ${deposit}`}</button>}
           </div>
         </div>
-        <aside className="deposit-summary" aria-label="What you leave">
-          <div className="sum-bike">
-            <ObjectImage deviceId={d.deviceId} glow={false} />
-            <div>
-              <p className="sum-name">{objectName(d)}</p>
-              <p className="sum-owner">lent by {d.ownerName ?? shortHex(d.owner.address)}</p>
-            </div>
-          </div>
-          <dl className="sum-lines">
-            <div><dt>You leave</dt><dd className="mono big">{deposit}</dd></div>
-            <div><dt>Rental price</dt><dd className="mono">2 dollars an hour</dd><dd className="tag">paid to the owner, separately</dd></div>
-          </dl>
-          <p className="hint-line">It comes back by the rule you accepted. <a className="link" href={href(`rent/${id}`)}>Read it again</a></p>
-        </aside>
-      </div>
+      </>}
     </Shell>
   );
 }

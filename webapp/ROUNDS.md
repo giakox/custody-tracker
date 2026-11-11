@@ -663,6 +663,38 @@ Edoardo, on the left column of the bike page: «l'occhio non sa dove guardare…
 
 **Test, "is it another screen at a glance?"** Yes: a big sentence and two cards where there were four boxed counters, a state line and two pages of identical rows.
 
+## Round 66 · Renting: every step beside the same card
+
+**Hierarchy audit (Rule step, before):**
+
+| Block | Who, when | If it vanished | Verdict |
+|---|---|---|---|
+| Back link + 5-step progress | renter, all along | lost in the flow | kept, tertiary |
+| H1 "The rule you accept." | renter | — | primary of the step |
+| Lead (deposit, knock decides) | renter | the rule unexplained | secondary, shorter, ends with "Try it:" |
+| "Test money" line under the lead | everyone | — | moved to the card, said once |
+| "Rental price: 2 dollars an hour…" line | renter | the price disappears | moved to the card |
+| The simulator (knock, money back, slider, table) | renter, to understand | the rule is abstract | secondary, the body of the step, on sand, no frame |
+| Two bullet notes | the careful renter | small loss | tertiary |
+| "Accept the rule and continue" + hint | renter, to decide | no way forward | the decision, in the card |
+
+Wallet and Deposit each had a different layout (a half-page photo; a grey summary box with ruled lines), and the Deposit page said "confirm 0 times" to someone with no wallet.
+
+**Levels after:** in the step column the H1 is primary and the step's own content (simulator, wallet choice, signatures) secondary. On the right a card that never changes shape: the bike, who lends it, the money, the step's action. **Squint test:** before, the Rule page was one grey column: H1, then a framed box, then the button at the bottom out of view. After, two masses: the H1 and simulator on the left, the white card with the blue button on the right; the button is in the first screen.
+
+**References:** Stripe Checkout (what you pay on one side, the form on the other, the same summary at every step) and Airbnb's "Confirm and pay" (the listing card with photo, title and price stays on the right while the steps change on the left). Why ours looked cheaper: each step had its own composition, the money was repeated in different places, the action was below the fold.
+
+**Three ideas:** (1) a checkout frame: the step on the left, a sticky "your rental" card on the right that holds the bike, the money and the step's action. (2) One question per screen, full screen, Typeform-style. (3) A vertical rail of the five steps on the left, the content on the right.
+**Discarded:** (2) hides the bike and the money just when you commit them, and wastes the width on a desktop. (3) repeats the progress bar and eats the width a phone does not have.
+
+**Chosen, (1):** [Rule, 1440](rounds/66-rule-1440.jpg), [Rule on a phone](rounds/66-rule-375.jpg), [Wallet, with focus on the option](rounds/66-wallet-1440.jpg). The card is white above (bike and the step's big figure, "You leave 50 dollars" on Deposit) and sand below (deposit, price, the test-money sentence), split by surface, not by a line. On a phone the card follows the step, so the button sits right after the simulator. The Deposit step now asks for a wallet first instead of counting zero signatures.
+
+**Without lines:** the signatures are a stepper of sand tiles (the one being signed gets a blue ring, the done ones lift onto white); the rule table everywhere lost its ruled rows (rows separate by padding, the highlighted one by its tint); the wallet option is a white tile with a ring, not a bordered box.
+
+**States:** wallet option hover lifts and rings in blue, pressed 98.5%, focus ring offset 3 px; the step's blocks enter in sequence, the card after them (off with reduced motion).
+
+**Test, "another screen at a glance?"** Yes: a single grey column became a two-pane checkout, the same on all three steps.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -674,7 +706,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Header | Structure |
 | Footer | — |
 | Bike page | 65 |
-| Rent flow | — |
+| Rent flow: Rule, Wallet, Deposit | 66 |
 | Receipt and My rentals | — |
 | Owner (My bikes) | — |
 | Add a bike | 63 |
