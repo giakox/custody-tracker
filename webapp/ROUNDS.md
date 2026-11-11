@@ -232,3 +232,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Stripe's test mode: the whole flow with test money and no real card: https://stripe.com/docs/testing
 - **Shots:** [1440 px](rounds/21-1440.jpg)
 - **Lines:** 6198
+
+## Round 22 · The owner's bikes as photo cards
+
+- **What:** On My bikes each bike is a card with its photo, its name, whether it's available or out, the last knock and the number of rentals, instead of a grey row.
+- **Why:** An owner's page should feel like looking at what they own. The rows had no picture and little weight.
+- **Reference:** Airbnb's host listings page: a card with a photo per listing: https://www.airbnb.com/hosting
+- **Shots:** [1440 px](rounds/22-1440.jpg)
+- **Lines:** 6212

@@ -8,6 +8,7 @@ import { DataError, type NewObject, type ObjectDetail, type RecorderInfo, type T
 import { SiteHeader } from "../components/SiteHeader";
 import { DemoSwitcher } from "../components/DemoSwitcher";
 import { TierMeter } from "../components/TierMeter";
+import { CASE_IMAGE } from "../components/ObjectImage";
 import { TxSteps } from "../components/TxSteps";
 import { RuleTiers } from "../components/RuleTiers";
 import { TubeRecorder } from "../components/TubeRecorder";
@@ -118,11 +119,11 @@ function ObjectRow({ d }: { d: ObjectDetail }) {
   return (
     <li>
       <a className="obj-row" href={href(`object/${d.id}`)}>
+        {CASE_IMAGE && <img className="obj-photo" src={CASE_IMAGE.src} alt="" />}
         <span className="obj-name">{objectName(d)}</span>
         <span className={`obj-status ${d.status === "available" ? "" : "busy"}`}>{status}</span>
         <span className="obj-shock">{last ? <><TierMeter tier={last.tier} /><span className="shock">last a {TIER_NAMES[last.tier]} knock</span></> : <span className="none">never dropped</span>}</span>
-        <span className="obj-count">{d.rentals.length} rentals</span>
-        <span className="link">Open</span>
+        <span className="obj-count">{d.rentals.length === 1 ? "1 rental" : `${d.rentals.length} rentals`}</span>
       </a>
     </li>
   );

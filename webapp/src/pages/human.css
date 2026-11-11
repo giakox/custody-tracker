@@ -177,3 +177,16 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 .live-line:hover { text-decoration: underline; }
 .live-line i { flex: none; }
 .wallet-opt.primary { border-color: var(--blue); background: var(--blue-wash); }
+
+/* Round 22: the owner's bikes as photo cards, not table rows. */
+.objects ol { border-top: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 20px; }
+.obj-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; align-items: center; padding: 0 0 16px; border: 1px solid var(--line-strong); border-radius: var(--radius); overflow: hidden; text-decoration: none; background: var(--bg); transition: box-shadow .15s ease; }
+.obj-row:hover { background: var(--bg); box-shadow: 0 10px 30px var(--shadow); }
+.obj-photo { grid-column: 1 / -1; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.obj-name, .obj-status, .obj-shock { padding-left: 16px; }
+.obj-name { grid-column: 1 / -1; font-size: 21px; margin-top: 8px; }
+.obj-status { grid-column: 1 / -1; font-size: 15px; }
+.obj-shock { grid-column: 1; font-size: 14px; }
+.obj-count { grid-column: 2; padding-right: 16px; font-size: 14px; color: var(--fog); }
+.obj-shock .none { font-size: 14px; }
+@media (max-width: 760px) { .obj-shock { grid-column: 1; grid-row: auto; } .obj-count { grid-column: 2; } .obj-status { grid-column: 1 / -1; } }
