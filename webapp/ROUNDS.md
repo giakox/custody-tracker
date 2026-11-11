@@ -1960,6 +1960,25 @@ Rounds 111–119 rotated through the screens that had gone longest untouched and
 
 **Test on the blurred shots:** yes, slightly: one fewer grey slab inside the card; the amount reads as the card's headline.
 
+## Round 126 · Connect a wallet: the demo wallet is the card's button, the next asks are the Deposit step's rail
+
+**Hierarchy audit (Wallet, untouched since 92):** the step's one action, "Use the demo test wallet", was a pale blue outlined box in the left column that looked like a selected option, not a button; the side card, which on every other step holds the action, had none. Below, "What your wallet will ask next" was a sand box with small numbered circles, a different drawing of the same three steps the Deposit step now shows as a rail (124).
+
+**What changed:** the demo wallet is the side card's primary button (with its "Test money only" line), exactly where "Accept the rule" and "Leave 50 dollars" are on the steps around it. The three asks are drawn as the Deposit step's rail (same dots, same line, same size), so the next screen is recognisable before it arrives. The live-network wallet choices (MetaMask, WalletConnect) stay as options in the column, because there it is a real choice.
+
+**On phones (every rent step):** the side card is below the content, so its first button now rides fixed at the bottom of the screen on Rule, Wallet and Deposit (verified: bottom at 800 px on an 812 px screen); Confirm a return keeps its own bar from 121, and the rule excludes it so there are never two.
+
+**Café test:** at the counter, the till is always in the same place. Still missing: the column is a list of text; the café would show you the thing (a picture of the wallet's pop-up).
+
+**References:** Stripe Checkout (the pay button in the same place on every step); Apple Pay's sheet (what will be asked, in the order it will be asked).
+
+**Three ideas:** (1) action in the card, the asks as the rail, a fixed button on phones. (2) A drawn mock of the wallet's pop-up for each ask. (3) Skip the step in demo mode and connect silently.
+**Discarded:** (2) a drawing of a wallet that isn't the user's would look like a real product screenshot and could mislead. (3) the step explains that Sharify never holds the money: skipping it hides the one sentence that matters most here.
+
+**Chosen, (1):** [before and after](rounds/126-wallet.jpg), [phone](rounds/126-wallet-375.jpg). Tested: the button connects and lands on the Deposit step.
+
+**Test on the blurred shots:** yes: a pale box became a blue button in the card; on the phone a blue bar now sits on the first screen.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1979,7 +1998,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Bike page | 107 (proof mode: 100) |
 | Rent flow: Rule | 125 (step back) |
 | Rent flow: Deposit | 124 |
-| Rent flow: Wallet | 92 |
+| Rent flow: Wallet | 126 |
 | Rent flow: Ride | 116 |
 | Rent flow: Waiting | 118 |
 | Rent flow: Return | 111 |

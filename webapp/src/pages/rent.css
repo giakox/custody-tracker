@@ -445,3 +445,18 @@ i.split-kept { background: var(--orange); }
 .tx-step.failed .tx-dot { background: var(--ink); border-color: var(--ink); color: var(--bg); }
 .tx-step.failed .tx-status { color: var(--orange-ink); }
 .tx-step.auto .tx-dot { font-size: 0; }
+
+/* ---------- Round 126: the wallet step: the demo wallet is the card's button, and what comes next is the same rail as the Deposit step ---------- */
+.ahead { margin-top: 36px; padding: 0; background: none; border-radius: 0; }
+.ahead-list { gap: 0; margin-top: 20px; }
+.ahead-list li { position: relative; grid-template-columns: 36px minmax(0, 1fr); gap: 16px; padding: 8px 0 20px; font-size: 17px; }
+.ahead-list li:not(:last-child)::before { content: ""; position: absolute; left: 17px; top: 46px; bottom: -6px; width: 2px; border-radius: 2px; background: var(--line-strong); }
+.ahead-list b { display: block; font-size: 18px; font-weight: 650; }
+.ahead-n { width: 36px; height: 36px; font-size: 15px; box-shadow: none; border: 2px solid var(--line-strong); }
+.ahead .hint-line { margin-top: 4px; max-width: 60ch; }
+/* on phones every rent step keeps its one action in reach: the card's first button rides at the bottom of the screen */
+@media (max-width: 860px) {
+  main.rent:not(:has(.confirm-sticky)) .rent-side .trip-act > .btn-primary:first-child { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 45; width: auto; box-shadow: var(--elev-3); }
+  main.rent:has(.rent-side .trip-act > .btn-primary:first-child) { padding-bottom: 88px; }
+  .page:has(main.rent .rent-side .trip-act > .btn-primary:first-child) .demo { margin-bottom: 72px; }
+}

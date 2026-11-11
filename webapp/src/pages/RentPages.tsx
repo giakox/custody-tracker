@@ -119,17 +119,16 @@ export function WalletPage({ id }: { id: number }) {
   const [busy, setBusy] = useState(false);
   const go = async () => { setBusy(true); await connect(); window.location.hash = `#/rent/${id}/deposit`; };
   return (
-    <Shell d={d} stage="Deposit" side={d && <TripCard d={d} />}>
+    <Shell d={d} stage="Deposit" side={d && <TripCard d={d}>{isMock && <>
+      <button type="button" className="btn btn-primary btn-lg" onClick={go} disabled={busy}>{busy ? "Connecting…" : "Use the demo test wallet"}</button>
+      <p className="hint-line">Test money only. In the live version you connect your own wallet.</p>
+    </>}</TripCard>}>
       <h1>Connect a <em>wallet</em>.</h1>
       <p className="lead">The deposit leaves from your wallet and comes back to it. Sharify never holds your money or your keys.</p>
-      <div className="wallets">
-        {isMock
-          ? <button type="button" className="wallet-opt primary" onClick={go} disabled={busy}><b>{busy ? "Connecting…" : "Use the demo test wallet"}</b><span>Test money only. In the live version you connect your own wallet.</span></button>
-          : <>
-            <button type="button" className="wallet-opt" onClick={go} disabled={busy}><b>MetaMask</b><span>Browser extension or mobile app</span></button>
-            <button type="button" className="wallet-opt" onClick={go} disabled={busy}><b>Another wallet</b><span>WalletConnect</span></button>
-          </>}
-      </div>
+      {!isMock && <div className="wallets">
+        <button type="button" className="wallet-opt" onClick={go} disabled={busy}><b>MetaMask</b><span>Browser extension or mobile app</span></button>
+        <button type="button" className="wallet-opt" onClick={go} disabled={busy}><b>Another wallet</b><span>WalletConnect</span></button>
+      </div>}
       {!isMock && <p className="hint-line">You need a little free test money for network fees (Base Sepolia, a test network).</p>}
       <section className="ahead" aria-labelledby="ahead-title">
         <h2 id="ahead-title">What your wallet will ask next</h2>
