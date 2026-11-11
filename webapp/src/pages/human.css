@@ -434,3 +434,15 @@ p, li, dd { text-wrap: pretty; }
 
 /* ---------- Round 49: one grade for every photograph ---------- */
 .bike-photo, .tale-photo > img, .welcome-photo, .owners-photo, .object-image img, .d-photo img, .past-photo, .obj-photo, .invite-photo, .step-photo { filter: saturate(1.04) contrast(1.03) sepia(.05); }
+
+/* ---------- Round 51: the receipt is a slip you could tear off ---------- */
+.receipt { border: 0; border-radius: var(--radius) var(--radius) 0 0; background: var(--bg); box-shadow: var(--elev-3); padding: clamp(24px, 3.6vw, 44px) clamp(24px, 3.6vw, 44px) clamp(40px, 5vw, 56px); position: relative;
+  -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 22px 51% repeat-x, linear-gradient(#000 0 0) top / 100% calc(100% - 11px) no-repeat;
+  mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 22px 51% repeat-x, linear-gradient(#000 0 0) top / 100% calc(100% - 11px) no-repeat; }
+.receipt-lines { border-top: 2px solid var(--ink); }
+.receipt-lines .total { padding: 20px 0 8px; border-bottom: 0; }
+.receipt-lines .total dt { font-size: 20px; font-weight: 650; }
+.receipt-lines .total dd { font-size: clamp(28px, 3.2vw, 40px); font-weight: 650; letter-spacing: -0.03em; }
+.receipt-lines dd.sub { font-size: 13px; }
+@media print { .receipt { box-shadow: none; -webkit-mask: none; mask: none; } }
+.receipt { background: var(--surface); box-shadow: none; }

@@ -484,3 +484,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** WCAG 2.1 reflow (1.4.10) and prefers-reduced-motion guidance: https://www.w3.org/WAI/WCAG21/Understanding/reflow.html
 - **Shots:** none
 - **Lines:** 6486
+
+## Round 51 · The receipt is a slip you could tear off
+
+- **What:** The receipt page is now a warm paper slip with a torn zigzag bottom edge, a heavy rule over the lines and the deposit back set in large type; printing flattens it.
+- **Why:** The receipt is the one thing a renter or owner keeps. It should look like something you would keep.
+- **Reference:** Stripe's receipts and Apple Store receipts: one big total, calm lines: https://stripe.com/docs/receipts
+- **Shots:** [1440 px](rounds/51-1440.jpg)
+- **Lines:** 6498
