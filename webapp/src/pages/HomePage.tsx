@@ -113,8 +113,8 @@ export function HomePage() {
           </section>
         </div>
       </main>
-      <div className="home-demo"><DemoSwitcher inline /></div>
       <SiteFooter />
+      <DemoSwitcher />
     </div>
   );
 }

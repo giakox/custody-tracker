@@ -6,6 +6,7 @@ import { getNetwork, getObject, getProof, getReadings } from "../data/api";
 import { DataError, type ProofResult } from "../data/types";
 import { SiteHeader } from "../components/SiteHeader";
 import { DemoSwitcher } from "../components/DemoSwitcher";
+import { SiteFooter } from "../components/SiteFooter";
 import { TierMeter } from "../components/TierMeter";
 import { addressUrl, g, hm, hms, day, objectName, possessive, shortHex, TIER_NAMES, txUrl } from "../ui/format";
 import { href } from "../ui/router";
@@ -143,6 +144,7 @@ export function VerifyPage({ id, seq: seqParam }: { id: number; seq: number | nu
         )}
         {!d && <p className="lead">Reading the record from the chain…</p>}
       </main>
+      <SiteFooter />
       <DemoSwitcher />
     </div>
   );

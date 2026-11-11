@@ -97,7 +97,6 @@
 @media (min-width: 900px) and (max-width: 1023px) { .finder-grid { grid-template-columns: minmax(0, 1fr); } }
 
 .finder-title h2 { white-space: nowrap; }
-.home-demo { max-width: var(--max); margin: 40px auto 0; padding: 0 var(--gutter); display: flex; justify-content: flex-end; }
 @media (max-width: 899px) { .finder-title h2 { font-size: 22px; } .chip-near { margin-left: 0; } }
 .finder { scroll-margin-top: calc(var(--hdr-space) - 32px); }
 .mini-actions .btn { white-space: nowrap; }

@@ -275,13 +275,19 @@ p, li, dd { text-wrap: pretty; }
 .page:has(.sticky-action.is-shown) .demo { margin-bottom: 84px; }
 
 /* ---------- Round 41: a designed close ---------- */
-.site-end { margin-top: clamp(64px, 9vw, 128px); background: var(--surface); overflow: clip; }
-.site-end-inner { max-width: var(--max); margin: 0 auto; padding: clamp(40px, 6vw, 80px) var(--gutter) 28px; }
-.site-end-name { font-family: var(--display); font-weight: 700; font-size: clamp(88px, 21vw, 320px); line-height: .8; letter-spacing: -0.07em; color: var(--blue); margin: 0 0 12px -0.04em; user-select: none; }
-.site-end-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 40px; padding-top: 28px; font-size: 15px; color: var(--fog); }
-.site-end-row p { max-width: 46ch; }
-.site-end-row nav { display: flex; gap: 24px; flex-wrap: wrap; }
-.site-end-row .link { font-size: 15px; }
+.site-end { margin-top: clamp(64px, 9vw, 128px); background: var(--raise); overflow: clip; }
+.page:has(.owners-band) .site-end { margin-top: 0; }
+.site-end-inner { max-width: var(--max); margin: 0 auto; padding: clamp(48px, 6vw, 80px) var(--gutter) 0; }
+.site-end-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 32px 64px; align-items: start; }
+.site-end-note { font-size: 17px; line-height: 1.5; color: var(--mist); max-width: 38ch; }
+.site-end-nav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.site-end-h { font-size: 14px; font-weight: 700; color: var(--ink); }
+.site-end-nav ul { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 4px; }
+.site-end-nav a { display: inline-block; padding: 4px 0; font-size: 15px; color: var(--mist); text-decoration: none; transition: color .15s ease; }
+.site-end-nav a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+.site-end-nav a:focus-visible { outline: 2px solid var(--blue-ink); outline-offset: 2px; border-radius: 4px; }
+.site-end-name { margin: clamp(48px, 6vw, 80px) 0 0 -0.04em; font-family: var(--display); font-weight: 700; font-size: clamp(96px, 22vw, 330px); line-height: .74; letter-spacing: -0.07em; color: var(--blue); user-select: none; height: .62em; overflow: hidden; }
+@media (max-width: 760px) { .site-end-top { grid-template-columns: minmax(0, 1fr); } .site-end-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 /* ---------- Round 42: scanning, found ---------- */
 .scan-frame { overflow: hidden; background: var(--blue-wash); }

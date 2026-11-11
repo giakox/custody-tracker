@@ -7,6 +7,7 @@ import { addObject, confirmReturn, getNetwork, getObject, listObjects, lookupRec
 import { DataError, type NewObject, type ObjectDetail, type RecorderInfo, type Terms, type TxStep } from "../data/types";
 import { SiteHeader } from "../components/SiteHeader";
 import { DemoSwitcher } from "../components/DemoSwitcher";
+import { SiteFooter } from "../components/SiteFooter";
 import { TierMeter } from "../components/TierMeter";
 import { CASE_IMAGE } from "../components/ObjectImage";
 import { TxSteps } from "../components/TxSteps";
@@ -26,6 +27,7 @@ function Page({ children, wide = false }: { children: ReactNode; wide?: boolean 
     <div className="page">
       <SiteHeader />
       <main className={`rent ${wide ? "rent-wide" : ""}`}>{children}</main>
+      <SiteFooter />
       <DemoSwitcher />
     </div>
   );

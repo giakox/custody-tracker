@@ -3,6 +3,7 @@ import { getNetwork, getObject, listObjects } from "../data/api";
 import type { ObjectDetail, Rental } from "../data/types";
 import { SiteHeader } from "../components/SiteHeader";
 import { DemoSwitcher } from "../components/DemoSwitcher";
+import { SiteFooter } from "../components/SiteFooter";
 import { TierMeter } from "../components/TierMeter";
 import { CASE_IMAGE } from "../components/ObjectImage";
 import { day, g, hm, objectName, shortHex, span, TEST_MONEY, TIER_NAMES, txUrl, usd, when } from "../ui/format";
@@ -42,6 +43,7 @@ function Page({ children }: { children: React.ReactNode }) {
     <div className="page">
       <SiteHeader />
       <main className="rent">{children}</main>
+      <SiteFooter />
       <DemoSwitcher />
     </div>
   );

@@ -873,6 +873,29 @@ Every section had the same layout (title left, content right) and the same weigh
 
 **Test, "another screen at a glance?"** Yes: a long even column became a document with a map of itself.
 
+## Round 73 · The footer: where you can go, grouped by what you came to do
+
+**Hierarchy audit (before):**
+
+| Block | Who, when | If it vanished | Verdict |
+|---|---|---|---|
+| A white band with only "Demo · sample data" in it (Home, 190 px) | the presenter | the switcher is also floating at the corner on every other page | removed: Home uses the corner switcher like the rest |
+| The wordmark at 320 px, its "y" running into the links | — | brand moment | kept, smaller share: it is the last thing, cut by the page's bottom edge |
+| The honest note | everyone | the demo looks like a real service | secondary, first thing in the footer |
+| Two links (Rent out your bike, How Sharify is designed) | someone at the end of a page | no way on | secondary: three groups, Ride / Lend / Check, with Verify and the demo bike added and your own pages when connected |
+| Footer only on Home, the bike page and Design | — | — | now on My rentals, receipts, the owner's pages and Verify too (the rent steps keep their checkout focus) |
+
+**Levels after:** note and link groups are the footer's content (secondary to the page); the wordmark is a quiet sign-off. **Squint test:** before, a white void, then a giant blue word with small text crashing into it. After, one darker sand step under the page, three columns of links, the blue word cut by the edge.
+
+**References:** Linear's footer (columns of links under short group names, the small print on the left) and Stripe's (grouped by what you came to do). Why ours looked cheaper: the footer was a logo with two links; the demo control sat alone in a white band.
+
+**Three ideas:** (1) a grouped sitemap with the note, the wordmark as a cropped sign-off. (2) A last call to action ("Find a bike near you") as the footer. (3) Remove the footer and end each page on its content.
+**Discarded:** (2) Home already ends with the owners' call to action; another one is a sales page. (3) pages like the receipt and Verify had no way on but the header.
+
+**Chosen, (1):** [Home, 1440, focus on a link](rounds/73-footer-1440.jpg), [phone](rounds/73-footer-375.jpg). The footer is one step darker than the sand above it (--raise), so the two sands don't merge.
+
+**Test, "another screen at a glance?"** Yes: a giant logo with two links became a footer you can navigate.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -883,7 +906,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Home: "how it works" band (and bike page) | 70 |
 | Home: find a bike (grid + map) | Structure |
 | Header | Structure |
-| Footer | — |
+| Footer | 73 |
 | Bike page | 65 |
 | Rent flow: Rule, Wallet, Deposit | 66 |
 | Rent flow: Ride, Return, Waiting, Outcome | 67 |
