@@ -489,3 +489,9 @@ p, li, dd { text-wrap: pretty; }
 .bar::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translate(-50%, 6px); padding: 6px 10px; border-radius: var(--radius); background: var(--ink); color: var(--bg); font-size: 13px; font-weight: 600; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .15s ease, transform .15s ease; z-index: 3; }
 .bar:hover::after, .bar:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
 .bar { position: relative; }
+
+/* ---------- Round 62: the hero photograph breathes ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .welcome-photo { animation: hero-drift linear both, hero-breathe 26s ease-in-out infinite alternate; animation-timeline: scroll(root), auto; animation-range: 0 100svh, normal; }
+}
+@keyframes hero-breathe { from { scale: 1; translate: 0 0; } to { scale: 1.07; translate: -1.2% 0.8%; } }

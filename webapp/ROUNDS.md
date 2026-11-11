@@ -578,3 +578,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Apple's HIG on tint and theme colour for web: https://developer.apple.com/design/human-interface-guidelines/
 - **Shots:** none
 - **Lines:** 6551
+
+## Round 62 · The hero photograph breathes
+
+- **What:** The first photo now drifts very slowly (a 26-second swell and slide, back and forth) on top of the scroll parallax, standing in for the background video that could not be generated here. Uses the independent scale and translate properties so it never fights the parallax; off with reduced motion.
+- **Why:** A still photograph at the top of a page is a poster; a barely moving one is a place. The video was blocked by a missing model, so the movement is made in CSS.
+- **Reference:** Airbnb and Aesop heroes with slow Ken Burns drift: https://aesop.com
+- **Shots:** none
+- **Lines:** 6557
