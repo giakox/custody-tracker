@@ -22,12 +22,12 @@ import "./site.css";
 import "./rent.css";
 import "./owner.css";
 
-function Page({ children, wide = false }: { children: ReactNode; wide?: boolean }) {
+function Page({ children, wide = false, footer = true }: { children: ReactNode; wide?: boolean; footer?: boolean }) {
   return (
     <div className="page">
       <SiteHeader />
       <main className={`rent ${wide ? "rent-wide" : ""}`}>{children}</main>
-      <SiteFooter />
+      {footer && <SiteFooter />}
       <DemoSwitcher />
     </div>
   );
@@ -225,7 +225,7 @@ function validate(d: Draft): string | null {
 
 function AddShell({ n, title, children, next, onNext, wide = false, aside }: { n: number; title: ReactNode; children: ReactNode; next?: string; onNext?: () => void; wide?: boolean; aside?: ReactNode }) {
   return (
-    <Page wide={wide}>
+    <Page wide={wide || !!aside} footer={false}>
       <div className="rent-top">
         <a className="link back" href={href("my-objects")}>Cancel</a>
         <ol className="rent-progress" aria-label="Add your bike">
@@ -261,6 +261,10 @@ function ListingPreview({ d }: { d: Draft }) {
           <p className="preview-meta">{d.kind}{d.spot.trim() ? `, ${d.spot.trim()}` : ""}</p>
           <p className="preview-price"><b>{d.price || "0"} dollars</b> an hour · deposit {d.deposit || "0"}</p>
         </div>
+        <ul className="preview-check">
+          <li className={d.recorder ? "ok" : ""}>{d.recorder ? `Recorder ending in ${d.recorder.deviceId.slice(-4).toUpperCase()}` : "Recorder not paired yet"}</li>
+          <li className={d.label.trim() && d.spot.trim() ? "ok" : ""}>{d.label.trim() && d.spot.trim() ? "Name and parking spot" : "Name and parking spot to add"}</li>
+        </ul>
       </div>
     </aside>
   );
@@ -278,7 +282,7 @@ export function AddPage({ n }: { n: number }) {
 
   switch (n) {
     case 1: return (
-      <AddShell n={1} title={<>Do you have a Sharify <em>recorder</em>?</>}>
+      <AddShell n={1} aside={<ListingPreview d={d} />} title={<>Do you have a Sharify <em>recorder</em>?</>}>
         <img className="step-photo" src="./img/day/recorder-hand.jpg" alt="A hand holding the Sharify recorder next to a bike" />
         <p className="lead">The recorder is a small sealed box that notes every hard knock and seals each note. Each bike needs its own.</p>
         <div className="choice">
@@ -288,7 +292,7 @@ export function AddPage({ n }: { n: number }) {
       </AddShell>
     );
     case 2: return (
-      <AddShell n={2} title={<>Fix it to the <em>frame</em>.</>} next="Continue" onNext={mounted ? () => go(3) : undefined}>
+      <AddShell n={2} aside={<ListingPreview d={d} />} title={<>Fix it to the <em>frame</em>.</>} next="Continue" onNext={mounted ? () => go(3) : undefined}>
         <div className="mount">
           <div className="mount-art" aria-hidden="true"><TubeRecorder /></div>
           <ol className="numbered">
@@ -304,7 +308,7 @@ export function AddPage({ n }: { n: number }) {
       const scan = async () => { setScanning(true); try { set({ recorder: await lookupRecorder("sharify:pk:a41c07d2e9b35f18") }); } finally { setScanning(false); } };
       const r = d.recorder;
       return (
-        <AddShell n={3} title={<>Pair the <em>recorder</em>.</>} next="Continue" onNext={r ? () => go(4) : undefined}>
+        <AddShell n={3} aside={<ListingPreview d={d} />} title={<>Pair the <em>recorder</em>.</>} next="Continue" onNext={r ? () => go(4) : undefined}>
           <p className="lead">Scan the QR on the recorder. It tells Sharify which box belongs to your bike.</p>
           <div className="scan">
             <div className={`scan-frame ${scanning ? "is-scanning" : r ? "is-found" : ""}`} aria-hidden="true"><i /><i /><i /><i /><span className="mono">{scanning ? "Reading…" : r ? "Found" : "Point the camera at the recorder's QR"}</span></div>

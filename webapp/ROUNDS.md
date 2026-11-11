@@ -896,6 +896,31 @@ Every section had the same layout (title left, content right) and the same weigh
 
 **Test, "another screen at a glance?"** Yes: a giant logo with two links became a footer you can navigate.
 
+## Round 74 · Adding a bike: every step beside the listing it builds
+
+**Hierarchy audit (before):**
+
+| Block | Who, when | If it vanished | Verdict |
+|---|---|---|---|
+| Steps 1–3 in a narrow centred column, steps 4–5 suddenly wide with a preview | owner | — | one frame for all five: the step on the left, the preview on the right from the first step |
+| The preview (photo, name, type, price, deposit) | owner: "what will renters see?" | they'd publish blind | secondary, always in view; now also lists what's done and what's missing (recorder paired, name and spot) with ticks |
+| Choice tiles "Yes, I have one" / "No, not yet" with borders, the second dashed | owner | can't start | white tile with a ring on hover for the live choice; the unavailable one is flat sand, not a dashed box |
+| The knock levels as a ruled table | owner | can't set the rule | rows as sand strips, no ruled lines |
+| The footer under each step | — | a setup flow doesn't need the sitemap | removed inside the flow |
+
+**Levels after:** the step's question (H1) is primary, its one control secondary, the preview card the steady secondary on the right; notes tertiary. **Squint test:** before, the first three steps looked like a different site from the last two. After, the same two masses on every step, and the preview's ticks turn blue as you go.
+
+**References:** Airbnb's host onboarding (a question on the left, the listing taking shape on the right) and Stripe's account setup (a checklist of what's done and what's left beside each step). Why ours looked cheaper: the layout changed under the owner's feet halfway through, and nothing showed progress except a thin bar.
+
+**Three ideas:** (1) one frame with the live preview and a done/missing checklist on every step. (2) All steps on one long page with sections that unlock in order. (3) A modal wizard over My bikes.
+**Discarded:** (2) the mount step needs the owner to go to the bike and come back; one long page loses their place. (3) a modal on a phone is a full screen anyway, and it hides the page they'd return to.
+
+**Chosen, (1):** [step 1, focus on the choice](rounds/74-add-1-1440.jpg), [step 2](rounds/74-add-2-1440.jpg), [step 5, the rules](rounds/74-add-5-1440.jpg), [step 1 on a phone](rounds/74-add-1-375.jpg). On a phone the preview follows the step, so the question and its choices come first.
+
+**States:** the live choice lifts and rings blue on hover, presses to 98.5%, focus ring offset 3 px; checklist ticks fill blue when done.
+
+**Test, "another screen at a glance?"** Yes for steps 1–3 (a centred column became a two-pane builder); steps 4–5 keep their frame with the new checklist and borderless rows.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -912,6 +937,6 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Rent flow: Ride, Return, Waiting, Outcome | 67 |
 | Receipt and My rentals | 68 |
 | Owner (My bikes) | 69 |
-| Add a bike | 63 |
+| Add a bike | 74 |
 | Verify | 71 |
 | Design | 72 |

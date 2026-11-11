@@ -142,3 +142,28 @@ button.choice-opt:hover { border-color: var(--blue); }
   .to-confirm { grid-template-columns: minmax(0, 1fr); }
   .to-confirm-photo { min-height: 0; aspect-ratio: 16 / 9; }
 }
+
+/* ---------- Round 74: every Add step beside the preview that fills in as you go ---------- */
+.add-grid .step-photo { margin-top: 24px; }
+.listing-preview { top: calc(var(--hdr-space) + 8px); }
+.preview-k { margin-top: 0; }
+.preview-check { list-style: none; margin: 0; padding: 16px 18px; background: var(--surface); display: grid; gap: 8px; }
+.preview-check li { position: relative; padding-left: 26px; font-size: 14px; color: var(--fog); }
+.preview-check li::before { content: ""; position: absolute; left: 0; top: 1px; width: 16px; height: 16px; border-radius: 50%; box-shadow: inset 0 0 0 2px var(--line-strong); }
+.preview-check li.ok { color: var(--ink); }
+.preview-check li.ok::before { background: var(--blue); box-shadow: none; }
+.preview-check li.ok::after { content: ""; position: absolute; left: 5px; top: 4px; width: 4px; height: 7px; border-right: 2px solid var(--on-blue); border-bottom: 2px solid var(--on-blue); transform: rotate(45deg); }
+
+.choice-opt { border: 0; background: var(--bg); box-shadow: var(--elev-1), inset 0 0 0 1px var(--line); transition: box-shadow .2s ease, transform .12s ease; }
+.choice-opt b { font-weight: 650; font-size: 19px; }
+button.choice-opt:hover { border-color: transparent; box-shadow: var(--elev-2), inset 0 0 0 2px var(--blue); }
+button.choice-opt:active { transform: scale(.985); }
+button.choice-opt:focus-visible { outline: 2px solid var(--blue-ink); outline-offset: 3px; }
+.choice-opt.off { border: 0; background: var(--surface); box-shadow: none; }
+
+table.levels { border-collapse: separate; border-spacing: 0 6px; }
+table.levels th { border: 0; padding: 0 12px 2px; font-size: 13px; font-weight: 600; color: var(--fog); text-align: left; }
+table.levels td { border: 0; padding: 8px 12px; background: var(--surface); }
+table.levels td:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+table.levels td:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
+@media (max-width: 900px) { .add-grid .listing-preview { order: 1; margin-top: 32px; } }
