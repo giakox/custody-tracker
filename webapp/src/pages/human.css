@@ -168,3 +168,5 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 .event .num { font-size: 1em; font-weight: 600; }
 .price-line { margin-top: 12px; font-size: 16px; color: var(--mist); }
 .price-line b { color: var(--ink); font-weight: 600; }
+.price-note { margin-top: 14px; font-size: 17px; color: var(--mist); }
+.price-note b { color: var(--ink); font-weight: 600; }

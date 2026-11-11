@@ -170,3 +170,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Airbnb listing page: the price line sits right under the title and action: https://www.airbnb.com
 - **Shots:** [1440 px](rounds/14-1440.jpg)
 - **Lines:** 6186
+
+## Round 15 · A step back: the rental path, read as a stranger
+
+- **What:** Read the rule and deposit pages as a new renter and took out what said the same thing twice: the Deposit/Price table above the simulator (now one sentence about the price) and the repeated rule table beside the deposit button (now one line that links back to the rule).
+- **Why:** The rule appeared three times in two pages. Said once, with the way to read it again, it stays credible and the page gets short.
+- **Reference:** Apple Pay's checkout sheet: only what you are about to confirm: https://www.apple.com/apple-pay/
+- **Shots:** [1440 px](rounds/15-1440.jpg)
+- **Lines:** 6183

@@ -60,10 +60,7 @@ export function RulePage({ id }: { id: number }) {
     <Shell d={d} stage="Rule">
       <h1>The rule you <em>accept</em>.</h1>
       <p className="lead">You leave a deposit of {usd(d.terms.collateral)}. When you bring the bike back, the hardest knock of your ride decides how much of it comes back, by this table. Nobody decides it by hand. <span className="test-money">{TEST_MONEY}</span></p>
-      <dl className="facts">
-        <div><dt>Rental price</dt><dd className="mono">2 dollars an hour</dd><dd className="tag">paid to the owner, separately from the deposit</dd></div>
-        <div><dt>Deposit</dt><dd className="mono">{usd(d.terms.collateral)}</dd><dd className="tag">comes back by this table</dd></div>
-      </dl>
+      <p className="price-note">Rental price: <b>2 dollars an hour</b>, paid to the owner separately from the deposit.</p>
       <RuleSimulator terms={d.terms} />
       <ul className="fine">
         <li>Only your ride counts: knocks from earlier renters stay on their record.</li>
@@ -167,9 +164,7 @@ export function DepositPage({ id }: { id: number }) {
             <div><dt>You leave</dt><dd className="mono big">{deposit}</dd></div>
             <div><dt>Rental price</dt><dd className="mono">2 dollars an hour</dd><dd className="tag">paid to the owner, separately</dd></div>
           </dl>
-          <p className="rule-title">Back to you by this rule</p>
-          <RuleTiers terms={d.terms} />
-          <p className="hint-line"><a className="link" href={href(`rent/${id}`)}>Read the rule again</a></p>
+          <p className="hint-line">It comes back by the rule you accepted. <a className="link" href={href(`rent/${id}`)}>Read it again</a></p>
         </aside>
       </div>
     </Shell>
