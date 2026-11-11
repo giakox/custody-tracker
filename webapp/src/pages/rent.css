@@ -490,3 +490,4 @@ i.split-kept { background: var(--orange); }
 .page:has(.receipt-stage) .receipt-stage { margin-top: 8px; padding-bottom: 96px; box-shadow: none; clip-path: none; background: none; }
 .page:has(.receipt-stage) footer.site-end { margin-top: 0; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06); }
 @media print { .page:has(.receipt-stage) { background: none; } }
+@media print { .receipt-stage .receipt.slip { transform: none !important; } }

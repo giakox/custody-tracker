@@ -2347,7 +2347,7 @@ The owner side and the system's edges. "Your rules" shows the rule renters will 
 
 **Hierarchy audit (Receipt, full page at 1440, 1,280 px):** white strip (only "‹ My rentals"), dark counter with the slip, white strip (96 px, nothing in it), dark footer. On the blurred shot: two pale cuts slicing one dark scene into three, the same seam 122 and 137 dealt with elsewhere, here with nothing true to put in the gap.
 
-**What changed:** the whole receipt page is the counter: the page background is ink from under the header to the footer, "‹ My rentals" sits on it in light text (rgba 244/241/236 at .82, well above 4.5:1 on ink), the slip and its desk buttons on the same surface, and the footer continues it with a 1 px light inner edge as the only hint of a change. 88 px shorter. Printing drops the dark (print styles unchanged: slip only).
+**What changed:** the whole receipt page is the counter: the page background is ink from under the header to the footer, "‹ My rentals" sits on it in light text (rgba 244/241/236 at .82, well above 4.5:1 on ink), the slip and its desk buttons on the same surface, and the footer continues it with a 1 px light inner edge as the only hint of a change. 88 px shorter. Printing drops the dark (slip only). Print check found a regression from 141: the new −0.5° tilt rule came after the print rule and printed the slip tilted; fixed with a print override after it, re-checked straight.
 
 **Why dark into dark is right here, when 127 undid it on the bike page:** on the bike page two dark bands of different content (the journey, the footer) merged into one heavy slab under the page's real content. Here the dark *is* the page's scene: a single object lies on it, and the footer is just the edge of the counter.
 
