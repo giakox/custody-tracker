@@ -1559,6 +1559,23 @@ Each group has a short heading. On a phone the carousel is unchanged (one card a
 
 **Test on the blurred shots:** yes for the finder: a regular grid of nine became a wide strip, a row of three, and a block of small tiles.
 
+## Round 104 · An object from the bike's world: the sticker on the frame, real and scannable
+
+**Hierarchy audit ("What if it gets dropped?" on the Home):** a title, three lines of text and, on the right, the simulator card. The left column was text and empty sand below it: the rule felt like a policy page, not something on a bike.
+
+**What changed:** under the text, the **sticker on the frame**, drawn as it sits on a dark down tube: the same sticker the owner prints at the end of "Add your bike", with the bike's name and "Scan to rent", and a **real QR code** that opens this bike's rule. Point a phone at the screen and the rule opens on the phone: the page's one live thing now reaches out of the screen. It tilts a little more and lifts on hover.
+
+**Café test:** the café turns each function into an object you know from the shop (the receipt, the punch card, the shelf). This is the first Sharify section that does the same: the rule arrives through an object that exists on the bike. Still missing: places and times; the finder and owners' band are still screens, not scenes.
+
+**References:** the café's punch card and receipt; Apple's Wallet pages (the card is shown as the object it is, at an angle, with the real information on it).
+
+**Three ideas:** (1) the frame sticker with a working QR. (2) The deposit as a luggage-tag ticket that tears into "back" and "kept". (3) The rule printed on a bike bell or a lock.
+**Discarded:** (2) the split bar already shows the money everywhere; a second picture for the same thing splits the system. (3) invented objects: the rule isn't printed on anything but the sticker's QR leads to it.
+
+**Chosen, (1):** [1440, "falls over" pressed](rounds/104-sticker-1440.jpg), [phone](rounds/104-sticker-375.jpg). The old, unused QR illustration and its styles were removed.
+
+**Test on the blurred shots:** yes for that section: an empty left column now holds a dark diagonal with a white label on it.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1569,7 +1586,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Home: journey (dark band) | 102 |
 | Bike page: "how it works" band | 70 |
 | Home: owners band | 80 |
-| Home: try the rule (and Rule step) | 82 |
+| Home: try the rule (and Rule step) | 104 |
 | Home: find a bike (grid + map) | 103 |
 | Header | 77 |
 | Page transitions | 88 |

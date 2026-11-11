@@ -21,9 +21,6 @@
 
 .lead { margin-top: 24px; font-size: clamp(18px, 1.5vw, 21px); line-height: 1.5; color: var(--mist); max-width: 46ch; text-wrap: pretty; }
 
-.qr-sticker { width: 100%; height: auto; display: block; }
-.qr-label { font-family: var(--mono); font-size: 13px; fill: var(--midnight); }
-.qr-label.dim { fill: #5a6973; }
 
 .block-intro h2 em { font-style: var(--em-style); }
 .block-intro .link { font-family: var(--ui); font-size: 14px; }

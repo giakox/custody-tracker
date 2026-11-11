@@ -11,6 +11,7 @@ import { Finder } from "../components/Finder";
 import { BikePhoto } from "../components/BikeCard";
 import type { LatLon } from "../components/FleetMap";
 import { RuleSimulator } from "../components/RuleSimulator";
+import { FrameSticker } from "../components/FrameSticker";
 import { BOCCONI } from "../data/mock/fleet";
 import { href } from "../ui/router";
 import { metres, walkText } from "../ui/geo";
@@ -29,6 +30,7 @@ function TryTheRule({ objectId }: { objectId: number }) {
       <div>
         <h2 id="try-title">What if it gets dropped?</h2>
         <p>Try it. This is the rule on the demo bike, and it's the same for everyone who rides it. Nobody can bend it afterwards. You'll see the whole rule before you rent.</p>
+        <FrameSticker id={objectId} label={q.data.label ?? "The demo bike"} />
       </div>
       <RuleSimulator terms={q.data.terms} full={false} />
     </section>
