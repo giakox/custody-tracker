@@ -381,3 +381,18 @@ p, li, dd { text-wrap: pretty; }
 .tale-card { margin-bottom: clamp(48px, 9vh, 96px); }
 @media (max-width: 760px) { .tale .tale-chapter { min-height: 100svh; } }
 @media (prefers-reduced-motion: reduce) { .tale .tale-chapter { position: relative; min-height: min(80svh, 720px); box-shadow: none; } }
+
+/* ---------- Round 45: a step back, the defects the critique saw ---------- */
+.btn-secondary { border-color: #8f897f; }
+.btn-secondary:hover { border-color: var(--blue-ink); }
+.step-note, .stateline .step-note { font-size: 13px; }
+.sim-examples button { font-size: 13px; padding: 5px 12px; }
+.sim-k { font-size: 15px; }
+.try-rule { align-items: start; }
+.try-rule > div:first-child { padding-top: clamp(0px, 3vw, 40px); }
+/* one spacing scale in the bike page's text column: 12 / 20 / 28 / 14 / 40 */
+.bike-copy .kicker { margin-bottom: 12px; }
+.bike-copy .hero-summary { margin: 20px 0 0; }
+.bike-copy .actions { margin-top: 28px; }
+.bike-copy .price-line { margin-top: 14px; }
+.bike-copy .stateline { margin-top: 40px; }

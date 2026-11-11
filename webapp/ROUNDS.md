@@ -429,3 +429,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Apple's AirPods Pro and Aesop's story pages: full-screen panels that stack as you scroll: https://www.apple.com/airpods-pro/
 - **Shots:** [375 px](rounds/44-375.jpg)
 - **Lines:** 6411
+
+## Round 45 · A step back: the defects the critique saw
+
+- **What:** Fixed what a fresh critique of the Home and bike page listed: the secondary buttons' border is now visible (3:1), slider and step labels are 13 px, the rule table fills its card, the rule band's heading aligns to the top of its card, and the bike page's text column uses one spacing scale (12 / 20 / 28 / 14 / 40).
+- **Why:** A layered page only looks expensive if every edge is square to the grid. These were the small things that said "prototype".
+- **Reference:** Refactoring UI, spacing scale and hierarchy chapters: https://www.refactoringui.com
+- **Shots:** [1440 px](rounds/45-1440.jpg)
+- **Lines:** 6426
