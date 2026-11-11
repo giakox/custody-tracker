@@ -189,3 +189,10 @@
 
 /* ---------- Round 151: in the narrow aside (900–1180 px) the rule's rows keep a gap between the knock and the dollars ---------- */
 @media (min-width: 900px) and (max-width: 1180px) { .book-card .rule-row { grid-template-columns: 46px minmax(0, 1fr) auto; gap: 8px; padding: 8px; font-size: 14px; } }
+
+/* ---------- Round 152: composition: the booking card climbs into the pictures, so price and action are on the first screen ---------- */
+@media (min-width: 900px) {
+  .l-gallery { height: clamp(400px, 36vw, 560px); }
+  .l-book { z-index: 2; margin-top: -120px; }
+  .l-gallery figure:not(:first-child) figcaption { bottom: auto; top: 12px; }
+}

@@ -2454,6 +2454,35 @@ Protocollo v4 letto.
 
 **Test on the blurred shots:** yes: a square grey block becomes two round white cards.
 
+## Round 152 · Composition: the booking card climbs into the pictures
+
+Protocollo v4 letto.
+
+**Hierarchy audit (the bike page, whole, top to bottom; judged on the full page):** title, then a full-bleed mosaic 634 px tall (44vw), then record + booking card, then the sand journey, then the dark footer. The order is right; the proportions were not. At 1440 × 900 the booking card started at y 924: price and "Rent this bike", the page's one primary thing, were entirely below the first screen, which held a title and three photos. At 1024 the same.
+
+**What changed:** at 900 px and up the mosaic is 36vw (518 px at 1440), and the booking card rises 120 px into it, on top of the lower right photo, as a second layer. "Rent this bike" now ends at y 860 at 1440, 799 at 1280, 727 at 1024, 721 at 900: on the first screen everywhere. The two small photos' captions move to their top-left corner, so the card never covers one. Phones unchanged (there the card already comes right after the title).
+
+**The six:**
+- **Positions:** the card's right edge stays on the content edge (1292), where the header's button ends; the captions sit on one line height from the top of each photo.
+- **Colours:** unchanged; the white card over a photo reads by its shadow (elev-2), checked in WebKit.
+- **Symmetries:** still open: the card's left edge (912) does not sit on the photo gutter (956); aligning it means changing the aside's width, left for the next bike page round.
+- **Sizes:** measured at 1440, 1280, 1024, 900; no horizontal overflow.
+- **Animations:** the card keeps its entrance (rise and fade, .2 s after the photos), which now reads as the card landing on the pictures; nothing with reduced motion.
+- **Curvatures:** full-bleed photos square (round 107), the card on top with the one radius, round in WebKit.
+
+**WebKit:** shot at 1440 and 375 (viewport). A WebKit full-page capture leaves the journey band empty (its scroll-driven entrances don't run in a tall capture); in the viewport it renders fully. Not a site bug, a capture trap.
+
+**References:** Airbnb's room page (the booking card is the thing that persists beside the photos); Aman's hotel pages (the booking bar overlaps the hero image, a layer over the place).
+
+**Three ideas:** (1) the card climbs into the mosaic. (2) Shrink the mosaic alone. (3) Price and button in the title row.
+**Discarded:** (2) reaching the first screen needs the mosaic down to about 28vw, losing the photos that make the page. (3) a second copy of the price and action, the card would repeat it.
+
+**Chosen, (1):** [before and after, sharp and blurred](rounds/152-bike-first-screen.jpg).
+
+**Café test:** the café shows the counter and the menu in the first look, not only the room. Still missing: the record under the card starts with a small kicker far from the card; the left column's start could meet the card's level.
+
+**Test on the blurred shots:** yes: before, a white page with a photo block; after, a photo block with a white card standing on it and a blue bar: another screen.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -2470,7 +2499,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Page transitions | 136 (shared photo) |
 | Live rental strip | 138 |
 | Footer | 120 (wordmark only on reading pages) |
-| Bike page | 151 (aside, Safari corners); 107 (proof mode: 100) |
+| Bike page | 152 (composition: card in the pictures), 151 (Safari corners); proof mode: 100 |
 | Rent flow: Rule | 125 (step back) |
 | Rent flow: Deposit | 124 |
 | Rent flow: Wallet | 126 |
