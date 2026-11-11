@@ -1,100 +1,100 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="Newsreader, Georgia, serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="Figtree, Helvetica, Arial, sans-serif">
 <title>Sharify: how the system is designed</title>
-<rect width="1600" height="900" fill="#02070A"/>
-<text x="60" y="66" font-size="40" fill="#E6EDF1">How Sharify is <tspan font-style="italic">designed</tspan></text>
-<text x="60" y="98" font-size="18" fill="#AEBBC3">Each step: what it does, who could cheat there, and why it fails.</text>
-<text x="600" y="128" font-size="14" font-family="IBM Plex Mono, Menlo, monospace" fill="#9AA7AF">Who could cheat, and why it fails</text>
-<rect x="60" y="140" width="500" height="118" fill="#02070A" stroke="#E6EDF1" stroke-width="2"/>
+<rect width="1600" height="900" fill="#FFFFFF"/>
+<text x="60" y="66" font-size="40" fill="#17191B">How Sharify is designed</text>
+<text x="60" y="98" font-size="18" fill="#3B3F43">Each step: what it does, who could cheat there, and why it fails.</text>
+<text x="600" y="128" font-size="14" font-family="IBM Plex Mono, Menlo, monospace" fill="#565B60">Who could cheat, and why it fails</text>
+<rect x="60" y="140" width="500" height="118" fill="#FFFFFF" stroke="#17191B" stroke-width="2"/>
 <circle cx="60" cy="140" r="15" fill="#0297DE"/><text x="60" y="145" font-size="14" font-family="IBM Plex Mono, Menlo, monospace" fill="#02070A" text-anchor="middle">1</text>
-<text x="82" y="172" font-size="24" fill="#E6EDF1">Recorder on the object</text>
-<text x="82" y="196" font-size="14" font-family="IBM Plex Mono, Menlo, monospace" fill="#9AA7AF">ADXL375 · GPS · ATECC608</text>
-<text x="82" y="222" font-size="17" fill="#E6EDF1">1600 samples/s, peak of each second kept;</text>
-<text x="82" y="243" font-size="17" fill="#E6EDF1">signs a Merkle root every 16 readings</text>
-<rect x="600" y="140" width="520" height="118" rx="4" fill="#061017" stroke="#1D2F3B" stroke-dasharray="6 4"/>
-<text x="620" y="172" font-size="17" fill="#E6EDF1"><tspan font-family="IBM Plex Mono, Menlo, monospace" font-size="13" fill="#0297DE">Could cheat  </tspan>Edit the readings afterwards</text>
-<text x="620" y="202" font-size="13" font-family="IBM Plex Mono, Menlo, monospace" fill="#9AA7AF">Why it fails</text>
-<text x="620" y="224" font-size="17" fill="#E6EDF1">Breaks the signature. It proves which chip</text>
-<text x="620" y="245" font-size="17" fill="#E6EDF1">and no later change, not an intact sensor</text>
-<line x1="560" y1="199" x2="600" y2="199" stroke="#1D2F3B" stroke-width="1.5"/>
+<text x="82" y="172" font-size="24" fill="#17191B">Recorder on the object</text>
+<text x="82" y="196" font-size="14" font-family="IBM Plex Mono, Menlo, monospace" fill="#565B60">ADXL375 · GPS · ATECC608</text>
+<text x="82" y="222" font-size="17" fill="#17191B">1600 samples/s, peak of each second kept;</text>
+<text x="82" y="243" font-size="17" fill="#17191B">signs a Merkle root every 16 readings</text>
+<rect x="600" y="140" width="520" height="118" rx="4" fill="#FAF8F5" stroke="#D9D3CA" stroke-dasharray="6 4"/>
+<text x="620" y="172" font-size="17" fill="#17191B"><tspan font-family="IBM Plex Mono, Menlo, monospace" font-size="13" fill="#0297DE">Could cheat  </tspan>Edit the readings afterwards</text>
+<text x="620" y="202" font-size="13" font-family="IBM Plex Mono, Menlo, monospace" fill="#565B60">Why it fails</text>
+<text x="620" y="224" font-size="17" fill="#17191B">Breaks the signature. It proves which chip</text>
+<text x="620" y="245" font-size="17" fill="#17191B">and no later change, not an intact sensor</text>
+<line x1="560" y1="199" x2="600" y2="199" stroke="#D9D3CA" stroke-width="1.5"/>
 <line x1="310" y1="258" x2="310" y2="282" stroke="#0297DE" stroke-width="2"/><path d="M303,275 L310,286 L317,275" fill="none" stroke="#0297DE" stroke-width="2"/>
-<rect x="60" y="288" width="500" height="118" fill="#02070A" stroke="#E6EDF1" stroke-width="2"/>
+<rect x="60" y="288" width="500" height="118" fill="#FFFFFF" stroke="#17191B" stroke-width="2"/>
 <circle cx="60" cy="288" r="15" fill="#0297DE"/><text x="60" y="293" font-size="14" font-family="IBM Plex Mono, Menlo, monospace" fill="#02070A" text-anchor="middle">2</text>
-<text x="82" y="320" font-size="24" fill="#E6EDF1">Signed batch</text>
-<text x="82" y="344" font-size="14" font-family="IBM Plex Mono, Menlo, monospace" fill="#9AA7AF">root · seq · max peak · times · P-256</text>
-<text x="82" y="370" font-size="17" fill="#E6EDF1">Only the fingerprint goes on-chain;</text>
-<text x="82" y="391" font-size="17" fill="#E6EDF1">readings are proven one by one</text>
-<rect x="600" y="288" width="520" height="118" rx="4" fill="#061017" stroke="#1D2F3B" stroke-dasharray="6 4"/>
-<text x="620" y="320" font-size="17" fill="#E6EDF1"><tspan font-family="IBM Plex Mono, Menlo, monospace" font-size="13" fill="#0297DE">Could cheat  </tspan>Replay or reorder batches</text>
-<text x="620" y="350" font-size="13" font-family="IBM Plex Mono, Menlo, monospace" fill="#9AA7AF">Why it fails</text>
-<text x="620" y="372" font-size="17" fill="#E6EDF1">seq only goes up: the contract refuses</text>
-<text x="620" y="393" font-size="17" fill="#E6EDF1">any seq it has already passed</text>
-<line x1="560" y1="347" x2="600" y2="347" stroke="#1D2F3B" stroke-width="1.5"/>
+<text x="82" y="320" font-size="24" fill="#17191B">Signed batch</text>
+<text x="82" y="344" font-size="14" font-family="IBM Plex Mono, Menlo, monospace" fill="#565B60">root · seq · max peak · times · P-256</text>
+<text x="82" y="370" font-size="17" fill="#17191B">Only the fingerprint goes on-chain;</text>
+<text x="82" y="391" font-size="17" fill="#17191B">readings are proven one by one</text>
+<rect x="600" y="288" width="520" height="118" rx="4" fill="#FAF8F5" stroke="#D9D3CA" stroke-dasharray="6 4"/>
+<text x="620" y="320" font-size="17" fill="#17191B"><tspan font-family="IBM Plex Mono, Menlo, monospace" font-size="13" fill="#0297DE">Could cheat  </tspan>Replay or reorder batches</text>
+<text x="620" y="350" font-size="13" font-family="IBM Plex Mono, Menlo, monospace" fill="#565B60">Why it fails</text>
+<text x="620" y="372" font-size="17" fill="#17191B">seq only goes up: the contract refuses</text>
+<text x="620" y="393" font-size="17" fill="#17191B">any seq it has already passed</text>
+<line x1="560" y1="347" x2="600" y2="347" stroke="#D9D3CA" stroke-width="1.5"/>
 <line x1="310" y1="406" x2="310" y2="430" stroke="#0297DE" stroke-width="2"/><path d="M303,423 L310,434 L317,423" fill="none" stroke="#0297DE" stroke-width="2"/>
-<rect x="60" y="436" width="500" height="118" fill="#02070A" stroke="#E6EDF1" stroke-width="2"/>
+<rect x="60" y="436" width="500" height="118" fill="#FFFFFF" stroke="#17191B" stroke-width="2"/>
 <circle cx="60" cy="436" r="15" fill="#0297DE"/><text x="60" y="441" font-size="14" font-family="IBM Plex Mono, Menlo, monospace" fill="#02070A" text-anchor="middle">3</text>
-<text x="82" y="468" font-size="24" fill="#E6EDF1">Relayer (not trusted)</text>
-<text x="82" y="492" font-size="14" font-family="IBM Plex Mono, Menlo, monospace" fill="#9AA7AF">Wi-Fi in · pays the gas</text>
-<text x="82" y="518" font-size="17" fill="#E6EDF1">Forwards batches, keeps the raw</text>
-<text x="82" y="539" font-size="17" fill="#E6EDF1">readings for maps and proofs</text>
-<rect x="600" y="436" width="520" height="118" rx="4" fill="#061017" stroke="#1D2F3B" stroke-dasharray="6 4"/>
-<text x="620" y="468" font-size="17" fill="#E6EDF1"><tspan font-family="IBM Plex Mono, Menlo, monospace" font-size="13" fill="#0297DE">Could cheat  </tspan>Drop or change a batch</text>
-<text x="620" y="498" font-size="13" font-family="IBM Plex Mono, Menlo, monospace" fill="#9AA7AF">Why it fails</text>
-<text x="620" y="520" font-size="17" fill="#E6EDF1">A change fails the on-chain signature check;</text>
-<text x="620" y="541" font-size="17" fill="#E6EDF1">a dropped batch leaves a visible seq gap</text>
-<line x1="560" y1="495" x2="600" y2="495" stroke="#1D2F3B" stroke-width="1.5"/>
+<text x="82" y="468" font-size="24" fill="#17191B">Relayer (not trusted)</text>
+<text x="82" y="492" font-size="14" font-family="IBM Plex Mono, Menlo, monospace" fill="#565B60">Wi-Fi in · pays the gas</text>
+<text x="82" y="518" font-size="17" fill="#17191B">Forwards batches, keeps the raw</text>
+<text x="82" y="539" font-size="17" fill="#17191B">readings for maps and proofs</text>
+<rect x="600" y="436" width="520" height="118" rx="4" fill="#FAF8F5" stroke="#D9D3CA" stroke-dasharray="6 4"/>
+<text x="620" y="468" font-size="17" fill="#17191B"><tspan font-family="IBM Plex Mono, Menlo, monospace" font-size="13" fill="#0297DE">Could cheat  </tspan>Drop or change a batch</text>
+<text x="620" y="498" font-size="13" font-family="IBM Plex Mono, Menlo, monospace" fill="#565B60">Why it fails</text>
+<text x="620" y="520" font-size="17" fill="#17191B">A change fails the on-chain signature check;</text>
+<text x="620" y="541" font-size="17" fill="#17191B">a dropped batch leaves a visible seq gap</text>
+<line x1="560" y1="495" x2="600" y2="495" stroke="#D9D3CA" stroke-width="1.5"/>
 <line x1="310" y1="554" x2="310" y2="578" stroke="#0297DE" stroke-width="2"/><path d="M303,571 L310,582 L317,571" fill="none" stroke="#0297DE" stroke-width="2"/>
-<rect x="60" y="584" width="500" height="118" fill="#02070A" stroke="#E6EDF1" stroke-width="2"/>
+<rect x="60" y="584" width="500" height="118" fill="#FFFFFF" stroke="#17191B" stroke-width="2"/>
 <circle cx="60" cy="584" r="15" fill="#0297DE"/><text x="60" y="589" font-size="14" font-family="IBM Plex Mono, Menlo, monospace" fill="#02070A" text-anchor="middle">4</text>
-<text x="82" y="616" font-size="24" fill="#E6EDF1">CustodyLog contract</text>
-<text x="82" y="640" font-size="14" font-family="IBM Plex Mono, Menlo, monospace" fill="#9AA7AF">P-256 check on-chain · custody periods</text>
-<text x="82" y="666" font-size="17" fill="#E6EDF1">Stores the root against whoever holds it;</text>
-<text x="82" y="687" font-size="17" fill="#E6EDF1">handover = one proposes, the other accepts</text>
-<rect x="600" y="584" width="520" height="118" rx="4" fill="#061017" stroke="#1D2F3B" stroke-dasharray="6 4"/>
-<text x="620" y="616" font-size="17" fill="#E6EDF1"><tspan font-family="IBM Plex Mono, Menlo, monospace" font-size="13" fill="#0297DE">Could cheat  </tspan>Blame someone for older damage</text>
-<text x="620" y="646" font-size="13" font-family="IBM Plex Mono, Menlo, monospace" fill="#9AA7AF">Why it fails</text>
-<text x="620" y="668" font-size="17" fill="#E6EDF1">Each batch belongs to the custodian of that</text>
-<text x="620" y="689" font-size="17" fill="#E6EDF1">moment; each period keeps its own peak</text>
-<line x1="560" y1="643" x2="600" y2="643" stroke="#1D2F3B" stroke-width="1.5"/>
+<text x="82" y="616" font-size="24" fill="#17191B">CustodyLog contract</text>
+<text x="82" y="640" font-size="14" font-family="IBM Plex Mono, Menlo, monospace" fill="#565B60">P-256 check on-chain · custody periods</text>
+<text x="82" y="666" font-size="17" fill="#17191B">Stores the root against whoever holds it;</text>
+<text x="82" y="687" font-size="17" fill="#17191B">handover = one proposes, the other accepts</text>
+<rect x="600" y="584" width="520" height="118" rx="4" fill="#FAF8F5" stroke="#D9D3CA" stroke-dasharray="6 4"/>
+<text x="620" y="616" font-size="17" fill="#17191B"><tspan font-family="IBM Plex Mono, Menlo, monospace" font-size="13" fill="#0297DE">Could cheat  </tspan>Blame someone for older damage</text>
+<text x="620" y="646" font-size="13" font-family="IBM Plex Mono, Menlo, monospace" fill="#565B60">Why it fails</text>
+<text x="620" y="668" font-size="17" fill="#17191B">Each batch belongs to the custodian of that</text>
+<text x="620" y="689" font-size="17" fill="#17191B">moment; each period keeps its own peak</text>
+<line x1="560" y1="643" x2="600" y2="643" stroke="#D9D3CA" stroke-width="1.5"/>
 <line x1="310" y1="702" x2="310" y2="726" stroke="#0297DE" stroke-width="2"/><path d="M303,719 L310,730 L317,719" fill="none" stroke="#0297DE" stroke-width="2"/>
-<rect x="60" y="732" width="500" height="118" fill="#02070A" stroke="#E6EDF1" stroke-width="2"/>
+<rect x="60" y="732" width="500" height="118" fill="#FFFFFF" stroke="#17191B" stroke-width="2"/>
 <circle cx="60" cy="732" r="15" fill="#0297DE"/><text x="60" y="737" font-size="14" font-family="IBM Plex Mono, Menlo, monospace" fill="#02070A" text-anchor="middle">5</text>
-<text x="82" y="764" font-size="24" fill="#E6EDF1">RentalEscrow contract</text>
-<text x="82" y="788" font-size="14" font-family="IBM Plex Mono, Menlo, monospace" fill="#9AA7AF">deposit · three shock levels</text>
-<text x="82" y="814" font-size="17" fill="#E6EDF1">Holds the deposit; after the return anyone</text>
-<text x="82" y="835" font-size="17" fill="#E6EDF1">triggers the settlement by the rule</text>
-<rect x="600" y="732" width="520" height="118" rx="4" fill="#061017" stroke="#1D2F3B" stroke-dasharray="6 4"/>
-<text x="620" y="764" font-size="17" fill="#E6EDF1"><tspan font-family="IBM Plex Mono, Menlo, monospace" font-size="13" fill="#0297DE">Could cheat  </tspan>Keep the deposit, change the rules</text>
-<text x="620" y="794" font-size="13" font-family="IBM Plex Mono, Menlo, monospace" fill="#9AA7AF">Why it fails</text>
-<text x="620" y="816" font-size="17" fill="#E6EDF1">The money sits in the contract, and the rules</text>
-<text x="620" y="837" font-size="17" fill="#E6EDF1">are locked while a rental is active</text>
-<line x1="560" y1="791" x2="600" y2="791" stroke="#1D2F3B" stroke-width="1.5"/>
-<rect x="1160" y="140" width="380" height="710" rx="4" fill="#02070A" stroke="#1D2F3B" stroke-width="1.5"/>
-<text x="1180" y="178" font-size="24" fill="#E6EDF1">Limits we <tspan font-style="italic">state</tspan></text>
+<text x="82" y="764" font-size="24" fill="#17191B">RentalEscrow contract</text>
+<text x="82" y="788" font-size="14" font-family="IBM Plex Mono, Menlo, monospace" fill="#565B60">deposit · three shock levels</text>
+<text x="82" y="814" font-size="17" fill="#17191B">Holds the deposit; after the return anyone</text>
+<text x="82" y="835" font-size="17" fill="#17191B">triggers the settlement by the rule</text>
+<rect x="600" y="732" width="520" height="118" rx="4" fill="#FAF8F5" stroke="#D9D3CA" stroke-dasharray="6 4"/>
+<text x="620" y="764" font-size="17" fill="#17191B"><tspan font-family="IBM Plex Mono, Menlo, monospace" font-size="13" fill="#0297DE">Could cheat  </tspan>Keep the deposit, change the rules</text>
+<text x="620" y="794" font-size="13" font-family="IBM Plex Mono, Menlo, monospace" fill="#565B60">Why it fails</text>
+<text x="620" y="816" font-size="17" fill="#17191B">The money sits in the contract, and the rules</text>
+<text x="620" y="837" font-size="17" fill="#17191B">are locked while a rental is active</text>
+<line x1="560" y1="791" x2="600" y2="791" stroke="#D9D3CA" stroke-width="1.5"/>
+<rect x="1160" y="140" width="380" height="710" rx="4" fill="#FFFFFF" stroke="#D9D3CA" stroke-width="1.5"/>
+<text x="1180" y="178" font-size="24" fill="#17191B">Limits we state</text>
 <rect x="1180" y="199" width="8" height="8" fill="none" stroke="#0297DE"/>
-<text x="1196" y="208" font-size="15" fill="#E6EDF1">The signature protects the key, not</text>
-<text x="1196" y="228" font-size="15" fill="#E6EDF1">the measurement: new firmware or a</text>
-<text x="1196" y="248" font-size="15" fill="#E6EDF1">detached recorder signs wrong data.</text>
+<text x="1196" y="208" font-size="15" fill="#17191B">The signature protects the key, not</text>
+<text x="1196" y="228" font-size="15" fill="#17191B">the measurement: new firmware or a</text>
+<text x="1196" y="248" font-size="15" fill="#17191B">detached recorder signs wrong data.</text>
 <rect x="1180" y="273" width="8" height="8" fill="none" stroke="#0297DE"/>
-<text x="1196" y="282" font-size="15" fill="#E6EDF1">No manufacturer certificate yet:</text>
-<text x="1196" y="302" font-size="15" fill="#E6EDF1">any public key can be registered.</text>
+<text x="1196" y="282" font-size="15" fill="#17191B">No manufacturer certificate yet:</text>
+<text x="1196" y="302" font-size="15" fill="#17191B">any public key can be registered.</text>
 <rect x="1180" y="327" width="8" height="8" fill="none" stroke="#0297DE"/>
-<text x="1196" y="336" font-size="15" fill="#E6EDF1">Open pairing: anyone can create an</text>
-<text x="1196" y="356" font-size="15" fill="#E6EDF1">object on a registered recorder, and a</text>
-<text x="1196" y="376" font-size="15" fill="#E6EDF1">batch doesn't name its object.</text>
+<text x="1196" y="336" font-size="15" fill="#17191B">Open pairing: anyone can create an</text>
+<text x="1196" y="356" font-size="15" fill="#17191B">object on a registered recorder, and a</text>
+<text x="1196" y="376" font-size="15" fill="#17191B">batch doesn't name its object.</text>
 <rect x="1180" y="401" width="8" height="8" fill="none" stroke="#0297DE"/>
-<text x="1196" y="410" font-size="15" fill="#E6EDF1">Deposit hostage: no deadline if the</text>
-<text x="1196" y="430" font-size="15" fill="#E6EDF1">owner never confirms the return.</text>
-<text x="1196" y="450" font-size="15" fill="#E6EDF1">Fix: it counts anyway after 24 h.</text>
+<text x="1196" y="410" font-size="15" fill="#17191B">Deposit hostage: no deadline if the</text>
+<text x="1196" y="430" font-size="15" fill="#17191B">owner never confirms the return.</text>
+<text x="1196" y="450" font-size="15" fill="#17191B">Fix: it counts anyway after 24 h.</text>
 <rect x="1180" y="475" width="8" height="8" fill="none" stroke="#0297DE"/>
-<text x="1196" y="484" font-size="15" fill="#E6EDF1">A shock is not damage: the levels</text>
-<text x="1196" y="504" font-size="15" fill="#E6EDF1">are a rule accepted in advance.</text>
+<text x="1196" y="484" font-size="15" fill="#17191B">A shock is not damage: the levels</text>
+<text x="1196" y="504" font-size="15" fill="#17191B">are a rule accepted in advance.</text>
 <rect x="1180" y="529" width="8" height="8" fill="none" stroke="#0297DE"/>
-<text x="1196" y="538" font-size="15" fill="#E6EDF1">A batch arriving after the return</text>
-<text x="1196" y="558" font-size="15" fill="#E6EDF1">counts for the next custodian.</text>
+<text x="1196" y="538" font-size="15" fill="#17191B">A batch arriving after the return</text>
+<text x="1196" y="558" font-size="15" fill="#17191B">counts for the next custodian.</text>
 <rect x="1180" y="583" width="8" height="8" fill="none" stroke="#0297DE"/>
-<text x="1196" y="592" font-size="15" fill="#E6EDF1">Raw readings live with the relayer;</text>
-<text x="1196" y="612" font-size="15" fill="#E6EDF1">only fingerprints are on-chain.</text>
+<text x="1196" y="592" font-size="15" fill="#17191B">Raw readings live with the relayer;</text>
+<text x="1196" y="612" font-size="15" fill="#17191B">only fingerprints are on-chain.</text>
 <rect x="1180" y="637" width="8" height="8" fill="none" stroke="#0297DE"/>
-<text x="1196" y="646" font-size="15" fill="#E6EDF1">Demo: the relayer holds all keys.</text>
-<text x="1196" y="666" font-size="15" fill="#E6EDF1">Product: each side signs itself.</text>
+<text x="1196" y="646" font-size="15" fill="#17191B">Demo: the relayer holds all keys.</text>
+<text x="1196" y="666" font-size="15" fill="#17191B">Product: each side signs itself.</text>
 </svg>

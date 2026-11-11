@@ -186,3 +186,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Booking.com's "no availability" page: it moves you to other places straight away: https://www.booking.com
 - **Shots:** [375 px](rounds/16-375.jpg)
 - **Lines:** 6184
+
+## Round 17 · The slide diagram follows the site
+
+- **What:** The system diagram that Design offers for the slides is now light, in the site's type and colours, instead of white on black.
+- **Why:** It was the last black surface left. The professors' slides now look like the site they demo.
+- **Reference:** Stripe's architecture diagrams in docs: light, one blue accent: https://stripe.com/docs
+- **Shots:** [diagram](rounds/17-slide.jpg)
+- **Lines:** 6184
