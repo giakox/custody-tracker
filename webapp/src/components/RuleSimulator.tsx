@@ -23,28 +23,31 @@ export function RuleSimulator({ terms }: { terms: Terms }) {
   const c = Number(terms.collateral);
   const fee = Math.round(c * bps) / 10_000;
   const toPos = (v: number) => (Math.log(v) - Math.log(100)) / (Math.log(20000) - Math.log(100));
+  const near = EXAMPLES.reduce((best, e) => (Math.abs(toPos(e.cg) - pos) < Math.abs(toPos(best.cg) - pos) ? e : best), EXAMPLES[0]);
+  const onExample = Math.abs(toPos(near.cg) - pos) < 0.01;
+  const back = c - fee;
   return (
-    <section className={`sim tier-${tier}`} aria-label="Try the rule">
-      <div className="sim-top">
-        <div>
-          <p className="sim-k">If the hardest knock of your ride were</p>
-          <p className={`sim-peak mono ${tier ? "shock" : ""}`}>{g(cg)}</p>
-        </div>
-        <div className="sim-out">
-          <p className="sim-k">you'd get back</p>
-          <p className="sim-back mono">{usd(String(c - fee))}</p>
-          <p className="sim-fee">{tier ? `${usd(String(fee))} kept for a ${TIER_NAMES[tier]} knock` : "nothing kept"}</p>
-        </div>
+    <section className={`sim sim2 tier-${tier}`} aria-label="Try the rule">
+      <p className="sim-k">What happened on the ride?</p>
+      <div className="sim-scen" role="group" aria-label="Examples">
+        {EXAMPLES.map((e) => <button key={e.label} type="button" aria-pressed={onExample && near.label === e.label} onClick={() => setPos(toPos(e.cg))}>{e.label}</button>)}
       </div>
       <div className="sim-track">
         <input type="range" min={0} max={1} step={0.001} value={pos} onChange={(e) => setPos(Number(e.target.value))}
-          aria-label="Hardest knock of the ride" aria-valuetext={`${g(cg)}, ${TIER_NAMES[tier]}, ${usd(String(c - fee))} back`} />
+          aria-label="Hardest knock of the ride" aria-valuetext={`${g(cg)}, ${TIER_NAMES[tier]}, ${usd(String(back))} back`} />
         <div className="sim-ticks" aria-hidden="true">
-          {[terms.lightCg, terms.mediumCg, terms.strongCg].map((t) => <i key={t} style={{ left: `${toPos(t) * 100}%` }}><span className="mono">{g(t)}</span></i>)}
+          {[terms.lightCg, terms.mediumCg, terms.strongCg].map((t) => <i key={t} style={{ left: `${toPos(t) * 100}%` }} />)}
         </div>
-        <div className="sim-examples">
-          {EXAMPLES.map((e) => <button key={e.label} type="button" style={{ left: `${toPos(e.cg) * 100}%` }} onClick={() => setPos(toPos(e.cg))}>{e.label}</button>)}
+        <p className="sim-read">Hardest knock <b className={tier ? "shock" : ""}>{g(cg)}</b>{tier ? <>, a {TIER_NAMES[tier]} knock</> : <>, under the first level</>}</p>
+      </div>
+      <div className="sim-money">
+        <p className="sim-k">You'd get back</p>
+        <p className="sim-back">{usd(String(back))}</p>
+        <div className="split" aria-hidden="true">
+          {back > 0 && <i className="split-back" style={{ flexGrow: back }} />}
+          {fee > 0 && <i className="split-kept" style={{ flexGrow: fee }} />}
         </div>
+        <p className="sim-fee">{tier ? <>{usd(String(fee))} of the {usd(terms.collateral)} deposit goes to the owner, by the rule.</> : <>All of the {usd(terms.collateral)} deposit comes back.</>}</p>
       </div>
       <RuleTiers terms={terms} highlight={tier} />
       <p className="hint-line">Examples are indicative peaks from early tests, not measurements of this bike. 1 g is the bike standing still.</p>

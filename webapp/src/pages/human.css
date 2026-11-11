@@ -390,3 +390,31 @@ p, li, dd { text-wrap: pretty; }
 .owner-steps li::before { content: counter(os); position: absolute; left: 0; top: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--ink); color: var(--bg); display: grid; place-items: center; font-size: 15px; font-weight: 700; }
 .owner-steps b { display: block; color: var(--ink); font-weight: 650; }
 .owners-band .owners > .btn { justify-self: start; }
+
+/* ---------- Round 82: the rule in everyday words first, the money as the answer ---------- */
+.sim2 { display: grid; gap: 20px; }
+.sim2 .sim-k { font-size: 15px; font-weight: 600; color: var(--ink); }
+.sim-scen { display: flex; flex-wrap: wrap; gap: 8px; margin-top: -8px; }
+.sim-scen button { min-height: 44px; padding: 0 18px; border: 0; border-radius: 999px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--line-strong); font: 600 15px/1 var(--ui); color: var(--ink); cursor: pointer; transition: background-color .15s ease, box-shadow .15s ease, transform .12s ease; }
+.sim-scen button:hover { box-shadow: inset 0 0 0 1px var(--ink); }
+.sim-scen button:active { transform: scale(.97); }
+.sim-scen button[aria-pressed="true"] { background: var(--ink); color: var(--bg); box-shadow: none; }
+.sim-scen button:focus-visible { outline: 2px solid var(--blue-ink); outline-offset: 2px; }
+.sim2 .sim-track { margin: 0; }
+.sim2 .sim-ticks i { top: 2px; height: 24px; }
+.sim-read { margin-top: 8px; font-size: 14px; color: var(--mist); }
+.sim-read b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.sim-read b.shock { color: var(--orange-ink); }
+.sim-money { padding: 20px; border-radius: var(--radius); background: var(--surface); }
+.sim2 .sim-back, .try-rule .sim2 .sim-back { margin-top: 4px; font-family: var(--display); font-size: clamp(40px, 4.4vw, 64px); font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
+.sim-money .split { margin-top: 16px; }
+.sim-money .split i { transition: flex-grow .35s cubic-bezier(.2, .7, .2, 1); animation: none; }
+.sim2 .sim-fee { margin-top: 10px; font-size: 15px; color: var(--mist); }
+.sim2.tier-1 .sim-fee, .sim2.tier-2 .sim-fee, .sim2.tier-3 .sim-fee { color: var(--mist); }
+.try-rule { align-items: start; }
+.try-rule > div:first-child { position: sticky; top: calc(var(--hdr-space) + 24px); }
+.rent-step .sim2 { background: var(--bg); box-shadow: var(--elev-1), inset 0 0 0 1px var(--line); }
+.try-rule .sim2 p.sim-read, .try-rule .sim2 p.sim-fee { margin-top: 8px; font-size: 15px; max-width: none; }
+.try-rule .sim2 p.sim-k { margin-top: 0; font-size: 15px; color: var(--ink); max-width: none; }
+.try-rule .sim2 p.sim-back { margin-top: 4px; max-width: none; }
+.try-rule .sim2 .hint-line { margin-top: 0; font-size: 13px; max-width: none; }

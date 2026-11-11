@@ -1090,6 +1090,28 @@ Also removed: the estimator's styles in map.css, which matched the earnings card
 
 **Test, "another screen at a glance?"** Yes on a phone: a stack of pins over a big card became a map with a slim row of cards.
 
+## Round 82 · The rule in everyday words first, the money as the answer
+
+**Hierarchy audit (the simulator, on the Home and on the Rule step):**
+
+| Block | Who, when | If it vanished | Verdict |
+|---|---|---|---|
+| "26.7 g" at 96 px in orange | — | a renter doesn't think in g | demoted to one line under the slider: "Hardest knock 26.7 g, a light knock" |
+| "45 dollars" at 68 px | renter: "what do I get back?" | the point | primary, in its own sand block, with the split bar under it (blue back, orange kept), the same bar as the receipt and Confirm a return |
+| The slider with g labels above and example chips hanging under it, "riding" spilling out of the card | renter | — | the examples become the first control, a row of chips above the slider ("What happened on the ride?"); the pressed one is dark; the slider stays for fine control with plain ticks |
+| The rule table | renter who wants the whole rule | the rule | tertiary, below |
+
+**Levels after:** what happened (chips) → what you get back (big number + bar) → the full rule. **Squint test:** before, two giant numbers fought (orange g, black dollars); after, the eye reads the chips, then one black number with a coloured bar.
+
+**References:** Wise's fee calculator (pick what you're sending, the answer in one large figure with the breakdown under it) and Apple's trade-in estimator (choose the condition in words, see the value). Why ours looked cheaper: it led with a physics unit.
+
+**Three ideas:** (1) everyday examples first, money as the answer with the split bar. (2) Four illustrated scenes (a pothole, a fall…) as cards. (3) Keep the layout, only shrink the g.
+**Discarded:** (2) four drawings in one family would be new illustration work for one widget, and photos of falls don't exist honestly. (3) a smaller g still leads with the wrong thing.
+
+**Chosen, (1):** [Home, "falls over" pressed and focused](rounds/82-rule-home-1440.jpg), [Home on a phone](rounds/82-rule-home-375.jpg), [the same simulator on the Rule step](rounds/82-rule-step-1440.jpg). On the Home the title column stays in view while you play. The bar's parts slide when the amount changes (instantly with reduced motion).
+
+**Test, "another screen at a glance?"** Yes: a giant orange number became a row of choices and a bar of money.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1099,6 +1121,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Home: hero | 78 |
 | Home: "how it works" band (and bike page) | 70 |
 | Home: owners band | 80 |
+| Home: try the rule (and Rule step) | 82 |
 | Home: find a bike (grid + map) | 81 |
 | Header | 77 |
 | Footer | 73 |
