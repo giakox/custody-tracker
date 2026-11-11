@@ -570,3 +570,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Apple's iPhone page on mobile: chapters shorter than the screen: https://www.apple.com/iphone/
 - **Shots:** none
 - **Lines:** 6551
+
+## Round 61 · The browser bar and the link preview match the site
+
+- **What:** The phone browser's top bar was still the old midnight black; it is white now. The page also has a description and a preview title and photo for when the link is shared.
+- **Why:** The first pixels a phone user sees are the browser's own bar. It was a leftover of the dark theme.
+- **Reference:** Apple's HIG on tint and theme colour for web: https://developer.apple.com/design/human-interface-guidelines/
+- **Shots:** none
+- **Lines:** 6551
