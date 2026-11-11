@@ -1576,6 +1576,21 @@ Each group has a short heading. On a phone the carousel is unchanged (one card a
 
 **Test on the blurred shots:** yes for that section: an empty left column now holds a dark diagonal with a white label on it.
 
+## Round 105 · A step back: "Sample fleet" said once
+
+**Hierarchy audit (the finder on a desktop):** the honesty note was said ten times: once as the sentence above the samples ("Sample fleet. How the map will look with more owners. These bikes have no recorder and can't be rented.") and nine more times as a white pill on every sample photo. Nine identical pills are noise on the photographs, and they made the one pill that matters ("Live · on-chain", on the real bike) one of ten.
+
+**What changed:** on a desktop, the sample photos lose their pill; the sentence stays right above them, and the map's mini card still says "A sample bike: it has no recorder, so it can't be rented" when you pick one. "Live · on-chain" is now the only pill in the list. On a phone, where the carousel shows one card at a time and the sentence isn't visible, every card keeps its pill.
+
+**Three ideas (what to remove):** (1) the repeated pills, keeping the sentence. (2) The sentence, keeping the pills. (3) The group headings from round 103.
+**Discarded:** (2) a pill can't say why (no recorder) and that they can't be rented. (3) the headings are what makes the card sizes legible as distance.
+
+**Café test:** cleaner photographs read more like the café's menu; the honesty is intact.
+
+**Chosen, (1):** [before and after](rounds/105-sample-once.jpg).
+
+**Test:** a step back: on the blurred shots the photos are calmer; not another screen, and not meant to be.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.

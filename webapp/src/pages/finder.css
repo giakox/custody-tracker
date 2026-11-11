@@ -188,3 +188,6 @@
   .fcard[data-band="near"] .fcard-name { font-size: 20px; }
   .fgroup { padding-top: 24px; margin-bottom: -8px; }
 }
+
+/* ---------- Round 105: a step back: "Sample fleet" said once, by the sentence above the samples ---------- */
+@media (min-width: 900px) { .finder-grid .fcard:not(.is-live) .fcard-badge { display: none; } }
