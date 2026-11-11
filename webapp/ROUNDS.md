@@ -695,6 +695,36 @@ Wallet and Deposit each had a different layout (a half-page photo; a grey summar
 
 **Test, "another screen at a glance?"** Yes: a single grey column became a two-pane checkout, the same on all three steps.
 
+## Round 67 · The ride is a live map; return, wait and outcome join the checkout frame
+
+**Hierarchy audit (Ride step, before):**
+
+| Block | Who, when | If it vanished | Verdict |
+|---|---|---|---|
+| "Your rental · 22 min so far" with a pulse | renter, during the ride | no sense of "live" | kept, tertiary, on the status card |
+| H1 "A medium knock so far: 20 dollars would be kept." (96 px, three lines) | renter | the point of the page | primary, set at 40 px so it sits on the map |
+| Facts: Deposit / Hardest knock / Last update, in ruled cells | renter | deposit and knock are already in the H1 | merged into one line under the H1 with the meter |
+| The rule table | renter who wonders "what if it gets worse" | they'd have to remember the rule | secondary, below the map, titled "The rule you accepted" |
+| "Return the bike" | renter at the end | no way out | in the status card, full width |
+| The map of the ride (440 px, right half, under the progress bar) | renter | the ride is invisible | the stage: full content width, 62 vh |
+
+Return used a layout whose CSS was deleted in round 66 (the photo spilled over the page); Waiting and Outcome had their own compositions, and Outcome's three buttons were in a row under a table.
+
+**Levels after:** the map is the stage, the status card on it is primary (H1, meter, one button), the rule below secondary. **Squint test:** before, the eye went to the 96 px H1 and then bounced between a map and a ruled table of the same weight. After, one picture (the map) with one white card on it; the blue button is the only colour in the card.
+
+**References:** Lime's ride screen (the map is the screen, the trip status is a card over it, one big "End ride") and Flighty's live flight (the route on a map, the status in a panel laid over it). Why ours looked cheaper: the map was a thumbnail beside a text page, as if the ride were an attachment.
+
+**Three ideas:** (1) the map as the whole stage with a status card over it. (2) A big live counter (time and money at stake) as the hero, the map below. (3) A split with the map pinned on the right and the status scrolling on the left.
+**Discarded:** (2) a ticking counter for a deposit reads like a meter running, which is not how the rule works (only the hardest knock counts). (3) is what we had, with better spacing.
+
+**Chosen, (1):** [Ride, 1440](rounds/67-ride-1440.jpg), [Ride on a phone](rounds/67-ride-375.jpg), [Return](rounds/67-return-1440.jpg), [Waiting](rounds/67-waiting-1440.jpg). The map keeps the route clear of the card (fitted with a 500 px left margin on a desktop). On a phone the map comes first and the card follows. Return, Waiting and Outcome now use round 66's frame with the trip card: Return's three steps are numbered tiles (the order is the content) and its two buttons are in the card; Outcome's card says "Back to you: 50 dollars" in large type with the receipt under it.
+
+**Without lines:** the ride's ruled fact cells are gone; the Waiting panel is a sand tile; the return steps are tiles.
+
+**Motion and depth:** the status card is a frosted panel on --elev-3 over the map (the map is on --elev-2); the pulse keeps beating only with motion allowed.
+
+**Test, "another screen at a glance?"** Yes: a text page with a map thumbnail became a map with a card on it.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -707,6 +737,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Footer | — |
 | Bike page | 65 |
 | Rent flow: Rule, Wallet, Deposit | 66 |
+| Rent flow: Ride, Return, Waiting, Outcome | 67 |
 | Receipt and My rentals | — |
 | Owner (My bikes) | — |
 | Add a bike | 63 |

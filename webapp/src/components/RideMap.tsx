@@ -5,7 +5,8 @@ import "leaflet/dist/leaflet.css";
 import type { Reading } from "../data/types";
 
 /** The renter's own ride (their readings, shown only to them), with shocks above the light level in orange. */
-export function RideMap({ readings, lightCg }: { readings: Reading[]; lightCg: number }) {
+/** `padLeft`: room kept free on the left for a card laid over the map. */
+export function RideMap({ readings, lightCg, padLeft = 0 }: { readings: Reading[]; lightCg: number; padLeft?: number }) {
   const el = useRef<HTMLDivElement>(null);
   const map = useRef<L.Map | null>(null);
   const layer = useRef<L.LayerGroup | null>(null);
@@ -36,8 +37,8 @@ export function RideMap({ readings, lightCg }: { readings: Reading[]; lightCg: n
     }
     const last = pts.at(-1)!;
     L.circleMarker(last, { radius: 6, color: "#02070a", weight: 2, fillColor: "#e6edf1", fillOpacity: 1 }).addTo(g);
-    m.fitBounds(L.latLngBounds(pts), { padding: [28, 28], maxZoom: 16, animate: false });
-  }, [readings, lightCg]);
+    m.fitBounds(L.latLngBounds(pts), { paddingTopLeft: [28 + padLeft, 28], paddingBottomRight: [28, 28], maxZoom: 16, animate: false });
+  }, [readings, lightCg, padLeft]);
 
   return <div ref={el} className="ride-map" role="img" aria-label="Map of your ride so far, shocks marked in orange" />;
 }

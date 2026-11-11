@@ -7,6 +7,7 @@ import { DataError, type ObjectDetail, type Party, type Reading, type TxStep } f
 import { SiteHeader } from "../components/SiteHeader";
 import { DemoSwitcher } from "../components/DemoSwitcher";
 import { RuleTiers } from "../components/RuleTiers";
+import { TierMeter } from "../components/TierMeter";
 import { RuleSimulator } from "../components/RuleSimulator";
 import { TxSteps } from "../components/TxSteps";
 import { RideMap } from "../components/RideMap";
@@ -62,6 +63,14 @@ function TripCard({ d, lead, children }: { d: ObjectDetail; lead?: ReactNode; ch
       {children && <div className="trip-act">{children}</div>}
     </div>
   );
+}
+
+/** True on screens wide enough for the ride card to sit over the map. */
+function useWide() {
+  const q = "(min-width: 861px)";
+  const [wide, setWide] = useState(() => window.matchMedia(q).matches);
+  useEffect(() => { const m = window.matchMedia(q); const on = () => setWide(m.matches); m.addEventListener("change", on); return () => m.removeEventListener("change", on); }, []);
+  return wide;
 }
 
 function useBike(id: number) {
@@ -211,6 +220,7 @@ export function ActivePage({ id }: { id: number }) {
   const { d } = useBike(id);
   const { account } = useViewer();
   const ride = useRideReadings(d);
+  const wideScreen = useWide();
   const [, tick] = useState(0);
   useEffect(() => { const t = setInterval(() => tick((n) => n + 1), 1000); return () => clearInterval(t); }, []);
   if (!d) return <Loading stage="Ride" />;
@@ -229,28 +239,26 @@ export function ActivePage({ id }: { id: number }) {
   const lastBatch = d.batches.filter((b) => b.period === r.period).at(-1);
   return (
     <Shell d={d} stage="Ride" wide>
-      <section className={`ride-hero tier-glow-${alert ? c.tier : 0}`}>
-        <div>
-          <p className="kicker live-kicker"><i className="pulse" aria-hidden="true" />Your rental · {span(r.started.at, null)} so far</p>
-          <h1>{c.peakCg === null
-            ? <>No readings <em>yet</em>.</>
-            : alert ? <>A {TIER_NAMES[c.tier]} knock so far: {usd(c.wouldWithhold)} would be <em>kept</em>.</>
-              : <>No knocks so far: all {usd(r.collateral)} would come <em>back</em>.</>}</h1>
-          <dl className="facts">
-            <div><dt>Deposit</dt><dd className="mono">{usd(r.collateral)}</dd></div>
-            <div><dt>Hardest knock</dt><dd className={`mono ${alert ? "shock" : ""}`}>{c.peakCg === null || c.tier === 0 ? "none" : TIER_NAMES[c.tier]}</dd></div>
-            <div><dt>Last update from the bike</dt><dd className="mono">{lastBatch ? when(lastBatch.anchor.at) : "any moment now"}</dd></div>
-          </dl>
-          <RuleTiers terms={d.terms} highlight={c.tier} />
-          <div className="actions"><a className="btn btn-primary" href={href(`rent/${id}/return`)}>Return the bike</a></div>
-        </div>
-        <div className="ride-side">
-          <div className="glow" aria-hidden="true"><i className="glow-blue" /><i className="glow-orange" /><i className="grain" /></div>
+      <section className={`ride-live tier-glow-${alert ? c.tier : 0}`} aria-labelledby="ride-title">
+        <div className="ride-stage">
           {ride.data?.length
-            ? <RideMap readings={ride.data} lightCg={d.terms.lightCg} />
-            : <ObjectImage alert={alert} deviceId={d.deviceId} />}
-          <p className="hint-line">{ride.isError ? "The map of your ride is not available right now. Everything else on this page is up to date." : "Your route is shown only to you."}</p>
+            ? <RideMap readings={ride.data} lightCg={d.terms.lightCg} padLeft={wideScreen ? 500 : 0} />
+            : <ObjectImage alert={alert} deviceId={d.deviceId} glow={false} />}
+          <div className="ride-card">
+            <p className="live-kicker"><i className="pulse" aria-hidden="true" />Your rental · {span(r.started.at, null)} so far</p>
+            <h1 id="ride-title">{c.peakCg === null
+              ? <>No readings <em>yet</em>.</>
+              : alert ? <>A {TIER_NAMES[c.tier]} knock: {usd(c.wouldWithhold)} would be <em>kept</em>.</>
+                : <>No knocks: all {usd(r.collateral)} would come <em>back</em>.</>}</h1>
+            <p className="ride-meta"><TierMeter tier={c.peakCg === null ? 0 : c.tier} showNone /><span>{usd(r.collateral)} deposit · the bike last reported {lastBatch ? when(lastBatch.anchor.at) : "a moment ago"}</span></p>
+            <div className="actions"><a className="btn btn-primary" href={href(`rent/${id}/return`)}>Return the bike</a></div>
+          </div>
         </div>
+        <p className="hint-line">{ride.isError ? "The map of your ride is not available right now. Everything else on this page is up to date." : "Your route is shown only to you."}</p>
+      </section>
+      <section className="ride-rule" aria-labelledby="ride-rule-title">
+        <h2 id="ride-rule-title">The rule you accepted</h2>
+        <RuleTiers terms={d.terms} highlight={c.tier} />
       </section>
     </Shell>
   );
@@ -270,24 +278,20 @@ export function ReturnPage({ id }: { id: number }) {
   };
   if (!d) return <Loading stage="Return" />;
   return (
-    <Shell d={d} stage="Return" wide>
-      <div className="wallet-grid">
-        <div>
+    <Shell d={d} stage="Return" side={
+      <TripCard d={d}>
+        <button type="button" className="btn btn-primary btn-lg" onClick={run} disabled={state === "running"}>{state === "running" ? "Working…" : "It's back"}</button>
+        <a className="btn btn-secondary" href={href(`rent/${id}/active`)}>Back to your rental</a>
+      </TripCard>
+    }>
       <h1>Return the <em>bike</em>.</h1>
-      <ol className="numbered">
-        <li>Leave it where the owner asked, locked.</li>
-        <li>Tell the owner it's back. Knocks still count under your name until the owner confirms.</li>
-        <li>When the owner confirms, your deposit comes back by itself, by the rule.</li>
+      <ol className="numbered tiles">
+        <li><span><b>Leave it where the owner asked</b>, locked.</span></li>
+        <li><span><b>Tell the owner it's back</b> with the button. Knocks still count under your name until the owner confirms.</span></li>
+        <li><span><b>Your deposit comes back by itself</b>, by the rule, when the owner confirms.</span></li>
       </ol>
       {steps.length > 0 && <TxSteps steps={steps} deposit={usd(d.terms.collateral)} explorer={explorer} />}
       {error && <p className="notice error">{error}</p>}
-      <div className="actions">
-        <button type="button" className="btn btn-primary" onClick={run} disabled={state === "running"}>{state === "running" ? "Working…" : "It's back"}</button>
-        <a className="btn btn-secondary" href={href(`rent/${id}/active`)}>Back to your rental</a>
-      </div>
-        </div>
-        <img className="wallet-photo" src="./img/day/bocconi-park.jpg" alt="A city bike parked at a rack outside Bocconi" />
-      </div>
     </Shell>
   );
 }
@@ -305,7 +309,11 @@ export function WaitingPage({ id }: { id: number }) {
   const p = d.pendingHandoff;
   const ownerConfirm = async () => { setDemoBusy(true); try { await demoEndRental(id, () => {}); } finally { await qc.invalidateQueries(); setDemoBusy(false); } };
   return (
-    <Shell d={d} stage="Return">
+    <Shell d={d} stage="Return" side={
+      <TripCard d={d}>
+        <p className="demo-line">Demo only: <button type="button" className="link-btn" onClick={ownerConfirm} disabled={demoBusy}>{demoBusy ? "the owner is confirming…" : "have the owner confirm now"}</button></p>
+      </TripCard>
+    }>
       <h1>Waiting for the owner to <em>confirm</em>.</h1>
       <p className="lead">The owner has to confirm the bike is back with them. Until then it still counts as yours. Nothing else is needed from you.</p>
       <ol className="tx-steps">
@@ -317,9 +325,6 @@ export function WaitingPage({ id }: { id: number }) {
         <h2>What if the owner doesn't confirm?</h2>
         <p>The owner sees your return on their page. Your deposit waits for their confirmation; nobody else can take it, and the owner can't change the rule.</p>
       </section>
-      <p className="demo-line">
-        Demo only: <button type="button" className="link-btn" onClick={ownerConfirm} disabled={demoBusy}>{demoBusy ? "the owner is confirming…" : "have the owner confirm now"}</button>
-      </p>
     </Shell>
   );
 }
@@ -336,25 +341,20 @@ export function OutcomePage({ id }: { id: number }) {
   const s = mine.settlement;
   const cause = s.causeSeq !== null ? d.batches.find((b) => b.seq === s.causeSeq) : null;
   return (
-    <Shell d={d} stage="Deposit back" wide>
-      <section className={`ride-hero outcome tier-glow-${s.tier}`}>
-        <div>
-          <h1>{s.tier === 0 ? <>Thanks for riding. Your whole deposit is <em>back</em>.</> : Number(s.refund) === 0 ? <>The whole deposit was <em>kept</em>.</> : <>{usd(s.refund)} back, {usd(s.fee)} <em>kept</em>.</>}</h1>
-          <p className="lead">{s.tier === 0
-            ? `No knocks were recorded during your ride, so all ${usd(mine.collateral)} came back to you.`
-            : <>During your ride the bike recorded a <span className="shock">{TIER_NAMES[s.tier]}</span> knock{cause ? ` ${when(cause.anchor.at)}` : ""}. By the rule you accepted, {usd(s.fee)} went to the owner.</>}</p>
-        </div>
-        {s.tier === 0
-          ? <figure className="object-image"><img src="./img/day/return-smile.jpg" alt="A renter handing a bike back to its owner, both smiling" /></figure>
-          : <ObjectImage alert deviceId={d.deviceId} />}
-      </section>
-      <RuleTiers terms={d.terms} highlight={s.tier} />
-      <div className="actions">
+    <Shell d={d} stage="Deposit back" side={
+      <TripCard d={d} lead={<p className="trip-big"><span>Back to you</span><b>{usd(s.refund)}</b>{s.tier > 0 && <span className="shock">{usd(s.fee)} kept for the {TIER_NAMES[s.tier]} knock</span>}</p>}>
         <a className="btn btn-primary" href={href(`receipt/${id}/${mine.period}`)}>Receipt</a>
         {s.causeSeq !== null && <a className="btn btn-secondary" href={href(`verify/${id}/${s.causeSeq}`)}>Check that knock yourself</a>}
-        <a className="btn btn-secondary" href={href("my-rentals")}>My rentals</a>
-      </div>
-      <p className="hint-line" title={`${day(s.anchor.at)}, ${hm(s.anchor.at)}`}>Settled {when(s.anchor.at)}, by the rule.</p>
+        <p className="hint-line" title={`${day(s.anchor.at)}, ${hm(s.anchor.at)}`}>Settled {when(s.anchor.at)}, by the rule. <a className="link" href={href("my-rentals")}>My rentals</a></p>
+      </TripCard>
+    }>
+      <h1>{s.tier === 0 ? <>Thanks for riding. Your whole deposit is <em>back</em>.</> : Number(s.refund) === 0 ? <>The whole deposit was <em>kept</em>.</> : <>{usd(s.refund)} back, {usd(s.fee)} <em>kept</em>.</>}</h1>
+      <p className="lead">{s.tier === 0
+        ? `No knocks were recorded during your ride, so all ${usd(mine.collateral)} came back to you.`
+        : <>During your ride the bike recorded a <span className="shock">{TIER_NAMES[s.tier]}</span> knock{cause ? ` ${when(cause.anchor.at)}` : ""}. By the rule you accepted, {usd(s.fee)} went to the owner.</>}</p>
+      {s.tier === 0
+        ? <img className="step-photo" src="./img/day/return-smile.jpg" alt="A renter handing a bike back to its owner, both smiling" />
+        : <RuleTiers terms={d.terms} highlight={s.tier} />}
     </Shell>
   );
 }
