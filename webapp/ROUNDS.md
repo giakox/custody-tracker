@@ -1979,6 +1979,25 @@ Rounds 111–119 rotated through the screens that had gone longest untouched and
 
 **Test on the blurred shots:** yes: a pale box became a blue button in the card; on the phone a blue bar now sits on the first screen.
 
+## Round 127 · Composition: the bike page ends light, then dark
+
+**Hierarchy audit (bike page, full page at 1440, 3,504 px):** gallery (photographs) → the record and the booking card (white) → "How renting works" (dark, 1,180 px) → footer (dark, 492 px). On the blurred shot the bottom half of the page was one black block: the journey and the footer (only a shade apart, #17191b vs #222528) read as a single slab heavier than the bike itself, and the page's real content (the record, the price) became the pale strip between two heavy ends.
+
+**What changed:** on the bike page the journey is a sand band (ink text, grey dotted path, softer photo shadows); the footer goes back to the same ink as everywhere else. The page now steps down: photographs → white record → sand "how it works" → dark footer. The Home keeps its dark journey, where it is the hinge between the finder and the sand "What if it gets dropped?".
+
+**Separation without lines:** three surfaces (white, sand, ink) each meeting edge to edge; no shade-of-black trick needed to tell the journey from the footer.
+
+**Café test:** the café goes from the bright counter to the warm back room to the dark door out; the bike page now has the same descent. Still missing: the record block is the least pictorial part of the page.
+
+**References:** Airbnb's listing page (light all the way down, the darkest thing is the footer); Apple's product pages (a sand "how it works" tile between white and the black footer).
+
+**Three ideas:** (1) sand journey on the bike page. (2) Remove the journey from the bike page. (3) Lighten the footer instead.
+**Discarded:** (2) a first-time visitor who lands on a bike from the QR sticker has never seen the Home: the three moments are their only explanation. (3) the dark footer is the site's one constant ending (102); changing it per page would make it look unfinished.
+
+**Chosen, (1):** [full page before, after, both blurred](rounds/127-bike-full.jpg).
+
+**Test on the blurred shots:** yes: the bottom half went from one black slab to a warm band and a short dark end.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1987,7 +2006,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 |---|---|
 | Home: hero | 78 |
 | Home: journey (dark band) | 102 |
-| Bike page: "how it works" band | 107 (dark journey) |
+| Bike page: "how it works" band | 127 (sand journey) |
 | Home: owners band | 108 |
 | Home: try the rule (and Rule step) | 104 (bands joined: 122) |
 | Home: find a bike (grid + map) | 123 |

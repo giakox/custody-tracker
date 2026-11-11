@@ -178,3 +178,11 @@
 .parked-text b { font-size: 15px; font-weight: 650; color: var(--ink); }
 .page:has(.listing .journey) footer.site-end { margin-top: 0; background: #222528; }
 .listing { padding-bottom: 0; }
+
+/* ---------- Round 127: composition: on the bike page "How renting works" is a sand band, so the page ends light-then-dark, not dark-then-dark ---------- */
+.listing .journey { background: var(--surface); color: var(--ink); }
+.listing .journey-head h2, .listing .stop-text h3 { color: var(--ink); }
+.listing .journey-head p, .listing .stop-text p { color: var(--mist); }
+.listing .journey-path path { stroke: rgba(23, 25, 27, .28); }
+.listing .stop-pic { box-shadow: var(--elev-2); }
+.page:has(.listing .journey) footer.site-end { background: var(--ink); }
