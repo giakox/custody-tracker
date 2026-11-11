@@ -154,3 +154,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Airbnb's map: price tags as pins: https://www.airbnb.com
 - **Shots:** [1440 px](rounds/12-1440.jpg)
 - **Lines:** 6179
+
+## Round 13 · "Check it yourself" inside the story
+
+- **What:** Where the story says a bike was dropped, a plain link right in the sentence: "Check it yourself", straight to the check. Amounts in the story are readable size again.
+- **Why:** The strongest proof of the product was two clicks away behind a toggle. It now sits next to the very sentence a doubting renter or owner would question, without any technical word.
+- **Reference:** Carfax's report: the claim and "view the record" side by side: https://www.carfax.com
+- **Shots:** [375 px](rounds/13-375.jpg)
+- **Lines:** 6183

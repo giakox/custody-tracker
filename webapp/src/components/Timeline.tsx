@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import type { ObjectDetail } from "../data/types";
 import { buildStory, type Chapter, type StoryEvent } from "../ui/story";
 import { day, g, hm, inSentence, nameOf, possessive, shortHex, span, TIER_NAMES, txUrl, usd, whenShort } from "../ui/format";
+import { href } from "../ui/router";
 import { TierMeter } from "./TierMeter";
 
 function Tx({ explorer, tx }: { explorer: string | null; tx: string }) {
@@ -14,7 +15,7 @@ function Tx({ explorer, tx }: { explorer: string | null; tx: string }) {
 
 const Seq = ({ n }: { n: number }) => <a className="mono seq-link" href={`#batch-${n}`}>seq {n}</a>;
 
-function sentence(e: StoryEvent): { text: ReactNode; extra?: ReactNode; tone?: "shock" | "gap" | "quiet" } {
+function sentence(e: StoryEvent, id: number): { text: ReactNode; extra?: ReactNode; tone?: "shock" | "gap" | "quiet" } {
   switch (e.kind) {
     case "registered":
       return { text: <>Joined Sharify. From here on, its box keeps a sealed diary of every hard knock.</>, tone: "quiet" };
@@ -23,7 +24,7 @@ function sentence(e: StoryEvent): { text: ReactNode; extra?: ReactNode; tone?: "
     case "deposit":
       return { text: <>{nameOf(e.who)} left a <span className="num">{usd(e.amount)}</span> deposit.</> };
     case "shock":
-      return { text: <>It was dropped: a <span className="shock">{TIER_NAMES[e.tier]}</span> knock<span className="proof-only">, <span className="num">{g(e.peakCg)}</span> in <Seq n={e.seq} /></span>.</>, extra: <TierMeter tier={e.tier} />, tone: "shock" };
+      return { text: <>It was dropped: a <span className="shock">{TIER_NAMES[e.tier]}</span> knock<span className="proof-only">, <span className="num">{g(e.peakCg)}</span> in <Seq n={e.seq} /></span>. <a className="link check-it" href={href(`verify/${id}/${e.seq}`)}>Check it yourself</a></>, extra: <TierMeter tier={e.tier} />, tone: "shock" };
     case "late":
       return {
         text: <>A <span className="shock">{TIER_NAMES[e.tier]}</span> knock from {e.during ? `${possessive(e.during)} rental` : "before"} arrived after the return, so it counts for {inSentence(e.countsFor)}.</>,
@@ -68,7 +69,7 @@ function ChapterBlock({ c, d, explorer }: { c: Chapter; d: ObjectDetail; explore
       {!quiet && (
         <ol className="events">
           {c.events.map((e, i) => {
-            const s = sentence(e);
+            const s = sentence(e, d.id);
             return (
               <li key={i} className={`event ${s.tone ?? ""}`}>
                 <time className="mono" dateTime={new Date(e.at.at).toISOString()} title={`${day(e.at.at)}, ${hm(e.at.at)}`}>{whenShort(e.at.at)}</time>
