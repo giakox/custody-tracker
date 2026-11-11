@@ -13,7 +13,7 @@ import { CASE_IMAGE } from "../components/ObjectImage";
 import { TxSteps } from "../components/TxSteps";
 import { RuleTiers } from "../components/RuleTiers";
 import { TubeRecorder } from "../components/TubeRecorder";
-import { nameOf, objectName, span, TEST_MONEY, TIER_NAMES, usd, when } from "../ui/format";
+import { hm, nameOf, objectName, span, TEST_MONEY, TIER_NAMES, usd, when } from "../ui/format";
 import { href } from "../ui/router";
 import { useViewer } from "../ui/viewer";
 import { priceOf } from "./MyRentalsPages";
@@ -105,6 +105,8 @@ export function MyObjectsPage() {
         </section>
       )}
 
+      {owned && owned.length > 0 && <DayRibbon owned={owned} />}
+
       {owned && owned.length > 0 && (
         <div className="host-body">
           <section className="host-bikes" aria-labelledby="bikes-title">
@@ -128,6 +130,29 @@ export function MyObjectsPage() {
         </div>
       )}
     </Page>
+  );
+}
+
+/** Today, hour by hour: when your bikes were out, and whether a ride brought a knock (round 114). */
+function DayRibbon({ owned }: { owned: ObjectDetail[] }) {
+  const now = Date.now();
+  const start = new Date(); start.setHours(0, 0, 0, 0);
+  const t0 = start.getTime(), span24 = 24 * 3600_000;
+  const rides = owned.flatMap((d) => d.rentals.map((r) => {
+    const end = d.periods[r.period]?.end?.at ?? (r.settlement ? r.settlement.anchor.at : now);
+    return { d, r, from: Math.max(r.started.at, t0), to: Math.min(end, now), tier: r.settlement?.tier ?? r.current?.tier ?? 0 };
+  })).filter((x) => x.to > t0);
+  const pct = (t: number) => `${Math.max(0, Math.min(100, ((t - t0) / span24) * 100))}%`;
+  const hours = [0, 6, 12, 18, 24];
+  return (
+    <section className="day" aria-label="Today">
+      <div className="day-head"><h2>Today</h2><p>{rides.length === 0 ? "No rides yet today." : rides.length === 1 ? "One ride today." : `${rides.length} rides today.`} Each mark is a rental; orange means the recorder felt a knock.</p></div>
+      <div className="day-track">
+        {hours.map((h) => <span key={h} className="day-tick" style={{ left: `${(h / 24) * 100}%` }}>{h === 24 ? "" : `${String(h).padStart(2, "0")}:00`}</span>)}
+        {rides.map((x, i) => <i key={i} className={`day-ride ${x.tier ? "is-knock" : ""}`} style={{ left: pct(x.from), width: `max(6px, calc(${pct(x.to)} - ${pct(x.from)}))` }} title={`${nameOf(x.r.renter)}, ${hm(x.r.started.at)}`} />)}
+        <i className="day-now" style={{ left: pct(now) }} aria-hidden="true" />
+      </div>
+    </section>
   );
 }
 

@@ -160,3 +160,17 @@ table.levels td:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
 .invite-body > p { font-size: 18px; line-height: 1.5; color: var(--mist); max-width: 40ch; }
 .invite-body .actions { margin-top: 0; }
 @media (max-width: 760px) { .invite { grid-template-columns: minmax(0, 1fr); } .invite .invite-photo { min-height: 0; aspect-ratio: 16 / 9; } }
+
+/* ---------- Round 114: My bikes shows today, hour by hour ---------- */
+.day { margin-top: 32px; padding: 28px 32px 36px; border-radius: var(--radius); background: var(--ink); color: rgba(244, 241, 236, .8); }
+.day-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 20px; }
+.day-head h2 { font-size: 22px; letter-spacing: -0.02em; color: #fff; }
+.day-head p { font-size: 15px; }
+.day-track { position: relative; height: 44px; margin-top: 36px; border-radius: 999px; background: rgba(255, 255, 255, .08); }
+.day-tick { position: absolute; top: -24px; transform: translateX(0); font-size: 13px; color: rgba(244, 241, 236, .6); }
+.day-tick::after { content: ""; position: absolute; left: 0; top: 22px; width: 1px; height: 46px; background: rgba(255, 255, 255, .12); }
+.day-ride { position: absolute; top: 8px; bottom: 8px; border-radius: 999px; background: var(--blue); box-shadow: 0 0 0 3px rgba(2, 151, 222, .25); }
+.day-ride.is-knock { background: var(--orange); box-shadow: 0 0 0 3px rgba(252, 115, 77, .25); }
+.day-now { position: absolute; top: -6px; bottom: -6px; width: 2px; border-radius: 2px; background: #fff; }
+.day-now::after { content: "now"; position: absolute; top: calc(100% + 4px); left: 50%; transform: translateX(-50%); font-size: 13px; color: #fff; }
+@media (max-width: 640px) { .day { padding: 20px 20px 32px; } .day-tick:nth-of-type(odd):not(:first-child) { display: none; } }

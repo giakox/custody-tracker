@@ -1748,6 +1748,23 @@ Fixed on the way: an absolutely positioned photo inside a grid takes its grid ar
 
 **Test on the blurred shots:** yes: a white card on white became a light slip on a dark band.
 
+## Round 114 · My bikes shows today, hour by hour
+
+**Hierarchy audit (owner's home):** a sentence ("Nothing needs you right now."), the tiles and the earnings card. All of it is totals and states; nothing says how the day went, which is what someone lending their bike actually wonders ("was it out this afternoon?").
+
+**What changed:** under the title, a dark "Today" ribbon: the day from midnight to midnight, a tick every six hours, a mark for each rental while it was out (blue, or orange when the recorder felt a knock), and a white "now" line. The sentence above it counts the rides ("3 rides today"). Hovering a mark names the renter and the time.
+
+**Café test:** the café's "shelf by the door" (the week as cups, one per weekday) makes time visible as an object; this is the owner's equivalent, in our dark tone. The demo's rentals all happened within minutes, so the marks stand close together near "now": true to the demo, not a staged picture.
+
+**References:** the café's weekday shelf; Apple's Screen Time and Fitness (a day as a band with what happened on it).
+
+**Three ideas:** (1) a 24-hour ribbon of today's rides. (2) A month calendar with dots. (3) A chart of earnings over time.
+**Discarded:** (2) one bike, a few rentals: a month of empty squares would look abandoned. (3) the earnings are 21 test dollars; a chart would dramatise noise.
+
+**Chosen, (1):** [before (round 69) and after, with a bike out](rounds/114-owner-today.jpg), [phone](rounds/114-owner-375.jpg).
+
+**Test on the blurred shots:** yes: a dark band now separates the title from the tiles.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1772,7 +1789,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Rent flow: Outcome | 91 |
 | Receipt | 113 (print: 97) |
 | My rentals | 99 |
-| Owner (My bikes) | 69 |
+| Owner (My bikes) | 114 |
 | Owner: Confirm a return | 76 |
 | Add a bike | 74 |
 | Verify | 109 |
