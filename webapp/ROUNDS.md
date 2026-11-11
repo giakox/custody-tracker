@@ -366,3 +366,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Airbnb's map card: the listing photo first, price second: https://www.airbnb.com
 - **Shots:** [1440 px](rounds/37-1440.jpg)
 - **Lines:** 6379
+
+## Round 38 · Progress as a segmented bar
+
+- **What:** The five rental steps (and the six owner steps) are now a row of rounded segments that fill in blue as you go, with the current step named under its segment; on a phone only the current label shows.
+- **Why:** The grey pills with numbers looked like a form wizard. A bar says "how far" at a glance and is quieter.
+- **Reference:** Stripe Checkout and Typeform: a thin segmented progress, one label: https://stripe.com/payments/checkout
+- **Shots:** [1440 px](rounds/38-1440.jpg)
+- **Lines:** 6390

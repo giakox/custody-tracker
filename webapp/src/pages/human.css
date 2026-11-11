@@ -332,3 +332,14 @@ p, li, dd { text-wrap: pretty; }
 .bike-detail .bike-detail-top { margin-top: 18px; }
 .bike-detail h2 { font-size: 34px; letter-spacing: -0.04em; line-height: 1; }
 .bike-detail .bike-facts dd { font-size: 20px; font-weight: 600; }
+
+/* ---------- Round 38: progress as a segmented bar ---------- */
+.rent-top { width: 100%; }
+.rent-progress { gap: 6px; flex: 1 1 340px; max-width: 520px; margin-left: auto; }
+.rent-progress li { flex: 1 1 0; position: relative; padding: 14px 0 0; border: 0; border-radius: 0; background: none; font-size: 13px; color: var(--dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rent-progress li::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px; border-radius: 999px; background: var(--line-strong); transition: background-color .3s ease; }
+.rent-progress li.done::before { background: var(--blue); }
+.rent-progress li.done { color: var(--fog); border: 0; }
+.rent-progress li.current { background: none; border: 0; color: var(--ink); font-weight: 600; }
+.rent-progress li.current::before { background: var(--blue-ink); color: inherit; }
+@media (max-width: 640px) { .rent-progress { flex-basis: 100%; max-width: none; margin-left: 0; } .rent-progress li:not(.current) { font-size: 0; } .rent-progress li.current { font-size: 13px; flex: 2 1 0; } }
