@@ -465,3 +465,17 @@ i.split-kept { background: var(--orange); }
 .trip-sum .split { height: 14px; }
 .trip-sum-map { margin-top: 24px; }
 .trip-sum-map .ride-map, .trip-sum-map .leaflet-container { height: clamp(320px, 34vw, 440px); border-radius: var(--radius); box-shadow: var(--elev-2); }
+
+/* ---------- Round 141: the slip is only the document; what you can do with it sits on the counter beside it ---------- */
+.receipt-stage { display: grid; grid-template-columns: minmax(0, 640px) 220px; justify-content: center; align-items: start; gap: 40px; }
+.receipt-stage .receipt.slip { transform: rotate(-.5deg); }
+.receipt-desk { position: sticky; top: calc(var(--hdr-space) + 24px); display: grid; gap: 10px; padding-top: 32px; }
+.desk-btn { justify-content: center; width: 100%; background: rgba(255, 255, 255, .1); color: #fff; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .22); transition: background-color .15s ease; }
+.desk-btn:hover { background: rgba(255, 255, 255, .18); }
+.desk-btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+@media (max-width: 960px) { .receipt-stage { grid-template-columns: minmax(0, 640px); } .receipt-desk { position: static; padding-top: 0; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); } }
+@media print { .receipt-desk { display: none !important; } .receipt-stage { display: block; } }
+.receipt-stage { display: block; position: relative; }
+.receipt-desk { position: absolute; left: calc(100% + 40px); top: 88px; width: 240px; padding-top: 0; }
+.desk-btn { white-space: nowrap; }
+@media (max-width: 1180px) { .receipt-desk { position: static; width: auto; margin: 28px auto 0; max-width: 640px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); } }

@@ -2235,6 +2235,25 @@ Block 121–130 worked through the oldest screens in the register and two compos
 
 The owner side and the system's edges. "Your rules" shows the rule renters will accept, in dollars (131). My bikes makes a single bike its poster (132) and lost its black "Today" slab (135, step back). The Home hero split the proposition from the bike that's free now, and fixed "walkfrom" (133). The finder says when the chain is down instead of "no bike matches" (134). The photo you click becomes the bike page's photo (136). Verify says what a check proves and what it doesn't before you press it (137). The live ride pill floats instead of pushing the Home down (138). Deposit back is on the page, and Leaflet maps can no longer paint over fixed buttons (139, a real bug from 126). Lines in `src`: about 7,990 of the 10,560 cap. Next: the receipt (113), My rentals (117), the journey on the Home (102), the design page (112), the menu and footer on phones.
 
+## Round 141 · The receipt: the slip is the document, what you do with it sits on the counter
+
+**Hierarchy audit (Receipt, last touched in 113):** the slip carried both the document (amount, split, lines, fine print, proof) and the controls ("Check that knock yourself", "Print") at its foot, below the first screen, so the slip ran off the screen and its torn edge, the thing that makes it a slip, was never seen. The −1.2° tilt made each row's value sit visibly higher than its label on a 560 px slip.
+
+**What changed:** the controls leave the slip: on wide screens they sit on the dark counter to the right of it, as two light-on-dark buttons, and under 1,180 px they line up under the slip. The slip is what Print gives you (the controls hide in print). The tilt is −0.5°: still a slip, rows read straight. At 1440 the whole slip, torn edge included, fits on the first screen.
+
+**Overflow pass (started in 140):** 19 routes at 375 and 1024 px, no horizontal overflow anywhere (run before this round's change; the receipt was re-checked after it at 375 and 1024: none).
+
+**Café test:** the receipt is on the saucer; the pen and the card machine are beside it. Still missing: between the counter and the footer there's still a white strip on the receipt page (the seam 122 removed on the Home); next pass.
+
+**References:** Apple Wallet's transaction detail (the receipt, then actions outside it); Square's printed receipt preview (the slip alone, the buttons on the device).
+
+**Three ideas:** (1) actions on the counter. (2) Actions as a sticky bar at the bottom. (3) Remove the tilt.
+**Discarded:** (2) a receipt is something you read top to bottom, not a step with one action. (3) the slight tilt is what makes it read as paper on a counter (113); halving it was enough.
+
+**Chosen, (1):** [before and after](rounds/141-receipt.jpg), [phone](rounds/141-receipt-375.jpg).
+
+**Test on the blurred shots:** yes: a long white rectangle running off the screen became a whole slip with a jagged foot and two small dark buttons beside it.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -2259,7 +2278,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Rent flow: Waiting | 118 |
 | Rent flow: Return | 111 |
 | Rent flow: Outcome | 139 |
-| Receipt | 113 (print: 97) |
+| Receipt | 141 (print: 97) |
 | My rentals | 117 |
 | Owner (My bikes) | 132, 135 (step back) |
 | Owner: Confirm a return | 121 |

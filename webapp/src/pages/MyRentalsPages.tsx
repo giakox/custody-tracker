@@ -200,11 +200,11 @@ export function ReceiptPage({ id, period }: { id: number; period: number }) {
             {s && tx("Deposit settled", s.anchor.tx)}
           </ul>
         </details>
-        <div className="actions">
-          {cause && <a className="btn btn-secondary" href={href(`verify/${id}/${cause.seq}`)}>Check that knock yourself</a>}
-          <button type="button" className="btn btn-secondary" onClick={() => window.print()}>Print</button>
-        </div>
       </article>
+      <div className="receipt-desk">
+        {cause && <a className="btn desk-btn" href={href(`verify/${id}/${cause.seq}`)}>Check that knock yourself</a>}
+        <button type="button" className="btn desk-btn" onClick={() => window.print()}>Print</button>
+      </div>
       </div>
     </Page>
   );
