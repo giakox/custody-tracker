@@ -259,3 +259,14 @@ p, li, dd { text-wrap: pretty; }
 .sk-photo { aspect-ratio: 4 / 3; width: 100%; }
 @keyframes sk-pulse { 50% { opacity: .5; } }
 @media (prefers-reduced-motion: reduce) { .sk { animation: none; } }
+
+/* ---------- Round 28: the owners' card steps out over the photo ---------- */
+.owners-band { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: center; padding: clamp(40px, 6vw, 96px) 0; background: var(--surface); }
+.owners-photo { grid-column: 1 / 8; grid-row: 1; min-height: clamp(420px, 46vw, 680px); border-radius: 0 var(--radius) var(--radius) 0; }
+.owners-band .owners { grid-column: 6 / 12; grid-row: 1; background: var(--bg); border-radius: var(--radius); box-shadow: var(--elev-3); padding: clamp(28px, 3.6vw, 56px); margin-right: var(--gutter); position: relative; }
+.owners-band .own-cta { background: var(--surface); }
+@media (max-width: 960px) {
+  .owners-band { grid-template-columns: minmax(0, 1fr); padding: 0 0 32px; }
+  .owners-photo { grid-column: 1; border-radius: 0; min-height: 0; aspect-ratio: 4 / 3; }
+  .owners-band .owners { grid-column: 1; grid-row: 2; margin: -48px 12px 0; padding: 24px 20px; }
+}

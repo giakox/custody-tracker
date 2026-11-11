@@ -280,3 +280,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Stripe and Vercel: tactile buttons, restrained lift, skeleton loaders: https://vercel.com
 - **Shots:** [1440 px](rounds/27-1440.jpg)
 - **Lines:** 6298
+
+## Round 28 · The owners' card steps out over the photo
+
+- **What:** In the owners' band the earnings card now overlaps the shop photo by a column, floating above it with the soft top shadow; on a phone it rises over the bottom of the photo.
+- **Why:** Edoardo asked for layers: things that overlap and leave their frames. The band was two boxes side by side.
+- **Reference:** Squarespace and Webflow showcase sites: a card overlapping the hero photograph: https://www.squarespace.com
+- **Shots:** [375 px](rounds/28-375.jpg)
+- **Lines:** 6309
