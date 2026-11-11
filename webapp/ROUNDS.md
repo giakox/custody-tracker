@@ -1480,6 +1480,44 @@ Also a step towards one shadow scale: the three hand-written shadows left (the p
 
 Every screen was rebuilt at least once with the same method (a written hierarchy audit, two real references, three structural ideas and two discarded, before and after side by side), and the most important ones twice: the finder (structure, 79, 81, 96), the bike page (64, 65, 84), the rent flow (66, 67, 86, 91, 92), the header (structure, 77), the Home's first screen (78) and its rule simulator (82, 90). The site now has one system: a floating header, working screens with a calm title and a white card on the right, documents with big type, sand surfaces instead of ruled lines, one radius, one shadow scale, one picture of money (the blue and orange split bar) wherever a deposit is divided, and states (loading, empty, error, success) that always leave a way on.
 
+## Round 101 · Study, no code: why the café site is warm and ours is flat
+
+**A note first.** `PROTOCOL.md` changed while rounds 64–100 were running (study round, café yardstick, composition rounds, blurred-shot test, run to 150, cap raised to 10,560 lines). I stopped re-reading it after round 71, so rounds 86–100 followed the older version: no café comparison, no composition round, the "another screen?" answer given on sharp shots. From this round on, the current version applies.
+
+**What I compared:** the 12 frames of the finished café site (`foto-sabato/cafe/`, not committed: not ours) beside [Sharify's Home, top to bottom](rounds/101-sharify-home-full.jpg).
+
+### What makes the café warm
+
+1. **Light you could stand in.** Its photographs are interiors in late-afternoon light (wood, brick, steam), used as the whole background of a section, edge to edge, with the content set into the scene. Ours are photographs in frames: a hero, then pictures inside cards. You look at our pictures; you are inside theirs.
+2. **A rhythm of tone.** Cream sections alternate with deep espresso ones (the chalkboard, "More ways to order", the footer). The page breathes in and out. Ours is white and sand from top to bottom, with one pink band; nothing is ever dark, so nothing feels like evening, or like a place.
+3. **Every section is an object from the shop.** The order is a paper receipt with a torn edge; loyalty is a punch card with holes; "your drink on the shelf" is a wooden shelf with cups for each weekday; the regulars' orders are on a chalkboard in handwriting; the seats are a floor plan you can pick from; the way there is a little street map with the bus stop. Each of these is also the thing you use. Ours are cards with text and a button: correct, interchangeable, the same card shape forty times.
+4. **People.** Marcus, Priya, Dana, Sam, Jen, Walt: named regulars with their usual order and a line in their own words. Ours has "Alice" and "Bob" only inside the record, and nobody on the Home.
+5. **Time and place, live.** The header says "Closed, opens tomorrow at 6am" and later "Order, ready by 6:05am"; the visit section says "418 Maple Street, park in the back lot behind the bank", "2 min walk from the 14 bus". Ours says "Bikes near Bocconi" and gives distances, but never a street, a shop, an hour, or what's happening right now.
+6. **Two voices of type.** A warm serif for the headlines and a handwritten script on the chalkboard, against a quiet sans for the rest. Ours is one grotesque everywhere, bold or regular: tidy, and the same temperature on every line.
+7. **Each section is composed differently.** A full-bleed photo with numbered hotspots and a dotted path; a split with a tall portrait card; a dark band with a strip of small photos; a map card floating over a kitchen. Ours repeats two moves: "title left, card right" and "a grid of equal cards" (the finder's ten photo cards fill two screens with the same shape, which the protocol now forbids).
+8. **Small honest rituals in the copy.** "Every cup punches your card, so 5 a week works out to a free drink about every 2 weeks." Specific, numeric, about a habit. Ours is careful and clear, but it explains a system; it rarely describes a morning.
+
+### What makes ours flat, section by section
+
+- **Hero:** a good photograph, but the card covers the person; the scene is a backdrop, not a place. One button, one bike card: correct and cold.
+- **Finder:** the most useful section, and the least warm: ten identical cards in a grid beside a map. No street names, no owner, no time.
+- **Three moments:** three equal portrait photos with captions: the most "template" row on the site.
+- **What if it gets dropped:** a white card on a pink band: clear, but it's a calculator, not an object.
+- **Owners:** a photo of a shop owner who has no name, no shop, no street.
+- **Footer:** sand, links, a big blue word: tidy, not a closing.
+
+### Principles to carry into Sharify (Theme B · Day, our palette, not the café's)
+
+1. **Put people and places in:** the owner has a name and a shop (Giacomo's bikes, Via Sarfatti); bikes are parked at a named spot; the Home can say what's happening now ("The demo bike is free, parked outside Bocconi since 10:20").
+2. **One deep section per page** in our own ink (#17191b) with warm photographic light, so the page has a rhythm of light and dark, still inside Theme B.
+3. **Turn functions into objects from the bike's world:** the deposit as a luggage-tag-like ticket; the record as the recorder's logbook; the rule as the sticker on the frame; the way to the bike as a little street map with the walk.
+4. **Photographs as places, not thumbnails:** at least one full-bleed section per page where the content sits inside the scene, with hotspots (the recorder on the frame, the QR sticker, the lock).
+5. **No row of identical cards:** the finder and "three moments" get compositions where items differ in size and role.
+6. **A second voice of type**, used sparingly for warmth (to propose to Edoardo before using: it touches the theme).
+7. **Copy about mornings, not systems:** what a ride is like, where you leave the bike, how long the walk is.
+
+**Test:** none: a study round. The next rounds have to close this distance, and each one says in writing how much is left.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
