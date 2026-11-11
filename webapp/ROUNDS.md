@@ -2324,6 +2324,25 @@ The owner side and the system's edges. "Your rules" shows the rule renters will 
 
 **Test on the blurred shots:** yes: a black rectangle became a line of large text with a blue mark.
 
+## Round 146 · "Do we need a blockchain?": five answers on the page, not five sand boxes
+
+**Hierarchy audit (Design, the test above the verdict):** five identical sand boxes, one per question of Wüst and Gervais's test, each with a Yes/No pill. A column of equal slabs (the protocol's identical rows) and, with the verdict unboxed in 145, the boxes became the heaviest thing in the section.
+
+**What changed:** the answers are plain lines on the page (pill, question, the short reason), 6 px apart, aligned on the same column; the "No" pill is sand with ink text instead of black. The verdict under them is now the only marked thing in the section.
+
+**A first attempt, undone in the same round:** I first gave the "Yes" rows a blue surface as "the answers that decide". That misreads the test: three answers are Yes, two are No, and *all five* point to a blockchain (the No's do too: there's no trusted third party, and the writers don't trust each other). Highlighting only the Yes rows would have told the professors something false about the method. Reverted before committing.
+
+**Café test:** the café's menu lists the ingredients as a line, not each in its own box. Still missing: nothing in this section.
+
+**References:** Wüst and Gervais's own paper (the test as a flowchart of plain questions); the Linear Method (lists as lists).
+
+**Three ideas:** (1) plain lines. (2) The paper's flowchart, drawn. (3) Highlight the deciding answers.
+**Discarded:** (2) the downloadable scheme is the drawing; a second diagram for five questions is decoration. (3) see above: every answer decides.
+
+**Chosen, (1):** [before and after](rounds/146-test.jpg).
+
+**Test on the blurred shots:** yes: five grey slabs became five short lines with blue and sand dots, then the verdict.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -2355,4 +2374,4 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Add a bike | 119 (step 2), 128 (step 3), 129 (step 4), 131 (step 5) |
 | Verify | 137 |
 | Empty, loading and error states | 134 (finder) |
-| Design | 144, 145 (step back) |
+| Design | 144, 145 (step back), 146 |

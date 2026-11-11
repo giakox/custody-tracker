@@ -141,3 +141,8 @@
 /* ---------- Round 145: a step back: the verdict is a sentence on the page, not a second black box; the numbers band stays the page's one dark moment ---------- */
 .verdict { padding: 0 0 0 24px; border-radius: 0; background: none; color: var(--ink); box-shadow: inset 4px 0 0 var(--blue); }
 .verdict em { color: var(--blue-ink); }
+
+/* ---------- Round 146: the blockchain test is a list of five answers that all point the same way: plain lines, no boxes; the verdict under them is the one marked thing ---------- */
+.test { gap: 6px; }
+.test li { padding: 12px 0; background: none; border-radius: 0; }
+.yn.no { background: var(--raise); color: var(--ink); }
