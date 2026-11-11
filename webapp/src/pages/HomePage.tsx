@@ -85,7 +85,7 @@ export function HomePage() {
     <div className="fleet-list">
       <div className="fleet-list-head">
         <h2>{bikes.length} bikes free {me ? "near you" : "around Bocconi"}</h2>
-        <p className="muted">Nearest first. Bikes out on a ride aren't shown: where they are is where someone is. Prices are in test dollars: no real money moves.</p>
+        <p className="muted">Nearest first. Only the first bike is real for now; the rest are samples. Bikes out on a ride are never shown: where they are is where someone is.</p>
         {!live && fleet.data && <p className="note">{rentingIt ? "You have the live bike right now, so it isn't on the map." : "The live bike is out on a rental right now, so it isn't on the map."}</p>}
       </div>
       <ol>
@@ -95,7 +95,7 @@ export function HomePage() {
               <BikePhoto b={b} className="row-photo" />
               <span className="row-body">
                 <span className="row-top"><span className="row-name">{b.label}</span><span className="mono row-dist">{distanceText(d)}</span></span>
-                <span className="row-meta"><LiveBadge live={b.live} /><span className="mono">{b.pricePerHour} dollars an hour</span></span>
+                <span className="row-meta">{b.live && <LiveBadge live />}<span className="mono">{b.pricePerHour} dollars an hour</span></span>
                 <BlackBoxLine b={b} />
               </span>
             </button>

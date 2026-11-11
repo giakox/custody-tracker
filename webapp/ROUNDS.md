@@ -125,3 +125,16 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Stripe Checkout: a single confirming action, the terms stated beside it: https://stripe.com/payments/checkout
 - **Shots:** [1440 px](rounds/09-1440.jpg)
 - **Lines:** 6163
+
+## Round 10 · A step back: Home, read as a stranger
+
+- **What:** Read the whole Home as a new visitor and as a professor, and took things out: nine "Sample fleet" chips (the list now says once that only the first bike is real), the repeated money note, and a dot-separated line in the bike record.
+- **Why:** The list shouted "sample" nine times and buried the one real bike. A new visitor should see one real bike and a calm list.
+- **Reference:** Airbnb's search results: one badge for what is special, nothing on the rest: https://www.airbnb.com
+- **Shots:** [1440 px](rounds/10-1440.jpg)
+- **Lines:** 6163
+
+### Block 1 to 10 (summary)
+
+- **Lines in `webapp/src`:** see each round's "Lines" (cap: 7392, +40% over commit 463f724 at 5280).
+- **Strongest changes:** (1) the whole site in one light, warm theme with a plain voice, photos and relative times; (2) the rule made visible early: playable on Home (round 7) and beside the bike's photo (round 8).
