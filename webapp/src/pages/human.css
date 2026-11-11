@@ -283,3 +283,15 @@ p, li, dd { text-wrap: pretty; }
 .bike-side .object-image img { aspect-ratio: 5 / 4; box-shadow: var(--elev-2); }
 .bike-side .rule-card { margin: -72px 20px 0; position: relative; background: var(--bg); border: 0; box-shadow: var(--elev-3); }
 @media (max-width: 860px) { .bike-side .rule-card { margin: -48px 12px 0; } }
+
+/* ---------- Round 32: pages arrive, they don't pop ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .page > main { animation: page-in .45s cubic-bezier(.2, .7, .2, 1) both; }
+  .page > main > *:nth-child(2) { animation: page-in .5s .06s cubic-bezier(.2, .7, .2, 1) both; }
+  .page > main > *:nth-child(3) { animation: page-in .55s .12s cubic-bezier(.2, .7, .2, 1) both; }
+  .bike-copy > * { animation: page-in .55s cubic-bezier(.2, .7, .2, 1) both; }
+  .bike-copy > *:nth-child(2) { animation-delay: .06s; } .bike-copy > *:nth-child(3) { animation-delay: .12s; } .bike-copy > *:nth-child(4) { animation-delay: .18s; } .bike-copy > *:nth-child(5) { animation-delay: .24s; }
+  .welcome-card > * { animation: page-in .6s cubic-bezier(.2, .7, .2, 1) both; }
+  .welcome-card > *:nth-child(2) { animation-delay: .08s; } .welcome-card > *:nth-child(3) { animation-delay: .16s; } .welcome-card > *:nth-child(4) { animation-delay: .24s; }
+}
+@keyframes page-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
