@@ -133,6 +133,12 @@ export function VerifyPage({ id, seq: seqParam }: { id: number; seq: number | nu
             </section>
             </div>
 
+            {!check.result && (
+              <section className="v-limits" aria-label="What a check proves">
+                <div><h2>What it proves</h2><p>That this second is part of what the recorder signed for this ride, and that nobody changed it afterwards: not the renter, not the owner, not Sharify.</p></div>
+                <div><h2>What it doesn't</h2><p>That the sensor itself was intact, or that the box stayed fixed to the frame. The signature vouches for the data, not for the hardware.</p></div>
+              </section>
+            )}
             {check.result && (
               <section className="v-proof">
                 <h2>Check it yourself</h2>

@@ -68,3 +68,10 @@
 .verify-stage .vc.state-done { box-shadow: 0 0 0 1px rgba(2, 151, 222, .45), 0 0 90px rgba(2, 151, 222, .35), 0 30px 80px rgba(0, 0, 0, .45); transition: box-shadow .6s ease; }
 .verify-stage + .v-proof { margin-top: 64px; }
 .verify-stage .state-card { margin-top: 0; }
+
+/* ---------- Round 137: composition: under the dark stage, before you check, what a check proves and what it doesn't ---------- */
+.v-limits { margin-top: 64px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 72px); max-width: 1000px; }
+.v-limits h2 { font-size: 22px; letter-spacing: -0.02em; }
+.v-limits div:last-child h2 { color: var(--mist); }
+.v-limits p { margin-top: 8px; font-size: 17px; line-height: 1.55; color: var(--mist); max-width: 46ch; }
+@media (max-width: 700px) { .v-limits { grid-template-columns: minmax(0, 1fr); margin-top: 48px; } }

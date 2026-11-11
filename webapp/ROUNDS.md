@@ -2161,6 +2161,25 @@ Block 121–130 worked through the oldest screens in the register and two compos
 
 **Test on the blurred shots:** at rest nothing changes; in motion, one picture travels instead of two blinking.
 
+## Round 137 · Composition: Verify says what a check proves before you press it
+
+**Hierarchy audit (Verify, full page at 1440):** title, the dark stage with the reading card, then 96 px of empty white and the dark footer: on the blurred shot, two black slabs with a pale cut between them (the same seam 122 removed on the Home). The one honest limit of the check ("it doesn't prove the sensor itself was intact") only appeared after a result, in small grey type at the end of the proof.
+
+**What changed:** before you check, the white band under the stage says, in two columns, what a check proves (this second is part of what the recorder signed, and nobody changed it afterwards: not the renter, not the owner, not Sharify) and what it doesn't (that the sensor was intact or that the box stayed fixed; the signature vouches for the data, not the hardware). After a check, the band gives way to "Check it yourself" (the contract call), as before. The page goes: white title → dark stage → white explanation → dark footer, each band with a job.
+
+**Separation without lines:** the two columns are separated by the gap and by the second heading being grey (the limit is quieter than the claim), no rule between them.
+
+**Café test:** a good café tells you what's in the cake before you bite, allergens included. Still missing: the stage's result state hasn't been looked at since 109.
+
+**References:** Apple's privacy labels (what's collected / what's not, side by side); Stripe's Radar docs ("what this protects / what it doesn't").
+
+**Three ideas:** (1) the proves/doesn't band under the stage. (2) Join the stage to the footer. (3) Move the lead's sentence under the stage.
+**Discarded:** (2) dark into dark, the merge 127 removed on the bike page. (3) the lead is what makes the stage understandable; it must come first.
+
+**Chosen, (1):** [full page before, after, blurred](rounds/137-verify-full.jpg).
+
+**Test on the blurred shots:** yes: the pale cut between two black slabs became a white band with two blocks of text.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -2190,6 +2209,6 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Owner (My bikes) | 132, 135 (step back) |
 | Owner: Confirm a return | 121 |
 | Add a bike | 119 (step 2), 128 (step 3), 129 (step 4), 131 (step 5) |
-| Verify | 109 |
+| Verify | 137 |
 | Empty, loading and error states | 134 (finder) |
 | Design | 112 |
