@@ -329,3 +329,11 @@ i.split-kept { background: var(--orange); }
 @media (prefers-reduced-motion: no-preference) { .trip-ok-mark { animation: v-pop .5s cubic-bezier(.2, 1.4, .4, 1) backwards; } .tx-step.confirmed .tx-dot { animation: v-pop .4s cubic-bezier(.2, 1.4, .4, 1); } }
 @media (prefers-reduced-motion: reduce) { .btn-spin { animation: none; } }
 .rent.rent-wide:has(.slip) { max-width: 760px; }
+
+/* ---------- Round 91: the outcome as a trip summary: where the money went, and where you rode ---------- */
+.trip-sum { margin-top: 32px; padding: 24px; border-radius: var(--radius); background: var(--surface); }
+.trip-sum .split { height: 14px; }
+.trip-sum-map { margin-top: 24px; }
+.trip-sum-map .ride-map { height: 340px; border: 0; border-radius: var(--radius); box-shadow: var(--elev-1); }
+.trip-sum-map .hint-line { margin-top: 8px; font-size: 13px; }
+.trip-sum .step-photo { margin-top: 24px; }

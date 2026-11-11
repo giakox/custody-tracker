@@ -1283,6 +1283,28 @@ Also removed: the estimator's styles in map.css, which matched the earnings card
 - **Steps back:** round 85 (nothing under 13 px; near-duplicate sizes merged) and round 90 (the Home's simulator without the contract table).
 - **The same picture of money everywhere:** the blue-and-orange split bar now appears on the receipt, on Confirm a return, and in the simulator on the Home and the Rule step.
 
+## Round 91 · The end of a rental is a trip summary: where the money went, and where you rode
+
+**Hierarchy audit (Outcome step):**
+
+| Block | Who, when | If it vanished | Verdict |
+|---|---|---|---|
+| H1 "30 dollars back, 20 dollars kept." beside a card saying "Back to you 30 dollars" | renter | the card says it | the H1 thanks and says who decided ("Thanks for riding. The rule settled it."); the amount stays in the card |
+| The rule table (with a knock) | renter who wonders why | they accepted it before the ride; the lead says which level | replaced by the split bar (blue back, orange kept), the same picture as the receipt |
+| A photo of a hand-back (no knock) | — | mood | replaced by the map of the ride you just did; the photo stays only if the readings are unavailable |
+| The map of your ride, with the knock where it happened | renter: "where did it happen?" | the most concrete proof we have | added, under the bar |
+
+**Levels after:** the card's "Back to you" primary; the bar secondary; the map the story. **Squint test:** before, a title and a grey table; after, a coloured bar over a map with one orange dot.
+
+**References:** Flighty after landing (the route on a map, the numbers that mattered above it) and Strava's activity summary (the map is the record of what you did). Why ours looked cheaper: the last screen of a rental told the renter what they'd already read in the card.
+
+**Three ideas:** (1) the outcome as a trip summary: bar plus map of the ride. (2) A shareable "ride card" image. (3) Only the receipt (skip the outcome page).
+**Discarded:** (2) a sharing feature is new functionality, not design. (3) the receipt is a document; the outcome is the moment the rule acts, and the map belongs there.
+
+**Chosen, (1):** [with a knock](rounds/91-outcome-knock.jpg), [no knocks](rounds/91-outcome-clean.jpg), [phone](rounds/91-outcome-375.jpg). The route is shown only to the renter, as on the ride page.
+
+**Test, "another screen at a glance?"** Yes: a table became a map.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1299,7 +1321,8 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Footer | 73 |
 | Bike page | 84 |
 | Rent flow: Rule, Wallet, Deposit | 86 |
-| Rent flow: Ride, Return, Waiting, Outcome | 67 |
+| Rent flow: Ride, Return, Waiting | 67 |
+| Rent flow: Outcome | 91 |
 | Receipt and My rentals | 68 |
 | Owner (My bikes) | 69 |
 | Owner: Confirm a return | 76 |

@@ -332,6 +332,9 @@ export function WaitingPage({ id }: { id: number }) {
 export function OutcomePage({ id }: { id: number }) {
   const { d } = useBike(id);
   const { account } = useViewer();
+  const mineP = d?.rentals.filter((x) => x.settlement && account && x.renter.address.toLowerCase() === account.address.toLowerCase()).at(-1);
+  const seqs = d && mineP ? d.batches.filter((x) => x.period === mineP.period).map((x) => x.seq) : [];
+  const ride = useQuery({ queryKey: ["ride-done", id, seqs.join(",")], queryFn: async () => (await Promise.all(seqs.map((q) => getReadings(id, q)))).flat(), enabled: seqs.length > 0, retry: false });
   if (!d) return <Loading stage="Deposit back" />;
   const mine = d.rentals.filter((x) => x.settlement && account && x.renter.address.toLowerCase() === account.address.toLowerCase()).at(-1);
   if (!mine?.settlement) {
@@ -347,13 +350,20 @@ export function OutcomePage({ id }: { id: number }) {
         <p className="hint-line" title={`${day(s.anchor.at)}, ${hm(s.anchor.at)}`}>Settled {when(s.anchor.at)}, by the rule. <a className="link" href={href("my-rentals")}>My rentals</a></p>
       </TripCard>
     }>
-      <h1>{s.tier === 0 ? <>Thanks for riding. Your whole deposit is <em>back</em>.</> : Number(s.refund) === 0 ? <>The whole deposit was <em>kept</em>.</> : <>{usd(s.refund)} back, {usd(s.fee)} <em>kept</em>.</>}</h1>
+      <h1>{s.tier === 0 ? <>Thanks for riding. Your whole deposit is <em>back</em>.</> : <>Thanks for riding. The rule <em>settled</em> it.</>}</h1>
       <p className="lead">{s.tier === 0
         ? `No knocks were recorded during your ride, so all ${usd(mine.collateral)} came back to you.`
         : <>During your ride the bike recorded a <span className="shock">{TIER_NAMES[s.tier]}</span> knock{cause ? ` ${when(cause.anchor.at)}` : ""}. By the rule you accepted, {usd(s.fee)} went to the owner.</>}</p>
-      {s.tier === 0
-        ? <img className="step-photo" src="./img/day/return-smile.jpg" alt="A renter handing a bike back to its owner, both smiling" />
-        : <RuleTiers terms={d.terms} highlight={s.tier} />}
+      <section className="trip-sum" aria-label="Your ride">
+        <div className="split" role="img" aria-label={`${usd(s.refund)} back to you, ${usd(s.fee)} kept, of a ${usd(mine.collateral)} deposit`}>
+          {Number(s.refund) > 0 && <i className="split-back" style={{ flexGrow: Number(s.refund) }} />}
+          {Number(s.fee) > 0 && <i className="split-kept" style={{ flexGrow: Number(s.fee) }} />}
+        </div>
+        <p className="split-legend"><span><i className="split-back" /><span>{usd(s.refund)} back to you</span></span>{Number(s.fee) > 0 && <span><i className="split-kept" /><span>{usd(s.fee)} kept for the <span className="shock">{TIER_NAMES[s.tier]}</span> knock</span></span>}</p>
+        {ride.data?.length
+          ? <div className="trip-sum-map"><RideMap readings={ride.data} lightCg={d.terms.lightCg} /><p className="hint-line">Your ride{s.tier ? ", the knock in orange" : ""}. Shown only to you.</p></div>
+          : s.tier === 0 && <img className="step-photo" src="./img/day/return-smile.jpg" alt="A renter handing a bike back to its owner, both smiling" />}
+      </section>
     </Shell>
   );
 }
