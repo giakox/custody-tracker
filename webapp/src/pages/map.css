@@ -1,10 +1,5 @@
 /* Home map: dark tiles tinted toward Midnight Black, pins in Electric Blue, orange only for recent drops. */
 
-.map-shell { position: relative; display: grid; grid-template-columns: 400px minmax(0, 1fr); height: calc(100svh - 64px); min-height: 520px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.map-panel { overflow-y: auto; border-right: 1px solid var(--line); background: var(--bg); }
-.map-area { position: relative; min-width: 0; }
-.fleet-map-wrap, .fleet-map { position: absolute; inset: 0; }
-.fleet-map { background: var(--bg); }
 .leaflet-container { font-family: var(--ui); }
 .leaflet-control-attribution { background: var(--overlay) !important; color: var(--dim) !important; font-size: 10px; }
 .leaflet-control-attribution a { color: var(--fog) !important; }
@@ -19,32 +14,6 @@
 .pin-drop { position: absolute; right: -2px; top: -3px; width: 10px; height: 10px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 2px #fff; }
 .me-dot { display: block; width: 14px; height: 14px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 3px var(--blue); }
 
-/* tools over the map */
-.map-tools { position: absolute; top: 14px; left: 14px; right: 14px; display: flex; gap: 8px; z-index: 500; pointer-events: none; }
-.map-btn { pointer-events: auto; background: var(--overlay); color: var(--ink); border: 1px solid var(--line-strong); border-radius: var(--radius); min-height: 40px; padding: 0 14px; font-size: 13px; cursor: pointer; }
-.map-btn:hover { border-color: var(--blue); }
-.view-toggle { display: none; margin-left: auto; }
-.map-msg { position: absolute; top: 62px; left: 14px; z-index: 500; background: var(--overlay); border: 1px solid var(--line-strong); padding: 6px 10px; font-size: 12px; color: var(--mist); border-radius: var(--radius); }
-.map-legend { position: absolute; left: 14px; bottom: 14px; z-index: 500; display: flex; flex-wrap: wrap; gap: 6px 14px; background: var(--overlay); border: 1px solid var(--line); padding: 7px 10px; border-radius: var(--radius); font-size: 11px; color: var(--fog); pointer-events: none; }
-.map-legend i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
-.lg-live { background: var(--blue); }
-.lg-drop { background: var(--orange); }
-
-/* list */
-.fleet-list-head { padding: 22px 22px 14px; }
-.fleet-list-head h1 { font-size: 28px; line-height: 1.1; letter-spacing: -0.015em; }
-.fleet-list-head h1 em { font-style: var(--em-style); }
-.muted { color: var(--fog); font-size: 14px; margin-top: 8px; }
-.note { margin-top: 10px; font-size: 14px; color: var(--mist); border-left: 2px solid var(--blue); padding-left: 10px; }
-.fleet-list ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-.fleet-row { display: grid; gap: 6px; width: 100%; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--line); padding: 14px 22px; color: inherit; font: inherit; cursor: pointer; }
-.fleet-row:hover, .fleet-row.is-selected { background: var(--raise); }
-.fleet-row.is-live { box-shadow: inset 2px 0 0 var(--blue); }
-.row-top { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
-.row-name { font-size: 18px; color: var(--ink); }
-.row-dist { font-size: 13px; color: var(--mist); }
-.row-meta { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; font-size: 12px; color: var(--fog); }
-
 /* badges and black-box line */
 .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
 .badge-live { color: var(--on-blue); background: var(--blue); }
@@ -53,24 +22,6 @@
 .bb-line { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: baseline; gap: 10px; font: 12px/1.45 var(--ui); color: var(--mist); }
 .bb-line .tier-name { display: none; }
 .bb-line .shock { color: var(--orange-ink); }
-
-/* detail (panel on desktop, sheet on phones) */
-.bike-detail { position: relative; padding: 22px; }
-.sheet-close { position: absolute; top: 16px; right: 16px; background: none; border: 1px solid var(--line-strong); color: var(--mist); border-radius: 999px; padding: 4px 10px; font-size: 11px; cursor: pointer; }
-.bike-detail-top { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; align-items: center; margin-top: 8px; }
-.bike-thumb { width: 120px; height: auto; background: var(--raise); border: 1px solid var(--line); border-radius: var(--radius); padding: 8px; }
-.bike-detail h2 { font-size: 26px; line-height: 1.1; margin-top: 8px; letter-spacing: -0.01em; }
-.dist { font-size: 12px; color: var(--mist); margin-top: 6px; }
-.bike-facts { display: grid; grid-template-columns: 1fr 1fr; margin: 20px 0 0; border-top: 1px solid var(--line); }
-.bike-facts div { padding: 12px 0; border-bottom: 1px solid var(--line); }
-.bike-facts dt { font-size: 13px; color: var(--fog); }
-.bike-facts dd { margin: 4px 0 0; font-size: 18px; color: var(--ink); }
-.bb { margin-top: 18px; }
-.bb-title { font-size: 13px; color: var(--fog); margin-bottom: 8px; }
-.bike-detail .actions { margin-top: 22px; }
-.sample-note { margin-top: 22px; border: 1px dashed var(--line-strong); border-radius: var(--radius); padding: 14px; font-size: 15px; color: var(--mist); }
-.sample-note .btn { margin-top: 12px; }
-.sheet { display: none; }
 
 /* below the map */
 .home-title { font-size: clamp(36px, 4.6vw, 64px); line-height: 1.02; letter-spacing: -0.024em; max-width: 14ch; font-variation-settings: "opsz" 72; }
@@ -83,25 +34,6 @@
 .site-wallet { display: flex; align-items: center; gap: 10px; }
 .menu-btn { display: none; background: none; border: 1px solid var(--line-strong); color: var(--mist); border-radius: var(--radius); min-height: 38px; padding: 0 12px; font-size: 12px; cursor: pointer; }
 
-/* ---------- phones ---------- */
-@media (max-width: 760px) {
-  .map-shell { grid-template-columns: minmax(0, 1fr); height: calc(100svh - 64px); }
-  .map-panel { display: none; }
-  .map-shell.view-list .map-panel { display: block; position: absolute; inset: 0; z-index: 600; border: 0; }
-  .map-shell.view-list .map-panel .fleet-list-head { padding-top: 70px; }
-  .map-shell.view-list .map-tools { z-index: 700; position: absolute; }
-  .map-area { position: static; }
-  .map-shell .fleet-map { position: absolute; inset: 0; }
-  .view-toggle { display: inline-block; }
-  .map-legend { bottom: 26px; left: 10px; right: 10px; } /* leaves the map credits visible */
-  .leaflet-control-zoom { display: none; } /* pinch to zoom; the buttons would sit under the sheet */
-  .sheet { display: block; position: absolute; left: 0; right: 0; bottom: 0; z-index: 800; max-height: 72%; overflow-y: auto;
-    background: var(--bg); border-top: 1px solid var(--line-strong); border-radius: var(--radius) var(--radius) 0 0; box-shadow: 0 -12px 40px var(--shadow); }
-  .sheet::before { content: ""; display: block; width: 40px; height: 4px; border-radius: 999px; background: var(--line-strong); margin: 8px auto 0; }
-  .bike-detail-top { grid-template-columns: 88px minmax(0, 1fr); }
-  .bike-thumb { width: 88px; }
-  .bike-detail h2 { font-size: 22px; }
-}
 @media (max-width: 760px) {
   .site-nav { display: none; }
   .site-nav.open { display: grid; position: absolute; top: 100%; left: 0; right: 0; z-index: 900; background: var(--bg); border-bottom: 1px solid var(--line-strong); padding: 8px var(--gutter) 16px; gap: 0; }
@@ -119,48 +51,12 @@
 .demo.demo-inline .demo-panel { position: absolute; top: 34px; right: 0; }
 @media (min-width: 1400px) { .demo.demo-inline { position: relative; left: auto; bottom: auto; } }
 
-/* Selection: the chosen pin lights up, the others step back. */
-.fleet-map-wrap.has-selection .pin:not(.is-selected) { opacity: .4; }
-.pin { transition: opacity .2s ease; }
-
 /* The Esri reference layer sits in the overlay pane: keep its labels under the pins and quiet. */
 .fleet-map .leaflet-overlay-pane img { opacity: .75; }
-
-/* Phones: free map on arrival, a strip at the bottom opens the list. */
-.strip { display: none; }
-@media (max-width: 760px) {
-  .map-legend { display: none; }
-  .strip { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 4px 12px; position: absolute; left: 0; right: 0; bottom: 0; z-index: 700;
-    background: var(--bg); border: 0; border-top: 1px solid var(--line-strong); border-radius: var(--radius) var(--radius) 0 0; padding: 18px var(--gutter) 16px; color: var(--ink); font: 17px/1.2 var(--text); text-align: left; cursor: pointer; }
-  .strip b { font-weight: 400; }
-}
 
 /* Esri's dark grey is lighter than Midnight Black: darken the tiles so map and header read as one surface. */
 .fleet-map .leaflet-tile-pane, .ride-map .leaflet-tile-pane { filter: var(--tile-filter); }
 .fleet-map, .ride-map { background: var(--bg) !important; }
-@media (max-width: 760px) {
-  /* credits sit just above the bottom strip, compact */
-  .map-shell .leaflet-bottom.leaflet-right { bottom: 150px; }
-  .leaflet-control-attribution { font-size: 9px; max-width: 70vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-}
-
-/* Round 1: the nearest rentable bike as a card over the map, with Rent one tap away. */
-.nearest { position: absolute; z-index: 700; left: calc(400px + 14px); bottom: 14px; /* over the map, right of the 400 px list */ width: min(420px, calc(100% - 28px)); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center;
-  background: var(--overlay); border: 1px solid rgba(2, 151, 222, .55); border-radius: var(--radius); padding: 14px 14px 14px 16px; box-shadow: var(--elev-2); }
-.nearest-info { display: grid; gap: 4px; text-align: left; background: none; border: 0; padding: 0; color: inherit; font: inherit; cursor: pointer; min-width: 0; }
-.nearest-k { font-size: 11px; color: var(--blue-ink); }
-.nearest-name { font-size: 21px; color: var(--ink); line-height: 1.15; }
-.nearest-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: 12px; color: var(--fog); }
-.nearest-actions { display: grid; gap: 6px; }
-.nearest-actions .btn { min-height: 44px; }
-.nearest-list { font-size: 12px; min-height: 34px !important; padding: 0 12px; }
-.map-legend { left: auto; right: 14px; top: 62px; bottom: auto; }
-@media (max-width: 760px) {
-  .strip { display: none !important; }
-  .nearest { left: 0; right: 0; bottom: 0; width: auto; border-radius: var(--radius) var(--radius) 0 0; border-width: 1px 0 0; padding: 16px var(--gutter) 18px; }
-  .nearest-actions .btn { padding: 0 18px; }
-}
-
 /* Round 5: the owner's entry is an estimate they control. */
 .earn { display: grid; gap: 14px; }
 .earn h3 em { font-style: var(--em-style); }
@@ -176,5 +72,3 @@
   .earn-row span { grid-column: 1 / -1; }
   .earn-out .mono { font-size: 32px; }
 }
-/* the live rental bar takes a row: the map gives it back so the bottom card stays on screen */
-.page:has(.live-rental-bar) .map-shell { height: calc(100svh - 132px); }

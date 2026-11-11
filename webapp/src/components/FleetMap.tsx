@@ -6,21 +6,22 @@ import type { FleetBike } from "../data/types";
 
 export type LatLon = { lat: number; lon: number };
 
-const pinHtml = (b: FleetBike, selected: boolean) => {
+const pinHtml = (b: FleetBike, selected: boolean, hover: boolean) => {
   const drop = b.record.lastDrop && Date.now() - b.record.lastDrop.at < 7 * 24 * 3600_000;
-  return `<span class="pin ${b.live ? "pin-live" : ""} ${selected ? "is-selected" : ""}">
+  return `<span class="pin ${b.live ? "pin-live" : ""} ${selected ? "is-selected" : ""} ${hover ? "is-hover" : ""}">
     <span class="pin-price">$${b.pricePerHour}</span>${drop ? '<span class="pin-drop" title="Dropped in the last 7 days"></span>' : ""}
   </span>`;
 };
 
 /** Map of free bikes, each pin showing its hourly price (Airbnb's map). Leaflet is driven imperatively; React only passes data in. */
-export function FleetMap({ bikes, center, me, selected, onSelect, padding }: {
+export function FleetMap({ bikes, center, me, selected, highlight = null, onSelect, padding }: {
   bikes: FleetBike[]; center: LatLon; me: (LatLon & { accuracy: number }) | null;
-  selected: string | null; onSelect: (key: string | null) => void;
+  selected: string | null; highlight?: string | null; onSelect: (key: string | null) => void;
   /** Space taken by controls over the map (top, bottom, left in px): no pin is framed under them. */
   padding: { top: number; bottom: number; left: number; sheet?: number };
 }) {
   const fitted = useRef(false);
+  const sig = useRef("");
   const userMoved = useRef(false);
   const fit = useRef<() => void>(() => {});
   const el = useRef<HTMLDivElement>(null);
@@ -31,7 +32,7 @@ export function FleetMap({ bikes, center, me, selected, onSelect, padding }: {
   useEffect(() => {
     if (!el.current || map.current) return;
     const m = L.map(el.current, { zoomControl: false, attributionControl: true, maxZoom: 16, zoomSnap: 0.25 }).setView([center.lat, center.lon], 15);
-    L.control.zoom({ position: "bottomright" }).addTo(m);
+    L.control.zoom({ position: "topright" }).addTo(m);
     L.tileLayer(TILES.url, { maxZoom: 16, attribution: TILES.attribution }).addTo(m);
     m.on("click", () => onSelect(null));
     meLayer.current = L.layerGroup().addTo(m);
@@ -52,9 +53,9 @@ export function FleetMap({ bikes, center, me, selected, onSelect, padding }: {
     const seen = new Set<string>();
     for (const b of bikes) {
       seen.add(b.key);
-      const icon = L.divIcon({ className: "pin-wrap", html: pinHtml(b, b.key === selected), iconSize: [52, 30], iconAnchor: [26, 15] });
+      const icon = L.divIcon({ className: "pin-wrap", html: pinHtml(b, b.key === selected, b.key === highlight), iconSize: [52, 30], iconAnchor: [26, 15] });
       const existing = markers.current.get(b.key);
-      if (existing) { existing.setIcon(icon); existing.setZIndexOffset(b.key === selected ? 1000 : b.live ? 500 : 0); continue; }
+      if (existing) { existing.setIcon(icon); existing.setZIndexOffset(b.key === selected || b.key === highlight ? 1000 : b.live ? 500 : 0); continue; }
       const mk = L.marker([b.lat, b.lon], { icon, keyboard: true, title: b.label, riseOnHover: true, zIndexOffset: b.live ? 500 : 0 })
         .on("click", (e) => { L.DomEvent.stopPropagation(e); onSelect(b.key); })
         .addTo(m);
@@ -71,7 +72,11 @@ export function FleetMap({ bikes, center, me, selected, onSelect, padding }: {
       if (m.getZoom() < 12) m.setZoom(13, { animate: false }); // never wider than a district // animated fits get cut short by the resize refit
     };
     if (!fitted.current && pts.length) { fitted.current = true; fit.current(); }
-  }, [bikes, selected, onSelect, padding.top, padding.bottom, padding.left]);
+    // A filter changed which bikes are shown: frame the new set.
+    const now = bikes.map((b) => b.key).join(",");
+    if (fitted.current && sig.current && sig.current !== now) fit.current();
+    sig.current = now;
+  }, [bikes, selected, highlight, onSelect, padding.top, padding.bottom, padding.left]);
 
   // Recenter only when the user's own position arrives, not on first load (fitBounds frames the fleet).
   useEffect(() => { if (me) map.current?.setView([me.lat, me.lon], 15, { animate: true }); }, [me]); // eslint-disable-line react-hooks/exhaustive-deps

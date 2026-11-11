@@ -594,3 +594,14 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Stripe Elements and Linear forms: tall fields, one focus ring: https://stripe.com/docs/elements
 - **Shots:** none
 - **Lines:** 6565
+
+## Structure · Find a bike, rebuilt like a search with a map
+
+Edoardo, on the old section: the structure had not changed since round 1, a flat column glued to the left edge with 60 px thumbnails and the map filling the rest. Not a detail problem: the layout was wrong.
+
+- **Before:** [rounds/structure-before-1440.jpg](rounds/structure-before-1440.jpg).
+- **Reference 1, Airbnb search with the map on (desktop):** [rounds/ref-airbnb-1440.jpg](rounds/ref-airbnb-1440.jpg). What we take: real page margins, no element on the edge; a title and small subtitle above the results; a row of filter chips; the results as large cards, two per row, photo first (4:3, rounded), then two short lines and the price; the map as a rounded panel with a margin all round, sticky while the cards scroll, with price pills and zoom buttons inside it.
+- **Reference 2, Airbnb on a phone:** [rounds/ref-airbnb-390.jpg](rounds/ref-airbnb-390.jpg). What we take: the map is the full-screen layer, with a rounded white sheet over it that has a grab handle, a title and large photo cards; the search pill and filter chips float at the top.
+- **Not used:** Turo (the closest product, peer-to-peer car rental) sits behind a bot check, so it could not be viewed.
+- **After (desktop):** [rounds/structure-after-1440.jpg](rounds/structure-after-1440.jpg). The section has the page's margins and a grid: on the left, the title, the filter chips (All, City, E-bike, Cargo, Road, up to 2 dollars an hour) and the bikes as large cards two per row, photo first (4:3) with the Live or Sample badge on it, then name, distance and walk, the price in bold and the black-box line; the real bike has Rent on its photo. On the right, the map as a framed panel from the top of the section, sticky while the cards scroll, with price pins. Hovering a card lights its pin; choosing one opens a mini-card with the photo on the map.
+- **After (phone):** [rounds/structure-after-390.jpg](rounds/structure-after-390.jpg) and [pulled up](rounds/structure-after-390-full.jpg). The map fills the screen, the chips float on top, the cards ride in a sheet as a carousel that snaps; the card in the middle lights its pin. Pulling the handle up turns the sheet into the full list.

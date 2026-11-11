@@ -15,21 +15,10 @@
 .welcome-card h1 { color: var(--card-ink); font-size: clamp(38px, 4.4vw, 64px); line-height: 1.02; text-wrap: balance; font-variation-settings: "opsz" 72; }
 .welcome-card p { margin-top: 18px; font-size: clamp(19px, 1.7vw, 23px); line-height: 1.4; color: var(--card-ink); max-width: 32ch; text-wrap: pretty; }
 .welcome-card .actions { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 10px; }
-.bikes-anchor { scroll-margin-top: 0; }
 
-.map-shell { height: min(820px, calc(100svh - 64px)); }
-.fleet-list-head h2 { font-size: 28px; line-height: 1.1; }
 
 /* list rows and detail carry the owner's photo */
 .bike-photo { display: block; object-fit: cover; background: var(--raise); }
-.fleet-row { grid-template-columns: 84px minmax(0, 1fr); gap: 14px; align-items: start; }
-.row-photo { width: 84px; height: 64px; border-radius: var(--radius); }
-.row-body { display: grid; gap: 6px; min-width: 0; }
-.detail-photo { width: 100%; aspect-ratio: 16 / 10; border-radius: var(--radius); margin-top: 34px; }
-.bike-detail-top { grid-template-columns: minmax(0, 1fr); }
-.nearest { grid-template-columns: 64px minmax(0, 1fr) auto; }
-.nearest-photo { width: 64px; height: 64px; border-radius: var(--radius); }
-.nearest, .map-btn, .map-legend, .map-msg { border-radius: var(--radius); box-shadow: var(--elev-2); }
 .leaflet-bar a { background: var(--surface) !important; }
 
 
@@ -47,10 +36,7 @@
   .welcome-card { position: relative; left: auto; bottom: auto; width: auto; margin: -36px 12px 0; padding: 24px 20px; }
   .welcome-card h1 { font-size: 36px; }
   .welcome-card .actions .btn { flex: 1 1 100%; }
-  .map-shell { height: calc(100svh - 64px); }
   .owners { grid-template-columns: minmax(0, 1fr); }
-  .fleet-row { grid-template-columns: 72px minmax(0, 1fr); }
-  .row-photo { width: 72px; height: 56px; }
 }
 
 /* ---------- Bike page ---------- */
@@ -213,7 +199,6 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 
 /* ---------- Round 25: a translucent header that floats over the photos ---------- */
 .site-header { position: sticky; top: 0; z-index: 900; max-width: none; padding-inline: max(var(--gutter), calc((100% - var(--max)) / 2 + var(--gutter))); background: rgba(255, 255, 255, .74); -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5); }
-.map-shell { isolation: isolate; }
 .welcome { margin-top: -64px; }
 .welcome-photo { height: min(86svh, 860px); }
 @supports (animation-timeline: scroll()) {
@@ -243,7 +228,6 @@ p, li, dd { text-wrap: pretty; }
 .btn-primary:hover { box-shadow: var(--elev-1); }
 .btn-secondary:hover { background: var(--surface); }
 :focus-visible { outline: 3px solid var(--blue-ink); outline-offset: 3px; border-radius: var(--radius); }
-.fleet-row, .obj-row, .bike-photo { transition: transform .18s ease, box-shadow .18s ease, background-color .15s ease; }
 .obj-row:hover { transform: translateY(-3px); box-shadow: var(--elev-2); }
 .pin-price { cursor: pointer; }
 .pin-wrap:hover { z-index: 9999 !important; }
@@ -325,13 +309,6 @@ p, li, dd { text-wrap: pretty; }
 @keyframes hero-card { from { transform: translateY(0); } to { transform: translateY(-48px); } }
 
 /* ---------- Round 37: the selected bike's panel opens on a full-bleed photo ---------- */
-.bike-detail { padding: 0 0 22px; }
-.bike-detail > .detail-photo { width: 100%; aspect-ratio: 4 / 3; margin: 0; border-radius: 0; }
-.bike-detail > .bike-detail-top, .bike-detail > .bike-facts, .bike-detail > .bb, .bike-detail > .actions, .bike-detail > .sample-note { margin-left: 22px; margin-right: 22px; }
-.bike-detail .sheet-close { top: 14px; right: 14px; z-index: 2; background: var(--overlay); box-shadow: var(--elev-1); }
-.bike-detail .bike-detail-top { margin-top: 18px; }
-.bike-detail h2 { font-size: 34px; letter-spacing: -0.04em; line-height: 1; }
-.bike-detail .bike-facts dd { font-size: 20px; font-weight: 600; }
 
 /* ---------- Round 38: progress as a segmented bar ---------- */
 .rent-top { width: 100%; }

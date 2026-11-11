@@ -1,17 +1,16 @@
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getFleet, getObject, listObjects } from "../data/api";
 import { useViewer } from "../ui/viewer";
 import { SiteHeader } from "../components/SiteHeader";
 import { Moments } from "../components/HowItWorks";
-import { DemoSwitcher } from "../components/DemoSwitcher";
 import { SiteFooter } from "../components/SiteFooter";
-import { FleetMap, type LatLon } from "../components/FleetMap";
+import { Finder } from "../components/Finder";
+import type { LatLon } from "../components/FleetMap";
 import { RuleSimulator } from "../components/RuleSimulator";
-import { BikeDetail, BikePhoto, BlackBoxLine, LiveBadge } from "../components/BikeCard";
 import { BOCCONI } from "../data/mock/fleet";
 import { href } from "../ui/router";
-import { distanceText, metres, walkText } from "../ui/geo";
+import { metres, walkText } from "../ui/geo";
 import "./object-page.css";
 import "./site.css";
 import "./map.css";
@@ -55,8 +54,6 @@ export function HomePage() {
   const fleet = useQuery({ queryKey: ["fleet"], queryFn: getFleet, refetchInterval: 10_000 });
   const [me, setMe] = useState<Me | null>(null);
   const [locating, setLocating] = useState<"idle" | "asking" | "denied">("idle");
-  const [selected, setSelected] = useState<string | null>(null);
-  const [view, setView] = useState<"map" | "list">("map");
   const origin: LatLon = me ?? BOCCONI;
 
   const bikes = useMemo(() => (fleet.data ?? [])
@@ -66,11 +63,6 @@ export function HomePage() {
   const { account } = useViewer();
   const mine = useQuery({ queryKey: ["objects-mine-home", account?.address], enabled: !!account, queryFn: listObjects });
   const rentingIt = !!account && !!mine.data?.some((o) => o.custodian.address.toLowerCase() === account.address.toLowerCase() && o.activeRental);
-  const current = bikes.find((x) => x.b.key === selected) ?? null;
-  const fleetBikes = useMemo(() => bikes.map((x) => x.b), [bikes]);
-  // Room taken by the buttons (top), the legend or bottom strip: the first framing keeps pins clear of them.
-  const padding = useMemo(() => (window.matchMedia("(max-width: 760px)").matches ? { top: 64, bottom: 140, left: 0, sheet: 0.66 } : { top: 64, bottom: 130, left: 0 }), []);
-  const select = useCallback((k: string | null) => { setSelected(k); if (k) setView("map"); }, []);
 
   const locate = () => {
     if (!("geolocation" in navigator)) { setLocating("denied"); return; }
@@ -81,30 +73,6 @@ export function HomePage() {
       { enableHighAccuracy: true, timeout: 10_000 },
     );
   };
-
-  const list = (
-    <div className="fleet-list">
-      <div className="fleet-list-head">
-        <h2>{bikes.length} bikes free {me ? "near you" : "around Bocconi"}</h2>
-        <p className="muted">Nearest first. Only the first bike is real for now; the rest are samples. Bikes out on a ride are never shown: where they are is where someone is.</p>
-        {!live && fleet.data && <p className="note">{rentingIt ? "You have the live bike right now, so it isn't on the map." : "The live bike is out on a rental right now, so it isn't on the map."}</p>}
-      </div>
-      <ol>
-        {bikes.map(({ b, d }) => (
-          <li key={b.key}>
-            <button type="button" className={`fleet-row ${b.live ? "is-live" : ""} ${b.key === selected ? "is-selected" : ""}`} onClick={() => select(b.key)}>
-              <BikePhoto b={b} className="row-photo" />
-              <span className="row-body">
-                <span className="row-top"><span className="row-name">{b.label}</span><span className="mono row-dist">{distanceText(d)}</span></span>
-                <span className="row-meta">{b.live && <LiveBadge live />}<span className="mono">{b.pricePerHour} dollars an hour</span></span>
-                <BlackBoxLine b={b} />
-              </span>
-            </button>
-          </li>
-        ))}
-      </ol>
-    </div>
-  );
 
   return (
     <div className="page">
@@ -124,56 +92,7 @@ export function HomePage() {
         </section>
 
         <div id="bikes" className="bikes-anchor" />
-        <section className={`map-shell view-${view} ${current ? "has-selection" : ""}`} aria-label="Bikes near you">
-          <aside className="map-panel">
-            {current
-              ? <BikeDetail b={current.b} distance={current.d} onClose={() => setSelected(null)} onShowLive={live ? () => select(live.b.key) : null} />
-              : list}
-          </aside>
-          <div className="map-area">
-            <FleetMap bikes={fleetBikes} center={origin} me={me} selected={selected} onSelect={select} padding={padding} />
-            <div className="map-tools">
-              <button type="button" className="map-btn mono" onClick={locate} disabled={locating === "asking"}>
-                {locating === "asking" ? "Locating…" : me ? "Recenter on me" : "Use my location"}
-              </button>
-              {view === "list" && <button type="button" className="map-btn mono view-toggle" onClick={() => setView("map")}>Map</button>}
-              <DemoSwitcher inline />
-            </div>
-            {locating === "denied" && <p className="map-msg mono" role="status">Location unavailable: showing bikes around Bocconi.</p>}
-            <p className="map-legend mono" aria-hidden="true">
-              <span><i className="lg-live" />Real bike</span><span><i className="lg-drop" />Dropped this week</span>
-            </p>
-          </div>
-          {!current && view === "map" && (
-            // The one bike you can actually rent, one tap away (Lime's "Find Available Scooter").
-            <div className="nearest" role="region" aria-label="Nearest bike you can rent">
-              {live ? (
-                <>
-                  <BikePhoto b={live.b} className="nearest-photo" />
-                  <button type="button" className="nearest-info" onClick={() => select(live.b.key)}>
-                    <span className="nearest-k mono">Nearest · {distanceText(live.d)} · {walkText(live.d)}</span>
-                    <span className="nearest-name">{live.b.label}</span>
-                    <span className="nearest-meta mono"><LiveBadge live />{live.b.pricePerHour} dollars an hour · deposit {live.b.deposit}</span>
-                  </button>
-                  <div className="nearest-actions">
-                    <a className="btn btn-primary" href={href(`rent/${live.b.objectId}`)}>Rent</a>
-                    <button type="button" className="btn btn-secondary nearest-list" onClick={() => setView("list")}>{bikes.length} nearby</button>
-                  </div>
-                </>
-              ) : (
-                <button type="button" className="nearest-info" onClick={() => setView("list")}>
-                  <span className="nearest-k mono">{rentingIt ? "You have the live bike right now" : "The live bike is out on a rental right now"}</span>
-                  <span className="nearest-name">{bikes.length} sample bikes nearby</span>
-                </button>
-              )}
-            </div>
-          )}
-          {current && (
-            <div className="sheet" role="dialog" aria-label={current.b.label}>
-              <BikeDetail b={current.b} distance={current.d} onClose={() => setSelected(null)} onShowLive={live ? () => select(live.b.key) : null} />
-            </div>
-          )}
-        </section>
+        <Finder bikes={bikes} me={me} locating={locating} onLocate={locate} live={live} rentingIt={rentingIt} loaded={!!fleet.data} />
 
         <Moments />
         {live && live.b.objectId !== null && <TryTheRule objectId={live.b.objectId} />}

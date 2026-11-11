@@ -1,0 +1,141 @@
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { FleetBike } from "../data/types";
+import { href } from "../ui/router";
+import { distanceText, walkText } from "../ui/geo";
+import { BOCCONI } from "../data/mock/fleet";
+import { DemoSwitcher } from "./DemoSwitcher";
+import { FleetMap, type LatLon } from "./FleetMap";
+import { BikePhoto, BlackBoxLine, LiveBadge } from "./BikeCard";
+
+type Entry = { b: FleetBike; d: number };
+const KINDS: { id: FleetBike["kind"]; label: string }[] = [
+  { id: "City bike", label: "City" }, { id: "E-bike", label: "E-bike" }, { id: "Cargo bike", label: "Cargo" }, { id: "Road bike", label: "Road" },
+];
+const CHEAP = 2; // dollars an hour
+
+function useMedia(q: string) {
+  const [on, setOn] = useState(() => window.matchMedia(q).matches);
+  useEffect(() => { const m = window.matchMedia(q); const f = () => setOn(m.matches); m.addEventListener("change", f); return () => m.removeEventListener("change", f); }, [q]);
+  return on;
+}
+
+/** Find a bike: large photo cards on the left, the map as a framed panel that stays in view on the right (a phone: the map
+ *  fills the screen and the cards ride in a sheet that pulls up). Structure after Airbnb's search with the map on. */
+export function Finder({ bikes, me, locating, onLocate, live, rentingIt, loaded }: {
+  bikes: Entry[]; me: (LatLon & { accuracy: number }) | null; locating: "idle" | "asking" | "denied"; onLocate: () => void;
+  live: Entry | undefined; rentingIt: boolean; loaded: boolean;
+}) {
+  const phone = useMedia("(max-width: 899px)");
+  const [kind, setKind] = useState<FleetBike["kind"] | null>(null);
+  const [cheap, setCheap] = useState(false);
+  const [selected, setSelected] = useState<string | null>(null);
+  const [hover, setHover] = useState<string | null>(null);
+  const [sheet, setSheet] = useState<"peek" | "full">("peek");
+  const shown = useMemo(() => bikes.filter((x) => (!kind || x.b.kind === kind) && (!cheap || Number(x.b.pricePerHour) <= CHEAP)), [bikes, kind, cheap]);
+  const fleetBikes = useMemo(() => shown.map((x) => x.b), [shown]);
+  const current = shown.find((x) => x.b.key === selected) ?? null;
+  const origin: LatLon = me ?? BOCCONI;
+  void origin;
+
+  const cards = useRef(new Map<string, HTMLElement>());
+  const list = useRef<HTMLUListElement>(null);
+  const fromScroll = useRef(false);
+  const select = useCallback((k: string | null) => setSelected(k), []);
+
+  // A pin or a card chosen elsewhere brings its card into view (without fighting the carousel's own scrolling).
+  useEffect(() => {
+    if (!selected) return;
+    if (fromScroll.current) { fromScroll.current = false; return; }
+    const el = cards.current.get(selected);
+    const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el?.scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "nearest", inline: "center" });
+  }, [selected]);
+
+  // On a phone the card in the middle of the carousel is the active one: its pin lights up.
+  const onScroll = useCallback(() => {
+    if (!phone || sheet !== "peek" || !list.current) return;
+    const box = list.current.getBoundingClientRect();
+    const mid = box.left + box.width / 2;
+    let best: { k: string; dist: number } | null = null;
+    for (const [k, el] of cards.current) { const r = el.getBoundingClientRect(); const dist = Math.abs(r.left + r.width / 2 - mid); if (!best || dist < best.dist) best = { k, dist }; }
+    if (best && best.k !== selected) { fromScroll.current = true; setSelected(best.k); }
+  }, [phone, sheet, selected]);
+
+  const drag = useRef<number | null>(null);
+  const padding = useMemo(() => (phone ? { top: 110, bottom: 340, left: 0, sheet: 0.5 } : { top: 28, bottom: 150, left: 0 }), [phone]);
+
+  const title = `Bikes near ${me ? "you" : "Bocconi"}`;
+  return (
+    <section id="bikes" className={`finder ${phone ? "is-phone" : ""}`} aria-labelledby="finder-title">
+      <div className="finder-body">
+      <div className="finder-main">
+      <header className="finder-head">
+        <div className="finder-title">
+        <div className="finder-title-row">
+          <h2 id="finder-title">{title}</h2>
+          <span className="chips-end">
+            <button type="button" className="chip chip-near" onClick={onLocate} disabled={locating === "asking"}>{locating === "asking" ? "Locating…" : me ? "Recenter" : "Near me"}</button>
+            <DemoSwitcher inline />
+          </span>
+        </div>
+          <p>{shown.length} free to borrow, nearest first. Bikes out on a ride never show: where they are is where someone is.</p>
+        </div>
+        <div className="finder-chips" role="group" aria-label="Filter the bikes">
+          <button type="button" className="chip" aria-pressed={!kind && !cheap} onClick={() => { setKind(null); setCheap(false); }}>All</button>
+          {KINDS.map((k) => <button key={k.id} type="button" className="chip" aria-pressed={kind === k.id} onClick={() => setKind(kind === k.id ? null : k.id)}>{k.label}</button>)}
+          <button type="button" className="chip" aria-pressed={cheap} onClick={() => setCheap(!cheap)}>Up to {CHEAP} dollars an hour</button>
+        </div>
+        {locating === "denied" && <p className="finder-note" role="status">Location unavailable: showing bikes around Bocconi.</p>}
+        {!live && loaded && <p className="finder-note">{rentingIt ? "You have the real bike right now, so it isn't on the map." : "The real bike is out on a ride right now, so it isn't on the map."}</p>}
+      </header>
+
+        <div className="finder-list" data-sheet={sheet}>
+          <button type="button" className="sheet-handle" aria-label={sheet === "peek" ? "Show all bikes" : "Show the map"} aria-expanded={sheet === "full"}
+            onClick={() => setSheet(sheet === "peek" ? "full" : "peek")}
+            onPointerDown={(e) => { drag.current = e.clientY; }}
+            onPointerUp={(e) => { if (drag.current === null) return; const dy = e.clientY - drag.current; drag.current = null; if (dy < -30) setSheet("full"); else if (dy > 30) setSheet("peek"); }}>
+            <i aria-hidden="true" /><span>{shown.length} bikes</span>
+          </button>
+          {shown.length === 0 && <p className="finder-empty">No bike matches. <button type="button" className="link-btn" onClick={() => { setKind(null); setCheap(false); }}>Show all bikes</button></p>}
+          <ul ref={list} className="finder-grid" onScroll={onScroll}>
+            {shown.map(({ b, d }) => (
+              <li key={b.key} ref={(el) => { if (el) cards.current.set(b.key, el); else cards.current.delete(b.key); }}
+                className={`fcard ${b.key === selected ? "is-selected" : ""} ${b.live ? "is-live" : ""}`}
+                onMouseEnter={() => setHover(b.key)} onMouseLeave={() => setHover(null)}>
+                <button type="button" className="fcard-hit" onClick={() => { select(b.key); if (phone) setSheet("peek"); }} aria-label={`${b.label}, ${b.pricePerHour} dollars an hour, ${distanceText(d)}`}>
+                  <span className="fcard-photo"><BikePhoto b={b} /><span className="fcard-badge"><LiveBadge live={b.live} /></span></span>
+                  <span className="fcard-body">
+                    <span className="fcard-top"><span className="fcard-name">{b.label}</span><span className="fcard-dist">{distanceText(d)} · {walkText(d)}</span></span>
+                    <span className="fcard-price"><b>{b.pricePerHour} dollars</b> an hour</span>
+                    <BlackBoxLine b={b} />
+                  </span>
+                </button>
+                {b.live && b.objectId !== null && <a className="btn btn-primary btn-sm fcard-rent" href={href(`rent/${b.objectId}`)}>Rent</a>}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+      </div>
+
+        <div className="finder-map">
+          <FleetMap bikes={fleetBikes} center={BOCCONI} me={me} selected={selected} highlight={hover} onSelect={select} padding={padding} />
+          <p className="map-legend" aria-hidden="true"><span><i className="lg-live" />Real bike</span><span><i className="lg-drop" />Dropped this week</span></p>
+          {current && !phone && (
+            <div className="mini" role="dialog" aria-label={current.b.label}>
+              <BikePhoto b={current.b} className="mini-photo" />
+              <div className="mini-body">
+                <p className="mini-name">{current.b.label}</p>
+                <p className="mini-meta">{current.b.pricePerHour} dollars an hour · deposit {current.b.deposit} · {walkText(current.d)}</p>
+                {current.b.live && current.b.objectId !== null
+                  ? <div className="mini-actions"><a className="btn btn-primary btn-sm" href={href(`rent/${current.b.objectId}`)}>Rent</a><a className="btn btn-secondary btn-sm" href={href(`object/${current.b.objectId}`)}>See the bike</a></div>
+                  : <p className="mini-sample">A sample bike: it has no recorder, so it can't be rented. {live && <button type="button" className="link-btn" onClick={() => select(live.b.key)}>Show the real bike</button>}</p>}
+              </div>
+              <button type="button" className="mini-close" aria-label="Close" onClick={() => select(null)}>×</button>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}

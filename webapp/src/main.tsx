@@ -6,6 +6,7 @@ import "./styles/base.css";
 import { App } from "./App";
 // Last on purpose: the everyday layer overrides page CSS of equal specificity.
 import "./pages/human.css";
+import "./pages/finder.css";
 
 const queryClient = new QueryClient({ defaultOptions: { queries: { refetchOnWindowFocus: false } } });
 
