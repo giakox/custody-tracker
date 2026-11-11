@@ -122,19 +122,25 @@ export function WalletPage({ id }: { id: number }) {
   return (
     <Shell d={d} stage="Deposit" side={d && <TripCard d={d} />}>
       <h1>Connect a <em>wallet</em>.</h1>
-      <p className="lead">{isMock
-        ? "A wallet is the app that holds your money. For this demo we made you a test wallet, with test money only. In the live version it is your own wallet: the deposit leaves from it and comes back to it, and Sharify never holds your money or your keys."
-        : "A wallet is the app that holds your money. The deposit leaves from it and comes back to it: Sharify never holds your money or your keys."}</p>
+      <p className="lead">The deposit leaves from your wallet and comes back to it. Sharify never holds your money or your keys.</p>
       <div className="wallets">
         {isMock
-          ? <button type="button" className="wallet-opt primary" onClick={go} disabled={busy}><b>Use the demo test wallet</b><span>Test money only. Nothing real is used, and it is not your wallet.</span></button>
+          ? <button type="button" className="wallet-opt primary" onClick={go} disabled={busy}><b>{busy ? "Connecting…" : "Use the demo test wallet"}</b><span>Test money only. In the live version you connect your own wallet.</span></button>
           : <>
             <button type="button" className="wallet-opt" onClick={go} disabled={busy}><b>MetaMask</b><span>Browser extension or mobile app</span></button>
             <button type="button" className="wallet-opt" onClick={go} disabled={busy}><b>Another wallet</b><span>WalletConnect</span></button>
           </>}
       </div>
-      <p className="hint-line">{busy ? "Waiting for your wallet…" : isMock ? "In the live version you connect your own wallet." : "You need a little free test money for network fees (Base Sepolia, a test network)."}</p>
-      <img className="step-photo" src="./img/day/unlock-phone.jpg" alt="Hands holding a phone next to a parked city bike" />
+      {!isMock && <p className="hint-line">You need a little free test money for network fees (Base Sepolia, a test network).</p>}
+      <section className="ahead" aria-labelledby="ahead-title">
+        <h2 id="ahead-title">What your wallet will ask next</h2>
+        <ol className="ahead-list">
+          <li><span className="ahead-n">1</span><span><b>Take the bike.</b> You accept the owner's offer.</span></li>
+          <li><span className="ahead-n">2</span><span><b>Allow deposits.</b> Once per wallet: it lets the rule hold the deposit.</span></li>
+          <li><span className="ahead-n">3</span><span><b>Leave {d ? usd(d.terms.collateral) : "the deposit"}.</b> It goes to the rule, not to the owner.</span></li>
+        </ol>
+        <p className="hint-line">Each one is a few seconds; the second is only for a wallet that has never rented. If your wallet has no test money yet, it first gets some, for free. Nothing moves until you confirm it.</p>
+      </section>
     </Shell>
   );
 }

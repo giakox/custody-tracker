@@ -1305,6 +1305,29 @@ Also removed: the estimator's styles in map.css, which matched the earnings card
 
 **Test, "another screen at a glance?"** Yes: a table became a map.
 
+## Round 92 · The wallet step says what the wallet will ask next
+
+**Hierarchy audit (Wallet step):**
+
+| Block | Who, when | If it vanished | Verdict |
+|---|---|---|---|
+| A four-line lead (what a wallet is, the demo wallet, the live version, keys) | first-timer | — | one sentence: the deposit leaves from your wallet and comes back to it; Sharify never holds your money or keys |
+| The demo wallet option | everyone | can't go on | primary; it says "Connecting…" while it works |
+| "In the live version you connect your own wallet." under the option | — | — | moved into the option's own line |
+| A 16:9 stock photo of a phone | — | mood only | removed |
+| (missing) what happens after you connect | first-timer, nervous about money | they meet three wallet prompts unprepared | added: "What your wallet will ask next": take the bike, allow deposits (once per wallet), leave 50 dollars; and that nothing moves until you confirm |
+
+**Levels after:** the option primary, the preview secondary. **Squint test:** before, a long paragraph and a big photo; after, one choice and a short list of what comes next.
+
+**References:** Stripe's Link and Apple Pay set-up screens (one choice, then a short list of what you'll be asked to approve). Why ours looked cheaper: the photo was filler and the real worry (what will I be asked to sign?) went unanswered.
+
+**Three ideas:** (1) one sentence, the option, and a preview of the next prompts. (2) A short video of the wallet prompts. (3) Merge Wallet into Deposit.
+**Discarded:** (2) no honest footage of our prompts exists, and a recorded one would date at once. (3) the Rule → Wallet → Deposit order keeps "connect" and "pay" as separate decisions.
+
+**Chosen, (1):** [before (round 66) and after](rounds/92-wallet-1440.jpg), [phone](rounds/92-wallet-375.jpg).
+
+**Test, "another screen at a glance?"** Yes: a photo page became a choice with a plan.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1320,7 +1343,8 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Page transitions | 88 |
 | Footer | 73 |
 | Bike page | 84 |
-| Rent flow: Rule, Wallet, Deposit | 86 |
+| Rent flow: Rule, Deposit | 86 |
+| Rent flow: Wallet | 92 |
 | Rent flow: Ride, Return, Waiting | 67 |
 | Rent flow: Outcome | 91 |
 | Receipt and My rentals | 68 |
