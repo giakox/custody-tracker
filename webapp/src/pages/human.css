@@ -379,7 +379,7 @@ p, li, dd { text-wrap: pretty; }
 .tale .tale-chapter { position: sticky; top: 0; min-height: 100svh; border-radius: var(--radius) var(--radius) 0 0; box-shadow: 0 -24px 60px rgba(23, 25, 27, .22); }
 .tale .tale-chapter:first-child { box-shadow: none; }
 .tale-card { margin-bottom: clamp(48px, 9vh, 96px); }
-@media (max-width: 760px) { .tale .tale-chapter { min-height: 100svh; } }
+@media (max-width: 760px) { .tale .tale-chapter { min-height: 82svh; } }
 @media (prefers-reduced-motion: reduce) { .tale .tale-chapter { position: relative; min-height: min(80svh, 720px); box-shadow: none; } }
 
 /* ---------- Round 45: a step back, the defects the critique saw ---------- */

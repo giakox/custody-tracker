@@ -556,3 +556,17 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Linear and Vercel charts: a plain dark tooltip on hover, no legend: https://vercel.com/analytics
 - **Shots:** none
 - **Lines:** 6551
+
+### Block 51 to 60 (summary)
+
+- **Lines in `webapp/src`:** about 6,550. Edoardo and the lead agreed that purely visual code (layers, scroll animations, micro-interactions, type) may take the cap from +40% to +60% over commit 463f724 (8,448); nothing here is a new feature, and it is still below the old cap of 7,392.
+- **Strongest changes:** (1) the receipt as a tear-off slip (round 51) and the story's vertical spine with an orange dot at the knock (round 54); (2) the map in paper tones (round 53) and one shadow scale for the whole site (round 55).
+- **Steps back:** round 55 (nine shadows reduced to three) and round 60 (phone length of the Home: the stacked chapters are 82% of the screen on a phone, about 440 px shorter).
+
+## Round 60 · A step back: the Home on a phone
+
+- **What:** Measured the Home at 375 px: 8.4 screens, 2,400 px of it the three chapters. On a phone they are now 82% of the screen tall each.
+- **Why:** Stacked sheets feel generous on a laptop and endless on a phone.
+- **Reference:** Apple's iPhone page on mobile: chapters shorter than the screen: https://www.apple.com/iphone/
+- **Shots:** none
+- **Lines:** 6551
