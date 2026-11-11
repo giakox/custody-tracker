@@ -1173,6 +1173,28 @@ Also removed: the estimator's styles in map.css, which matched the earnings card
 
 **Test, "another screen at a glance?"** No: a step back. You can read the small print now.
 
+## Round 86 · The deposit's button sits under the amount it pays
+
+**Hierarchy audit (Deposit step, a motion round):**
+
+| Block | Who, when | If it vanished | Verdict |
+|---|---|---|---|
+| "You leave 50 dollars" in the card | renter | — | primary, with the action now right under it |
+| "Leave 50 dollars" under the four signature tiles, on the left | renter | — | moved into the card (as on the Rule and Return steps: every step's action is in the card) |
+| "Working…" on a pale disabled button while signing | renter, during the 10 seconds it takes | no sign of what to do | "Confirm in your wallet…" with a spinner, on a ringed light-blue button, while the tile being signed glows blue on the left |
+| Success: the same tiles all ticked and a small "Go to your rental" | renter | — | the card turns into the moment: a check pops in, "Unlocked · 50 dollars held by the rule", one big "Go to your rental"; each tile's dot pops as its signature lands |
+
+**Levels after:** the card's amount and button primary throughout; the tiles are the live log (secondary). **Squint test:** before, the eye split between the amount on the right and the button on the left; after, both are in one white card.
+
+**Frames:** [idle, signing (mid-flow), done, before](rounds/86-deposit-before.jpg) and [after](rounds/86-deposit-after.jpg); [phone](rounds/86-deposit-375.jpg).
+
+**References:** Stripe Checkout (the Pay button sits under the total, and becomes a spinner, then a check, in place) and Apple Pay (the sheet shows "Confirm with side button" while it waits, then "Done"). Why ours looked cheaper: the total and the button lived in two different places and the waiting state said "Working…".
+
+**Three ideas:** (1) the action in the card under the amount, a waiting state that says what to do, a success card. (2) A full-screen "Unlocked" celebration. (3) Collapse the four signatures into one progress bar.
+**Discarded:** (2) the next thing the renter needs is the ride page; a celebration screen is one more tap. (3) each signature is a real prompt in the wallet: the renter needs to see which one they're on.
+
+**Test, "another screen at a glance?"** For the moment of paying, yes: the button moved to the money, and success has its own card.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1187,7 +1209,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Header | 77 |
 | Footer | 73 |
 | Bike page | 84 |
-| Rent flow: Rule, Wallet, Deposit | 66 |
+| Rent flow: Rule, Wallet, Deposit | 86 |
 | Rent flow: Ride, Return, Waiting, Outcome | 67 |
 | Receipt and My rentals | 68 |
 | Owner (My bikes) | 69 |

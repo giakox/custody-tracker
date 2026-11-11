@@ -176,14 +176,18 @@ export function DepositPage({ id }: { id: number }) {
   const signatures = shown.filter((s) => s.viaWallet).length;
   return (
     <Shell d={d} stage="Deposit" side={
-      <TripCard d={d} lead={<p className="trip-big"><span>You leave</span><b>{deposit}</b></p>}>
-        <p className="hint-line">It comes back by the rule you accepted. <a className="link" href={href(`rent/${id}`)}>Read it again</a></p>
+      <TripCard d={d} lead={state === "done"
+        ? <p className="trip-big trip-ok"><span className="trip-ok-mark" aria-hidden="true">✓</span><span>Unlocked</span><b>{deposit} held by the rule</b></p>
+        : <p className="trip-big"><span>You leave</span><b>{deposit}</b></p>}>
+        {!account ? <a className="btn btn-primary btn-lg" href={href(`rent/${id}/wallet`)}>Connect a wallet</a>
+          : state === "done" ? <a className="btn btn-primary btn-lg" href={href(`rent/${id}/active`)}>Go to your rental</a>
+          : <button type="button" className="btn btn-primary btn-lg" onClick={run} disabled={state === "running"}>{state === "running" ? <><span className="btn-spin" aria-hidden="true" />Confirm in your wallet…</> : state === "error" ? "Try again" : `Leave ${deposit}`}</button>}
+        {state !== "done" && <p className="hint-line">It comes back by the rule you accepted. <a className="link" href={href(`rent/${id}`)}>Read it again</a></p>}
       </TripCard>
     }>
       <h1>{state === "done" ? <>Unlocked. Enjoy the <em>ride</em>.</> : <>Leave the <em>deposit</em>.</>}</h1>
       {!account ? <>
         <p className="lead">The deposit leaves from a wallet and comes back to it. Connect one first.</p>
-        <div className="actions"><a className="btn btn-primary" href={href(`rent/${id}/wallet`)}>Connect a wallet</a></div>
       </> : <>
       <p className="lead">{state === "done"
         ? `Your ${deposit} are held by the rule, not by the owner. From now on, knocks are recorded under your name.`
@@ -193,11 +197,6 @@ export function DepositPage({ id }: { id: number }) {
       <div className="deposit-main">
           {shown.length > 0 && <TxSteps steps={shown} deposit={deposit} explorer={explorer} />}
           {error && <p className="notice error">{error === "You rejected the request in your wallet." ? "You rejected the request in your wallet. Nothing was sent: try again when you're ready." : error}</p>}
-          <div className="actions">
-            {state === "done"
-              ? <a className="btn btn-primary" href={href(`rent/${id}/active`)}>Go to your rental</a>
-              : <button type="button" className="btn btn-primary" onClick={run} disabled={state === "running"}>{state === "running" ? "Working…" : state === "error" ? "Try again"   : `Leave ${deposit}`}</button>}
-          </div>
         </div>
       </>}
     </Shell>
