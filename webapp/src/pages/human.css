@@ -462,3 +462,6 @@ p, li, dd { text-wrap: pretty; }
   .owners-band::after { background: linear-gradient(270deg, rgba(23, 25, 27, 0) 40%, rgba(23, 25, 27, .35) 100%); }
   .owners-photo { object-position: 70% 40%; }
 }
+
+/* ---------- Round 122: composition: after the finder the Home is one run of bands that meet edge to edge, no white seams ---------- */
+.journey + .try-rule, .try-rule + .owners-band { margin-top: 0; }

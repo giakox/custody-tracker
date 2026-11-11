@@ -1888,6 +1888,25 @@ Rounds 111–119 rotated through the screens that had gone longest untouched and
 
 **Test on the blurred shots:** yes: a text column over a table became a photo-and-map band under the question; on the phone a blue button is now on the first screen.
 
+## Round 122 · Composition: after the finder, the Home is one run of bands
+
+**Hierarchy audit (Home, full page at 1440):** six blocks: photo hero, white finder (two screens), dark journey, sand "What if it gets dropped?", photo owners band, dark footer. Each full-bleed band sat 128 px below the one before, so between dark and sand, and between sand and the photo, a white strip appeared that belongs to nothing: on the blurred shot they read as two pale cuts, the page looked unfinished where it should accelerate towards the end.
+
+**What changed:** the bands after the finder meet edge to edge: journey (dark) → try the rule (sand, which turns pink on a strong knock) → owners photo → footer. The white ground stays where it is the ground (between hero and finder, between finder and journey). The page is 256 px shorter (6,348 → 6,092) with nothing removed. Phone checked: 1775→3479, 3479→4633, 4633→5516, no gaps.
+
+**Separation without lines:** the seams were the "divider" here: a white rule 128 px thick. The bands are separated by their own surfaces (ink, sand, photograph) and need no gap.
+
+**Café test:** the café's rooms open one into the next (counter, tables, terrace) without a corridor. Still missing: the finder is two white screens long, the one stretch of the Home that feels like a catalogue, not a place.
+
+**References:** Apple's product pages (full-bleed tiles butt against each other, no gutters between colour fields); Aesop's site (sand, photograph and dark blocks stacked edge to edge).
+
+**Three ideas:** (1) close the seams. (2) Make "try the rule" white so it blends with the seams. (3) Reorder so the try-the-rule comes before the journey.
+**Discarded:** (2) the sand is the stage that turns pink on a strong knock: losing the surface loses the one live colour change. (3) the rule makes sense after you've seen the three moments of a rental, not before.
+
+**Chosen, (1):** [full page before, after, and both blurred](rounds/122-home-full.jpg).
+
+**Test on the blurred shots:** yes: two pale cuts disappear; the second half of the page is one continuous run of dark, sand, photo, dark.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1898,7 +1917,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Home: journey (dark band) | 102 |
 | Bike page: "how it works" band | 107 (dark journey) |
 | Home: owners band | 108 |
-| Home: try the rule (and Rule step) | 104 |
+| Home: try the rule (and Rule step) | 104 (bands joined: 122) |
 | Home: find a bike (grid + map) | 103 |
 | Header | 106 |
 | Page transitions | 88 |
