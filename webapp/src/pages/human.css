@@ -236,3 +236,26 @@ p, li, dd { text-wrap: pretty; }
 .moments h2, .try-rule h2, .owners h2 { font-size: var(--t-h2); line-height: 1; letter-spacing: -0.04em; }
 .lead, .hero-summary { font-size: var(--t-lead); line-height: 1.45; }
 @media (max-width: 760px) { .welcome-card h1 { font-size: 40px; max-width: none; } }
+
+/* ---------- Round 27: pressed, lifted and loading states ---------- */
+.btn { transition: transform .12s ease, box-shadow .18s ease, background-color .15s ease, border-color .15s ease; }
+.btn:active { transform: translateY(1px) scale(.98); box-shadow: none; }
+.btn-primary:hover { box-shadow: var(--elev-1); }
+.btn-secondary:hover { background: var(--surface); }
+:focus-visible { outline: 3px solid var(--blue-ink); outline-offset: 3px; border-radius: var(--radius); }
+.fleet-row, .obj-row, .bike-photo { transition: transform .18s ease, box-shadow .18s ease, background-color .15s ease; }
+.obj-row:hover { transform: translateY(-3px); box-shadow: var(--elev-2); }
+.pin-price { cursor: pointer; }
+.pin-wrap:hover { z-index: 9999 !important; }
+.pin:hover .pin-price { transform: scale(1.12); box-shadow: var(--elev-2); }
+.nav-link { background: linear-gradient(currentColor, currentColor) 0 100% / 0 2px no-repeat; transition: background-size .2s ease, color .15s ease; padding-bottom: 3px; }
+.nav-link:hover { background-size: 100% 2px; }
+.sk { display: block; border-radius: var(--radius); background: var(--raise); animation: sk-pulse 1.4s ease-in-out infinite; }
+.sk-s { height: 16px; width: 40%; margin-bottom: 18px; }
+.sk-xl { height: clamp(40px, 5vw, 72px); width: 92%; margin-bottom: 14px; }
+.sk-w60 { width: 60%; }
+.sk-m { height: 20px; width: 80%; margin: 18px 0 26px; }
+.sk-btn { height: 54px; width: 180px; }
+.sk-photo { aspect-ratio: 4 / 3; width: 100%; }
+@keyframes sk-pulse { 50% { opacity: .5; } }
+@media (prefers-reduced-motion: reduce) { .sk { animation: none; } }

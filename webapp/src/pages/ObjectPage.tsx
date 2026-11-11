@@ -61,7 +61,12 @@ export function ObjectPage({ id }: { id: number }) {
       </Message>
     );
   } else {
-    body = <Message glow title={<>Reading object {id} from the <em>chain</em>…</>}>Custody, shocks and settlements come straight from the contracts.</Message>;
+    body = (
+      <section className="hero bike-top skeleton-hero" aria-busy="true" aria-label="Loading the bike">
+        <div className="bike-copy"><i className="sk sk-s" /><i className="sk sk-xl" /><i className="sk sk-xl sk-w60" /><i className="sk sk-m" /><i className="sk sk-btn" /></div>
+        <div className="bike-side"><i className="sk sk-photo" /></div>
+      </section>
+    );
   }
 
   return (

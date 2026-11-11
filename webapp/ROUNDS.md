@@ -272,3 +272,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Stripe and Linear headlines: tight tracking, heavy weight, balanced lines: https://stripe.com https://linear.app
 - **Shots:** [1440 px](rounds/26-1440.jpg)
 - **Lines:** 6270
+
+## Round 27 · Pressed, lifted, loading
+
+- **What:** Buttons press in and rise on hover with the shared shadow scale; cards lift; map price pins grow and come to the front on hover; nav links draw an underline; a visible 3 px focus ring everywhere; the bike page loads as a skeleton of its own layout instead of a sentence about the chain.
+- **Why:** The details that make a page feel alive and cared for, and an honest loading state that also keeps the layout from jumping.
+- **Reference:** Stripe and Vercel: tactile buttons, restrained lift, skeleton loaders: https://vercel.com
+- **Shots:** [1440 px](rounds/27-1440.jpg)
+- **Lines:** 6298
