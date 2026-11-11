@@ -2423,6 +2423,37 @@ The receipt became a slip with its actions on the counter (141), then the whole 
 
 Fifty rounds under PROTOCOL.md: most screens in the rotation register were touched again; the ones that have waited longest are the bike page as a whole (107), the Home owners band (108), Return (111) and Add step 1 (not since 74), which is where a next block should start, five composition rounds per block were judged on the full page and the blurred shot, every fifth round removed instead of added. Real bugs found and fixed on the way: "walkfrom" in the hero (133), "no bike matches" during a chain outage (134), the phone's fixed buttons painted under Leaflet maps (139), a printed receipt tilted (147), a duplicate confirm button on phones (130). Lines in `src`: about 8,080 of the 10,560 cap. Nothing pushed; everything is on `webapp-edoardo`, one local commit per round.
 
+## Round 151 · Safari's square corners: the map's paper shadow had climbed out of the map
+
+Protocollo v4 letto.
+
+**The bug Edoardo reported:** in Safari the price card (`.book-card`) and the map card ("Parked outside Bocconi") have straight corners. **Real cause, found by elimination in Safari itself** (the page open in Safari on the dev server; each CSS change arrives by hot reload, Safari only looked at, never driven): turning off sticky, the entrance animation, the clipping (`overflow`) and the cards' own shadow changed nothing; painting the cards red showed they were round all along. What was square was something on top: `.fleet-map-wrap::after`, the map's inner "paper" shadow (round 53, `position: absolute; inset: 0; z-index: 450`). The wrapper had a position only inside the finder; on the bike page the shadow climbed to the nearest positioned ancestor, the sticky aside, and laid an 80 px inner shadow over the whole column: price card and map card read as one square grey-edged box. Not WebKit: Chromium measured the same (shadow 380 × 779 px over a 168 px map), Safari's rendering just made it obvious. The WebKit suspect named in the protocol (`overflow: hidden` + `border-radius` not clipping composited children) does not apply here: with the fix, Safari clips the Leaflet tiles to the card's round corners.
+
+**Fix:** `.fleet-map-wrap { position: relative }`, and the shadow takes the wrapper's radius. **Same defect across the site:** a probe of every page in `routes.txt` at 1440 and 375 for absolute pseudo-elements whose parent is not positioned, and for absolute children that escape a rounded clipping box (checked first on a test page with both faults: it catches them): 18 pages × 2 widths, nothing else found. The map vignette was the only escapee, and only the bike page's map used the unpositioned wrapper (the finder sets its own).
+
+**WebKit:** first checked in the real Safari (no Playwright WebKit yet); then, once WebKit 27.2 was installed, reproduced and confirmed there: the old rule restored in the test page gives the same square veil (380 × 779 px), the fix gives 168 px, the map's own size: [WebKit before and after](rounds/151-webkit-corners.jpg). One trap for the next rounds: a WebKit shot of the sticky aside after scrolling puts the fixed header's shadow over the card's top corners; shoot it at the top of the page.
+
+**Hierarchy audit (bike page aside):** price and action primary, the rule secondary, where it's parked tertiary: right, and now visible as three levels again instead of one grey box.
+
+**The six:**
+- **Positions:** the map card's text started 16 px in, the price card's 24 px; now both 24, one left edge down the column.
+- **Colours:** the grey veil over the white card is gone; the card is white again, the rule sand, the map paper.
+- **Symmetries:** the two cards share the column's inner margins on both sides.
+- **Sizes:** at 1024 the rule's rows touched ("Medium knock20 dollars kept"); between 900 and 1180 px they are set at 14 px with a narrower gap so the knock and the dollars stay apart. 375 and 1440 unchanged.
+- **Animations:** the price card's entrance is unchanged (checked it is not the cause).
+- **Curvatures:** all four corners of both cards are round in Safari, and the map tiles are clipped to the card's radius.
+
+**References:** Airbnb's booking card (white on white, the edge carried by a soft round shadow, nothing over it); Apple Maps' place card (the map clipped to the card's corners).
+
+**Three ideas:** (1) fix the cause (contain the shadow) and align the two cards. (2) Mask the symptom: `isolation`/`clip-path` on the cards. (3) Remove the map's paper shadow everywhere.
+**Discarded:** (2) the protocol says find the cause, and the clip would have hidden a shadow still spilling over other things. (3) the shadow is what makes the finder's map sit in the page's tones; it was right where it was meant to be.
+
+**Chosen, (1):** [Safari before and after](rounds/151-safari-corners.jpg).
+
+**Café test:** the café's cards are cards, not boxes drawn on a grey sheet. Still missing: nothing on this column.
+
+**Test on the blurred shots:** yes: a square grey block becomes two round white cards.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -2439,7 +2470,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Page transitions | 136 (shared photo) |
 | Live rental strip | 138 |
 | Footer | 120 (wordmark only on reading pages) |
-| Bike page | 107 (proof mode: 100) |
+| Bike page | 151 (aside, Safari corners); 107 (proof mode: 100) |
 | Rent flow: Rule | 125 (step back) |
 | Rent flow: Deposit | 124 |
 | Rent flow: Wallet | 126 |

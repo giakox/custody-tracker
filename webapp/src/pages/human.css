@@ -325,7 +325,10 @@ p, li, dd { text-wrap: pretty; }
 .receipt { background: var(--surface); box-shadow: none; }
 
 /* ---------- Round 53: the map is drawn in the page's paper tones ---------- */
-.fleet-map-wrap::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 450; box-shadow: inset 0 0 80px rgba(60, 40, 15, .14); }
+/* Round 151: the wrap is the vignette's box. Without it the ::after climbed to the nearest positioned ancestor (the bike
+   page's sticky aside) and laid a square inner shadow over the price card and the map card: the "square corners" seen in Safari. */
+.fleet-map-wrap { position: relative; }
+.fleet-map-wrap::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 450; box-shadow: inset 0 0 80px rgba(60, 40, 15, .14); }
 .pin-price { box-shadow: var(--elev-2); }
 .leaflet-control-attribution { border-radius: var(--radius) 0 0 0; }
 

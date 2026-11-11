@@ -1,6 +1,8 @@
 # Protocollo dei giri «make it better»
 
 Rileggi questo file per intero all'inizio di OGNI giro: si aggiorna mentre lavori, e vale sempre l'ultima versione.
+**Versione: 4** (dopo il giro 150). La prima riga di ogni giro in ROUNDS.md è «Protocollo v4 letto». Fra i giri 72 e
+100 avevi smesso di rileggerlo e hai lavorato con regole vecchie per 30 giri: non deve succedere più.
 Le citazioni tra virgolette sono di Edoardo, testuali.
 
 ## Il prompt di ogni giro
@@ -30,7 +32,24 @@ ultra curato». Un giro che rende il sito più tecnico, più affollato o più si
 6. **Test**: prima e dopo fianco a fianco. «A colpo d'occhio è un'altra schermata?» Se no, il giro non è finito.
 7. **Spedisci**: un commit locale per giro («round N: …»), ROUNDS.md aggiornato (audit, riferimenti, 3 idee, scelta,
    test). Un giro su 5 è un passo indietro (stesso protocollo; l'idea è cosa togliere o accorpare). Ogni 10 giri un
-   riepilogo. Fino al 150 senza fermarti; ti fermi solo al 150, con il build rotto senza rimedio, o al tetto di righe.
+   riepilogo. Fino al 200 senza fermarti; ti fermi solo al 200, con il build rotto senza rimedio, o al tetto di righe.
+
+## Giri 151–200: la rifinitura (versione 4)
+Edoardo, dopo il giro 150, guardando il sito in Safari: «Sono soddisfatto ma c'è ancora da migliorare. Posizioni,
+colori, simmetrie, gestione dimensioni, animazioni, curvature... insomma a lavoro!» E sulla card del prezzo nella pagina
+della bici: «sto box non ha gli angoli stondati».
+- La struttura ora va: questi 50 giri sono di **rifinitura**, schermata per schermata, a rotazione. Il prompt di ogni
+  giro e i passi restano; il cambio coraggioso ora può stare nel dettaglio, purché si veda.
+- **Le sei voci di Edoardo, ogni giro, sulla schermata del giro**, ognuna con una riga in ROUNDS.md su cosa hai trovato e
+  corretto: **posizioni** (griglia, allineamenti, margini, niente che sborda o è tagliato), **colori** (coerenza dei
+  fondi e degli accenti, contrasto), **simmetrie** (colonne, spazi a destra e a sinistra, centri), **dimensioni** (scala
+  dei testi, dei bottoni, delle foto, a 1440, 1024, 768 e 375 px), **animazioni** (entrate, hover, pressione, scroll,
+  reduced-motion), **curvature** (un solo raggio, applicato davvero ovunque, anche a foto, mappe e card).
+- **Bug segnalato da Edoardo, da chiudere nel giro 151:** in Safari la card del prezzo (`.book-card`) e la card della mappa
+  («Parked outside Bocconi») hanno gli angoli dritti. Cerca la causa vera (WebKit e il ritaglio dei figli con
+  `overflow: hidden` + `border-radius`), non mascherarla. Poi cerca lo stesso difetto in tutto il sito.
+- **Edoardo guarda il sito in Safari.** Ogni giro, oltre agli scatti con Chromium, controlla la schermata in WebKit. Se
+  WebKit di Playwright non è installato, non scaricarlo da sola: scrivi in ROUNDS.md che manca e continua.
 
 ## Il metro: il sito del caffè (aggiunto dopo il giro 82)
 Edoardo, dopo il giro 82: «Ancora non sono soddisfatto. Rimane piatto e noioso il sito. Non bello e accogliente come

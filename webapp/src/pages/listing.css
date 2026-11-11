@@ -174,7 +174,7 @@
 .parked-map { height: 168px; }
 .parked-map .fleet-map, .parked-map > div { height: 100%; }
 .parked-map .leaflet-control-zoom { display: none; }
-.parked-text { display: grid; gap: 2px; padding: 14px 16px 16px; font-size: 14px; color: var(--mist); }
+.parked-text { display: grid; gap: 2px; padding: 16px 24px 20px; font-size: 14px; color: var(--mist); }
 .parked-text b { font-size: 15px; font-weight: 650; color: var(--ink); }
 .page:has(.listing .journey) footer.site-end { margin-top: 0; background: #222528; }
 .listing { padding-bottom: 0; }
@@ -186,3 +186,6 @@
 .listing .journey-path path { stroke: rgba(23, 25, 27, .28); }
 .listing .stop-pic { box-shadow: var(--elev-2); }
 .page:has(.listing .journey) footer.site-end { background: var(--ink); }
+
+/* ---------- Round 151: in the narrow aside (900–1180 px) the rule's rows keep a gap between the knock and the dollars ---------- */
+@media (min-width: 900px) and (max-width: 1180px) { .book-card .rule-row { grid-template-columns: 46px minmax(0, 1fr) auto; gap: 8px; padding: 8px; font-size: 14px; } }
