@@ -117,3 +117,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Airbnb's listing page, with its sticky booking card: https://www.airbnb.com
 - **Shots:** [1440 px](rounds/08-1440.jpg)
 - **Lines:** 6167
+
+## Round 9 · One tap to accept the rule
+
+- **What:** The rule page no longer asks to tick a box and then press a disabled button: one large button, "Accept the rule and continue", with the consent written under it.
+- **Why:** Fewer steps before the deposit. The rule is already on screen above the button, so the consent is no less informed.
+- **Reference:** Stripe Checkout: a single confirming action, the terms stated beside it: https://stripe.com/payments/checkout
+- **Shots:** [1440 px](rounds/09-1440.jpg)
+- **Lines:** 6163

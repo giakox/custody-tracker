@@ -53,7 +53,6 @@ const Loading = ({ stage }: { stage: Stage }) => <Shell stage={stage}><p classNa
 export function RulePage({ id }: { id: number }) {
   const { d } = useBike(id);
   const { account } = useViewer();
-  const [ok, setOk] = useState(false);
   if (!d) return <Loading stage="Rule" />;
   const r = relation(d, account);
   const busy = d.status !== "available" && !r.isOfferedToMe;
@@ -74,13 +73,10 @@ export function RulePage({ id }: { id: number }) {
         <p className="notice">This bike is not available right now. <a className="link" href={href("")}>Find another one on the map</a></p>
       ) : (
         <>
-          <label className="check"><input type="checkbox" checked={ok} onChange={(e) => setOk(e.target.checked)} /> <span>I accept this rule for this rental.</span></label>
           <div className="actions">
-            {ok
-              ? <a className="btn btn-primary" href={href(account ? `rent/${id}/deposit` : `rent/${id}/wallet`)}>Continue</a>
-              : <span className="btn btn-primary is-off" aria-disabled="true">Continue</span>}
+            <a className="btn btn-primary btn-lg" href={href(account ? `rent/${id}/deposit` : `rent/${id}/wallet`)}>Accept the rule and continue</a>
           </div>
-          {!ok && <p className="hint-line">Tick the box to continue.</p>}
+          <p className="hint-line">By continuing you accept this rule for this rental. You can still back out before you leave the deposit.</p>
         </>
       )}
     </Shell>
