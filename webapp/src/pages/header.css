@@ -135,3 +135,6 @@ html.menu-open { overflow: hidden; }
 ::view-transition-group(bike-photo) { animation-duration: .42s; animation-timing-function: cubic-bezier(.2, .7, .2, 1); }
 ::view-transition-old(bike-photo), ::view-transition-new(bike-photo) { height: 100%; object-fit: cover; overflow: clip; }
 ::view-transition-group(bike-photo) { border-radius: var(--radius); overflow: clip; }
+
+/* ---------- Round 140: a step back: on the bike's own page the header doesn't repeat the title's news ---------- */
+.page:has(.listing) .hdr-status { display: none; }

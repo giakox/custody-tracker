@@ -2216,6 +2216,25 @@ Block 121–130 worked through the oldest screens in the register and two compos
 
 **Test on the blurred shots:** yes: a sand rectangle with a map in it became a bar and a larger map on white; on the phone the bottom bar now reads "Receipt".
 
+## Round 140 · A step back: the bike's own page doesn't repeat its news in the header
+
+**Hierarchy audit (the whole site after 131–139, plus an overflow pass):** on the bike page, the header's status pill ("The demo bike is free, outside Bocconi") said the same thing as the page's title one line below it ("The demo bike is available."). Everywhere else the pill is news from elsewhere; here it was an echo. Overflow pass: 19 routes at 375 and 1024 px after ten rounds of layout changes (it runs long; its result is logged with round 141).
+
+**What was removed:** the header status on the bike page (the nav re-centres in the free space). Nothing added.
+
+**Café test:** the café doesn't announce today's cake at the door and again on the cake. Still missing: see the summary below.
+
+**Three ideas:** (1) hide the status on the bike page. (2) Remove the status everywhere. (3) Shorten the page title instead.
+**Discarded:** (2) on every other page it is the one live fact in the header (115). (3) the title is the page's answer; the echo is the header's.
+
+**Chosen, (1):** [before and after](rounds/140-bike-header.jpg).
+
+**Test on the blurred shots:** marginal: one grey pill fewer next to the logo; the header reads as navigation only.
+
+## Block 131 to 140 (summary)
+
+The owner side and the system's edges. "Your rules" shows the rule renters will accept, in dollars (131). My bikes makes a single bike its poster (132) and lost its black "Today" slab (135, step back). The Home hero split the proposition from the bike that's free now, and fixed "walkfrom" (133). The finder says when the chain is down instead of "no bike matches" (134). The photo you click becomes the bike page's photo (136). Verify says what a check proves and what it doesn't before you press it (137). The live ride pill floats instead of pushing the Home down (138). Deposit back is on the page, and Leaflet maps can no longer paint over fixed buttons (139, a real bug from 126). Lines in `src`: about 7,990 of the 10,560 cap. Next: the receipt (113), My rentals (117), the journey on the Home (102), the design page (112), the menu and footer on phones.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -2228,7 +2247,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Home: owners band | 108 |
 | Home: try the rule (and Rule step) | 104 (bands joined: 122) |
 | Home: find a bike (grid + map) | 123 |
-| Header | 106 |
+| Header | 140 (no echo on the bike page) |
 | Page transitions | 136 (shared photo) |
 | Live rental strip | 138 |
 | Footer | 120 (wordmark only on reading pages) |
