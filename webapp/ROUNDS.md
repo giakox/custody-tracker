@@ -1666,6 +1666,30 @@ Fixed on the way: an absolutely positioned photo inside a grid takes its grid ar
 
 **Test on the blurred shots:** yes: a white page with a card became a white page with a dark band and a lit card in it.
 
+## Round 110 · A step back: the rule's band stops changing colour
+
+**Hierarchy audit:** "What if it gets dropped?" sat on a band that turned light blue with no knock and orange-pink with any knock (the default example is a light knock, so most visitors saw pink). The protocol keeps orange for knocks; here a whole section was tinted for a simulated one, and the knock was already shown three times in the card (the number, the meter's colour, the orange part of the bar).
+
+**What changed:** the band is a constant sand; the card and the sticker carry all the colour.
+
+**Three ideas (what to remove):** (1) the section tint. (2) The meter beside the knock number. (3) The examples' footnote.
+**Discarded:** (2) the meter is the same symbol the bike's record and receipts use: learning it here pays off later. (3) the footnote is the honesty about the example values.
+
+**Café test:** the café uses its accent orange sparingly, on buttons and one band; a band that flashes as you play reads as an alarm. Calmer now.
+
+**Chosen, (1):** [before and after](rounds/110-rule-band.jpg).
+
+**Test:** a step back; on the blurred shots the Home's tones are now white, ink, sand, photograph: no pink.
+
+### Block 101 to 110 (summary)
+
+- **Lines in `webapp/src`:** about 7,530, under the cap of 10,560 (the protocol's new cap).
+- **Re-read the protocol:** it had changed during rounds 72–100 (café yardstick, composition rounds, blurred test, run to 150); from round 101 every round checks it first.
+- **The café study (101)** named eight reasons the café feels warm; this block worked on four of them: a rhythm of light and dark (102: dark journey and footer; 109: Verify's dark stage), objects from the bike's world (104: the frame sticker with a working QR), a "now" (106: the header says what the real bike is doing), and places you could stand in (107: edge-to-edge pictures and a "where it's parked" map; 108: the owners' band as a scene).
+- **Composition rounds:** 102 (Home) and 107 (bike page), judged on blurred full pages.
+- **The finder** stopped being a wall of equal cards: size says distance (103), and "Sample fleet" is said once (105).
+- **Still missing, honestly:** the café's second voice of type (it would change Theme B: to propose, not to impose) and its people (named regulars would be invented testimonials, which the rules forbid).
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.

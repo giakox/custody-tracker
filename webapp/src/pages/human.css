@@ -183,7 +183,7 @@ p, li, dd { text-wrap: pretty; }
 }
 
 /* ---------- Round 29: the rule on a field of colour, with big numbers ---------- */
-.try-rule { background: var(--blue-wash); box-shadow: 0 0 0 100vmax var(--blue-wash); clip-path: inset(0 -100vmax); margin-top: clamp(64px, 9vw, 128px); padding-block: clamp(56px, 8vw, 112px); }
+.try-rule { background: var(--surface); box-shadow: 0 0 0 100vmax var(--surface); clip-path: inset(0 -100vmax); margin-top: clamp(64px, 9vw, 128px); padding-block: clamp(56px, 8vw, 112px); }
 .try-rule .sim { background: var(--bg); box-shadow: var(--elev-3); border: 0; padding: clamp(24px, 3vw, 40px); }
 .try-rule .sim-peak { font-size: clamp(56px, 6vw, 96px); letter-spacing: -0.04em; }
 .try-rule .sim-back { font-size: clamp(40px, 4.4vw, 68px); letter-spacing: -0.03em; }
@@ -279,8 +279,6 @@ p, li, dd { text-wrap: pretty; }
 .bike-copy .stateline { margin-top: 40px; }
 
 /* ---------- Round 46: the slider drives the whole band ---------- */
-.try-rule, .try-rule { transition: background-color .5s ease, box-shadow .5s ease; }
-.try-rule:has(.sim.tier-1), .try-rule:has(.sim.tier-2), .try-rule:has(.sim.tier-3) { background: var(--orange-wash); box-shadow: 0 0 0 100vmax var(--orange-wash); }
 .try-rule:has(.sim.tier-3) { background: #fbd9cb; box-shadow: 0 0 0 100vmax #fbd9cb; }
 .try-rule .sim-peak { font-size: clamp(72px, 8.4vw, 136px); line-height: .9; }
 .try-rule .sim-back { font-size: clamp(48px, 5.2vw, 84px); line-height: .95; }
