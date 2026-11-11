@@ -1437,6 +1437,19 @@ Also a step towards one shadow scale: the three hand-written shadows left (the p
 
 **Test, "another screen at a glance?"** No: a verification round.
 
+## Round 99 · The whole site, one more look
+
+**What was checked:** all 18 routes (Home, the bike page, the six rent steps, My rentals, a receipt, My bikes, Confirm a return, two Add steps, Verify, Design, a missing bike) at 375 px and 1024 px for horizontal overflow (none on any of the 36), and side by side at 1440 px on one sheet: [every page](rounds/99-every-page-1440.jpg).
+
+**What the sheet shows:** one system. The same floating header; working screens with a calm title on the left and a white card on the right (the rent steps, Confirm a return, Add); documents and listings with big type (Home, the bike page, Design); state cards for errors; sand for secondary surfaces, never a ruled line between zones.
+
+**What it caught:** My rentals was the only working screen still opening with a bare "Your rentals." while My bikes opens with a small label and a sentence that says where things stand. Now: "Your rentals" as the label and "One rental, settled." / "You're riding the demo bike." / "No rentals yet." as the title. [Before and after](rounds/99-rentals-title.jpg).
+
+**Three ideas:** (1) look at everything together and fix what breaks the system. (2) A component library page. (3) Visual regression tests.
+**Discarded:** (2) and (3) are tools for a team over months; this round is a look, not infrastructure.
+
+**Test, "another screen at a glance?"** For My rentals' first line, yes; for the site, the point was that every screen now looks like the same product.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1458,7 +1471,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Rent flow: Ride, Return, Waiting | 67 |
 | Rent flow: Outcome | 91 |
 | Receipt (print) | 97 |
-| My rentals | 89 |
+| My rentals | 99 |
 | Owner (My bikes) | 69 |
 | Owner: Confirm a return | 76 |
 | Add a bike | 74 |

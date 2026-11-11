@@ -69,9 +69,13 @@ export function MyRentalsPage() {
   }
   const active = rows?.filter((x) => x.r.status === "active") ?? [];
   const past = [...(rows?.filter((x) => x.r.settlement) ?? [])].reverse();
+  const n = past.length;
   return (
     <Page>
-      <h1>Your <em>rentals</em>.</h1>
+      <header className="host-head">
+        <p className="host-kicker">Your rentals</p>
+        <h1>{active.length ? <>You're riding <em>{objectName(active[0].d, false)}</em>.</> : n === 0 ? <>No rentals <em>yet</em>.</> : n === 1 ? <>One rental, <em>settled</em>.</> : <>{n} rentals, all <em>settled</em>.</>}</h1>
+      </header>
       {loading && <p className="lead">Loading your rentals…</p>}
       {active.map(({ d, r }) => {
         const waiting = d.pendingHandoff?.to.role === "owner";
