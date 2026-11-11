@@ -263,3 +263,13 @@ table.levels tbody tr:last-child .levels-usd { color: var(--orange-ink); }
 .rule-preview .rule-tiers { margin: 8px 8px 0; max-width: none; }
 .rule-preview .notice { margin: 12px 20px; }
 @media (max-width: 640px) { table.levels th:nth-child(4), .levels-usd { display: none; } table.levels tbody tr td:first-child { width: auto; } }
+
+/* ---------- Round 132: composition: with one bike, the bike is the poster of the page; "Add a bike" is a row under it ---------- */
+.bike-tiles:has(> li:nth-child(2):last-child) { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.bike-tiles:has(> li:nth-child(2):last-child) .bike-tile-photo { aspect-ratio: 16 / 9; }
+.bike-tiles:has(> li:nth-child(2):last-child) .bike-tile-name { font-size: 22px; letter-spacing: -0.02em; }
+.bike-tiles:has(> li:nth-child(2):last-child) .add-tile { aspect-ratio: auto; grid-template-columns: 44px auto minmax(0, 1fr); align-items: center; column-gap: 16px; padding: 16px 20px; margin-top: 8px; }
+.bike-tiles:has(> li:nth-child(2):last-child) .add-tile .add-plus { width: 44px; height: 44px; margin: 0; }
+.bike-tiles:has(> li:nth-child(2):last-child) .add-tile small { justify-self: end; }
+@media (max-width: 640px) { .bike-tiles:has(> li:nth-child(2):last-child) .add-tile { grid-template-columns: 44px minmax(0, 1fr); } .bike-tiles:has(> li:nth-child(2):last-child) .add-tile small { grid-column: 2; justify-self: start; } }
+.page:has(main.rent) footer.site-end { margin-top: 0; }

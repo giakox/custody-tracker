@@ -2072,6 +2072,25 @@ Block 121–130 worked through the oldest screens in the register and two compos
 
 **Test on the blurred shots:** yes: three grey slabs on the left and an empty block on the right became a clean column of inputs and a card with four orange marks.
 
+## Round 132 · Composition: with one bike, the bike is the poster of My bikes
+
+**Hierarchy audit (My bikes, full page at 1440, 1,346 px):** the title, the dark "Today" ribbon, then three equal-weight objects in a row (the bike's photo, a sand "Add a bike" tile of the same size, the earnings card), then 224 px of white before the footer. In the blurred shot the heaviest things were the ribbon and the empty sand tile; the owner's actual bike was a third of a row.
+
+**What changed:** when the owner has one bike, its photo takes the whole column (16:9, name at 22 px) beside the earnings card; "Add a bike" becomes a sand row under it (the "+" disc, the name, the one-line promise on the right; stacked on a phone). With two or more bikes the grid is unchanged. On working screens the footer no longer adds its 128 px margin to the page's padding: 96 px of white before it instead of 224.
+
+**Separation without lines:** the row is a surface, not a bordered box; the white before the footer is one step of the spacing scale.
+
+**Café test:** the café's window shows its best cake large, not one of three equal plates. Still missing: the Today ribbon is still the darkest thing on the page on a quiet day.
+
+**References:** Airbnb's host "Listings" with a single listing (one large card, the "create" action as a row); Strava's single-bike gear page (the bike, big, the stats beside it).
+
+**Three ideas:** (1) the bike as the poster, "Add" as a row. (2) Move the earnings into the Today ribbon. (3) Lighten the ribbon on quiet days.
+**Discarded:** (2) the ribbon is about today; earnings are all-time, mixing them would mislabel one of them. (3) worth a round of its own (the ribbon's states), not a side effect here.
+
+**Chosen, (1):** [full page before, after, blurred](rounds/132-mybikes-full.jpg) (taken before the footer gap fix).
+
+**Test on the blurred shots:** yes: three equal blocks became one large photograph beside a card, with a slim row under it.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -2098,7 +2117,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Rent flow: Outcome | 91 |
 | Receipt | 113 (print: 97) |
 | My rentals | 117 |
-| Owner (My bikes) | 114 |
+| Owner (My bikes) | 132 |
 | Owner: Confirm a return | 121 |
 | Add a bike | 119 (step 2), 128 (step 3), 129 (step 4), 131 (step 5) |
 | Verify | 109 |
