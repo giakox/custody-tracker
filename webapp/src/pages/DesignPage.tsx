@@ -38,6 +38,16 @@ export function DesignPage() {
           <p className="lead">Today the record of what happened to a rented object belongs to whoever has the most power: the rental desk, the courier, the seller. Sharify moves it to a path where every step can be checked by anyone. For each step: who could cheat, and why it doesn't work.</p>
         </header>
 
+        <section className="oneminute" aria-labelledby="one-title">
+          <h2 id="one-title">In one minute</h2>
+          <ol>
+            <li><b>A small box rides on the bike.</b> It notes every hard knock and seals each note, so nobody can quietly change it.</li>
+            <li><b>The notes are kept in public.</b> On a blockchain, where neither the owner, the renter nor Sharify can rewrite them.</li>
+            <li><b>The deposit follows a rule.</b> At the return, the hardest knock decides how much comes back. The rule is public before anyone rides.</li>
+          </ol>
+          <p className="d-sub">Below is the same thing for people who want to check it: each step, who could cheat, and why it doesn't work.</p>
+        </section>
+
         <section className="scheme" aria-labelledby="scheme-title">
           <div className="scheme-cols" aria-hidden="true"><span>What happens</span><span>Who could cheat, and why it fails</span></div>
           <h2 id="scheme-title" className="sr-only">The system, step by step</h2>

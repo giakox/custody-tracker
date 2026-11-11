@@ -25,11 +25,11 @@
 .v-asking .mono { font-size: 14px; color: var(--blue-ink); }
 .spinner { width: 34px; height: 34px; border-radius: 50%; border: 3px solid var(--line-strong); border-top-color: var(--blue); animation: spin .9s linear infinite; flex: none; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.v-check.state-done { border-color: var(--blue); background: rgba(2, 151, 222, .07); }
+.v-check.state-done { border-color: var(--blue); background: var(--blue-wash); }
 .v-result { display: grid; gap: 6px; }
 .v-mark { width: 64px; height: 64px; border-radius: 50%; background: var(--blue); color: var(--on-blue); display: grid; place-items: center; font-size: 34px; font-weight: 700; margin-bottom: 8px; }
 .v-title { font-size: clamp(34px, 3.6vw, 48px); line-height: 1.02; color: var(--ink); letter-spacing: -0.02em; }
-.v-sub { font-size: clamp(20px, 2vw, 26px); font-style: italic; color: var(--blue-ink); }
+.v-sub { font-size: clamp(20px, 2vw, 26px); color: var(--blue-ink); }
 .v-result p:last-child { margin-top: 12px; color: var(--mist); max-width: 52ch; }
 .v-result.bad .v-title { color: var(--ink); }
 .again { justify-self: start; font-size: 12px; margin-top: 6px; }
