@@ -17,8 +17,11 @@ const TITLES: Record<string, string> = { object: "The bike", rent: "Rent a bike"
 const num = (v: string | undefined, fallback = 1) => { const n = Number(v); return Number.isFinite(n) && n > 0 ? n : fallback; };
 
 export function App() {
-  const parts = useRoute();
+  const parts = useRoute(true);
   const [page, a, b] = parts;
+  // A new page starts at its top (a hash change keeps the old scroll); #/bikes scrolls itself to the finder.
+  const where = parts.join("/");
+  useEffect(() => { if (page !== "bikes") window.scrollTo(0, 0); }, [where]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { document.title = page && TITLES[page] ? `${TITLES[page]} · Sharify` : "Sharify: borrow a bike, the rule decides"; }, [page]);
   if (page === "dev") return <DataPreview />;
   if (page === "wireframes") return <Wireframes parts={parts.slice(1)} />;

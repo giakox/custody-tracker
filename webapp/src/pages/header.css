@@ -100,3 +100,11 @@ html.menu-open { overflow: hidden; }
   }
 }
 @keyframes hdr-action { from { opacity: 0; transform: translateX(8px) scale(.96); visibility: hidden; } to { opacity: 1; transform: none; visibility: visible; } }
+
+/* ---------- Round 88: pages cross-fade; the header stays put ---------- */
+.site-header { view-transition-name: site-header; }
+::view-transition-old(root) { animation: vt-out .18s cubic-bezier(.4, 0, 1, 1) both; }
+::view-transition-new(root) { animation: vt-in .32s cubic-bezier(.2, .7, .2, 1) both; }
+@keyframes vt-out { to { opacity: 0; transform: translateY(-6px); } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(10px); } }
+@media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }

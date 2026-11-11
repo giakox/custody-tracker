@@ -1216,6 +1216,25 @@ Also removed: the estimator's styles in map.css, which matched the earnings card
 
 **Test, "another screen at a glance?"** No: a care round. The difference shows when you interact.
 
+## Round 88 · Moving between pages: the new page starts at its top and arrives with a cross-fade
+
+**Hierarchy audit (what happens between two pages):**
+
+| Moment | Before | After |
+|---|---|---|
+| Clicking a footer link at the bottom of the Home | the next page opened at the same scroll position: "How Sharify is designed" appeared at y = 4,681, its end | every new page starts at its top (the finder link still scrolls to the finder) |
+| The swap | an instant cut: header, page and all | the page cross-fades (out 180 ms, in 320 ms with a 10 px rise); the header is its own layer and stays still |
+| Reduced motion | — | no animation at all, an instant swap |
+
+**References:** Apple's and Linear's sites (page changes under a header that doesn't move; short, decelerating fades), and the browser's own View Transitions API. Why ours looked cheaper: a jump cut, and sometimes the wrong part of the next page.
+
+**Three ideas:** (1) scroll to the top on a page change and cross-fade the content under a still header. (2) Shared-element transitions (the bike's photo flies from the card to the listing). (3) A progress bar at the top while the next page's data loads.
+**Discarded:** (2) the finder card and the listing crop the photo differently; a flying photo that changes its crop looks broken, and it needs per-element names on every card. (3) the mock answers in under half a second; a bar would flash.
+
+**Chosen, (1):** [a frame mid-transition and the settled page](rounds/88-transition.jpg). Within the same page (steps of the rent flow that only change the hash's second part) there is no fade, only the scroll to the top.
+
+**Test, "another screen at a glance?"** No: a motion round. The difference is that nothing jumps.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1228,6 +1247,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Home: try the rule (and Rule step) | 82 |
 | Home: find a bike (grid + map) | 81 |
 | Header | 77 |
+| Page transitions | 88 |
 | Footer | 73 |
 | Bike page | 84 |
 | Rent flow: Rule, Wallet, Deposit | 86 |
