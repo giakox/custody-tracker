@@ -210,3 +210,17 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Lime's app: the nearest vehicle is offered before you browse the map: https://www.li.me
 - **Shots:** [1440 px](rounds/19-1440.jpg)
 - **Lines:** 6192
+
+### Block 11 to 20 (summary)
+
+- **Lines in `webapp/src`:** about 6,190 (cap 7,392; commit 463f724 had 5,280).
+- **Strongest changes:** (1) prices on the map pins (round 12), the bike's cost visible at a glance; (2) "Check it yourself" placed inside the story sentence where a knock is mentioned (round 13), with the price and the way forward when a bike is out (rounds 14 and 16).
+- **Steps back:** round 15 (the rental path said the rule three times) and round 20 (the map legend cut from three items to two).
+
+## Round 20 · A step back: the map
+
+- **What:** Read the map as a stranger. The price pins explain themselves, so the legend lost the "sample bikes" entry and is down to two: the real bike and the orange "dropped this week" dot.
+- **Why:** A legend that explains what is already obvious is noise. The orange dot is the only thing that needed a word.
+- **Reference:** Google Maps: legend only for the one layer that needs it: https://maps.google.com
+- **Shots:** [1440 px](rounds/20-1440.jpg)
+- **Lines:** 6192

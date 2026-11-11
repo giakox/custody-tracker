@@ -140,7 +140,7 @@ export function HomePage() {
             </div>
             {locating === "denied" && <p className="map-msg mono" role="status">Location unavailable: showing bikes around Bocconi.</p>}
             <p className="map-legend mono" aria-hidden="true">
-              <span><i className="lg-live" />The live bike</span><span><i className="lg-sample" />Sample bikes</span><span><i className="lg-drop" />Dropped this week</span>
+              <span><i className="lg-live" />Real bike</span><span><i className="lg-drop" />Dropped this week</span>
             </p>
           </div>
           {!current && view === "map" && (
