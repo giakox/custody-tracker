@@ -524,3 +524,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Material Design elevation and Apple HIG: a short, named elevation scale: https://m3.material.io/styles/elevation/overview
 - **Shots:** none
 - **Lines:** 6522
+
+## Round 56 · How it works as three sand cards
+
+- **What:** On the bike page the three steps are now three warm sand cards with large blue numerals; they lift on hover.
+- **Why:** The end of the page was three columns of text between thin lines; now it closes the page with something to look at, in the same material as the rest.
+- **Reference:** Stripe Press and Notion's marketing pages: big numerals over short sentences on soft cards: https://press.stripe.com
+- **Shots:** [1440 px](rounds/56-1440.jpg)
+- **Lines:** 6530

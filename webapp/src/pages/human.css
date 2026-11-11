@@ -470,3 +470,11 @@ p, li, dd { text-wrap: pretty; }
 .event.quiet::before { border-color: var(--line-strong); }
 .event p { padding-left: 30px; }
 @media (max-width: 900px) { .events::before { left: 81px; } .event::before { left: 76px; } }
+
+/* ---------- Round 56: "How it works" as three sand cards with big numerals ---------- */
+.how-steps { border-top: 0; gap: 20px; }
+.how-steps li, .how-steps li + li { padding: 28px; background: var(--surface); border: 0; border-radius: var(--radius); transition: transform .2s ease, box-shadow .2s ease; }
+.how-steps li:hover { transform: translateY(-4px); box-shadow: var(--elev-2); }
+.how-n { display: block; font-size: 56px; line-height: 1; font-weight: 700; letter-spacing: -0.05em; color: var(--blue); font-family: var(--display); }
+.how-steps h3 { margin: 18px 0 8px; font-size: 24px; letter-spacing: -0.03em; }
+@media (max-width: 900px) { .how-steps li, .how-steps li + li { padding: 22px; } }
