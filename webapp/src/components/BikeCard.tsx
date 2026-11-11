@@ -28,7 +28,7 @@ export function BlackBoxLine({ b }: { b: FleetBike }) {
   return (
     <p className="bb-line" title={g(d.peakCg)}>
       <TierMeter tier={d.tier} />
-      <span>{r.drops === 1 ? "Dropped once" : `Dropped ${r.drops} times`} in {r.rentals} rentals, last a <span className="shock">{TIER_NAMES[d.tier]}</span> knock {ago(d.at)}</span>
+      <span>{r.drops === 1 ? "Dropped once" : `Dropped ${r.drops} times`} in {r.rentals} rentals<span className="bb-last">, last {ago(d.at)}</span><span className="sr-only">, a {TIER_NAMES[d.tier]} knock</span></span>
     </p>
   );
 }

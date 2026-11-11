@@ -1014,6 +1014,28 @@ Every section had the same layout (title left, content right) and the same weigh
 
 **Test, "another screen at a glance?"** Yes: two equal buttons and a text line became one button and a bike.
 
+## Round 79 · The finder again: the one real bike leads, the samples follow under their own name
+
+**Hierarchy audit (the finder's list):**
+
+| Block | Who, when | If it vanished | Verdict |
+|---|---|---|---|
+| Ten cards of the same size, the real one first | renter | — | the real bike is the only one you can rent: it gets the full width, a larger name and a full-size Rent button |
+| "Live · on-chain" vs "Sample fleet" badges on each photo | everyone | honesty | kept; plus one sentence where the samples start: "Sample fleet. How the map will look with more owners. These bikes have no recorder and can't be rented." |
+| Record line under each card: "Dropped once in 2 rentals, last a medium knock 1 h ago" (two lines) | renter | the record | shortened to "Dropped once in 2 rentals, last 1 h ago"; the meter shows the level, the word stays for screen readers |
+| Sample names at 19 px like the real one | — | — | 16 px |
+
+**Levels after:** the real bike primary, the nine samples secondary, the map the steady companion. **Squint test:** before, a uniform wall of ten photos; after, one wide card with a blue button, then a sentence, then a smaller grid.
+
+**References:** Airbnb's search puts a featured stay ("Guest favourite") at a larger size in the same grid; Apple's store lists the product you can buy now first and the rest under a heading. Why ours looked cheaper: a demo where only one item works, presented as if all ten were equal.
+
+**Three ideas:** (1) the real bike full width, the samples under their own sentence. (2) Hide the samples by default behind "Show the sample fleet". (3) Grey out the samples.
+**Discarded:** (2) the map would look empty and the finder would stop showing what it's for. (3) grey photos look broken, not "sample".
+
+**Chosen, (1):** [before and after, 1440, focus on Rent](rounds/79-finder-1440.jpg), [1024](rounds/79-finder-1024.jpg). From 1024 px up; on a phone the carousel keeps one size per card (the real one is first).
+
+**Test, "another screen at a glance?"** Yes for the list: a uniform grid became one bike and a sample grid.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1022,7 +1044,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 |---|---|
 | Home: hero | 78 |
 | Home: "how it works" band (and bike page) | 70 |
-| Home: find a bike (grid + map) | Structure |
+| Home: find a bike (grid + map) | 79 |
 | Header | 77 |
 | Footer | 73 |
 | Bike page | 65 |

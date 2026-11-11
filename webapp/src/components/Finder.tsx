@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { FleetBike } from "../data/types";
 import { href } from "../ui/router";
 import { distanceText, walkText } from "../ui/geo";
@@ -94,8 +94,11 @@ export function Finder({ bikes, me, locating, onLocate, live, rentingIt, loaded 
           </button>
           {shown.length === 0 && <p className="finder-empty">No bike matches. <button type="button" className="link-btn" onClick={() => { setKind(null); setCheap(false); }}>Show all bikes</button></p>}
           <ul ref={list} className="finder-grid" onScroll={onScroll}>
-            {shown.map(({ b, d }) => (
-              <li key={b.key} ref={(el) => { if (el) cards.current.set(b.key, el); else cards.current.delete(b.key); }}
+            {shown.map(({ b, d }, i) => (<Fragment key={b.key}>
+              {!b.live && i > 0 && shown[i - 1].b.live && (
+                <li className="fsplit" aria-hidden={phone ? true : undefined}><p><b>Sample fleet.</b> How the map will look with more owners. These bikes have no recorder and can't be rented.</p></li>
+              )}
+              <li ref={(el) => { if (el) cards.current.set(b.key, el); else cards.current.delete(b.key); }}
                 className={`fcard ${b.key === selected ? "is-selected" : ""} ${b.live ? "is-live" : ""}`}
                 onMouseEnter={() => setHover(b.key)} onMouseLeave={() => setHover(null)}>
                 <button type="button" className="fcard-hit" onClick={() => { select(b.key); if (phone) setSheet("peek"); }} aria-label={`${b.label}, ${b.pricePerHour} dollars an hour, ${distanceText(d)}`}>
@@ -108,7 +111,7 @@ export function Finder({ bikes, me, locating, onLocate, live, rentingIt, loaded 
                 </button>
                 {b.live && b.objectId !== null && <a className="btn btn-primary btn-sm fcard-rent" href={href(`rent/${b.objectId}`)}>Rent</a>}
               </li>
-            ))}
+            </Fragment>))}
           </ul>
         </div>
 
