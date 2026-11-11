@@ -158,6 +158,8 @@ function DayRibbon({ owned }: { owned: ObjectDetail[] }) {
 }
 
 function ObjectRow({ d }: { d: ObjectDetail }) {
+  const qc = useQueryClient();
+  const warm = () => { if (!qc.getQueryData(["object", d.id])) qc.setQueryData(["object", d.id], d); };
   const last = d.rentals.filter((r) => r.settlement && r.settlement.tier > 0).at(-1)?.settlement ?? null;
   const status = d.pendingHandoff?.to.role === "owner" ? `${nameOf(d.pendingHandoff.from)} is returning it`
     : d.status === "rented" ? `Out with ${nameOf(d.custodian)}`
@@ -165,7 +167,7 @@ function ObjectRow({ d }: { d: ObjectDetail }) {
         : d.status === "held-without-deposit" ? `${nameOf(d.custodian)} has it, no deposit` : "Available";
   return (
     <li>
-      <a className="bike-tile" href={href(`object/${d.id}`)}>
+      <a className="bike-tile" href={href(`object/${d.id}`)} onPointerEnter={warm} onFocus={warm} onPointerDown={warm}>
         <span className="bike-tile-photo">
           {CASE_IMAGE && <img src={CASE_IMAGE.src} alt="" />}
           <span className={`bike-tile-status ${d.status === "available" ? "" : "busy"}`}>{status}</span>

@@ -129,3 +129,9 @@ html.menu-open { overflow: hidden; }
   }
 }
 @media (prefers-reduced-motion: reduce) { .page:has(.welcome) .hdr-status { display: none; } }
+
+/* ---------- Round 136: the photo you clicked becomes the bike page's main photo ---------- */
+.l-main-photo img { view-transition-name: bike-photo; }
+::view-transition-group(bike-photo) { animation-duration: .42s; animation-timing-function: cubic-bezier(.2, .7, .2, 1); }
+::view-transition-old(bike-photo), ::view-transition-new(bike-photo) { height: 100%; object-fit: cover; overflow: clip; }
+::view-transition-group(bike-photo) { border-radius: var(--radius); overflow: clip; }

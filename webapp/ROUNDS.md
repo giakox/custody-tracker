@@ -2142,6 +2142,25 @@ Block 121–130 worked through the oldest screens in the register and two compos
 
 **Test on the blurred shots:** yes: the black band at the top is gone; the bike photo is the darkest, largest thing on the page.
 
+## Round 136 · Motion: the photo you click becomes the bike page's photo
+
+**Hierarchy audit (page transitions, untouched since 88):** every page change was the same short cross-fade of the whole page, with the header held still. Going from the Home's "Free now: the demo bike" card or a My bikes tile to the bike page, the small photo you pressed vanished and a large photo of the same bike appeared elsewhere: the one continuity the eye could follow was thrown away.
+
+**What changed:** a shared-element view transition. The photo inside the link you click is named `bike-photo` just before the change (only that one, so no two elements share the name), and the bike page's main photo carries the same name: the thumbnail grows into the gallery's main picture in 0.42 s while the rest cross-fades. For it to have something to land on, the bike's data is warmed before the click: on hover, focus or press, the Home prefetches the bike and the network; a My bikes tile puts the bike it already has into the cache. Without a warm cache (a very fast tap on a slow network) it falls back to the old cross-fade. Off with reduced motion (the router skips view transitions entirely, as before).
+
+**Mid-animation frames:** [three frames at 6× slower](rounds/136-photo-transition.jpg): the thumbnail leaves its card, grows over the fading Home, lands in the gallery.
+
+**Café test:** when the waiter brings what you pointed at in the window, it's the same cake. Still missing: the same continuity from the finder's cards (they select on the map rather than navigate; their "See the bike" link does carry it from the map's mini card).
+
+**References:** the iOS Photos app (the thumbnail opens into the photo); Airbnb's listing open on mobile web (the card's photo expands into the listing's).
+
+**Three ideas:** (1) shared photo transition with prefetch. (2) Slide pages left/right by flow direction. (3) Keep the cross-fade, make it longer.
+**Discarded:** (2) the site isn't a stack: Home → bike → rent is mostly forward, but the header links jump anywhere, and sideways slides would lie about where you are. (3) longer only makes the disappearing photo more noticeable.
+
+**Chosen, (1).** Probed: during the transition `::view-transition-group(bike-photo)`, `old` and `new` all exist.
+
+**Test on the blurred shots:** at rest nothing changes; in motion, one picture travels instead of two blinking.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -2155,7 +2174,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Home: try the rule (and Rule step) | 104 (bands joined: 122) |
 | Home: find a bike (grid + map) | 123 |
 | Header | 106 |
-| Page transitions | 88 |
+| Page transitions | 136 (shared photo) |
 | Live rental strip | 94 |
 | Footer | 120 (wordmark only on reading pages) |
 | Bike page | 107 (proof mode: 100) |

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRoute } from "../ui/router";
-import { useQuery } from "@tanstack/react-query";
-import { getFleet, getObject, listObjects } from "../data/api";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { getFleet, getNetwork, getObject, listObjects } from "../data/api";
 import { useViewer } from "../ui/viewer";
 import { SiteHeader } from "../components/SiteHeader";
 import { Moments } from "../components/HowItWorks";
@@ -40,6 +40,11 @@ function TryTheRule({ objectId }: { objectId: number }) {
 /** Home = the map of bikes free to rent near you, then what Sharify is. */
 export function HomePage() {
   const fleet = useQuery({ queryKey: ["fleet"], queryFn: getFleet, refetchInterval: 10_000 });
+  const qc = useQueryClient();
+  const warm = (id: number) => () => {
+    void qc.prefetchQuery({ queryKey: ["network"], queryFn: getNetwork, staleTime: Infinity });
+    void qc.prefetchQuery({ queryKey: ["object", id], queryFn: () => getObject(id), staleTime: 4_000 });
+  };
   const [page] = useRoute();
   // "Find a bike" (#/bikes) opens Home on the finder.
   useEffect(() => { if (page === "bikes") setTimeout(() => document.getElementById("bikes")?.scrollIntoView(), 60); }, [page]);
@@ -79,7 +84,7 @@ export function HomePage() {
             </div>
           </div>
           {live && live.b.objectId !== null && (
-            <a className="nearest" href={href(`object/${live.b.objectId}`)}>
+            <a className="nearest" href={href(`object/${live.b.objectId}`)} onPointerEnter={warm(live.b.objectId)} onFocus={warm(live.b.objectId)} onPointerDown={warm(live.b.objectId)}>
               <BikePhoto b={live.b} className="nearest-photo" />
               <span className="nearest-body">
                 <span className="nearest-k"><i aria-hidden="true" />Free now, {walkText(live.d)}<span className="wide-only">{"\u00a0"}from {me ? "you" : "Bocconi"}</span></span>

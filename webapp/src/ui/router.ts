@@ -27,3 +27,17 @@ export function useRoute(animate = false): string[] {
 
 /** Links keep the query string (?scenario=…) and change only the hash. */
 export const href = (path: string) => `${window.location.search}#/${path}`;
+
+/** The photo you click on the way to a bike's page becomes that page's main photo (a shared-element view transition).
+ *  Only the clicked photo is named, just before the change, so two elements never share the name. */
+if (typeof document !== "undefined") {
+  document.addEventListener("click", (e) => {
+    const a = (e.target as Element | null)?.closest?.('a[href*="#/object/"]');
+    if (!a) return;
+    const img = a.querySelector("img") ?? a.closest(".mini")?.querySelector("img");
+    if (!(img instanceof HTMLElement)) return;
+    img.style.setProperty("view-transition-name", "bike-photo");
+    setTimeout(() => img.style.removeProperty("view-transition-name"), 1000);
+  }, true);
+}
+
