@@ -725,6 +725,38 @@ Return used a layout whose CSS was deleted in round 66 (the photo spilled over t
 
 **Test, "another screen at a glance?"** Yes: a text page with a map thumbnail became a map with a card on it.
 
+## Round 68 · The receipt leads with the money back; My rentals as trip tiles
+
+**Hierarchy audit (Receipt, before):**
+
+| Block | Who, when | If it vanished | Verdict |
+|---|---|---|---|
+| "Receipt" at 72 px | — | the page still is one | demoted to a kicker with the bike and the owner |
+| Bike, owner, date, times (11 px) | renter, later | small loss | tertiary, under the kicker |
+| Rental price + its explanation (first line) | renter | the price | last of the summary lines |
+| Deposit, hardest knock, kept | renter | the why | secondary, grouped on sand |
+| "Deposit back to you: 30 dollars" (at the bottom) | renter, the one thing they came for | the receipt is pointless | primary: 72 px at the top |
+| Note, proof, check, print | the careful renter, a judge | the proof | tertiary, at the end |
+
+**My rentals, before:** a 120 px H1, the word "Past", and one ruled row with a 60 px thumbnail; the rental in progress was a bordered panel.
+
+**Levels after:** Receipt: the amount back is primary, the split bar right under it (blue back, orange kept, proportional) is secondary and says the whole story without reading; the summary lines are tertiary on sand. My rentals: a ride in progress is a large card with its photo and one button (primary), past rentals are photo tiles with the amount back on the right (secondary).
+
+**Squint test:** Receipt before: the eye went to "Receipt" and then wandered down a column of dashed rows; the 30 dollars were below the fold on a phone. After: the 30 dollars, then the blue and orange bar, then the sand block. My rentals before: a heading over nothing. After: the photo card, then the tiles.
+
+**References:** Stripe's receipts (the amount in large type at the top, the summary in a quiet block below, the details at the end) and Airbnb Trips (each past trip a photo with the place and the dates under it, the upcoming one as a big card). Why ours looked cheaper: a list of equally weighted rows with dashed rules, and a title instead of a result.
+
+**Three ideas:** (1) amount first, with a proportional bar of what came back and what was kept; trips as photo tiles. (2) The receipt as a torn paper slip with a stamp. (3) The receipt as a small timeline of the rental (deposit, knock, return, settled).
+**Discarded:** (2) we had the torn edge already: decoration, not hierarchy. (3) repeats the bike page's record and pushes the amount down again.
+
+**Chosen, (1):** [Receipt, 1440](rounds/68-receipt-1440.jpg), [Receipt on a phone](rounds/68-receipt-375.jpg), [My rentals with a ride in progress](rounds/68-rentals-1440.jpg), [My rentals on a phone](rounds/68-rentals-375.jpg). The bar grows from the left once on load (off with reduced motion). The top live bar hides on My rentals, where the in-progress card already says it.
+
+**Without lines:** the 2 px ink rule, the dashed rows and the torn-edge mask are gone; the slip is white on top and sand below. The past-rentals list lost its ruled rows: tiles separate by a 24 px gap.
+
+**States:** tiles lift 3 px with a shadow on hover, press at 99%, and show a focus ring offset 4 px.
+
+**Test, "another screen at a glance?"** Yes, both: the receipt is a big number with a coloured bar; My rentals is a photo card and tiles.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -738,7 +770,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Bike page | 65 |
 | Rent flow: Rule, Wallet, Deposit | 66 |
 | Rent flow: Ride, Return, Waiting, Outcome | 67 |
-| Receipt and My rentals | — |
+| Receipt and My rentals | 68 |
 | Owner (My bikes) | — |
 | Add a bike | 63 |
 | Verify | — |

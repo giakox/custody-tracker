@@ -68,30 +68,38 @@ export function MyRentalsPage() {
       {active.map(({ d, r }) => {
         const waiting = d.pendingHandoff?.to.role === "owner";
         return (
-          <section key={`${d.id}-${r.period}`} className="panel live-rental">
-            <p className="kicker">In progress</p>
-            <h2>{objectName(d)}</h2>
-            <p className="meta">{span(r.started.at, null)} so far · deposit {usd(r.collateral)}{waiting ? " · waiting for the owner to confirm" : ""}</p>
-            {r.current && r.current.tier > 0 && <p className="bb-line"><TierMeter tier={r.current.tier} /><span>a <span className="shock">{TIER_NAMES[r.current.tier]}</span> knock so far</span></p>}
-            <div className="actions"><a className="btn btn-primary" href={href(`rent/${d.id}/${waiting ? "waiting" : "active"}`)}>Open</a></div>
+          <section key={`${d.id}-${r.period}`} className={`now-card tier-glow-${r.current?.tier ?? 0}`}>
+            {CASE_IMAGE && <img className="now-photo" src={CASE_IMAGE.src} alt="" />}
+            <div className="now-body">
+              <p className="live-kicker"><i className="pulse" aria-hidden="true" />In progress · {span(r.started.at, null)} so far</p>
+              <h2>{objectName(d)}</h2>
+              <p className="now-line">{r.current && r.current.tier > 0
+                ? <><TierMeter tier={r.current.tier} /><span>a <span className="shock">{TIER_NAMES[r.current.tier]}</span> knock so far</span></>
+                : <><TierMeter tier={0} showNone /><span>no knocks so far</span></>}
+                <span className="now-dep">{usd(r.collateral)} deposit{waiting ? ", waiting for the owner to confirm" : ""}</span></p>
+              <div className="actions"><a className="btn btn-primary" href={href(`rent/${d.id}/${waiting ? "waiting" : "active"}`)}>Open the rental</a></div>
+            </div>
           </section>
         );
       })}
       {rows && (
-        <section className="history-list">
-          <h2>Past</h2>
-          {past.length === 0 && <p className="hint-line">No finished rentals yet. <a className="link" href={href("")}>Find a bike on the map</a></p>}
-          <ol>
+        <section className="history-list" aria-labelledby="past-title">
+          <h2 id="past-title">Past rentals</h2>
+          {past.length === 0 && <p className="empty-line">No finished rentals yet. <a className="link" href={href("bikes")}>Find a bike near you</a></p>}
+          <ol className="trips">
             {past.map(({ d, r }) => {
               const s = r.settlement!;
               return (
                 <li key={`${d.id}-${r.period}`}>
-                  <a className="past-row" href={href(`receipt/${d.id}/${r.period}`)}>
-                    {CASE_IMAGE && <img className="past-photo" src={CASE_IMAGE.src} alt="" />}
-                    <span className="past-what"><span className="past-name">{objectName(d)}</span><span className="past-when">{when(r.started.at)}, for {span(r.started.at, s.anchor.at)}</span></span>
-                    <span className="past-shock"><TierMeter tier={s.tier} showNone /><span className={s.tier ? "shock" : ""}>{s.tier ? `${TIER_NAMES[s.tier]} knock` : "no knocks"}</span></span>
-                    <span className="past-back">{s.refund} of {usd(r.collateral)} back</span>
-                    <span className="link">Receipt</span>
+                  <a className="trip-tile" href={href(`receipt/${d.id}/${r.period}`)}>
+                    {CASE_IMAGE && <img className="trip-tile-photo" src={CASE_IMAGE.src} alt="" />}
+                    <span className="trip-tile-body">
+                      <span className="trip-tile-name">{objectName(d)}</span>
+                      <span className="trip-tile-when">{when(r.started.at)}, for {span(r.started.at, s.anchor.at)}</span>
+                      <span className="trip-tile-back">{usd(s.refund)} back</span>
+                      <span className="trip-tile-knock"><TierMeter tier={s.tier} showNone /><span className={s.tier ? "shock" : ""}>{s.tier ? `${TIER_NAMES[s.tier]} knock` : "no knocks"}</span></span>
+                    </span>
+                    <span className="trip-tile-go">Receipt</span>
                   </a>
                 </li>
               );
@@ -121,17 +129,22 @@ export function ReceiptPage({ id, period }: { id: number; period: number }) {
   return (
     <Page>
       <p><a className="link back" href={href("my-rentals")}>My rentals</a></p>
-      <article className="receipt">
-        <header>
-          <h1>Receipt</h1>
-          <p className="meta">{objectName(d)}, lent by {d.ownerName ?? shortHex(d.owner.address)} · {day(r.started.at)}, {hm(r.started.at)}–{returned ? hm(returned.at) : "now"}</p>
+      <article className={`receipt slip tier-${s?.tier ?? 0}`}>
+        <header className="slip-head">
+          <p className="slip-kicker">Receipt · {objectName(d)}, lent by {d.ownerName ?? shortHex(d.owner.address)}</p>
+          <p className="slip-sub">{day(r.started.at)}, {hm(r.started.at)}–{returned ? hm(returned.at) : "now"}</p>
+          <h1 className="slip-amount"><span>Deposit back to you</span>{s ? usd(s.refund) : "Not settled yet"}</h1>
+          {s && <div className="split" role="img" aria-label={`${usd(s.refund)} back, ${usd(s.fee)} kept, of a ${usd(r.collateral)} deposit`}>
+            <i className="split-back" style={{ flexGrow: Number(s.refund) }} />
+            {Number(s.fee) > 0 && <i className="split-kept" style={{ flexGrow: Number(s.fee) }} />}
+          </div>}
+          {s && <p className="split-legend"><span><i className="split-back" />{usd(s.refund)} back</span>{Number(s.fee) > 0 && <span><i className="split-kept" /><span>{usd(s.fee)} kept for the <span className="shock">{TIER_NAMES[s.tier]}</span> knock</span></span>}</p>}
         </header>
         <dl className="receipt-lines">
-          <div><dt>Rental price</dt><dd className="mono">{usd(price.amount)}</dd><dd className="sub">{price.mins} min, billed per started quarter hour at 2 dollars an hour · paid to the owner, separately</dd></div>
           <div><dt>Deposit</dt><dd className="mono">{usd(r.collateral)}</dd></div>
           <div><dt>Hardest knock</dt><dd className={s && s.tier ? "shock" : ""}>{s ? (s.tier ? TIER_NAMES[s.tier] : "none") : "rental in progress"}</dd></div>
-          <div><dt>Kept for the knock</dt><dd className="mono">{s ? (s.tier ? `${usd(s.fee)} (${(Number(s.fee) / Number(r.collateral)) * 100}% of the deposit)` : "nothing") : "—"}</dd></div>
-          <div className="total"><dt>Deposit back to you</dt><dd className="mono">{s ? usd(s.refund) : "—"}</dd></div>
+          <div><dt>Kept for the knock</dt><dd className="mono">{s ? (s.tier ? `${usd(s.fee)}, ${(Number(s.fee) / Number(r.collateral)) * 100}%` : "nothing") : "—"}</dd></div>
+          <div><dt>Rental price</dt><dd className="mono">{usd(price.amount)}</dd><dd className="sub">{price.mins} min, per started quarter hour at 2 dollars an hour, paid to the owner separately</dd></div>
         </dl>
         <p className="fine-print">Nobody decided this by hand: the rule did. {TEST_MONEY}</p>
         <details className="proof-details">
