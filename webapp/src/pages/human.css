@@ -146,3 +146,10 @@
 .bike-side .rule-card { margin-top: 0; max-width: none; }
 .bike-side .rule-card h2.rule-title { font-size: clamp(22px, 2vw, 26px); }
 @media (max-width: 860px) { .bike-side { position: static; } .bike-top .object-image { order: 0; } }
+
+/* Round 11: owners get a full-width band with a face (the shop owner), not a card at the bottom of the page. */
+.owners-band { margin-top: clamp(64px, 9vw, 128px); background: var(--surface); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+.owners-photo { width: 100%; height: 100%; min-height: 420px; object-fit: cover; }
+.owners-band .owners { max-width: none; margin: 0; padding: clamp(40px, 6vw, 88px) var(--gutter); grid-template-columns: minmax(0, 1fr); gap: 28px; align-items: start; }
+.owners-band .own-cta { background: var(--bg); }
+@media (max-width: 860px) { .owners-band { grid-template-columns: minmax(0, 1fr); } .owners-photo { min-height: 0; aspect-ratio: 4 / 3; } }

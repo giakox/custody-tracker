@@ -176,13 +176,16 @@ export function HomePage() {
         <Moments />
         {live && live.b.objectId !== null && <TryTheRule objectId={live.b.objectId} />}
 
-        <section className="owners" aria-labelledby="owners-title">
-          <div className="owners-copy">
-            <h2 id="owners-title">Your bike sits still most of the week.</h2>
-            <p>Lend it to people nearby. You set the price, the deposit and what a drop costs; the rule is public before anyone rides.</p>
-          </div>
-          <Earnings />
-        </section>
+        <div className="owners-band">
+          <img className="owners-photo" src="./img/day/owner-shop.jpg" alt="A bike shop owner smiling in his doorway, bikes parked outside" loading="lazy" />
+          <section className="owners" aria-labelledby="owners-title">
+            <div className="owners-copy">
+              <h2 id="owners-title">Your bike sits still most of the week.</h2>
+              <p>Lend it to people nearby. You set the price, the deposit and what a drop costs; the rule is public before anyone rides.</p>
+            </div>
+            <Earnings />
+          </section>
+        </div>
       </main>
       <footer className="site-foot">Sharify is a course project at Bocconi (30518). It runs on a test network: no real money moves. <a className="link" href={href("design")}>How Sharify is designed</a></footer>
     </div>
