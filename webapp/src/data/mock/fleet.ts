@@ -16,6 +16,7 @@ export const SAMPLE_FLEET: FleetBike[] = [
   S("s1", "Blue Graziella", "City bike", "Navigli Rentals", 0.0062, -0.0071, "1.5", "40", 41, 0, null),
   S("s2", "Porta Romana e-bike", "E-bike", "Porta Romana Bike Co.", 0.0081, 0.0094, "3", "80", 18, 1, drop(2, 3640, 2 * D)),
   S("s3", "Campus fixie", "City bike", "Student Bikes Bocconi", -0.0019, 0.0022, "1.5", "40", 63, 2, drop(1, 1180, 9 * D)),
+  S("s10", "Sarfatti e-bike", "E-bike", "Student Bikes Bocconi", 0.0021, -0.0024, "2.5", "80", 24, 0, null),
   S("s4", "Cargo for errands", "Cargo bike", "Navigli Rentals", 0.0118, -0.0035, "3", "100", 9, 0, null),
   S("s5", "Darsena city bike", "City bike", "Navigli Rentals", 0.0098, -0.0129, "2", "50", 27, 1, drop(1, 940, 5 * H)),
   S("s6", "Ripamonti e-bike", "E-bike", "Porta Romana Bike Co.", -0.0105, 0.0071, "2.5", "80", 12, 0, null),

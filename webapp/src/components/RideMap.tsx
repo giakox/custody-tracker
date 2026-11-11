@@ -40,5 +40,5 @@ export function RideMap({ readings, lightCg, padLeft = 0 }: { readings: Reading[
     m.fitBounds(L.latLngBounds(pts), { paddingTopLeft: [28 + padLeft, 28], paddingBottomRight: [28, 28], maxZoom: 16, animate: false });
   }, [readings, lightCg, padLeft]);
 
-  return <div ref={el} className="ride-map" role="img" aria-label="Map of your ride so far, shocks marked in orange" />;
+  return <div ref={el} className="ride-map" role="img" aria-label="Map of your ride so far, shocks marked in black" />;
 }

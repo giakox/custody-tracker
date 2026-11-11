@@ -1,0 +1,23 @@
+/* Sharify v2: printed documents. Nothing here shows on screen. */
+.v2-print-band { display: none; }
+
+@media print {
+  @page { size: A4; margin: 0; }
+  .v2.v2-receipt-page .v2-page > .v2-print-hide { display: none !important; }
+  .v2-print-band, .v2-print-band * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  /* ---------- Documents with a band (receipt): one A4 page, blue band on top, white body ---------- */
+  .v2-demo, .v2 .v2-demo, [class*="v2-demo"] { display: none !important; }
+  .v2 .v2-print-band { display: flex !important; justify-content: space-between; align-items: center; margin: 0 -16mm 10mm !important; padding: 10mm 16mm !important; background: #0297de !important; }
+  .v2 .v2-print-band * { background: transparent !important; color: #fff !important; }
+  .v2 .v2-print-band img { height: 7mm; width: auto; filter: brightness(0) invert(1); }
+  .v2 .v2-print-band span { font-size: 12pt; font-weight: 500; }
+  .v2.v2-receipt-page .v2-page { padding: 0 16mm 14mm !important; margin: 0 !important; box-sizing: border-box; max-width: none !important; font-size: 10.5pt; }
+  .v2 .v2-receipt .v2-h2 { font-size: 22pt; }
+  .v2 .v2-receipt-block { margin-top: 8mm !important; }
+  .v2 .v2-receipt-total { font-size: 13pt; padding: 5mm 6mm !important; margin-left: -6mm !important; margin-right: -6mm !important; border-radius: 4mm; background: #f2f8fc !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .v2 .v2-receipt-page article > :first-child + * { margin-top: 0 !important; }
+  .v2.v2-receipt-page .v2-receipt { margin-top: 0 !important; }
+  .v2 .v2-receipt-total * { background: transparent !important; }
+  .v2 .v2-receipt .v2-body, .v2 .v2-receipt .v2-small { font-size: 9.5pt; }
+}

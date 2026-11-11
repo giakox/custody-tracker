@@ -1,0 +1,233 @@
+/* Sharify v2: the renting path, cash-desk style. One centred column, at most 640 px. */
+
+.v2-co-col { width: 100%; max-width: calc(640px + 2 * var(--v2-gutter)); margin: 0 auto; padding: 48px var(--v2-gutter) var(--v2-band) !important; }
+
+.v2-co-progress { margin-bottom: 24px; }
+.v2-co-progress-row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+.v2-co-progress-row .v2-link-quiet { font-size: var(--v2-size-5); }
+.v2-co-bar { margin-top: 8px; height: 4px; border-radius: 999px; background: #e5e5ea; clip-path: inset(0 round 999px); }
+.v2-co-bar > i { display: block; height: 100%; border-radius: 999px; background: var(--v2-accent); }
+
+.v2-co-bike { display: flex; align-items: center; gap: 16px; }
+.v2-co-bike img { width: 64px; height: 64px !important; object-fit: cover; border-radius: var(--v2-radius); flex: none; }
+
+.v2-co-title { margin-top: 48px; }
+.v2-co-lead { margin-top: 16px; }
+.v2-co-body { margin-top: 48px; display: grid; row-gap: 48px; }
+.v2-co-action { margin-top: 48px; display: grid; gap: 16px; }
+.v2-co-action .v2-btn-primary { width: 100%; }
+/* Wizard: Back on the left, the primary on the right. */
+.v2-co-action.has-back { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.v2-co-action.has-back .v2-btn-primary { width: auto; min-width: 200px; }
+.v2-co-note { margin-top: 24px; }
+.v2-co-error { color: var(--v2-text); }
+.v2-co-sub { font-size: var(--v2-size-3); font-weight: 500; line-height: 1.3; margin-bottom: 16px; }
+
+/* ---------- With a side panel: 7 + 4 columns, the panel sticky; on phones it folds above the button ---------- */
+.v2-co-col.has-aside { max-width: calc(1200px + 2 * var(--v2-gutter)); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: start; }
+.v2-co-col.has-aside .v2-co-main { grid-column: 1 / span 7; }
+.v2-co-aside { grid-column: 9 / span 4; position: sticky; top: 96px; }
+.v2-co-fold { display: none; }
+.v2-co-fold.v2-co-fold-always { display: block; }
+.v2-co-fold summary { font-size: var(--v2-size-4); font-weight: 500; list-style: none; display: flex; justify-content: space-between; align-items: center; padding: 16px 24px !important; border-radius: var(--v2-radius); background: var(--v2-tint); }
+.v2-co-fold summary::-webkit-details-marker { display: none; }
+.v2-co-fold summary::after { content: "Show"; font-weight: 400; color: var(--v2-muted); }
+.v2-co-fold[open] summary::after { content: "Hide"; }
+
+/* ---------- The step rail (wide screens): 40 px rows, 24 px circles, a 2 px line between them ---------- */
+.v2-co-title-row { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-top: 48px; }
+.v2-co-title-row .v2-co-title { margin-top: 0; }
+.v2-co-title-end { display: none; flex: none; font-size: var(--v2-size-4); }
+.v2-rail ol { display: grid; }
+.v2-rail-step { position: relative; }
+.v2-rail-hit { display: flex; align-items: center; gap: 16px; height: 40px; padding: 0 8px !important; margin: 0 -8px !important; border-radius: 12px; color: var(--v2-text); text-decoration: none; }
+a.v2-rail-hit { transition: background-color 150ms ease-out; }
+a.v2-rail-hit:hover { background: #f7f9fb; }
+.v2-rail-dot { position: relative; z-index: 1; flex: none; display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 999px; background: var(--v2-white); border: 1.5px solid #e5e5ea !important; color: var(--v2-white); }
+.v2-rail-step.is-done .v2-rail-dot { background: var(--v2-accent); border-color: var(--v2-accent) !important; }
+.v2-rail-step.is-current .v2-rail-dot { border: 2px solid var(--v2-accent) !important; }
+.v2-rail-step.is-current .v2-rail-dot::after { content: ""; width: 10px; height: 10px; border-radius: 999px; background: var(--v2-accent); }
+.v2-rail-name { font-size: var(--v2-size-4); }
+.v2-rail-step.is-current .v2-rail-name { font-weight: 500; }
+.v2-rail-step.is-todo .v2-rail-name { color: var(--v2-muted); }
+/* The line from this circle to the next: blue once the next step has been reached. */
+.v2-rail-step:not(:last-child)::after { content: ""; position: absolute; left: 11px; top: 32px; width: 2px; height: 16px; background: #e5e5ea; }
+.v2-rail-step.line-done::after { background: var(--v2-accent); }
+.v2-co-aside-preview { margin-top: 32px; }
+
+/* ---------- Steps: 24 px circle, empty / filled blue with a tick / spinning ring ---------- */
+.v2-steps-list { display: grid; row-gap: 16px; }
+.v2-step { display: grid; grid-template-columns: 24px 1fr; column-gap: 16px; align-items: start; }
+.v2-step-text { display: grid; }
+.v2-step-dot {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; margin-top: 0; border-radius: 999px;
+  border: 1.5px solid #e5e5ea !important; color: var(--v2-white);
+}
+.v2-step.is-confirmed .v2-step-dot { background: var(--v2-accent); border-color: var(--v2-accent) !important; }
+.v2-step.is-signing .v2-step-dot,
+.v2-step.is-pending .v2-step-dot { border: 2px solid #e5e5ea !important; border-top-color: var(--v2-accent) !important; animation: v2-spin 900ms linear infinite; }
+.v2-step.is-failed .v2-step-dot { border-color: var(--v2-text) !important; }
+
+.v2-spin { display: inline-block; border-radius: 999px; border: 2px solid #e5e5ea !important; border-top-color: var(--v2-accent) !important; animation: v2-spin 900ms linear infinite; }
+@keyframes v2-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .v2-step.is-signing .v2-step-dot, .v2-step.is-pending .v2-step-dot, .v2-spin { animation: none !important; }
+}
+/* The reset in tokens.css stops animations; these rings are the exception. */
+.v2 .v2-spin, .v2 .v2-step.is-signing .v2-step-dot, .v2 .v2-step.is-pending .v2-step-dot { animation: v2-spin 900ms linear infinite; }
+@media (prefers-reduced-motion: reduce) { .v2 .v2-spin, .v2 .v2-step .v2-step-dot { animation: none !important; } }
+
+/* ---------- Money rows ---------- */
+.v2-bill { display: grid; row-gap: 16px; }
+.v2-bill > div { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; font-size: var(--v2-size-4); }
+.v2-bill dt { color: var(--v2-muted); }
+.v2-bill dd { text-align: right; white-space: nowrap; }
+.v2-bill .is-strong dt, .v2-bill .is-strong dd { color: var(--v2-text); font-weight: 500; font-size: var(--v2-size-3); }
+
+/* ---------- The ride, now: two stats on one row, left aligned ---------- */
+.v2-ride-stats { display: grid; grid-template-columns: 1fr 1fr; column-gap: 24px; align-items: start; }
+.v2-ride-stats > div > :first-child { margin-bottom: 8px; }
+.v2-ride-time { font-size: 72px; font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.v2-ride-peak-g { font-size: 40px; line-height: 1.3; }
+.v2-big { font-size: var(--v2-size-1); font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; }
+
+/* The row the hardest knock sits in: a tint and round corners, no new colour. */
+
+
+/* Maps of the ride and of the spot: grey tiles; knocks in black, not orange. */
+.v2-co-map { position: relative; height: 280px; border-radius: var(--v2-radius); clip-path: inset(0 round 16px); background: var(--v2-tint); }
+.v2 .v2-co-map .ride-map, .v2 .v2-co-map .spot-map, .v2 .v2-co-map .leaflet-container { position: absolute; inset: 0; height: 100% !important; width: 100%; border-radius: 0; box-shadow: none; background: var(--v2-tint) !important; }
+.v2 .v2-co-map .leaflet-tile-pane { filter: none; }
+.v2 .v2-co-map .leaflet-tile { filter: grayscale(1) brightness(1.06) contrast(0.92); }
+.v2 .v2-co-map path[fill="#fc734d"] { fill: var(--v2-text); }
+.v2 .v2-co-map .leaflet-control-zoom { display: none; }
+.v2 .v2-co-map .leaflet-control-attribution { background: rgba(255, 255, 255, 0.85) !important; color: var(--v2-muted) !important; font: 400 12px/1.5 "Poppins", system-ui, sans-serif; padding: 0 8px !important; }
+.v2 .v2-co-map .leaflet-control-attribution a { color: var(--v2-muted) !important; }
+.v2 .v2-co-map .spot-pin { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 16px !important; border-radius: 999px; background: var(--v2-accent-strong); color: var(--v2-white); font: 500 14px/1 "Poppins", system-ui, sans-serif; white-space: nowrap; transform: translate(-50%, -50%); box-shadow: none; border: 0; }
+.v2 .v2-co-map .spot-pin i { width: 8px; height: 8px; border-radius: 999px; background: var(--v2-white); }
+.v2-co-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.v2-co-pair > img { width: 100%; height: 280px !important; object-fit: cover; border-radius: var(--v2-radius); }
+
+.v2-co-list { display: grid; row-gap: 16px; counter-reset: v2n; }
+.v2-co-list li { display: grid; grid-template-columns: 24px 1fr; column-gap: 16px; font-size: var(--v2-size-4); counter-increment: v2n; }
+.v2-co-list li::before { content: counter(v2n); width: 24px; height: 24px; border-radius: 999px; background: var(--v2-tint); display: inline-flex; align-items: center; justify-content: center; font-size: var(--v2-size-5); font-weight: 500; }
+
+.v2-co-wallets { display: grid; gap: 16px; }
+.v2-co-wallet { display: grid; gap: 4px; padding: 16px 24px !important; border-radius: var(--v2-radius); border: 1.5px solid var(--v2-text) !important; }
+.v2-co-wait { display: flex; justify-content: center; }
+
+/* ---------- The owner's wizard ---------- */
+.v2-add-photo { width: 100%; height: 280px !important; object-fit: cover; border-radius: var(--v2-radius); }
+.v2-choices { display: grid; gap: 16px; }
+.v2-choice { display: grid; gap: 4px; padding: 24px !important; border-radius: var(--v2-radius); background: var(--v2-tint); text-align: left; }
+.v2-choice.is-off { background: transparent; border: 1.5px solid #e5e5ea !important; }
+.v2-choice.is-off .v2-strong { color: var(--v2-muted); }
+.v2-check { display: grid; grid-template-columns: 24px 1fr; column-gap: 16px; align-items: start; padding: 24px !important; border-radius: var(--v2-radius); background: var(--v2-tint); cursor: pointer; }
+.v2-check-box { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 8px; background: var(--v2-white); border: 1.5px solid var(--v2-text) !important; color: var(--v2-white); }
+.v2-check.is-on .v2-check-box { background: var(--v2-accent); border-color: var(--v2-accent) !important; }
+.v2-check:focus-within { outline: 2px solid var(--v2-accent); outline-offset: 2px; }
+.v2-scan { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center; }
+.v2-scan img { width: 100%; height: 220px !important; object-fit: cover; border-radius: var(--v2-radius); }
+.v2-scan-say { display: grid; gap: 16px; justify-items: start; }
+.v2-form { display: grid; gap: 24px; }
+.v2-form-2 { grid-template-columns: 1fr 1fr; align-items: end; }
+.v2-levels { display: grid; row-gap: 8px; }
+.v2-levels-row { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; column-gap: 16px; align-items: center; }
+.v2-levels-head { font-size: var(--v2-size-5); font-weight: 500; color: var(--v2-muted); }
+.v2-preview { display: grid; gap: 16px; padding: 24px !important; border-radius: var(--v2-radius); background: var(--v2-tint); }
+.v2-co-fold .v2-preview { border: 0 !important; padding: 0 !important; }
+.v2-preview-row { display: flex; align-items: center; gap: 16px; }
+.v2-preview-photo { position: relative; flex: none; display: flex; align-items: center; justify-content: center; width: 96px; height: 96px; border-radius: var(--v2-radius); background: var(--v2-white); overflow: hidden; cursor: pointer; }
+.v2-preview-photo img { width: 100%; height: 100% !important; object-fit: cover; }
+.v2-preview-add { font-size: var(--v2-size-5); color: var(--v2-muted); text-align: center; padding: 8px !important; }
+.v2-preview-check { display: grid; gap: 4px; font-size: var(--v2-size-4); color: var(--v2-muted); }
+.v2-qr { display: grid; justify-items: center; gap: 16px; }
+.v2-qr-svg { width: 280px; height: 280px; }
+.v2-qr-svg svg { width: 100%; height: 100%; }
+
+/* Info under a choice (Add, step 1: "No, not yet"). */
+.v2-infobox { padding: 24px !important; border-radius: var(--v2-radius); background: var(--v2-tint); }
+
+/* Step 1: the photo explains what a recorder is; it doesn't need to dominate. */
+.v2-add-photo-small { height: 200px !important; }
+/* Step 3, before pairing: one framed area that says what to do. */
+.v2-scanbox-icon { display: inline-flex; align-items: center; justify-content: center; width: 72px; height: 72px; border-radius: 999px; background: var(--v2-white); }
+.v2-scanbox { display: grid; place-items: center; align-content: center; gap: 16px; height: 280px; padding: 24px !important; border-radius: var(--v2-radius); background: var(--v2-tint); text-align: center; }
+/* Step 3, after pairing: one confirmation card. */
+.v2-paired { padding: 24px !important; border-radius: var(--v2-radius); background: var(--v2-tint); }
+.v2-paired-head { display: flex; align-items: center; gap: 16px; }
+.v2-paired-mark { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 999px; background: var(--v2-accent); color: var(--v2-white); }
+.v2-paired-title { font-size: var(--v2-size-3); font-weight: 500; line-height: 1.3; }
+.v2-paired-rows { display: grid; row-gap: 8px; margin-top: 16px; }
+.v2-paired-rows > div { display: flex; justify-content: space-between; gap: 16px; font-size: var(--v2-size-4); }
+.v2-paired-rows dt { color: var(--v2-muted); }
+/* The rule inside the narrow preview. */
+.v2-knocks-compact { row-gap: 16px; }
+.v2-knocks-compact .v2-knock { grid-template-columns: 72px 1fr; }
+.v2-knocks-compact .v2-knock-num { font-size: var(--v2-size-3); }
+.v2-knocks-compact .v2-knock-unit { font-size: var(--v2-size-5); }
+.v2-knocks-compact .v2-knock-name { font-size: var(--v2-size-4); }
+.v2-knocks-compact .v2-knock-sum { font-size: var(--v2-size-5); }
+
+/* ---------- Phone: the one action is fixed at the bottom, over the safe area ---------- */
+/* Wide screens: the rail replaces "Step N of 6" and the bar; Cancel sits beside the title. */
+@media (min-width: 1024px) {
+  .v2-co-col.has-rail .v2-co-progress { display: none; }
+  .v2-co-col.has-rail .v2-co-title-end { display: block; }
+  .v2-co-col.has-rail .v2-co-progress + .v2-co-title-row, .v2-co-col.has-rail .v2-co-title-row:first-child { margin-top: 0; }
+  /* The wizard is one centred group (form + step list), centred across the page and, when it is shorter
+     than the screen, centred top to bottom too; a long step simply grows from the top margin. */
+  .v2-co-col.has-aside.has-rail {
+    max-width: none; margin: 0;
+    grid-template-columns: minmax(0, 640px) 240px; column-gap: 96px;
+    justify-content: center; align-content: center;
+    min-height: calc(100svh - 72px);
+    padding: 48px var(--v2-gutter) !important;
+  }
+  .v2-co-col.has-aside.has-rail .v2-co-main { grid-column: 1; }
+  .v2-co-col.has-aside.has-rail .v2-co-aside { grid-column: 2; top: 120px; }
+}
+@media (max-width: 1023px) {
+  .v2-co-col.has-aside { display: block; max-width: calc(640px + 2 * var(--v2-gutter)); }
+  .v2-co-aside { display: none; }
+  .v2-co-fold { display: block; margin-top: 24px; }
+}
+@media (max-width: 767px) {
+  .v2-ride-stats { grid-template-columns: 1fr; row-gap: 24px; }
+  .v2-ride-time { font-size: 56px; }
+  .v2-co-col { padding-top: 24px !important; }
+  .v2-co-title-row { margin-top: 24px; }
+  .v2-co-body { margin-top: 24px; row-gap: 24px; }
+  .v2-co-pair { grid-template-columns: 1fr; }
+  .v2-co-pair > img { height: 200px !important; }
+  .v2-scan, .v2-form-2 { grid-template-columns: 1fr; }
+  .v2-levels-row { grid-template-columns: 1fr 1fr 1fr; }
+  .v2-levels-row > :last-child { display: none; }
+  .v2-co-action.has-back .v2-btn-primary { min-width: 0; flex: 1; }
+  /* Room for the fixed bar: its measured height + 24 (useBarSpace); the fallback is 76 + 24 + safe area. */
+  .v2-co.has-action .v2-co-col { padding-bottom: var(--v2-bar-space, calc(100px + env(safe-area-inset-bottom))) !important; }
+  .v2-co-action {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 1000; margin: 0;
+    padding: 12px var(--v2-gutter) calc(12px + env(safe-area-inset-bottom)) !important;
+    background: var(--v2-white);
+  }
+  /* Only the primary button rides in the bar; the quiet links stay in the page flow. */
+  .v2-co-action .v2-co-aside { display: none; }
+}
+
+.v2-skel-rule { height: 480px; border-radius: var(--v2-radius); background: rgba(255, 255, 255, 0.6); }
+
+/* The preview beside the wizard: wide enough for its lines, the rule as a 2 x 2 grid of small cells. */
+@media (min-width: 1024px) {
+  .v2-co-col.has-aside.has-rail { grid-template-columns: minmax(0, 640px) 320px; column-gap: 80px; }
+}
+.v2-preview .v2-preview-photo { width: 72px; height: 72px; }
+.v2-preview .v2-body { font-size: var(--v2-size-5); line-height: 1.45; }
+.v2-preview-check { font-size: var(--v2-size-5); }
+.v2-knocks.v2-knocks-mini { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 8px; }
+.v2-knocks-mini .v2-knock { display: block; padding: 12px !important; border-radius: 12px; background: var(--v2-white); }
+.v2-knocks-mini .v2-knock-num { font-size: var(--v2-size-4); line-height: 1.2; }
+.v2-knocks-mini .v2-knock-unit { font-size: var(--v2-size-5); }
+.v2-knocks-mini .v2-knock-name { margin-top: 4px; font-size: var(--v2-size-5); font-weight: 500; }
+.v2-knocks-mini .v2-knock-sum { font-size: var(--v2-size-5); }

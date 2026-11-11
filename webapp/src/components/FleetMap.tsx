@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import { TILES } from "../ui/tiles";
 import "leaflet/dist/leaflet.css";
@@ -28,10 +28,15 @@ export function FleetMap({ bikes, center, me, selected, highlight = null, onSele
   const map = useRef<L.Map | null>(null);
   const markers = useRef(new Map<string, L.Marker>());
   const meLayer = useRef<L.LayerGroup | null>(null);
+  const touchPinch = useRef(false);
+  const [hint, setHint] = useState(false);
 
   useEffect(() => {
     if (!el.current || map.current) return;
-    const m = L.map(el.current, { zoomControl: false, attributionControl: true, maxZoom: 16, zoomSnap: 0.25 }).setView([center.lat, center.lon], 15);
+    // On a touch screen one finger scrolls the page, not the map: the map sits in the middle of the Home
+    // and would otherwise trap the scroll. Two fingers pinch and move it; one finger shows a hint.
+    const touch = matchMedia("(pointer: coarse)").matches;
+    const m = L.map(el.current, { zoomControl: false, attributionControl: true, maxZoom: 16, zoomSnap: 0.25, dragging: !touch }).setView([center.lat, center.lon], 15);
     L.control.zoom({ position: "topright" }).addTo(m);
     L.tileLayer(TILES.url, { maxZoom: 16, attribution: TILES.attribution }).addTo(m);
     m.on("click", () => onSelect(null));
@@ -39,11 +44,19 @@ export function FleetMap({ bikes, center, me, selected, highlight = null, onSele
     map.current = m;
     // Leaflet measures its container once; keep it in sync with layout changes (panel, sheet, rotation).
     // Until the user pans, refit on every size change: the first fit can run before layout settles.
-    m.on("dragstart", () => { userMoved.current = true; });
+    m.on("dragstart zoomstart", (e) => { if (e.type === "dragstart" || touchPinch.current) userMoved.current = true; });
+    let hintTimer = 0;
+    const onTouchStart = (e: TouchEvent) => { touchPinch.current = e.touches.length > 1; if (touchPinch.current) setHint(false); };
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 1) return;
+      setHint(true); clearTimeout(hintTimer); hintTimer = window.setTimeout(() => setHint(false), 1400);
+    };
+    if (touch) { el.current.addEventListener("touchstart", onTouchStart, { passive: true }); el.current.addEventListener("touchmove", onTouchMove, { passive: true }); }
     const ro = new ResizeObserver(() => { m.invalidateSize(); if (!userMoved.current) fit.current(); });
     ro.observe(el.current);
     // StrictMode and hot reload remove and recreate the map: the new one must be framed again.
-    return () => { ro.disconnect(); m.remove(); map.current = null; markers.current.clear(); fitted.current = false; userMoved.current = false; };
+    const node = el.current;
+    return () => { clearTimeout(hintTimer); node.removeEventListener("touchstart", onTouchStart); node.removeEventListener("touchmove", onTouchMove); ro.disconnect(); m.remove(); map.current = null; markers.current.clear(); fitted.current = false; userMoved.current = false; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -106,6 +119,7 @@ export function FleetMap({ bikes, center, me, selected, highlight = null, onSele
   return (
     <div className={`fleet-map-wrap ${selected ? "has-selection" : ""}`}>
       <div ref={el} className="fleet-map" role="application" aria-label="Map of bikes free to rent" />
+      <p className={`map-two-fingers ${hint ? "is-on" : ""}`} aria-hidden="true">Use two fingers to move the map</p>
     </div>
   );
 }

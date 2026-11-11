@@ -1,0 +1,163 @@
+/* Sharify v2: the bike's page. Gallery, sections on the left, the rent card on the right (a fixed bar on phones). */
+
+.v2-obj { padding-top: 48px; padding-bottom: var(--v2-band); }
+.v2-obj-back { display: inline-block; font-size: var(--v2-size-4); color: var(--v2-text); margin-bottom: 16px; }
+.v2-obj-title { margin-bottom: 8px; }
+.v2-obj-gallery { margin-top: 24px; }
+
+/* ---------- Gallery: 8 + 4 columns, 520 tall, gap 8, rounded only on the outer corners ---------- */
+.v2-gallery-track {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 8px;
+  height: 520px;
+  border-radius: var(--v2-radius);
+  clip-path: inset(0 round 16px);
+}
+.v2-gallery-item { position: relative; min-height: 0; background: var(--v2-tint); }
+.v2-gallery-item:first-child { grid-row: 1 / span 2; }
+.v2-gallery-item img { width: 100%; height: 100% !important; object-fit: cover; }
+.v2-gallery-item figcaption { position: absolute; left: 16px; bottom: 16px; }
+.v2-gallery.is-single .v2-gallery-track { grid-template-columns: 1fr; grid-template-rows: 1fr; }
+.v2-gallery-dots { display: none; }
+
+/* ---------- Body: 7 columns of sections, 1 empty, 4 for the rent card ---------- */
+.v2-obj-body { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; margin-top: 48px; align-items: start; }
+.v2-obj-main { grid-column: 1 / span 7; display: grid; row-gap: 48px; }
+.v2-obj-aside { grid-column: 9 / span 4; position: sticky; top: 96px; }
+
+.v2-obj-section-body { margin-top: 16px; display: grid; row-gap: 16px; }
+
+.v2-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 24px; }
+.v2-facts dt { font-size: var(--v2-size-4); color: var(--v2-muted); }
+.v2-facts dd { font-size: var(--v2-size-3); }
+
+/* Old components rendered inside v2: keep their words, drop their colours. */
+.v2 .shock { color: inherit; font-weight: 500; }
+.v2 em { font-weight: 500; }
+
+/* Where it stands, while something is happening. */
+.v2 .stateline { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.v2 .stateline .step { display: grid; gap: 8px; }
+.v2 .stateline .node { display: block; height: 4px; border-radius: 999px; background: var(--v2-tint); }
+.v2 .stateline .step.done .node { background: var(--v2-text); }
+.v2 .stateline .step.current .node { background: var(--v2-accent); }
+.v2 .stateline .step-name { font-size: var(--v2-size-4); font-weight: 500; }
+.v2 .stateline .step.next .step-name { color: var(--v2-muted); font-weight: 400; }
+.v2 .stateline .step-note { font: 400 var(--v2-size-5)/1.5 "Poppins", system-ui, sans-serif; color: var(--v2-muted); }
+
+/* ---------- What the box recorded: clean rows, no colours ---------- */
+.v2-rec { display: grid; row-gap: 24px; }
+.v2-rec-row { display: grid; grid-template-columns: 1fr auto; column-gap: 24px; align-items: baseline; }
+.v2-rec-who { display: flex; align-items: center; gap: 8px; font-size: var(--v2-size-3); font-weight: 500; line-height: 1.3; }
+.v2-rec-main > * + * { margin-top: 8px; }
+.v2-rec-peak { display: grid; justify-items: end; font-size: var(--v2-size-4); text-align: right; }
+.v2-rec-g { font-size: var(--v2-size-3); font-weight: 500; white-space: nowrap; }
+
+/* ---------- The map: grey tiles, one pin, 280 tall ---------- */
+.v2-obj-map { position: relative; height: 280px; border-radius: var(--v2-radius); clip-path: inset(0 round 16px); background: var(--v2-tint); }
+.v2 .v2-obj-map .fleet-map-wrap, .v2 .v2-obj-map .fleet-map { position: absolute; inset: 0; height: 100%; }
+.v2 .v2-obj-map .fleet-map-wrap::after { display: none; }
+.v2 .v2-obj-map .fleet-map .leaflet-tile-pane { filter: none; }
+.v2 .v2-obj-map .fleet-map .leaflet-tile { filter: grayscale(1) brightness(1.06) contrast(0.92); }
+.v2 .v2-obj-map .leaflet-control-zoom { display: none; }
+.v2 .v2-obj-map .leaflet-control-attribution { background: rgba(255, 255, 255, 0.85) !important; color: var(--v2-muted) !important; font: 400 12px/1.5 "Poppins", system-ui, sans-serif; padding: 0 8px !important; }
+.v2 .v2-obj-map .leaflet-control-attribution a { color: var(--v2-muted) !important; }
+.v2 .v2-obj-map .pin { position: relative; display: block; width: 52px; height: 30px; }
+.v2 .v2-obj-map .pin-price { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 999px; background: var(--v2-accent); color: var(--v2-white); border: 1.5px solid var(--v2-accent); box-shadow: none; transform: none; font: 500 14px/1 "Poppins", system-ui, sans-serif; }
+.v2 .v2-obj-map .pin-drop { display: none; }
+
+/* ---------- Check it yourself: text links ---------- */
+.v2-obj-links { display: grid; row-gap: 8px; font-size: var(--v2-size-4); }
+.v2-obj-batches summary { font-size: var(--v2-size-4); list-style: none; }
+.v2-obj-batches summary::-webkit-details-marker { display: none; }
+.v2-obj-batches ol { margin-top: 16px; display: grid; row-gap: 8px; }
+.v2-batch { display: grid; grid-template-columns: 96px 1fr auto auto; column-gap: 16px; font-size: var(--v2-size-4); }
+
+/* ---------- Rent card ---------- */
+.v2-book { padding: 24px !important; border-radius: var(--v2-radius); background: var(--v2-tint); }
+.v2-book-price { font-size: var(--v2-size-4); }
+.v2-book-amount { font-size: var(--v2-size-2); font-weight: 400; line-height: 1.3; margin-right: 4px; }
+.v2-book-actions { margin-top: 24px; display: grid; gap: 8px; }
+
+/* Action (./action.tsx) renders .btn links: drawn here as v2 buttons. */
+.v2 .v2-book-actions .btn,
+.v2 .v2-rentbar-actions .btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 52px; padding: 0 24px !important; border-radius: 999px;
+  font-size: var(--v2-size-4); font-weight: 500; line-height: 1; white-space: nowrap;
+  box-shadow: none; transform: none;
+}
+.v2 .v2-book-actions .btn { width: 100%; }
+.v2 .v2-book-actions .btn-primary, .v2 .v2-rentbar-actions .btn-primary { background: var(--v2-accent-strong); color: var(--v2-white); border: 0 !important; }
+.v2 .v2-book-actions .btn-secondary, .v2 .v2-rentbar-actions .btn-secondary { background: transparent; color: var(--v2-text); border: 1.5px solid var(--v2-text) !important; }
+.v2 .action-note { font-size: var(--v2-size-4); color: var(--v2-muted); }
+
+/* The phone bar exists only on phones. */
+.v2-rentbar { display: none; }
+
+/* ---------- States ---------- */
+.v2-obj-message { padding-top: var(--v2-band); padding-bottom: var(--v2-band); max-width: 760px; }
+.v2-obj-message-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 48px; }
+.v2-skel { border-radius: var(--v2-radius); background: var(--v2-tint); }
+.v2-skel-title { height: 52px; width: 40%; }
+.v2-skel-gallery { height: 520px; margin-top: 24px; }
+
+/* ---------- Phone ---------- */
+@media (max-width: 899px) {
+  .v2-obj { padding-top: 0; }
+  /* The way back sits right under the header, above the photos. */
+  .v2-obj-back { order: -2; margin-top: 16px; }
+  /* Gallery first and edge to edge: swiped, with dots. */
+  .v2-obj { display: flex; flex-direction: column; }
+  .v2-obj-gallery { order: -1; margin: 0 calc(-1 * var(--v2-gutter)) 0; }
+  .v2-gallery-track {
+    display: grid; grid-template-columns: none; grid-template-rows: none; grid-auto-flow: column; grid-auto-columns: 100%;
+    gap: 0; height: auto; aspect-ratio: 4 / 3; border-radius: 0; clip-path: none;
+    overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+  }
+  .v2-gallery-track::-webkit-scrollbar { display: none; }
+  .v2-gallery-item, .v2-gallery-item:first-child { grid-row: auto; scroll-snap-align: start; }
+  .v2-gallery-dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
+  .v2-obj-body { display: block; margin-top: 48px; }
+  .v2-obj-aside { display: none; }
+  .v2-facts { grid-template-columns: 1fr; }
+  .v2-batch { grid-template-columns: 1fr auto; row-gap: 0; }
+  .v2 .stateline { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 16px; }
+
+  /* The rent card becomes a fixed white bar: price left, action right. */
+  .v2-rentbar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    min-height: calc(76px + env(safe-area-inset-bottom));
+    padding: 12px var(--v2-gutter) calc(12px + env(safe-area-inset-bottom)) !important;
+    background: var(--v2-white);
+  }
+  .v2-rentbar-price { font-size: var(--v2-size-4); line-height: 1.3; min-width: 0; }
+  .v2-rentbar-sub { display: block; font-size: var(--v2-size-5); color: var(--v2-muted); }
+  .v2-rentbar-actions { display: flex; align-items: center; gap: 8px; }
+  .v2-rentbar-actions .action-note { display: none; }
+  .v2 .v2-rentbar-actions .btn { height: 52px; padding: 0 24px !important; }
+  /* Room for the bar under the last line of the page. */
+  .v2-object-page { padding-bottom: var(--v2-bar-space, calc(100px + env(safe-area-inset-bottom))) !important; }
+}
+
+/* The one pin on this map is the live bike and stays blue even though it is the selected one
+   (map.css paints a selected pin dark; this map has nothing to select). */
+.v2 .v2-obj-map .pin.is-selected .pin-price, .v2 .v2-obj-map .pin .pin-price { background: var(--v2-accent); border-color: var(--v2-accent); color: var(--v2-white); }
+/* The deposit sentence in the phone bar: no lone last word. */
+.v2-rentbar-sub { text-wrap: balance; }
+
+/* Phone bar while you are renting (two actions: Return + Rental details): only the two buttons, side by side,
+   each half the width; the price and the deposit sentence don't matter once the bike is yours. 76 px + safe area. */
+@media (max-width: 899px) {
+  .v2-rentbar:has(.v2-rentbar-actions .btn + .btn) .v2-rentbar-price { display: none; }
+  .v2-rentbar:has(.v2-rentbar-actions .btn + .btn) .v2-rentbar-actions { flex: 1 0 100%; }
+  .v2 .v2-rentbar:has(.v2-rentbar-actions .btn + .btn) .v2-rentbar-actions .btn { flex: 1 1 0; min-width: 0; padding: 0 16px !important; }
+}
+
+
+.v2 :is(.v2-book-actions, .v2-rentbar-actions) .btn-primary { transition: background-color 150ms ease-out; }
+.v2 :is(.v2-book-actions, .v2-rentbar-actions) .btn-primary:hover { background: var(--v2-accent-strong-hover); }
+.v2 :is(.v2-book-actions, .v2-rentbar-actions) .btn-secondary:hover { background: var(--v2-tint); }

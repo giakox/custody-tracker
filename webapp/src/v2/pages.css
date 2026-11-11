@@ -1,0 +1,112 @@
+/* Sharify v2: plain pages (lists, receipt, reading pages). */
+
+.v2-page { width: 100%; max-width: calc(1200px + 2 * var(--v2-gutter)); margin: 0 auto; padding: 48px var(--v2-gutter) var(--v2-band) !important; }
+.v2-page-640 { max-width: calc(640px + 2 * var(--v2-gutter)); }
+.v2-page-720 { max-width: calc(720px + 2 * var(--v2-gutter)); }
+.v2-page-lead { max-width: 40em; }
+.v2-page-section { margin-top: 48px; }
+.v2-page-section > .v2-h3 + * { margin-top: 16px; }
+.v2-page-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 24px; }
+.v2-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: var(--v2-size-5); }
+
+/* ---------- Rows: photo 96, name and pill, a line under, figures on the right ---------- */
+.v2-rows { display: grid; row-gap: 16px; margin-top: 24px; }
+.v2-row-hit { display: grid; grid-template-columns: 96px 1fr auto; column-gap: 24px; align-items: center; color: inherit; }
+.v2-row-photo { display: block; width: 96px; height: 96px !important; object-fit: cover; border-radius: var(--v2-radius); background: var(--v2-tint); }
+.v2-row-main { display: grid; row-gap: 8px; min-width: 0; }
+.v2-row-title { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: var(--v2-size-3); font-weight: 500; line-height: 1.3; }
+.v2-row-meta { font-size: var(--v2-size-4); color: var(--v2-muted); }
+.v2-row-right { display: grid; justify-items: end; row-gap: 8px; font-size: var(--v2-size-4); text-align: right; }
+
+/* ---------- Receipt: a document ---------- */
+.v2-receipt > .v2-h2 { margin-top: 8px; }
+.v2-receipt-block { margin-top: 48px; }
+.v2-receipt-sub { display: block; font-size: var(--v2-size-5); color: var(--v2-muted); margin-top: 4px; }
+.v2-receipt-total { display: flex; justify-content: space-between; gap: 24px; margin-top: 24px; font-size: var(--v2-size-3); font-weight: 500; }
+.v2-receipt + * { margin-top: 24px; }
+.v2-receipt .v2-page-actions { margin-top: 48px; }
+
+@media print {
+  .v2 .v2-header, .v2 .v2-footer, .v2 .v2-print-hide { display: none !important; }
+  .v2, .v2 * { color: #000 !important; background: #fff !important; }
+  .v2 .v2-page { padding: 0 !important; max-width: none; }
+  .v2 a { text-decoration: none; }
+}
+
+/* ---------- My bikes ---------- */
+.v2-owner-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: start; margin-top: 48px; }
+.v2-owner-main { grid-column: 1 / span 7; }
+.v2-owner-aside { grid-column: 9 / span 4; padding: 24px !important; border-radius: var(--v2-radius); background: var(--v2-tint); }
+.v2-owner-big { font-size: var(--v2-size-2); line-height: 1.3; margin: 8px 0 24px !important; }
+.v2-steps3 { display: grid; row-gap: 16px; counter-reset: v2n; margin-top: 24px; }
+.v2-steps3 li { display: grid; grid-template-columns: 24px 1fr; column-gap: 16px; counter-increment: v2n; }
+.v2-steps3 li::before { content: counter(v2n); width: 24px; height: 24px; border-radius: 999px; background: var(--v2-tint); display: inline-flex; align-items: center; justify-content: center; font-size: var(--v2-size-5); font-weight: 500; }
+
+/* ---------- Verify ---------- */
+.v2-verdict { padding: 24px !important; border-radius: var(--v2-radius); background: var(--v2-tint); }
+.v2-verdict-title { font-size: var(--v2-size-2); line-height: 1.3; }
+/* The readings strip: a row of 24 px circles that wraps (scrolls sideways on phones). Sizes are capped
+   so nothing in the strip can grow with the page. */
+.v2-readings { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; max-width: 100%; }
+.v2-readings > li { position: relative; flex: none; width: 24px; height: 24px; max-width: 24px; max-height: 24px; }
+/* A second with a knock carries a small mark under its circle, visible without hovering. */
+.v2-readings > li.has-knock::after { content: ""; position: absolute; left: 8px; top: 28px; width: 8px; height: 2px; background: var(--v2-text); }
+.v2-readings { padding-bottom: 8px !important; }
+.v2 .v2-reading { display: block; width: 24px; height: 24px; max-width: 24px; max-height: 24px; padding: 0; border-radius: 999px; background: #e5e5ea; }
+.v2 .v2-reading:hover { background: var(--v2-muted); }
+.v2 .v2-reading.is-picked { background: var(--v2-accent); }
+.v2-tech { display: grid; row-gap: 8px; margin-top: 16px; }
+.v2-tech > div { display: grid; grid-template-columns: 140px 1fr auto; column-gap: 16px; align-items: baseline; }
+.v2-tech dt { font-size: var(--v2-size-5); color: var(--v2-muted); }
+.v2-tech dd { min-width: 0; overflow-wrap: anywhere; }
+.v2-copy { font-size: var(--v2-size-5); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+.v2-two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+/* ---------- Design: a reading page ---------- */
+.v2-read p, .v2-read li { font-size: var(--v2-size-3); line-height: 1.6; }
+.v2-read .v2-h2 { margin-top: 96px; }
+.v2-read .v2-h2:first-of-type { margin-top: 48px; }
+.v2-read .v2-h2 + * { margin-top: 24px; }
+.v2-read figure img { width: 100%; border-radius: var(--v2-radius); }
+.v2-read figcaption { font-size: var(--v2-size-4) !important; color: var(--v2-muted); margin-top: 8px; }
+.v2-read ol.v2-read-list, .v2-read ul.v2-read-list { display: grid; row-gap: 16px; margin-top: 24px; }
+.v2-read-stage { display: grid; row-gap: 8px; }
+.v2-read-stage + .v2-read-stage { margin-top: 48px; }
+.v2-read-k { display: block; font-size: var(--v2-size-5) !important; font-weight: 500; color: var(--v2-muted); }
+.v2-read-numbers { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+.v2-read-numbers dt { font-size: var(--v2-size-2); line-height: 1.3; }
+.v2-read-numbers dt span { font-size: var(--v2-size-3); color: var(--v2-muted); margin-left: 4px; }
+.v2-read-numbers dd { font-size: var(--v2-size-4); color: var(--v2-muted); }
+.v2-read details { margin-top: 16px; }
+.v2-read summary { font-size: var(--v2-size-3); font-weight: 500; cursor: pointer; }
+.v2-read details > *:not(summary) { margin-top: 16px; }
+
+@media (max-width: 767px) {
+  .v2-page { padding-top: 24px !important; }
+  .v2-row-hit { grid-template-columns: 96px 1fr; column-gap: 16px; row-gap: 8px; }
+  .v2-row-right { grid-column: 2; justify-items: start; text-align: left; }
+  .v2-owner-grid { display: block; }
+  .v2-owner-aside { margin-top: 48px; }
+  .v2-readings { flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; padding: 4px 0 14px !important; }
+  .v2-readings::-webkit-scrollbar { display: none; }
+  .v2-readings > li { scroll-snap-align: center; }
+  .v2-tech > div { grid-template-columns: 1fr auto; }
+  .v2-tech dt { grid-column: 1 / -1; }
+  .v2-two { grid-template-columns: 1fr; }
+  .v2-read-numbers { grid-template-columns: 1fr; }
+}
+
+/* Receipt spacing: the document starts clear of the way back, and the note sits clear of the total. */
+.v2-receipt { margin-top: 24px; }
+.v2-receipt-block + .v2-body { margin-top: 24px; }
+
+/* Your last ride: the route beside what came of the deposit. */
+.v2-last { display: grid; grid-template-columns: 7fr 5fr; gap: 24px; align-items: stretch; }
+.v2-last-map { position: relative; min-height: 320px; border-radius: var(--v2-radius); clip-path: inset(0 round 16px); background: var(--v2-tint); }
+.v2 .v2-last-map .ride-map, .v2 .v2-last-map .leaflet-container, .v2-last-map > img { position: absolute; inset: 0; width: 100%; height: 100% !important; object-fit: cover; }
+.v2 .v2-last-map .leaflet-control-zoom { display: none; }
+.v2-last-body { padding: 24px 0 !important; }
+@media (max-width: 767px) { .v2-last { grid-template-columns: 1fr; } .v2-last-map { min-height: 240px; } .v2-last-body { padding: 0 !important; } }
+
+/* The status pill always sits on its own line under the name, in every row. */
+.v2-row-title { flex-direction: column; align-items: flex-start; gap: 8px; }

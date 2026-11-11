@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
+
+/* The only rules outside .v2: the page itself has no margin and is white behind every v2 page. */
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: #ffffff; }
+
+/* Sharify v2: tokens and base. Every v2 page has the root class .v2; nothing here leaks outside it.
+   Colours: white #FFFFFF, dark #0B1B2B, tint #F2F8FC, text #0A0A0A, secondary #6E6E73, accent #0297DE
+   (large surfaces and graphics), accent-strong #0279BA (filled buttons and pills, blue text under 24 px).
+   On dark: text white, secondary rgba(255,255,255,.7).
+   Type: desktop 72 / 40 / 20 / 16 / 14, phone 44 / 28 / 18 / 16 / 14. Poppins 400 and 500.
+   Radii: 16 photos and cards, 999 buttons and pills. No shadows. Gradients only as veils on photos. */
+
+.v2 {
+  --v2-white: #ffffff;
+  --v2-dark: #0b1b2b;
+  --v2-tint: #f2f8fc;
+  --v2-text: #0a0a0a;
+  --v2-muted: #6e6e73;
+  --v2-accent: #0297de;
+  /* The brand blue darkened for white text on it and for blue text under 24 px: white on it is 4.72:1. */
+  --v2-accent-strong: #0279ba;
+  --v2-accent-strong-hover: #026a9f;
+  --v2-on-dark-muted: rgba(255, 255, 255, 0.7);
+
+  --v2-gutter: 48px;
+  --v2-band: 96px;
+  --v2-header: 72px;
+  --v2-radius: 16px;
+
+  --v2-size-1: 72px;
+  --v2-size-2: 40px;
+  --v2-size-3: 20px;
+  --v2-size-4: 16px;
+  --v2-size-5: 14px;
+
+  min-height: 100vh;
+  background: var(--v2-white);
+  color: var(--v2-text);
+  font-family: "Poppins", system-ui, sans-serif;
+  font-size: var(--v2-size-4);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-align: left;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+@media (max-width: 767px) {
+  .v2 {
+    --v2-gutter: 20px;
+    --v2-band: 48px;
+    --v2-size-1: 44px;
+    --v2-size-2: 28px;
+    --v2-size-3: 18px;
+    --v2-size-4: 16px;
+    --v2-size-5: 14px;
+  }
+}
+
+/* Neutralise inherited globals inside the new pages.
+   Deliberately blunt: this zeroes padding, margin, border and background-image on EVERY
+   element under .v2, so the old global CSS (base.css, human.css, finder.css…) cannot leak in.
+   Consequence: any element that needs padding or a background image must set it on its own
+   class (selectors below win because they come later at equal specificity). If a native
+   control (input, select, button) ever looks broken here, this reset is the first suspect.
+   Leaflet keeps working under it: its own rules are more specific, and it sets sizes inline. */
+.v2 *,
+.v2 *::before,
+.v2 *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  text-shadow: none;
+  background-image: none;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  transition: none;
+  animation: none;
+}
+.v2 img { display: block; max-width: 100%; height: auto; }
+/* :where() keeps these at the reset's weight, so any component class below wins over them. */
+.v2 :where(a) { text-decoration: none; }
+.v2 :where(button) { background: none; cursor: pointer; text-align: inherit; }
+.v2 :where(ul, ol) { list-style: none; }
+.v2 :focus-visible { outline: 2px solid var(--v2-accent); outline-offset: 2px; }
+.v2 .v2-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* ---------- Layout ---------- */
+/* Short pages keep the footer below the fold. */
+.v2 > main { min-height: calc(100vh - var(--v2-header)); min-height: calc(100svh - var(--v2-header)); }
+.v2-container {
+  width: 100%;
+  max-width: calc(1200px + 2 * var(--v2-gutter));
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--v2-gutter);
+  padding-right: var(--v2-gutter);
+}
+.v2-band { padding-top: var(--v2-band); padding-bottom: var(--v2-band); }
+.v2-band-white { background: var(--v2-white); color: var(--v2-text); }
+.v2-band-tint { background: var(--v2-tint); color: var(--v2-text); }
+.v2-band-dark { background: var(--v2-dark); color: var(--v2-white); }
+.v2-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; }
+
+/* ---------- Type ---------- */
+/* Headings break where the meaning does, not one word short. */
+.v2 :where(h1, h2, .v2-h1, .v2-h2) { text-wrap: balance; }
+/* Paragraphs avoid a lone last word; figures line up in columns. (Inherited from the old global CSS until
+   lotto 5; now written here.) */
+.v2 :where(p, li, dd) { text-wrap: pretty; }
+.v2 :where(dd) { font-variant-numeric: tabular-nums; }
+.v2-h1 { font-size: var(--v2-size-1); font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; }
+.v2-h2 { font-size: var(--v2-size-2); font-weight: 400; line-height: 1.3; letter-spacing: -0.01em; }
+.v2-h3 { font-size: var(--v2-size-3); font-weight: 500; line-height: 1.3; }
+.v2-lead { font-size: var(--v2-size-3); line-height: 1.5; }
+.v2-body { font-size: var(--v2-size-4); line-height: 1.5; }
+.v2-small { font-size: var(--v2-size-5); line-height: 1.5; }
+.v2-strong { font-weight: 500; }
+.v2-muted { color: var(--v2-muted); }
+.v2-on-dark-muted { color: var(--v2-on-dark-muted); }
+.v2-gap-8 { margin-top: 8px; }
+.v2-gap-16 { margin-top: 16px; }
+.v2-gap-24 { margin-top: 24px; }
+.v2-gap-48 { margin-top: 48px; }
+
+/* ---------- Motion (one entrance per section, once) ---------- */
+.v2-motion .v2-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 600ms ease-out, transform 600ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.v2-motion .v2-reveal.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .v2 *, .v2 *::before, .v2 *::after { transition: none !important; animation: none !important; }
+  .v2-motion .v2-reveal { opacity: 1; transform: none; }
+}

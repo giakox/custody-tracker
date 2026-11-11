@@ -1,0 +1,52 @@
+/* Sharify v2: the base every map needs (FleetMap, RideMap, SpotMap), ported from the old pages/map.css
+   and the map rules that lived in the old page CSS. Drawn in the v2 language: grey tiles, black and blue,
+   no shadows. Page CSS (bikes.css, object.css, checkout.css) only sizes the maps and tunes the pins. */
+
+/* Leaflet's panes (z-index 400–1000) stay inside their map, so fixed bars are never painted under one. */
+.v2 .leaflet-container { isolation: isolate; font-family: "Poppins", system-ui, sans-serif; background: var(--v2-tint); }
+
+/* Tiles: standard OpenStreetMap, light and neutral. On each tile: WebKit skips a filter set on the pane. */
+.v2 .leaflet-tile-pane { filter: none; }
+.v2 .leaflet-tile { filter: grayscale(1) brightness(1.06) contrast(0.92); }
+.v2 .fleet-map .leaflet-overlay-pane img { opacity: 0.75; }
+
+/* Credits and zoom. */
+.v2 .leaflet-control-attribution { background: rgba(255, 255, 255, 0.85) !important; color: var(--v2-muted) !important; font: 400 12px/1.5 "Poppins", system-ui, sans-serif; padding: 0 8px !important; }
+.v2 .leaflet-control-attribution a { color: var(--v2-muted) !important; }
+.v2 .leaflet-bar { border: 0 !important; box-shadow: none; }
+.v2 .leaflet-bar a { background: var(--v2-white) !important; color: var(--v2-text) !important; }
+
+/* FleetMap pins: a white pill with the price; the live bike is the one blue pin. */
+.v2 .pin-wrap { background: none; border: 0; }
+.v2 .pin { position: relative; display: block; width: 52px; height: 30px; }
+.v2 .pin-price {
+  display: grid; place-items: center; width: 100%; height: 100%;
+  border-radius: 999px; background: var(--v2-white); color: var(--v2-text); border: 1.5px solid var(--v2-text);
+  font: 500 14px/1 "Poppins", system-ui, sans-serif; box-shadow: none; cursor: pointer;
+}
+.v2 .pin-live .pin-price { background: var(--v2-accent); color: var(--v2-white); border-color: var(--v2-accent); }
+.v2 .pin.is-selected .pin-price { background: var(--v2-dark); color: var(--v2-white); border-color: var(--v2-dark); }
+.v2 .pin-wrap:hover { z-index: 9999 !important; }
+/* "Dropped in the last 7 days": a small dark dot, no extra colour. */
+.v2 .pin-drop { position: absolute; right: -2px; top: -3px; width: 10px; height: 10px; border-radius: 999px; background: var(--v2-text); border: 2px solid var(--v2-white); }
+/* You are here. */
+.v2 .me-dot { display: block; width: 14px; height: 14px; border-radius: 999px; background: var(--v2-accent); border: 3px solid var(--v2-white); }
+
+/* Phones: one finger scrolls the page, two move the map; this is the hint. */
+.v2 .map-two-fingers {
+  position: absolute; left: 50%; top: 50%; z-index: 460; padding: 8px 16px !important; border-radius: 999px;
+  background: var(--v2-dark); color: var(--v2-white); font: 500 14px/1.5 "Poppins", system-ui, sans-serif; white-space: nowrap;
+  opacity: 0; transform: translate(-50%, -50%); pointer-events: none;
+}
+.v2 .map-two-fingers.is-on { opacity: 1; }
+
+/* RideMap: a knock is drawn in black, not orange. */
+.v2 .ride-map path[fill="#fc734d"] { fill: var(--v2-text); }
+
+/* SpotMap: the label where to leave the bike. */
+.v2 .spot-pin {
+  display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 16px !important; border-radius: 999px;
+  background: var(--v2-accent-strong); color: var(--v2-white); font: 500 14px/1 "Poppins", system-ui, sans-serif; white-space: nowrap;
+  transform: translate(-50%, -50%); border: 0;
+}
+.v2 .spot-pin i { width: 8px; height: 8px; border-radius: 999px; background: var(--v2-white); }

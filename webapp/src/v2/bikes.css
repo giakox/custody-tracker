@@ -1,0 +1,144 @@
+/* Sharify v2: Find a bike. Cards on the left, the map on the right that stays in view while the list scrolls.
+   Below 900 px the map sits on top (45% of the screen) and the list follows. */
+
+.v2-finder { padding-top: 48px; padding-bottom: var(--v2-band); }
+.v2-finder-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+
+.v2-finder-body {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 24px;
+  margin-top: 48px;
+  align-items: start;
+}
+.v2-finder-list { grid-column: 1 / span 6; }
+.v2-finder-aside {
+  grid-column: 7 / span 6;
+  /* Stays in view while the list scrolls. No ancestor may clip overflow, or sticky stops working. */
+  position: sticky;
+  top: 96px;
+  height: calc(100vh - 120px);
+}
+
+.v2-finder-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; row-gap: 48px; }
+.v2-finder-note, .v2-finder-group { grid-column: 1 / -1; }
+.v2-finder-group { margin-bottom: -24px; }
+.v2-finder-note { padding: 24px !important; border-radius: var(--v2-radius); background: var(--v2-tint); }
+.v2-finder-item.is-live { grid-column: 1 / -1; position: relative; }
+/* The real bike: photo on the left half, text on the right, as tall as the photo. */
+.v2-card-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; align-items: stretch; }
+.v2-card-row .v2-card-body { margin-top: 0; padding-bottom: 56px !important; }
+.v2-finder-rent { margin-top: 16px; }
+.v2-finder-item.is-live .v2-finder-rent { position: absolute; left: calc(50% + 12px); bottom: 0; margin-top: 0; }
+.v2-finder-empty { padding-bottom: 48px !important; }
+
+/* ---------- The map ---------- */
+.v2-finder-map {
+  position: relative;
+  height: 100%;
+  border-radius: var(--v2-radius);
+  clip-path: inset(0 round 16px);
+  background: var(--v2-tint);
+}
+.v2 .v2-finder-map .fleet-map-wrap,
+.v2 .v2-finder-map .fleet-map { position: absolute; inset: 0; height: 100%; }
+/* Standard OpenStreetMap tiles, made light and neutral; only the tiles are filtered, never the pins.
+   The old map layer's warm filter and inner shadow are replaced here. */
+/* On the tiles themselves: WebKit does not apply a filter set on the pane to its 3D-transformed tile layers. */
+.v2 .v2-finder-map .fleet-map .leaflet-tile-pane { filter: none; }
+.v2 .v2-finder-map .fleet-map .leaflet-tile { filter: grayscale(1) brightness(1.06) contrast(0.92); }
+.v2 .v2-finder-map .fleet-map-wrap::after { display: none; }
+.v2 .v2-finder-map .fleet-map { background: var(--v2-tint) !important; font-family: "Poppins", system-ui, sans-serif; }
+
+/* Pins: white pill, black price; the live bike is the one blue pin. */
+.v2 .v2-finder-map .pin-wrap { background: none; border: 0; }
+.v2 .v2-finder-map .pin { position: relative; display: block; width: 52px; height: 30px; transition: none; }
+.v2 .v2-finder-map .pin-price {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--v2-white);
+  color: var(--v2-text);
+  border: 1.5px solid var(--v2-text);
+  box-shadow: none;
+  font: 500 14px/1 "Poppins", system-ui, sans-serif;
+  transform: none;
+  cursor: pointer;
+}
+.v2 .v2-finder-map .pin-live .pin-price { background: var(--v2-accent); border-color: var(--v2-accent); color: var(--v2-white); }
+.v2 .v2-finder-map .pin.is-selected .pin-price,
+.v2 .v2-finder-map .pin.is-hover .pin-price { background: var(--v2-dark); border-color: var(--v2-dark); color: var(--v2-white); box-shadow: none; }
+/* Hover: the pin rises 2 px, above the others (the wrapper's z-index is in map.css). */
+.v2 .v2-finder-map .pin-price { transition: transform 150ms ease-out, background-color 150ms ease-out; }
+.v2 .v2-finder-map .pin-wrap:hover .pin-price { transform: translateY(-2px); }
+@media (prefers-reduced-motion: reduce) { .v2 .v2-finder-map .pin-wrap:hover .pin-price { transform: none; } }
+/* "Dropped in the last 7 days": a small dark dot, no extra colour. */
+.v2 .v2-finder-map .pin-drop { position: absolute; right: -2px; top: -3px; width: 10px; height: 10px; border-radius: 999px; background: var(--v2-text); border: 2px solid var(--v2-white); box-shadow: none; }
+.v2 .v2-finder-map .me-dot { display: block; width: 14px; height: 14px; border-radius: 999px; background: var(--v2-accent); border: 3px solid var(--v2-white); box-shadow: none; }
+
+/* Leaflet controls in the v2 language. */
+.v2 .v2-finder-map .leaflet-control-zoom { border: 0; margin: 16px 16px 0 0; display: grid; gap: 8px; }
+.v2 .v2-finder-map .leaflet-control-zoom a {
+  width: 40px; height: 40px; line-height: 38px; border-radius: 999px !important;
+  border: 1.5px solid var(--v2-text) !important; background: var(--v2-white); color: var(--v2-text);
+  font: 400 20px/37px "Poppins", system-ui, sans-serif; text-align: center;
+}
+.v2 .v2-finder-map .leaflet-control-attribution {
+  background: rgba(255, 255, 255, 0.85) !important; color: var(--v2-muted) !important;
+  font: 400 12px/1.5 "Poppins", system-ui, sans-serif; padding: 0 8px !important; border-radius: 8px 0 0 0;
+}
+.v2 .v2-finder-map .leaflet-control-attribution a { color: var(--v2-muted) !important; }
+.v2 .v2-finder-map .map-two-fingers {
+  position: absolute; left: 50%; top: 50%; z-index: 460; padding: 8px 16px !important; border-radius: 999px;
+  background: var(--v2-dark); color: var(--v2-white); font: 500 14px/1.5 "Poppins", system-ui, sans-serif;
+  opacity: 0; transform: translate(-50%, -50%); pointer-events: none;
+}
+.v2 .v2-finder-map .map-two-fingers.is-on { opacity: 1; }
+
+.v2-map-locate {
+  position: absolute; top: 16px; left: 16px; z-index: 500;
+  height: 40px; padding: 0 16px !important; border-radius: 999px;
+  background: var(--v2-white) !important; border: 1.5px solid var(--v2-text) !important; color: var(--v2-text);
+  font-size: var(--v2-size-4); font-weight: 500;
+}
+.v2-map-mini {
+  position: absolute; left: 16px; right: 16px; bottom: 16px; z-index: 500;
+  display: grid; grid-template-columns: 160px 1fr; gap: 16px; align-items: start;
+  padding: 16px !important; border-radius: var(--v2-radius); background: var(--v2-white);
+}
+.v2-map-mini-photo { width: 160px; height: 120px !important; object-fit: cover; border-radius: 8px; }
+.v2-map-mini-body > * + * { margin-top: 8px; }
+.v2-map-mini-body { padding-right: 32px !important; }
+.v2-map-mini-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px !important; }
+.v2-map-mini-close {
+  position: absolute; top: 8px; right: 8px; width: 40px; height: 40px; border-radius: 999px;
+  font-size: 24px; line-height: 1; color: var(--v2-text);
+}
+
+/* ---------- Narrow screens: map on top, then the list ---------- */
+@media (max-width: 899px) {
+  .v2-finder { padding-top: 24px; }
+  /* One scrolling row, edge to edge, with the gutter kept after the last pill too. */
+  .v2-finder-filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-left: calc(-1 * var(--v2-gutter)); margin-right: calc(-1 * var(--v2-gutter)); padding-left: var(--v2-gutter) !important; }
+  .v2-finder-filters::-webkit-scrollbar { display: none; }
+  .v2-finder-filters::after { content: ""; flex: 0 0 calc(var(--v2-gutter) - 8px); }
+  .v2-finder-filters > * { flex: 0 0 auto; }
+  .v2-finder-body { display: block; margin-top: 24px; }
+  .v2-finder-body > .v2-finder-map { height: 45vh; height: 45svh; min-height: 280px; margin-bottom: 48px; }
+  .v2-finder-grid { grid-template-columns: 1fr; row-gap: 16px; }
+  .v2-finder-group { margin-bottom: 0; margin-top: 32px !important; }
+  .v2-finder-note { margin-top: 32px !important; }
+
+  /* The real bike stays a big card; sample bikes become compact rows. */
+  .v2-card-row { display: block; }
+  .v2-card-row .v2-card-body { margin-top: 16px; padding-bottom: 0 !important; }
+  .v2-finder-item.is-live .v2-finder-rent { position: static; margin-top: 16px; }
+  .v2-finder-item:not(.is-live) .v2-card { display: grid; grid-template-columns: 112px 1fr; column-gap: 16px; align-items: center; }
+  .v2-finder-item:not(.is-live) .v2-card-photo { width: 112px; height: 112px; aspect-ratio: 1 / 1; }
+  .v2-finder-item:not(.is-live) .v2-card-badge,
+  .v2-finder-item:not(.is-live) .v2-finder-dist,
+  .v2-finder-item:not(.is-live) .v2-finder-record { display: none; }
+  .v2-finder-item:not(.is-live) .v2-card-body { margin-top: 0; }
+}
