@@ -194,3 +194,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Stripe's architecture diagrams in docs: light, one blue accent: https://stripe.com/docs
 - **Shots:** [diagram](rounds/17-slide.jpg)
 - **Lines:** 6184
+
+## Round 18 · The ride ends with a person
+
+- **What:** When nothing was dropped, the outcome page shows a photo of a renter handing the bike back, smiling, and starts with "Thanks for riding." When a fee was kept, it keeps the bike photo: a smile there would be wrong.
+- **Why:** The last screen is what people remember (peak-end rule). It was a table; now it is a moment.
+- **Reference:** Airbnb's "hope you enjoyed your stay" screen: https://www.airbnb.com
+- **Shots:** [1440 px](rounds/18-1440.jpg)
+- **Lines:** 6186

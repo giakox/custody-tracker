@@ -310,12 +310,14 @@ export function OutcomePage({ id }: { id: number }) {
     <Shell d={d} stage="Deposit back" wide>
       <section className={`ride-hero outcome tier-glow-${s.tier}`}>
         <div>
-          <h1>{s.tier === 0 ? <>Your whole deposit is <em>back</em>.</> : Number(s.refund) === 0 ? <>The whole deposit was <em>kept</em>.</> : <>{usd(s.refund)} back, {usd(s.fee)} <em>kept</em>.</>}</h1>
+          <h1>{s.tier === 0 ? <>Thanks for riding. Your whole deposit is <em>back</em>.</> : Number(s.refund) === 0 ? <>The whole deposit was <em>kept</em>.</> : <>{usd(s.refund)} back, {usd(s.fee)} <em>kept</em>.</>}</h1>
           <p className="lead">{s.tier === 0
             ? `No knocks were recorded during your ride, so all ${usd(mine.collateral)} came back to you.`
             : <>During your ride the bike recorded a <span className="shock">{TIER_NAMES[s.tier]}</span> knock{cause ? ` ${when(cause.anchor.at)}` : ""}. By the rule you accepted, {usd(s.fee)} went to the owner.</>}</p>
         </div>
-        <ObjectImage alert={s.tier > 0} deviceId={d.deviceId} />
+        {s.tier === 0
+          ? <figure className="object-image"><img src="./img/day/return-smile.jpg" alt="A renter handing a bike back to its owner, both smiling" /></figure>
+          : <ObjectImage alert deviceId={d.deviceId} />}
       </section>
       <RuleTiers terms={d.terms} highlight={s.tier} />
       <div className="actions">
