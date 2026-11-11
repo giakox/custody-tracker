@@ -469,3 +469,18 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Kinfolk and Aesop: a single colour grade across all photography: https://aesop.com
 - **Shots:** [1440 px](rounds/49-1440.jpg)
 - **Lines:** 6486
+
+### Block 41 to 50 (summary)
+
+- **Lines in `webapp/src`:** about 6,490 (cap 7,392; commit 463f724 had 5,280).
+- **Strongest changes:** (1) the Home story as full-screen chapters that stack like sheets (round 44) and a rule band whose colour follows the slider, with the biggest numbers on the site (round 46); (2) daylight photographs for every sample bike under one light grade (round 49), and the name set huge in the footer (round 41).
+- **Steps back:** round 45 (the defects a fresh critique listed) and round 50 (all 15 routes at 375 px: none overflows; every animation checked against reduced motion).
+- **Not done:** the hero video. The video tool downloads its model (about 20 files from the Hugging Face Hub) instead of using a local copy and moved at under 1 MB/s, so it was stopped; the hero keeps its scroll parallax. It needs the q4 weights placed under `~/.local/share/temposy-social/modelli/` or a decision to download them.
+
+## Round 50 · A step back: every route on a phone
+
+- **What:** Walked all 15 routes at 375 px: none overflows sideways. Checked that every animation added since round 24 is inside a no-preference media query or removed by the global reduced-motion rule.
+- **Why:** Fifty rounds in, the risk is not an ugly page but a broken edge. This is the check that catches it.
+- **Reference:** WCAG 2.1 reflow (1.4.10) and prefers-reduced-motion guidance: https://www.w3.org/WAI/WCAG21/Understanding/reflow.html
+- **Shots:** none
+- **Lines:** 6486
