@@ -366,3 +366,23 @@ p, li, dd { text-wrap: pretty; }
 .field > span:first-child { font-size: 15px; font-weight: 600; color: var(--ink); }
 .field input::placeholder { color: var(--dim); }
 .check input { accent-color: var(--blue-ink); width: 20px; height: 20px; }
+
+/* ---------- Round 78: the nearest real bike, as a card inside the hero ---------- */
+.nearest { margin-top: 24px; display: grid; grid-template-columns: 88px minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 10px 16px 10px 10px; border-radius: var(--radius); background: var(--surface); color: inherit; text-decoration: none; transition: background-color .2s ease, transform .12s ease, box-shadow .2s ease; }
+.nearest:hover { background: var(--raise); box-shadow: var(--elev-1); }
+.nearest:active { transform: scale(.99); }
+.nearest:focus-visible { outline: 2px solid var(--blue-ink); outline-offset: 3px; }
+.nearest-photo, .nearest .bike-photo { width: 88px; height: 66px; border-radius: 10px; object-fit: cover; display: block; }
+.nearest-body { display: grid; gap: 2px; min-width: 0; }
+.nearest-k { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--blue-ink); }
+.nearest-k i { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 3px var(--blue-wash); }
+.nearest-name { font-size: 17px; font-weight: 650; letter-spacing: -0.015em; color: var(--ink); }
+.nearest-price { font-size: 14px; color: var(--mist); }
+.nearest-go { font-size: 28px; line-height: 1; color: var(--ink); transition: transform .2s ease; }
+.nearest:hover .nearest-go { transform: translateX(3px); }
+@media (max-width: 640px) {
+  .nearest { grid-template-columns: 64px minmax(0, 1fr) auto; gap: 12px; }
+  .nearest-photo, .nearest .bike-photo { width: 64px; height: 64px; }
+  .nearest-k { font-size: 12px; }
+}
+@media (max-width: 640px) { .nearest .wide-only { display: none; } }

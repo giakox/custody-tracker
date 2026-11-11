@@ -988,13 +988,39 @@ Every section had the same layout (title left, content right) and the same weigh
 
 **Test, "another screen at a glance?"** For the bar, yes when connected: the blue moved from your address to the action.
 
+## Round 78 · The Home's first screen: one action, and the real bike as a card
+
+**Hierarchy audit (first screen of the Home):**
+
+| Block | Who, when | If it vanished | Verdict |
+|---|---|---|---|
+| H1 "Borrow a bike from someone nearby." | first-time visitor | the promise | primary |
+| Sub: "If it gets dropped, a public rule decides…" | visitor | the difference from any rental | secondary |
+| "Find a bike near you" (blue) | renter | the way in | the action, the only filled one on the first screen |
+| "Rent out your bike" (outline) beside it | owners, a minority | they'd use the header or the owners' band below | removed from the hero; it is in the header and has its own band on the Home |
+| "Find a bike" in the header at the same time | — | a second blue button saying the same | hidden on the Home's first screen; it fades in as the hero scrolls away (380–560 px) |
+| "The demo bike is free now, 2 min walk" as a line of text with a dot | renter | the proof the map is real | a card: photo, "Free now, 2 min walk", name, price, a chevron; it opens the bike |
+
+**Levels after:** H1 primary, then the blue button, then the bike card. **Squint test:** before, two buttons of equal width and a blue header button pulled the eye three ways; after, one blue button and, under it, a photo of a real bike.
+
+**References:** Lime's app home (the nearest vehicle as a card with distance and price, one big action) and Airbnb's home (the header's main action stays out of the way while the page's own search is in view). Why ours looked cheaper: the most concrete thing we have (a real bike two minutes away) was a line of small text.
+
+**Three ideas:** (1) one action plus the nearest real bike as a card; the header's button arrives on scroll. (2) A search pill in the hero (where, when, budget) like Airbnb's. (3) Full-bleed photo with the title set over it.
+**Discarded:** (2) we have one place and ten bikes: a search form would promise choices we don't have. (3) white type over this photo needs a dark scrim that kills the warm light that sells it.
+
+**Chosen, (1):** [1440, focus on the bike card](rounds/78-hero-1440.jpg), [the header's button half-way in, mid-scroll](rounds/78-hero-scroll-frame.jpg), [phone](rounds/78-hero-375.jpg). The fade is scroll-driven and only with motion allowed; with reduced motion, or on browsers without scroll timelines, the header button simply stays. On a phone the card drops "from Bocconi" and the deposit so it stays on three lines.
+
+**States:** the bike card darkens and lifts on hover, its chevron moves 3 px, presses to 99%, focus ring offset 3 px.
+
+**Test, "another screen at a glance?"** Yes: two equal buttons and a text line became one button and a bike.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
 
 | Screen | Last round |
 |---|---|
-| Home: hero | 62 |
+| Home: hero | 78 |
 | Home: "how it works" band (and bike page) | 70 |
 | Home: find a bike (grid + map) | Structure |
 | Header | 77 |

@@ -8,6 +8,7 @@ import { Moments } from "../components/HowItWorks";
 import { SiteFooter } from "../components/SiteFooter";
 import { DemoSwitcher } from "../components/DemoSwitcher";
 import { Finder } from "../components/Finder";
+import { BikePhoto } from "../components/BikeCard";
 import type { LatLon } from "../components/FleetMap";
 import { RuleSimulator } from "../components/RuleSimulator";
 import { BOCCONI } from "../data/mock/fleet";
@@ -90,9 +91,18 @@ export function HomePage() {
             <p>If it gets dropped, a public rule decides what you pay. Not the owner, not us.</p>
             <div className="actions">
               <a className="btn btn-primary btn-lg" href={href("bikes")}>Find a bike near you</a>
-              <a className="btn btn-secondary btn-lg" href={href("add/1")}>Rent out your bike</a>
             </div>
-            {live && live.b.objectId !== null && <a className="live-line" href={href(`object/${live.b.objectId}`)}><i aria-hidden="true" />{live.b.label} is free now, {walkText(live.d)} from {me ? "you" : "Bocconi"}</a>}
+            {live && live.b.objectId !== null && (
+              <a className="nearest" href={href(`object/${live.b.objectId}`)}>
+                <BikePhoto b={live.b} className="nearest-photo" />
+                <span className="nearest-body">
+                  <span className="nearest-k"><i aria-hidden="true" />Free now, {walkText(live.d)}<span className="wide-only"> from {me ? "you" : "Bocconi"}</span></span>
+                  <span className="nearest-name">{live.b.label}</span>
+                  <span className="nearest-price">{live.b.pricePerHour} dollars an hour<span className="wide-only">, deposit {live.b.deposit}</span></span>
+                </span>
+                <span className="nearest-go" aria-hidden="true">›</span>
+              </a>
+            )}
           </div>
         </section>
 
