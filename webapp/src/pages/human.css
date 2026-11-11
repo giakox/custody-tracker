@@ -370,3 +370,4 @@ p, li, dd { text-wrap: pretty; }
 @keyframes scan-sweep { from { transform: translateY(0); } to { transform: translateY(calc(100cqh - 34px)); } }
 .scan-frame { container-type: size; }
 @media (prefers-reduced-motion: reduce) { .scan-frame.is-scanning::after { animation: none; top: 50%; } }
+.sim-ticks span { font-size: 12px; top: -20px; }

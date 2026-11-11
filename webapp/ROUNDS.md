@@ -413,3 +413,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Apple Pay and bank apps' card scanners: a sweeping line then a lock-on: https://www.apple.com/apple-pay/
 - **Shots:** [1440 px](rounds/42-1440.jpg)
 - **Lines:** 6400
+
+## Round 43 · Contrast pass, measured
+
+- **What:** Ran a script over Home, bike page, rule, design and verify that computes the contrast of every piece of visible text against its real background. One finding (the 10 px tick labels on the rule slider, measured against their 1 px tick line, a false alarm in size but too small anyway): now 12 px. Every other text is at 4.5:1 or better.
+- **Why:** A design that looks refined and fails contrast is not refined. The rule is the contract of this site: min 4.5:1.
+- **Reference:** WebAIM contrast checker, the WCAG 2.1 method: https://webaim.org/resources/contrastchecker/
+- **Shots:** none
+- **Lines:** 6401
