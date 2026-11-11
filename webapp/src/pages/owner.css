@@ -149,3 +149,10 @@ table.levels td { border: 0; padding: 8px 12px; background: var(--surface); }
 table.levels td:first-child { border-radius: var(--radius) 0 0 var(--radius); }
 table.levels td:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
 @media (max-width: 900px) { .add-grid .listing-preview { order: 1; margin-top: 32px; } }
+
+/* ---------- Round 76: confirming a return shows the split before you press ---------- */
+.owner-split { margin-top: 32px; padding: 24px; border-radius: var(--radius); background: var(--surface); }
+.owner-split-k { font-size: 15px; font-weight: 600; color: var(--ink); }
+.owner-split .split { margin-top: 16px; }
+.rent-step .rule-tiers { margin-top: 24px; max-width: none; }
+.trip-lines dd.shock { color: var(--orange-ink); }

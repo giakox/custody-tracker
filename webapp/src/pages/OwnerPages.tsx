@@ -13,7 +13,7 @@ import { CASE_IMAGE } from "../components/ObjectImage";
 import { TxSteps } from "../components/TxSteps";
 import { RuleTiers } from "../components/RuleTiers";
 import { TubeRecorder } from "../components/TubeRecorder";
-import { day, hm, nameOf, objectName, span, TEST_MONEY, TIER_NAMES, usd, when } from "../ui/format";
+import { nameOf, objectName, span, TEST_MONEY, TIER_NAMES, usd, when } from "../ui/format";
 import { href } from "../ui/router";
 import { useViewer } from "../ui/viewer";
 import { priceOf } from "./MyRentalsPages";
@@ -177,26 +177,51 @@ export function ConfirmReturnPage({ id }: { id: number }) {
   const tier = s ? s.tier : c?.tier ?? 0;
   const fee = s ? s.fee : c?.wouldWithhold ?? "0";
   const price = priceOf(r, d);
+  const deposit = Number(r.collateral);
+  const toOwner = tier ? Number(fee) : 0;
+  const back = deposit - toOwner;
   return (
-    <Page>
+    <Page wide>
       <p><a className="link back" href={href("my-objects")}>My bikes</a></p>
-      {!s && <img className="step-photo" src="./img/day/return-smile.jpg" alt="A renter handing a bike back to its owner, both smiling" />}
-      <h1>{s ? (s.tier ? <>Done: {usd(s.fee)} to you, {usd(s.refund)} back to <em>{nameOf(r.renter)}</em>.</> : <>Done: all {usd(s.refund)} back to <em>{nameOf(r.renter)}</em>.</>)
-        : <>Do you have {objectName(d, false)} <em>back</em>?</>}</h1>
-      {!s && <p className="lead">{nameOf(r.renter)} returned it {d.pendingHandoff ? when(d.pendingHandoff.anchor.at) : ""}. Confirm only when it is really with you. You don't decide the fee: the hardest knock of the ride does, by the rule.</p>}
-      <dl className="facts">
-        <div><dt>Rental</dt><dd className="mono">{nameOf(r.renter)}, {span(r.started.at, d.periods[r.period]?.end?.at ?? d.pendingHandoff?.anchor.at ?? null)}</dd><dd className="tag" title={`${day(r.started.at)}, ${hm(r.started.at)}`}>started {when(r.started.at)}</dd></div>
-        <div><dt>Hardest knock</dt><dd className={`mono ${tier ? "shock" : ""}`}>{peak === null || !tier ? "none" : TIER_NAMES[tier]}</dd></div>
-        <div><dt>To you, for the knock</dt><dd className="mono">{tier ? usd(fee) : "nothing"}</dd></div>
-        <div><dt>Rental price</dt><dd className="mono">{usd(price.amount)}</dd><dd className="tag">paid to you separately</dd></div>
-      </dl>
-      <RuleTiers terms={d.terms} highlight={tier as 0 | 1 | 2 | 3} />
-      {steps.length > 0 && <TxSteps steps={steps} deposit={usd(d.terms.collateral)} explorer={net.data?.explorer ?? null} viewer="owner" />}
-      {error && <p className="notice error">{error}</p>}
-      <div className="actions">
-        {state === "done" || s
-          ? <a className="btn btn-primary" href={href("my-objects")}>Back to My bikes</a>
-          : <button type="button" className="btn btn-primary" onClick={run} disabled={state === "running"}>{state === "running" ? "Working…" : "Confirm it's back"}</button>}
+      <div className="rent-frame">
+        <div className="rent-step">
+          <h1>{s ? (s.tier ? <>Done: {usd(s.fee)} to you, {usd(s.refund)} back to <em>{nameOf(r.renter)}</em>.</> : <>Done: all {usd(s.refund)} back to <em>{nameOf(r.renter)}</em>.</>)
+            : <>Do you have {objectName(d, false)} <em>back</em>?</>}</h1>
+          {!s && <p className="lead">{nameOf(r.renter)} handed it back {d.pendingHandoff ? when(d.pendingHandoff.anchor.at) : ""}. Confirm only when it is really with you. You don't decide the fee: the hardest knock of the ride does, by the rule.</p>}
+          <section className="owner-split" aria-label="What the confirmation settles">
+            <p className="owner-split-k">{s ? "The deposit was settled" : "When you confirm, the deposit splits like this"}</p>
+            <div className="split" role="img" aria-label={`${usd(String(back))} back to ${nameOf(r.renter)}, ${usd(String(toOwner))} to you`}>
+              <i className="split-back" style={{ flexGrow: back }} />
+              {toOwner > 0 && <i className="split-kept" style={{ flexGrow: toOwner }} />}
+            </div>
+            <p className="split-legend"><span><i className="split-back" /><span>{usd(String(back))} back to {nameOf(r.renter)}</span></span>{toOwner > 0 && <span><i className="split-kept" /><span>{usd(String(toOwner))} to you, for a <span className="shock">{TIER_NAMES[tier]}</span> knock</span></span>}</p>
+          </section>
+          <RuleTiers terms={d.terms} highlight={tier as 0 | 1 | 2 | 3} />
+          {steps.length > 0 && <TxSteps steps={steps} deposit={usd(d.terms.collateral)} explorer={net.data?.explorer ?? null} viewer="owner" />}
+          {error && <p className="notice error">{error}</p>}
+        </div>
+        <aside className="rent-side" aria-label="The rental">
+          <div className="trip">
+            <div className="trip-bike">
+              {CASE_IMAGE && <img className="trip-photo" src={CASE_IMAGE.src} alt="" />}
+              <div>
+                <p className="trip-name">{objectName(d)}</p>
+                <p className="trip-owner">with {nameOf(r.renter)}, {span(r.started.at, d.periods[r.period]?.end?.at ?? d.pendingHandoff?.anchor.at ?? null)}</p>
+              </div>
+            </div>
+            <dl className="trip-lines">
+              <div><dt>Hardest knock</dt><dd className={tier ? "shock" : ""}>{peak === null || !tier ? "none" : TIER_NAMES[tier]}</dd></div>
+              <div><dt>Deposit</dt><dd>{usd(r.collateral)}</dd></div>
+              <div><dt>Rental price</dt><dd>{usd(price.amount)}</dd></div>
+            </dl>
+            <p className="trip-note">The rental price is paid to you separately. {TEST_MONEY}</p>
+            <div className="trip-act">
+              {state === "done" || s
+                ? <a className="btn btn-primary btn-lg" href={href("my-objects")}>Back to My bikes</a>
+                : <button type="button" className="btn btn-primary btn-lg" onClick={run} disabled={state === "running"}>{state === "running" ? "Working…" : "Confirm it's back"}</button>}
+            </div>
+          </div>
+        </aside>
       </div>
     </Page>
   );

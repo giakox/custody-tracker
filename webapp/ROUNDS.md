@@ -941,6 +941,30 @@ Every section had the same layout (title left, content right) and the same weigh
 
 **Test, "another screen at a glance?"** No, and it shouldn't be: a step back takes away. What changes at a glance is which thing you look at first.
 
+## Round 76 · Confirming a return shows the split before you press
+
+**Hierarchy audit (before):**
+
+| Block | Who, when | If it vanished | Verdict |
+|---|---|---|---|
+| A 4:3 photo of a hand-back at the top (360 px) | — | mood | removed: it pushed the question and the button below the fold; the bike's own photo is in the card |
+| H1 "Do you have the demo bike back?" | owner | — | primary |
+| Lead: who, when, "you don't decide the fee" | owner | the trust argument | kept |
+| Four facts in ruled cells (rental, hardest knock, to you, price) | owner | the numbers | split: the money becomes a bar ("45 back to Alice", "5 to you") on sand, secondary; the rest goes into the card |
+| The rule table | owner who wonders why | the reason for the fee | tertiary, the current level tinted |
+| "Confirm it's back" at the bottom of the column | owner | can't confirm | in the card on the right, in the first screen |
+
+**Levels after:** the question and the button are primary, the split bar secondary, the rule tertiary. **Squint test:** before, a big photo, then a title, the button out of sight. After, the title on the left, the blue button in the white card on the right, the blue and orange bar between.
+
+**References:** the renter's own steps (round 66, after Stripe Checkout and Airbnb's "Confirm and pay"), and the receipt's split bar (round 68): the owner now sees the same picture of the money the renter will see on the receipt. Why ours looked cheaper: the owner's most important click was below a decorative photo.
+
+**Three ideas:** (1) the checkout frame with the split bar previewing the outcome. (2) A dialog over My bikes with yes and no. (3) Two big buttons, "Yes, it's here" and "Not yet".
+**Discarded:** (2) the owner may arrive from a notification link, with no My bikes page behind. (3) "Not yet" does nothing on-chain; a button that does nothing is noise.
+
+**Chosen, (1):** [before and after, 1440, focus on the button](rounds/76-confirm-1440.jpg), [phone](rounds/76-confirm-375.jpg). Also for every rule table on a phone: one row per level, the amount set right, instead of the amount wrapping onto two lines.
+
+**Test, "another screen at a glance?"** Yes: a photo page with a form under it became a decision with its consequence drawn.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -957,6 +981,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Rent flow: Ride, Return, Waiting, Outcome | 67 |
 | Receipt and My rentals | 68 |
 | Owner (My bikes) | 69 |
+| Owner: Confirm a return | 76 |
 | Add a bike | 74 |
 | Verify | 71 |
 | Design | 72 |

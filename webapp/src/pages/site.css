@@ -166,3 +166,8 @@
   .moment { flex: 0 0 78%; scroll-snap-align: start; }
   .listing .moments-row { margin: 24px calc(-1 * var(--gutter)) 0; }
 }
+/* round 76: on phones every rule table keeps one row per level, the amount set right */
+@media (max-width: 640px) {
+  .rule-row, .deposit-summary .rule-row { grid-template-columns: 52px minmax(0, 1fr) auto; gap: 8px; }
+  .rule-row .rule-out { grid-column: auto; white-space: nowrap; text-align: right; }
+}
