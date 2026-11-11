@@ -382,3 +382,18 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Apple's bag bar and Airbnb's reserve bar: a floating translucent card pinned to the bottom: https://www.apple.com
 - **Shots:** [1440 px](rounds/39-1440.jpg)
 - **Lines:** 6397
+
+### Block 31 to 40 (summary)
+
+- **Lines in `webapp/src`:** about 6,360 (cap 7,392; commit 463f724 had 5,280).
+- **Strongest changes:** (1) depth on the bike page (the rule card over the photo, round 31) and the owners' card over the shop photo (round 28), with the soft shadow scale; (2) Verify dressed as the proof moment (round 33) and the floating action bar (round 39).
+- **Found and fixed:** the Home chapters shared a class name with the bike page's story and stretched it (round 39). All 14 routes were then checked for sideways overflow and broken images: none.
+- **Steps back:** round 35 (Home length) and round 40 (36 unused CSS rules removed).
+
+## Round 40 · A step back: what is no longer used
+
+- **What:** Listed every CSS rule whose class no longer appears in the code (old home hero, entries, stats, next-page, phone-only helpers) and removed the 36 single-line ones. Then walked all 14 routes at 1440 px: no sideways overflow, no broken image.
+- **Why:** Every redesign leaves orphans. Cutting them keeps the sheet honest and the line budget for what matters.
+- **Reference:** Chrome DevTools' CSS coverage tool (unused rules): https://developer.chrome.com/docs/devtools/coverage
+- **Shots:** none
+- **Lines:** 6361

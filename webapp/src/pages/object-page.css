@@ -51,14 +51,7 @@
   display: grid; grid-template-columns: 1fr minmax(0, 470px) 1fr; align-items: center; gap: 40px;
   max-width: var(--max); margin: clamp(20px, 3vw, 36px) auto 0; padding: 0 var(--gutter);
 }
-.stats { margin: 0; display: grid; gap: 30px; }
-.stats-left { justify-items: end; text-align: right; }
-.stats-right { justify-items: start; text-align: left; }
-.stats dt { font-size: 30px; color: var(--ink); line-height: 1; font-variant-numeric: tabular-nums; }
-.stats dt span { font-size: 13px; color: var(--dim); margin-left: 4px; }
-.stats dd { margin: 8px 0 0; font-size: 15px; line-height: 1.4; color: var(--fog); max-width: 21ch; }
 
-.hero-figure { margin: 0; position: relative; }
 /* Anchored to the drawing so the light stays under the recorder at every width. */
 .hero-figure .glow { inset: -45% -80% -45%; }
 .hero-figure .glow i { top: 59%; width: 100%; height: 72%; }
@@ -71,7 +64,6 @@
 .led-halo { fill: var(--blue); opacity: .22; transition: fill 1.6s ease; animation: breathe 3.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
 .led-halo.alert { fill: var(--orange); animation-duration: 1.4s; }
 @keyframes breathe { 50% { opacity: .05; transform: scale(1.5); } }
-.hero-figure figcaption { margin: 30px auto 0; max-width: 46ch; font-size: 14px; color: var(--fog); line-height: 1.45; }
 .hero-figure figcaption .mono { color: var(--ink); font-size: 12px; margin-right: 8px; }
 
 /* ---------- state line ---------- */
@@ -185,9 +177,6 @@ a.tx:hover, .seq-link:hover, .ledger .c-tx a:hover, .contracts a:hover { text-de
 
 /* ---------- small screens ---------- */
 @media (max-width: 900px) {
-  .hero-body { grid-template-columns: 1fr 1fr; gap: 28px 20px; }
-  .hero-figure { grid-column: 1 / -1; order: -1; max-width: 520px; margin: 0 auto; }
-  .stats-left, .stats-right { justify-items: center; text-align: center; }
   .block, .ledger .block-intro { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .block-intro { position: static; }
   .contracts { grid-template-columns: minmax(0, 1fr); }
@@ -196,11 +185,6 @@ a.tx:hover, .seq-link:hover, .ledger .c-tx a:hover, .contracts a:hover { text-de
   .hero { text-align: left; }
   .hero h1 { margin: 0; max-width: none; }
   .hero-summary { margin-left: 0; }
-  .hero-figure figcaption { margin-left: 0; }
-  .stats { gap: 22px; }
-  .stats-left, .stats-right { justify-items: start; text-align: left; }
-  .stats dt { font-size: 24px; }
-  .stats dd { font-size: 14px; }
   .step-name { font-size: 15px; }
   .step-note { font-size: 11px; text-align: center; }
   .event { grid-template-columns: 44px minmax(0, 1fr); gap: 2px 14px; }

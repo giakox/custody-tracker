@@ -38,25 +38,16 @@
   display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 32px; align-items: center;
   position: relative; isolation: isolate;
 }
-.home-copy h1 { font-size: clamp(42px, 6vw, 84px); line-height: 1; letter-spacing: -0.026em; font-variation-settings: "opsz" 72; text-wrap: balance; }
-.home-copy h1 em { font-style: var(--em-style); }
 .lead { margin-top: 24px; font-size: clamp(18px, 1.5vw, 21px); line-height: 1.5; color: var(--mist); max-width: 46ch; text-wrap: pretty; }
 
 
 
-.entry { border: 1px solid var(--line-strong); border-radius: var(--radius); padding: clamp(22px, 2.6vw, 32px); background: var(--overlay); }
-.entry h2 { font-size: clamp(26px, 2.4vw, 34px); letter-spacing: -0.015em; }
-.entry p { margin: 12px 0 22px; font-size: 17px; color: var(--mist); max-width: 40ch; }
 
 .qr-sticker { width: 100%; height: auto; display: block; }
 .qr-label { font-family: var(--mono); font-size: 10px; fill: var(--midnight); }
 .qr-label.dim { fill: #5a6973; }
 
-.hint { margin: 10px 0 0 !important; font-size: 14px !important; color: var(--fog) !important; }
-.phone-only { display: none; }
 @media (max-width: 640px), (pointer: coarse) {
-  .desktop-only { display: none; }
-  .phone-only { display: block; }
 }
 
 /* ---------- How it works (Home and bike page) ---------- */
@@ -94,9 +85,6 @@
 
 
 /* ---------- placeholder for pages of later batches ---------- */
-.next-page { max-width: var(--max); margin: 0 auto; padding: 96px var(--gutter); }
-.next-page h1 { font-size: clamp(36px, 5vw, 64px); line-height: 1.05; max-width: 16ch; }
-.next-page h1 em { font-style: var(--em-style); }
 .next-page .btn { margin-right: 16px; margin-top: 24px; }
 
 /* ---------- demo switcher: for the presentation, not part of the product ---------- */
@@ -150,10 +138,7 @@
   max-width: var(--max); margin: clamp(32px, 5vw, 64px) auto 0; padding: 0 var(--gutter);
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: stretch;
 }
-.entry { display: grid; grid-template-rows: auto 1fr; gap: 8px; }
-.entry-copy { display: flex; flex-direction: column; align-items: flex-start; }
 .entry-copy p { min-height: 4.6em; } /* three lines: both buttons line up */
-.entry-art { align-self: end; margin: 0 -12px -12px; }
 .tube-label { font-family: var(--mono); font-size: 11px; fill: var(--fog); }
 
 /* ---------- demo control: in the empty left margin on wide screens, at the end of the page otherwise ---------- */
@@ -165,13 +150,11 @@
 /* ---------- layout: image right of the heading down to small tablets ---------- */
 .home-hero, .bike-top { grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); }
 @media (max-width: 900px) {
-  .entries { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .how-steps { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 700px) {
   .home-hero, .bike-top { grid-template-columns: minmax(0, 1fr); }
   .object-image { max-width: 260px; justify-self: center; }
-  .entries { grid-template-columns: minmax(0, 1fr); }
   .rule-row { grid-template-columns: 96px minmax(0, 1fr); gap: 2px 8px; font-size: 13px; padding-left: 6px; }
   .rule-row .rule-out { grid-column: 2; white-space: normal; }
 }
