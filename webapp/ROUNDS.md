@@ -109,3 +109,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Wise's fee calculator on its home page: https://wise.com
 - **Shots:** [375 px](rounds/07-375.jpg)
 - **Lines:** 6157
+
+## Round 8 · The rule beside the bike
+
+- **What:** On the bike page the rule card moves under the photo, in a right column that stays in view while you read the bike's story. The title, the sentence and the Rent button now sit next to the rule, all above the fold.
+- **Why:** The rule is the product. It was below the fold on a laptop; now photo, rule and button are one glance.
+- **Reference:** Airbnb's listing page, with its sticky booking card: https://www.airbnb.com
+- **Shots:** [1440 px](rounds/08-1440.jpg)
+- **Lines:** 6167

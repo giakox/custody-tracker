@@ -125,14 +125,16 @@ export function Hero({ d }: { d: ObjectDetail }) {
         <h1 id="object-title"><ViewerTitle d={d} me={account} /></h1>
         <p className="hero-summary"><Summary d={d} /></p>
         <div className="actions"><Action d={d} me={account} /></div>
+        <StateLine d={d} />
+      </div>
+      <div className="bike-side">
+        <ObjectImage alert={alert} deviceId={d.deviceId} />
         <div className="rule-card">
           <h2 className="rule-title">If it's dropped, this rule decides. Not the owner, not us.</h2>
           <p className="rule-sub">You leave a deposit of {usd(d.terms.collateral)}. The hardest knock of your ride decides how much comes back. <span className="test-money">{TEST_MONEY}</span></p>
           <RuleTiers terms={d.terms} highlight={d.activeRental?.current ? d.activeRental.current.tier : undefined} />
         </div>
-        <StateLine d={d} />
       </div>
-      <ObjectImage alert={alert} deviceId={d.deviceId} />
       {alert && <p className="sr-only">Shock level of the current rental: {inSentence(d.custodian)}, {TIER_NAMES[tier]}.</p>}
     </section>
   );

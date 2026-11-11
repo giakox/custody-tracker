@@ -138,3 +138,11 @@
 .try-rule p { margin-top: 16px; font-size: 19px; color: var(--mist); max-width: 38ch; }
 .try-rule .sim { margin-top: 0; }
 @media (max-width: 860px) { .try-rule { grid-template-columns: minmax(0, 1fr); } }
+
+/* Round 8: the rule sits under the photo, in a card that stays in view while you read the bike's story (Airbnb's listing page). */
+.bike-top { align-items: start; }
+.bike-side { display: grid; gap: 20px; position: sticky; top: 20px; align-self: start; }
+.bike-side .object-image { margin-top: 0; }
+.bike-side .rule-card { margin-top: 0; max-width: none; }
+.bike-side .rule-card h2.rule-title { font-size: clamp(22px, 2vw, 26px); }
+@media (max-width: 860px) { .bike-side { position: static; } .bike-top .object-image { order: 0; } }
