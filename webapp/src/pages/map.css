@@ -13,7 +13,7 @@
 /* pins */
 .pin-wrap { background: none; border: 0; }
 .pin { position: relative; display: block; width: 52px; height: 30px; }
-.pin-price { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 999px; background: #fff; color: var(--ink); border: 1px solid var(--line-strong); font: 600 14px/1 var(--ui); box-shadow: 0 2px 8px var(--shadow); transition: transform .15s ease; }
+.pin-price { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 999px; background: #fff; color: var(--ink); border: 1px solid var(--line-strong); font: 600 14px/1 var(--ui); box-shadow: var(--elev-1); transition: transform .15s ease; }
 .pin-live .pin-price { background: var(--blue); color: var(--on-blue); border-color: var(--blue-ink); }
 .pin.is-selected .pin-price { transform: scale(1.15); background: var(--ink); color: #fff; border-color: var(--ink); }
 .pin-drop { position: absolute; right: -2px; top: -3px; width: 10px; height: 10px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 2px #fff; }
@@ -146,7 +146,7 @@
 
 /* Round 1: the nearest rentable bike as a card over the map, with Rent one tap away. */
 .nearest { position: absolute; z-index: 700; left: calc(400px + 14px); bottom: 14px; /* over the map, right of the 400 px list */ width: min(420px, calc(100% - 28px)); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center;
-  background: var(--overlay); border: 1px solid rgba(2, 151, 222, .55); border-radius: var(--radius); padding: 14px 14px 14px 16px; box-shadow: 0 12px 40px var(--shadow); }
+  background: var(--overlay); border: 1px solid rgba(2, 151, 222, .55); border-radius: var(--radius); padding: 14px 14px 14px 16px; box-shadow: var(--elev-2); }
 .nearest-info { display: grid; gap: 4px; text-align: left; background: none; border: 0; padding: 0; color: inherit; font: inherit; cursor: pointer; min-width: 0; }
 .nearest-k { font-size: 11px; color: var(--blue-ink); }
 .nearest-name { font-size: 21px; color: var(--ink); line-height: 1.15; }

@@ -516,3 +516,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Linear's issue history and GitHub's timeline: a spine with markers: https://github.com
 - **Shots:** [1440 px](rounds/54-1440.jpg)
 - **Lines:** 6522
+
+## Round 55 · A step back: one shadow scale
+
+- **What:** Collected the nine different resting shadows on cards, panels and pins into the three on the scale (small, medium, large). Only focus rings, dots and glows keep their own.
+- **Why:** Edoardo asked for a single, coherent shadow scale. A site where every card has its own shadow looks assembled; one with three looks designed.
+- **Reference:** Material Design elevation and Apple HIG: a short, named elevation scale: https://m3.material.io/styles/elevation/overview
+- **Shots:** none
+- **Lines:** 6522

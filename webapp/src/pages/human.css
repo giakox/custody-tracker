@@ -10,7 +10,7 @@
 .welcome-card {
   position: absolute; left: max(var(--gutter), calc((100% - var(--max)) / 2 + var(--gutter))); bottom: clamp(24px, 5vw, 56px);
   width: min(560px, calc(100% - 2 * var(--gutter))); padding: clamp(24px, 3vw, 40px);
-  background: var(--card-bg); color: var(--card-ink); border-radius: var(--radius); box-shadow: var(--card-shadow);
+  background: var(--card-bg); color: var(--card-ink); border-radius: var(--radius); box-shadow: var(--elev-3);
 }
 .welcome-card h1 { color: var(--card-ink); font-size: clamp(38px, 4.4vw, 64px); line-height: 1.02; text-wrap: balance; font-variation-settings: "opsz" 72; }
 .welcome-card p { margin-top: 18px; font-size: clamp(19px, 1.7vw, 23px); line-height: 1.4; color: var(--card-ink); max-width: 32ch; text-wrap: pretty; }
@@ -29,7 +29,7 @@
 .bike-detail-top { grid-template-columns: minmax(0, 1fr); }
 .nearest { grid-template-columns: 64px minmax(0, 1fr) auto; }
 .nearest-photo { width: 64px; height: 64px; border-radius: var(--radius); }
-.nearest, .map-btn, .map-legend, .map-msg { border-radius: var(--radius); box-shadow: 0 8px 28px var(--shadow); }
+.nearest, .map-btn, .map-legend, .map-msg { border-radius: var(--radius); box-shadow: var(--elev-2); }
 .leaflet-bar a { background: var(--surface) !important; }
 
 
@@ -172,7 +172,7 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 /* Round 22: the owner's bikes as photo cards, not table rows. */
 .objects ol { border-top: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 20px; }
 .obj-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; align-items: center; padding: 0 0 16px; border: 1px solid var(--line-strong); border-radius: var(--radius); overflow: hidden; text-decoration: none; background: var(--bg); transition: box-shadow .15s ease; }
-.obj-row:hover { background: var(--bg); box-shadow: 0 10px 30px var(--shadow); }
+.obj-row:hover { background: var(--bg); box-shadow: var(--elev-2); }
 .obj-photo { grid-column: 1 / -1; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 .obj-name, .obj-status, .obj-shock { padding-left: 16px; }
 .obj-name { grid-column: 1 / -1; font-size: 21px; margin-top: 8px; }
@@ -457,7 +457,7 @@ p, li, dd { text-wrap: pretty; }
 
 /* ---------- Round 53: the map is drawn in the page's paper tones ---------- */
 .fleet-map-wrap::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 450; box-shadow: inset 0 0 80px rgba(60, 40, 15, .14); }
-.pin-price { box-shadow: 0 6px 16px rgba(60, 40, 15, .22); }
+.pin-price { box-shadow: var(--elev-2); }
 .leaflet-control-attribution { border-radius: var(--radius) 0 0 0; }
 
 /* ---------- Round 54: the story has a spine ---------- */
