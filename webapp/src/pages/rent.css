@@ -346,3 +346,15 @@ i.split-kept { background: var(--orange); }
 .ahead-list b { color: var(--ink); font-weight: 650; }
 .ahead-n { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; box-shadow: inset 0 0 0 2px var(--line-strong); font-size: 14px; font-weight: 700; color: var(--ink); background: var(--bg); }
 .ahead .hint-line { margin-top: 16px; }
+
+/* ---------- Round 97: the receipt prints as a receipt ---------- */
+@media print {
+  .site-end, .live-rental-bar, .sticky-action, .demo, .site-header, .menu-foot { display: none !important; }
+  .page { padding-top: 0 !important; }
+  .rent .receipt.slip { box-shadow: none; border: 1px solid #999; max-width: none; margin: 0; }
+  .slip .receipt-lines, .slip-head { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .split i { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .proof-details summary { list-style: none; color: #000; font-weight: 600; }
+  .proof-details .tx-list a { color: #000; }
+  .proof-details .tx-list a::after { content: " (" attr(href) ")"; font-size: 10pt; word-break: break-all; }
+}

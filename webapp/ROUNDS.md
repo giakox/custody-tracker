@@ -1401,6 +1401,29 @@ Also a step towards one shadow scale: the three hand-written shadows left (the p
 
 **Test, "another screen at a glance?"** For the finder's top, yes at 1024: two rows of controls became one.
 
+## Round 97 · The receipt prints as a receipt
+
+**Hierarchy audit (the receipt on paper, "Print" button):**
+
+| Block | Printed before | Printed after |
+|---|---|---|
+| "Deposit back to you: 30 dollars" | **missing**: a print rule written for the QR sticker on the Add flow hid every H1 on the site | back, as the first thing on the page (the sticker rule now applies only to its own page) |
+| The proof (transactions) | folded: "See the proof" with nothing under it | opened just before printing; each transaction prints with its full address, so the paper can be checked without the site |
+| Footer, giant wordmark, demo switch, floating header | printed (a page and a half of chrome) | hidden |
+| Card shadow | a grey smear on paper | a thin border |
+| Split bar colours | dropped by "save ink" | kept (they carry meaning) |
+
+**Levels after:** on paper, the amount, the split, the lines, the proof. **Squint test:** before, a card without its number and a page of footer; after, one receipt.
+
+**References:** Stripe's receipts print as a single clean page with the transaction id; bank statements print the reference in full. Why ours looked cheaper: the one page meant to be printed fell apart on paper, and a global rule leaked from another screen.
+
+**Three ideas:** (1) fix the print stylesheet and open the proof before printing. (2) A "Download PDF" made by the site. (3) Remove the Print button.
+**Discarded:** (2) a PDF generator is a new feature and a dependency. (3) a receipt you can't keep is not a receipt.
+
+**Chosen, (1):** [printed before and after](rounds/97-receipt-print.jpg).
+
+**Test, "another screen at a glance?"** On paper, yes.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1421,7 +1444,8 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Rent flow: Wallet | 92 |
 | Rent flow: Ride, Return, Waiting | 67 |
 | Rent flow: Outcome | 91 |
-| Receipt and My rentals | 68 |
+| Receipt (print) | 97 |
+| My rentals | 89 |
 | Owner (My bikes) | 69 |
 | Owner: Confirm a return | 76 |
 | Add a bike | 74 |

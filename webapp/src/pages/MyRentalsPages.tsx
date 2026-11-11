@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getNetwork, getObject, listObjects } from "../data/api";
 import type { ObjectDetail, Rental } from "../data/types";
@@ -120,6 +121,12 @@ export function MyRentalsPage() {
 
 export function ReceiptPage({ id, period }: { id: number; period: number }) {
   const q = useQuery({ queryKey: ["object", id], queryFn: () => getObject(id) });
+  // On paper the proof is always shown: open it just before printing.
+  useEffect(() => {
+    const open = () => document.querySelectorAll<HTMLDetailsElement>("details.proof-details").forEach((el) => { el.open = true; });
+    window.addEventListener("beforeprint", open);
+    return () => window.removeEventListener("beforeprint", open);
+  }, []);
   const net = useQuery({ queryKey: ["network"], queryFn: getNetwork, staleTime: Infinity });
   const d = q.data;
   const r = d?.rentals.find((x) => x.period === period);

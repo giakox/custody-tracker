@@ -60,7 +60,7 @@ button.choice-opt:hover { border-color: var(--blue); }
   .scan-frame, .photo, .qr-print { max-width: 260px; }
 }
 @media print {
-  .ready > div, .rent-top, h1, .tx-steps, .lead { display: none !important; }
+  .page:has(.qr-print) :is(.ready > div, .rent-top, h1, .tx-steps, .lead) { display: none !important; }
   .qr-print { max-width: 8cm; margin: 0 auto; }
 }
 
