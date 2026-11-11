@@ -214,7 +214,7 @@ export function ActivePage({ id }: { id: number }) {
     <Shell d={d} stage="Ride" wide>
       <section className={`ride-hero tier-glow-${alert ? c.tier : 0}`}>
         <div>
-          <p className="kicker">Your rental · {span(r.started.at, null)} so far</p>
+          <p className="kicker live-kicker"><i className="pulse" aria-hidden="true" />Your rental · {span(r.started.at, null)} so far</p>
           <h1>{c.peakCg === null
             ? <>No readings <em>yet</em>.</>
             : alert ? <>A {TIER_NAMES[c.tier]} knock so far: {usd(c.wouldWithhold)} would be <em>kept</em>.</>

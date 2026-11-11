@@ -409,3 +409,12 @@ p, li, dd { text-wrap: pretty; }
 .try-rule .sim-out { text-align: left; }
 .try-rule .sim-peak { font-size: clamp(64px, 7vw, 112px); }
 .try-rule .sim-back { font-size: clamp(44px, 4.6vw, 72px); }
+
+/* ---------- Round 47: a rental in progress is live, and says so ---------- */
+.live-kicker { display: inline-flex; align-items: center; gap: 10px; font-size: 17px; color: var(--ink); font-weight: 600; }
+.pulse { width: 12px; height: 12px; border-radius: 50%; background: var(--blue); flex: none; position: relative; }
+.tier-glow-1 .pulse, .tier-glow-2 .pulse, .tier-glow-3 .pulse { background: var(--orange); }
+@media (prefers-reduced-motion: no-preference) {
+  .pulse::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: inherit; animation: pulse-ring 1.8s ease-out infinite; }
+}
+@keyframes pulse-ring { from { transform: scale(1); opacity: .6; } to { transform: scale(3.2); opacity: 0; } }

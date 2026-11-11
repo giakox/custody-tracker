@@ -445,3 +445,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Apple's colour-changing product configurators: the stage recolours with your choice: https://www.apple.com/shop/buy-iphone
 - **Shots:** [1440 px](rounds/46-1440.jpg)
 - **Lines:** 6439
+
+## Round 47 · A live rental says it is live
+
+- **What:** On the ride page a pulsing dot (blue, orange once there has been a knock) opens the line "Your rental · 22 min so far" in a larger, bolder size, so the page reads as something happening now.
+- **Why:** The most anxious page of the product (money is held) should feel alive and under watch.
+- **Reference:** Uber and Lyft ride-in-progress screens, Apple Live Activities: a pulsing live marker: https://www.uber.com/blog/live-activity-on-ios/
+- **Shots:** [1440 px](rounds/47-1440.jpg)
+- **Lines:** 6448
