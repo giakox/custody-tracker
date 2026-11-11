@@ -1,0 +1,92 @@
+/* Round 64: the bike page as a listing (Airbnb's room page, Apple's buy page).
+   Title, then the pictures as one mosaic across the page, then two columns: the story on the
+   left, a booking card that stays in view on the right. Spacing from one scale: 8 12 16 24 32 48 64. */
+
+.listing { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+
+/* ---------- head ---------- */
+.l-head { padding-top: 32px; }
+.l-kicker { font-size: 15px; color: var(--fog); }
+.l-head h1 { margin-top: 8px; font-size: clamp(36px, 4.4vw, 60px); line-height: 1; letter-spacing: -0.035em; text-wrap: balance; max-width: 22ch; }
+.l-head h1 em { font-style: var(--em-style); }
+
+/* ---------- the mosaic: one large picture, two beside it ---------- */
+.l-gallery { margin-top: 32px; display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 8px; height: clamp(340px, 34vw, 500px); border-radius: var(--radius); overflow: hidden; }
+.l-gallery figure { position: relative; margin: 0; min-height: 0; overflow: hidden; background: var(--raise); }
+.l-gallery .l-main-photo { grid-row: span 2; }
+.l-gallery img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+.l-gallery figcaption { position: absolute; left: 12px; bottom: 12px; padding: 6px 12px; border-radius: 999px; background: var(--overlay); box-shadow: var(--elev-1); font-size: 13px; font-weight: 600; color: var(--ink); }
+@media (hover: hover) { .l-gallery figure:hover img { transform: scale(1.03); } }
+
+/* ---------- body: story left, booking card right ---------- */
+.l-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 380px); gap: 64px; margin-top: 48px; align-items: start; }
+.l-col { min-width: 0; }
+
+.l-summary { font-size: clamp(19px, 1.6vw, 22px); line-height: 1.45; color: var(--mist); max-width: 46ch; text-wrap: pretty; }
+.l-summary time { font-family: var(--ui); color: var(--ink); }
+.l-summary .shock { color: var(--orange-ink); font-weight: 600; }
+.l-intro { padding-bottom: 48px; border-bottom: 1px solid var(--line); }
+.l-intro .stateline { margin: 32px 0 0; padding: 0; max-width: 560px; align-items: start; }
+.l-intro .step { align-content: start; justify-items: start; text-align: left; }
+.l-intro .step + .step::before { right: auto; left: calc(-100% + 6px); width: 100%; }
+
+/* the story and the proof live in the left column: one column inside it */
+.l-col .block { max-width: none; padding: 48px 0 0; grid-template-columns: minmax(0, 1fr); gap: 24px; }
+.l-col .block-intro { position: static; }
+.l-col .block-intro h2 { font-size: clamp(26px, 2.4vw, 32px); }
+.l-col .ledger .block-intro { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+.l-col .proof-toggle { max-width: none; padding: 0; margin-top: 32px; grid-template-columns: auto minmax(0, 1fr); column-gap: 16px; }
+.l-col .proof-toggle .btn { grid-column: 1; margin-left: 0; }
+.l-col .proof-toggle p { grid-column: 2; margin-left: 0; }
+.l-col .sources { padding-bottom: 0; }
+.l-col .contracts { grid-template-columns: minmax(0, 1fr); }
+
+/* ---------- the booking card ---------- */
+.l-book { position: sticky; top: calc(var(--hdr-space) + 8px); }
+.book-card { padding: 24px; border-radius: var(--radius); background: var(--bg); border: 1px solid var(--line); box-shadow: var(--elev-2); }
+.book-price { font-size: 17px; color: var(--mist); }
+.book-price b { font-size: 28px; font-weight: 700; letter-spacing: -0.03em; color: var(--ink); }
+.book-deposit { margin-top: 4px; font-size: 15px; color: var(--fog); }
+.book-card .actions { margin-top: 24px; display: grid; gap: 8px; }
+.book-card .actions .btn { width: 100%; justify-content: center; min-height: 52px; font-size: 17px; }
+.book-card .action-note { font-size: 14px; color: var(--fog); }
+.book-rule { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 17px; line-height: 1.3; letter-spacing: -0.01em; color: var(--ink); }
+.book-card .rule-tiers { margin-top: 12px; }
+.book-note { margin-top: 16px; font-size: 13px; line-height: 1.5; color: var(--fog); }
+
+/* the bar at the bottom is for phones; on a desktop the card is always in view */
+@media (min-width: 900px) { .listing .sticky-action { display: none; } }
+
+/* ---------- motion: the pictures arrive once, nothing loops ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .l-head > * { animation: page-in .55s cubic-bezier(.2, .7, .2, 1) backwards; }
+  .l-head > h1 { animation-delay: .05s; }
+  .l-gallery figure { animation: l-photo .8s cubic-bezier(.2, .7, .2, 1) backwards; }
+  .l-gallery figure:nth-child(2) { animation-delay: .1s; }
+  .l-gallery figure:nth-child(3) { animation-delay: .18s; }
+  .book-card { animation: page-in .6s cubic-bezier(.2, .7, .2, 1) .2s backwards; }
+}
+@keyframes l-photo { from { opacity: 0; clip-path: inset(6% 6% 6% 6% round var(--radius)); } }
+
+/* ---------- tablets ---------- */
+@media (max-width: 1100px) { .l-body { gap: 40px; grid-template-columns: minmax(0, 1fr) 320px; } }
+
+/* ---------- phones: the pictures swipe, the card follows the summary ---------- */
+@media (max-width: 899px) {
+  .l-head { padding-top: 16px; }
+  .l-head h1 { font-size: clamp(32px, 9vw, 44px); }
+  .l-gallery { display: flex; height: auto; gap: 8px; margin: 24px calc(-1 * var(--gutter)) 0; padding: 0 var(--gutter); border-radius: 0; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 var(--gutter); scrollbar-width: none; }
+  .l-gallery::-webkit-scrollbar { display: none; }
+  .l-gallery figure { flex: 0 0 86%; aspect-ratio: 4 / 3; border-radius: var(--radius); scroll-snap-align: start; }
+  .l-body { grid-template-columns: minmax(0, 1fr); gap: 32px; margin-top: 24px; }
+  .l-book { position: static; order: -1; }
+  .l-col { display: contents; }
+  .l-intro { order: -2; padding-bottom: 32px; }
+  .l-col > .proof, .l-col > .no-proof { order: 1; }
+  .l-intro .stateline { max-width: none; }
+}
+
+/* the rule inside the card: meter, level, amount on one line each, the amount set right */
+.book-card .rule-row { grid-template-columns: 52px minmax(0, 1fr) auto; gap: 12px; white-space: nowrap; }
+.book-card .rule-row .rule-out { grid-column: auto; white-space: nowrap; text-align: right; color: var(--ink); }
+.book-card .rule-row.hl { background: var(--blue-wash); }

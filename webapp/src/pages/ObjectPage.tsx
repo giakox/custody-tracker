@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getNetwork, getObject, getStatus } from "../data/api";
 import { DataError } from "../data/types";
-import { Hero, StickyAction } from "../components/Hero";
+import { BookCard, ListingIntro, ListingTop, StickyAction } from "../components/Hero";
+import { SiteFooter } from "../components/SiteFooter";
 import { Timeline } from "../components/Timeline";
 import { Ledger } from "../components/Ledger";
 import { Sources } from "../components/Sources";
@@ -11,6 +12,7 @@ import { HowItWorks } from "../components/HowItWorks";
 import { DemoSwitcher } from "../components/DemoSwitcher";
 import "./object-page.css";
 import "./site.css";
+import "./listing.css";
 
 /** Loading and failure states. The glow means "the chain is answering", so failures get none. */
 function Message({ title, children, glow = false }: { title: React.ReactNode; children: React.ReactNode; glow?: boolean }) {
@@ -34,23 +36,31 @@ export function ObjectPage({ id }: { id: number }) {
 
   let body: React.ReactNode;
   if (obj.data && net.data) {
+    const d = obj.data;
+    const tier = d.status === "rented" ? d.activeRental?.current?.tier ?? 0 : 0;
     body = (
-      <>
-        <Hero d={obj.data} />
-        <div className={proof ? "proof" : "no-proof"}>
-          <Timeline d={obj.data} explorer={net.data.explorer} />
-          <div className="proof-toggle">
-            <button type="button" className="btn btn-secondary" aria-expanded={proof} onClick={() => setProof(!proof)}>{proof ? "Hide the proof" : "See the proof"}</button>
-            <p>{proof ? "Transactions, batch numbers and where the data comes from." : "Every line above can be checked on a public blockchain, without asking us."}</p>
+      <div className={`listing tier-glow-${tier}`}>
+        <ListingTop d={d} />
+        <div className="l-body">
+          <div className="l-col">
+            <ListingIntro d={d} />
+            <div className={proof ? "proof" : "no-proof"}>
+              <Timeline d={d} explorer={net.data.explorer} />
+              <div className="proof-toggle">
+                <button type="button" className="btn btn-secondary" aria-expanded={proof} onClick={() => setProof(!proof)}>{proof ? "Hide the proof" : "See the proof"}</button>
+                <p>{proof ? "Transactions, batch numbers and where the data comes from." : "Every line above can be checked on a public blockchain, without asking us."}</p>
+              </div>
+              {proof && <>
+                <Ledger d={d} explorer={net.data.explorer} />
+                <Sources net={net.data} status={status.data} updatedAt={obj.dataUpdatedAt || undefined} />
+              </>}
+            </div>
           </div>
-          {proof && <>
-            <Ledger d={obj.data} explorer={net.data.explorer} />
-            <Sources net={net.data} status={status.data} updatedAt={obj.dataUpdatedAt || undefined} />
-          </>}
+          <BookCard d={d} />
         </div>
         <HowItWorks />
-        <StickyAction d={obj.data} />
-      </>
+        <StickyAction d={d} />
+      </div>
     );
   } else if (err?.code === "not-found") {
     body = <Message title={<>There is no <em>object {id}</em> on this network.</>}>Check the number on the label of the recorder, or open the page from its QR code.</Message>;
@@ -73,6 +83,7 @@ export function ObjectPage({ id }: { id: number }) {
     <div className="page">
       <SiteHeader />
       <main>{body}</main>
+      <SiteFooter />
       <DemoSwitcher />
     </div>
   );

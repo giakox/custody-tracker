@@ -619,6 +619,16 @@ Edoardo: the header was flat, a thin full-width strip with a small logo, the "Sa
 - **Critique after the first pass, fixed before the commit:** "Near me" fell alone onto a second chip row at 1440 (chips 15 px padding, 8 px gap: one row now); the legend had lost its two dots when the old map CSS went; the other pins faded to 55% when one was selected, which put their price text under 4.5:1 (no fading now: the selected pin is dark and larger, that is enough); the phone menu was 362 px wide and centred, not full screen, because a fixed grid child kept `justify-self: center` (now stretched); the mini-card's "deposit 50 · 2 min walk" broke mid-phrase (now two lines).
 - **Test, "is it another page at a glance?"** Yes. Edoardo, after seeing it: «OH ORA SIAMO SULLA STRADA GIUSTA».
 
+## Round 64 · The bike page becomes a listing
+
+- **Screen:** the bike page (weakest after the finder: a half-and-half hero, then a story column with an empty 300 px gutter on its left and a floating bar that repeated the button).
+- **References:** Airbnb's room page ([side by side](rounds/64-ref-airbnb.jpg)) and Apple's iPhone buy page. Why ours looked cheaper: Airbnb gives the pictures the whole content width as one mosaic and puts every decision (price, dates, the button) in one card that stays beside you while you read; ours split the first screen in two, so the photo and the copy each had half and neither led. Apple keeps the price in reach all the way down in one quiet strip; ours brought a second bar up from the bottom that covered the story and said the same thing as the hero. Below the hero, ours wasted the left third of the page on a sticky title.
+- **Three ideas:** (1) a listing: title, a mosaic of three pictures across the page, then the story on the left and a booking card on the right that stays in view (price, deposit, Rent, the rule). (2) The story as a horizontal ribbon of rentals, like a flight timeline. (3) A full-bleed photo hero with the title over it.
+- **Discarded:** (2) the story is sentences, and sentences in a horizontal strip are unreadable on a phone. (3) the photo is busy (people, railings): white type over it fails contrast without a scrim, and a scrim hides the bike.
+- **Chosen, (1):** [before and after, 1440](rounds/64-bike-1440.jpg), [phone](rounds/64-bike-375.jpg). The mosaic carries the bike, its recorder and the phone it is rented from, each with a caption saying what it is. The booking card holds the price in large type, the deposit, the one button and the rule table (meter, level, amount set right); it is sticky under the floating header and replaces the bottom bar on desktop. On a phone the pictures swipe and snap, the card follows the summary, and the bottom bar comes back once the card has scrolled away. The story and the proof take the left column at full width; the page now ends with the footer like the others.
+- **Craft:** one radius for mosaic, card and photo crops; card on --elev-2; spacing only from 8/12/16/24/32/48/64; the pictures arrive once with a short clip-path reveal (off with reduced motion), and grow 3% on hover with a pointer.
+- **Test, "is it another screen at a glance?"** Yes: the first screen is now a title over a picture mosaic, not a two-column hero; below, a card on the right instead of a gutter on the left.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -629,7 +639,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Home: find a bike (grid + map) | Structure |
 | Header | Structure |
 | Footer | — |
-| Bike page | — |
+| Bike page | 64 |
 | Rent flow | — |
 | Receipt and My rentals | — |
 | Owner (My bikes) | — |

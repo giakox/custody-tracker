@@ -3,7 +3,7 @@ import type { ObjectDetail, Party, Rental } from "../data/types";
 import { day, hm, inSentence, TEST_MONEY, when, nameOf, objectName, possessive, shortHex, usd, TIER_NAMES } from "../ui/format";
 import { href } from "../ui/router";
 import { relation, useViewer } from "../ui/viewer";
-import { ObjectImage } from "./ObjectImage";
+import { CASE_IMAGE } from "./ObjectImage";
 import { RuleTiers } from "./RuleTiers";
 import { StateLine } from "./StateLine";
 
@@ -97,7 +97,7 @@ export function StickyAction({ d }: { d: ObjectDetail }) {
   const { account } = useViewer();
   const [shown, setShown] = useState(false);
   useEffect(() => {
-    const el = document.querySelector(".bike-top .actions");
+    const el = document.querySelector(".l-book .actions");
     if (!el) return;
     const io = new IntersectionObserver(([e]) => setShown(!e.isIntersecting && e.boundingClientRect.top < 0));
     io.observe(el);
@@ -113,30 +113,54 @@ export function StickyAction({ d }: { d: ObjectDetail }) {
   );
 }
 
-export function Hero({ d }: { d: ObjectDetail }) {
+/** The pictures of this bike and of what renting it looks like; captions say which is which. */
+const GALLERY = [
+  { src: "./img/day/recorder-hand.jpg", alt: "The recorder, a small black box with one blue light, held next to the bike's frame", cap: "Its recorder" },
+  { src: "./img/day/unlock-phone.jpg", alt: "Someone opening the rental on a phone next to a parked bike", cap: "Renting, from your phone" },
+];
+
+/** The listing's top: who lends it, where it stands, and the pictures (Airbnb's listing header). */
+export function ListingTop({ d }: { d: ObjectDetail }) {
   const { account } = useViewer();
+  const owner = d.ownerName ?? shortHex(d.owner.address);
   const tier = d.activeRental?.current?.tier ?? 0;
   const alert = d.status === "rented" && tier > 0;
-  const owner = d.ownerName ?? shortHex(d.owner.address);
   return (
-    <section className={`hero bike-top tier-glow-${alert ? tier : 0}`} aria-labelledby="object-title">
-      <div className="bike-copy">
-        <p className="kicker">{objectName(d)}, lent by {owner}</p>
-        <h1 id="object-title"><ViewerTitle d={d} me={account} /></h1>
-        <p className="hero-summary"><Summary d={d} /></p>
-        <div className="actions"><Action d={d} me={account} /></div>
-        {d.status === "available" && <p className="price-line"><b>2 dollars an hour</b> · {usd(d.terms.collateral)} deposit, back by the rule</p>}
-        <StateLine d={d} />
-      </div>
-      <div className="bike-side">
-        <ObjectImage alert={alert} deviceId={d.deviceId} />
-        <div className="rule-card">
-          <h2 className="rule-title">If it's dropped, this rule decides. Not the owner, not us.</h2>
-          <p className="rule-sub">You leave a deposit of {usd(d.terms.collateral)}. The hardest knock of your ride decides how much comes back. <span className="test-money">{TEST_MONEY}</span></p>
-          <RuleTiers terms={d.terms} highlight={d.activeRental?.current ? d.activeRental.current.tier : undefined} />
-        </div>
+    <header className="l-head" aria-labelledby="object-title">
+      <p className="l-kicker">{objectName(d)}, lent by {owner}</p>
+      <h1 id="object-title"><ViewerTitle d={d} me={account} /></h1>
+      <div className="l-gallery">
+        <figure className="l-main-photo"><img src={CASE_IMAGE?.src} alt={CASE_IMAGE?.alt ?? ""} fetchPriority="high" /></figure>
+        {GALLERY.map((g) => <figure key={g.src}><img src={g.src} alt={g.alt} loading="lazy" /><figcaption>{g.cap}</figcaption></figure>)}
       </div>
       {alert && <p className="sr-only">Shock level of the current rental: {inSentence(d.custodian)}, {TIER_NAMES[tier]}.</p>}
+    </header>
+  );
+}
+
+/** What the page says first, under the pictures: the last thing that happened and the state line. */
+export function ListingIntro({ d }: { d: ObjectDetail }) {
+  return (
+    <section className="l-intro" aria-label="Where it stands">
+      <p className="l-summary"><Summary d={d} /></p>
+      <StateLine d={d} />
     </section>
+  );
+}
+
+/** The card that stays beside the story: price, deposit, the one action and the rule (Airbnb's booking card). */
+export function BookCard({ d }: { d: ObjectDetail }) {
+  const { account } = useViewer();
+  return (
+    <aside className="l-book" aria-label="Rent it">
+      <div className="book-card">
+        <p className="book-price"><b>2 dollars</b> an hour</p>
+        <p className="book-deposit">{usd(d.terms.collateral)} deposit, back by the rule</p>
+        <div className="actions">{<Action d={d} me={account} />}</div>
+        <h2 className="book-rule">If it's dropped, this rule decides. Not the owner, not us.</h2>
+        <RuleTiers terms={d.terms} highlight={d.activeRental?.current ? d.activeRental.current.tier : undefined} />
+        <p className="book-note">The hardest knock of your ride decides how much comes back. {TEST_MONEY}</p>
+      </div>
+    </aside>
   );
 }
