@@ -1814,6 +1814,25 @@ Fixed on the way: an absolutely positioned photo inside a grid takes its grid ar
 
 **Test on the blurred shots:** yes: a small tile on white became a wide map-and-ink band.
 
+## Round 118 · Waiting is a line with one moving point, and a deposit you can see is safe
+
+**Hierarchy audit (Waiting step):** three stacked tiles (returned / owner confirms / deposit back) and a sand panel "What if the owner doesn't confirm?". The renter's real question while waiting is "is my money safe?", and the answer sat in a paragraph at the bottom.
+
+**What changed:** the three steps are one horizontal line: a ticked dot, a pulsing dot ("The owner confirms · Waiting", in blue), an empty dot, joined by a track that's blue up to where you are. Under it, a dark block with a padlock: "50 dollars, held by the rule. Nobody can take it while you wait: not the owner, not us. If the owner doesn't confirm, it stays where it is; the owner can't change the rule." On a phone the line stacks.
+
+**Honesty check:** "stays where it is" is exactly the known limit (no deadline for the owner's confirmation; listed on the Design page). Nothing here promises a refund by a date.
+
+**Café test:** the café's "Order, ready by 6:05am" turns waiting into something you can see; ours shows where the return stands and what's protecting the money.
+
+**References:** the café's order status; delivery trackers (one line, one moving point).
+
+**Three ideas:** (1) a progress line and a "held" block. (2) A countdown to an automatic refund. (3) A button to remind the owner.
+**Discarded:** (2) there is no automatic refund in today's contract; a countdown would be false. (3) messaging the owner is a new function.
+
+**Chosen, (1):** [before and after](rounds/118-waiting.jpg), [phone](rounds/118-waiting-375.jpg).
+
+**Test on the blurred shots:** yes: three grey tiles and a panel became a line of dots and a dark block.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1834,7 +1853,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Rent flow: Rule, Deposit | 86 |
 | Rent flow: Wallet | 92 |
 | Rent flow: Ride | 116 |
-| Rent flow: Waiting | 67 |
+| Rent flow: Waiting | 118 |
 | Rent flow: Return | 111 |
 | Rent flow: Outcome | 91 |
 | Receipt | 113 (print: 97) |

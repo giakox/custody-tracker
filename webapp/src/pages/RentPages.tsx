@@ -335,14 +335,14 @@ export function WaitingPage({ id }: { id: number }) {
     }>
       <h1>Waiting for the owner to <em>confirm</em>.</h1>
       <p className="lead">The owner has to confirm the bike is back with them. Until then it still counts as yours. Nothing else is needed from you.</p>
-      <ol className="tx-steps">
-        <li className="tx-step confirmed"><span className="tx-dot">✓</span><span className="tx-body"><span className="tx-label">You returned it</span><span className="tx-status">{p ? when(p.anchor.at) : "Done"}</span></span></li>
-        <li className="tx-step pending"><span className="tx-dot">2</span><span className="tx-body"><span className="tx-label">The owner confirms it's back</span><span className="tx-status">Waiting</span></span></li>
-        <li className="tx-step waiting"><span className="tx-dot">3</span><span className="tx-body"><span className="tx-label">Your deposit comes back by the rule</span><span className="tx-status">Automatic</span></span></li>
+      <ol className="wait-line" aria-label="Where the return stands">
+        <li className="done"><span className="wl-dot" aria-hidden="true">✓</span><b>You returned it</b><span>{p ? when(p.anchor.at) : "Done"}</span></li>
+        <li className="now" aria-current="step"><span className="wl-dot" aria-hidden="true" /><b>The owner confirms</b><span>Waiting</span></li>
+        <li><span className="wl-dot" aria-hidden="true" /><b>Your deposit comes back</b><span>By itself, by the rule</span></li>
       </ol>
-      <section className="panel">
-        <h2>What if the owner doesn't confirm?</h2>
-        <p>The owner sees your return on their page. Your deposit waits for their confirmation; nobody else can take it, and the owner can't change the rule.</p>
+      <section className="held" aria-label="Your deposit">
+        <span className="held-lock" aria-hidden="true" />
+        <div><p className="held-amount">{usd(d.terms.collateral)}, held by the rule</p><p>Nobody can take it while you wait: not the owner, not us. If the owner doesn't confirm, it stays where it is; the owner can't change the rule.</p></div>
       </section>
     </Shell>
   );

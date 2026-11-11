@@ -403,3 +403,23 @@ i.split-kept { background: var(--orange); }
 .last-body .btn-secondary { background: transparent; color: #fff; border-color: rgba(255, 255, 255, .35); }
 .last-body .btn-secondary:hover { background: rgba(255, 255, 255, .08); border-color: #fff; color: #fff; box-shadow: none; }
 @media (max-width: 760px) { .last-ride { grid-template-columns: minmax(0, 1fr); } .last-map, .last-map .ride-map { min-height: 240px; } }
+
+/* ---------- Round 118: waiting is a line with one moving point, and a deposit you can see is safe ---------- */
+.wait-line { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); position: relative; }
+.wait-line::before { content: ""; position: absolute; left: 20px; right: calc(33.3% - 20px); top: 19px; height: 3px; border-radius: 999px; background: linear-gradient(90deg, var(--blue) 0 50%, var(--line-strong) 50% 100%); }
+.wait-line li { position: relative; display: grid; gap: 4px; justify-items: start; padding-right: 16px; }
+.wl-dot { position: relative; z-index: 1; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--bg); box-shadow: inset 0 0 0 3px var(--line-strong); font-weight: 700; color: var(--on-blue); }
+.wait-line li.done .wl-dot { background: var(--blue); box-shadow: none; }
+.wait-line li.now .wl-dot { box-shadow: inset 0 0 0 3px var(--blue); }
+.wait-line li.now .wl-dot::after { content: ""; position: absolute; inset: 11px; border-radius: 50%; background: var(--blue); }
+@media (prefers-reduced-motion: no-preference) { .wait-line li.now .wl-dot::before { content: ""; position: absolute; inset: 0; border-radius: 50%; box-shadow: 0 0 0 0 rgba(2, 151, 222, .45); animation: wl-pulse 1.8s ease-out infinite; } }
+@keyframes wl-pulse { to { box-shadow: 0 0 0 14px rgba(2, 151, 222, 0); } }
+.wait-line b { margin-top: 10px; font-size: 17px; font-weight: 650; color: var(--ink); }
+.wait-line li > span:last-child { font-size: 14px; color: var(--fog); }
+.wait-line li.now > span:last-child { color: var(--blue-ink); font-weight: 600; }
+.held { margin-top: 40px; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 20px; align-items: center; padding: 24px; border-radius: var(--radius); background: var(--ink); color: rgba(244, 241, 236, .8); }
+.held-lock { position: relative; width: 44px; height: 40px; margin: 12px auto 0; border-radius: 10px; background: var(--blue); }
+.held-lock::before { content: ""; position: absolute; left: 9px; right: 9px; top: -18px; height: 24px; border-radius: 13px 13px 0 0; box-shadow: inset 0 0 0 4px var(--blue); }
+.held-amount { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; color: #fff; }
+.held p + p { margin-top: 6px; font-size: 15px; line-height: 1.5; max-width: 56ch; }
+@media (max-width: 640px) { .wait-line { grid-template-columns: minmax(0, 1fr); row-gap: 20px; } .wait-line::before { display: none; } .wait-line li { grid-template-columns: 40px minmax(0, 1fr); column-gap: 14px; } .wait-line li > b { margin-top: 0; } .wait-line li .wl-dot { grid-row: span 2; } }
