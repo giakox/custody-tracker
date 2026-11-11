@@ -1998,6 +1998,23 @@ Rounds 111–119 rotated through the screens that had gone longest untouched and
 
 **Test on the blurred shots:** yes: the bottom half went from one black slab to a warm band and a short dark end.
 
+## Round 128 · Pairing is a viewfinder
+
+**Hierarchy audit (Add, steps 1, 3, 4, 5, untouched since 74):** the weakest is Pair (3): a small pale-blue square with four corner marks and a monospace caption, a secondary-styled "Scan the QR" beside it, and two thirds of the column empty while the preview card on the right, still blank, outweighed the step. The one action of the step looked like the least important control on the screen.
+
+**What changed:** the step is a camera viewfinder: the photograph of the recorder in a hand, dimmed under a dark stage, white corner brackets, the instruction in white at the top, and "Scan the QR" as the primary button inside the frame. Scanning tightens the brackets and makes them breathe (not under reduced motion); when paired the photo brightens, the brackets turn blue and "✓ Paired" sits at the bottom of the frame. The recorder's facts (ending in 07D2, last signal, battery) are one sand strip of three, without the grey lines they had. The monospace caption is gone.
+
+**Café test:** the café shows the machine, not a diagram of it; here you see the recorder through the camera you'll use. Still missing: steps 4 (an empty "Add a photo" box) and 5 (a long form) are still forms first.
+
+**References:** Apple's AirTag/AirPods pairing sheet (the object, large, with one button under it); bank apps' cheque-scan screens (a dark viewfinder, corner guides, the instruction on top).
+
+**Three ideas:** (1) a viewfinder stage with the action inside. (2) Open the real camera (getUserMedia) in demo mode too. (3) A three-step illustration of where the QR is.
+**Discarded:** (2) the demo has no real recorder to scan; a live camera that can't find anything would fail every time. (3) a drawing where the photograph exists (same reason as 119).
+
+**Chosen, (1):** [before and after](rounds/128-pair.jpg), [idle and paired](rounds/128-pair-found.jpg). Tested: Scan → Paired → Continue enabled; preview card ticks "Recorder ending in 07D2".
+
+**Test on the blurred shots:** yes: a pale square and a grey button became a dark photographic frame with a blue button in it.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -2026,7 +2043,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | My rentals | 117 |
 | Owner (My bikes) | 114 |
 | Owner: Confirm a return | 121 |
-| Add a bike | 119 (step 2) |
+| Add a bike | 119 (step 2), 128 (step 3) |
 | Verify | 109 |
 | Empty, loading and error states | 89 |
 | Design | 112 |

@@ -389,8 +389,13 @@ export function AddPage({ n }: { n: number }) {
       return (
         <AddShell n={3} aside={<ListingPreview d={d} />} title={<>Pair the <em>recorder</em>.</>} next="Continue" onNext={r ? () => go(4) : undefined}>
           <p className="lead">Scan the QR on the recorder. It tells Sharify which box belongs to your bike.</p>
-          <div className="scan">
-            <div className={`scan-frame ${scanning ? "is-scanning" : r ? "is-found" : ""}`} aria-hidden="true"><i /><i /><i /><i /><span className="mono">{scanning ? "Reading…" : r ? "Found" : "Point the camera at the recorder's QR"}</span></div>
+          <div className="scan scan-v2">
+            <div className={`scan-stage ${scanning ? "is-scanning" : r ? "is-found" : ""}`}>
+              <img src="./img/day/recorder-hand.jpg" alt="" />
+              <div className="scan-frame" aria-hidden="true"><i /><i /><i /><i /></div>
+              <p className="scan-say" role="status">{scanning ? "Reading the QR…" : r ? "Paired" : "Point the camera at the QR on the recorder"}</p>
+              {!r && <button type="button" className="btn btn-primary scan-go" onClick={scan} disabled={scanning}>{scanning ? "Reading…" : "Scan the QR"}</button>}
+            </div>
             <div>
               {r ? (
                 <dl className="facts single">
@@ -398,7 +403,7 @@ export function AddPage({ n }: { n: number }) {
                   <div><dt>Last signal</dt><dd className="mono">{r.lastSeenAt ? when(r.lastSeenAt) : "never"}</dd></div>
                   <div><dt>Battery</dt><dd className="mono">{r.batteryPct ?? "—"}%</dd></div>
                 </dl>
-              ) : <button type="button" className="btn btn-secondary" onClick={scan} disabled={scanning}>{scanning ? "Reading…" : "Scan the QR"}</button>}
+              ) : null}
               {r && r.objects > 0 && <p className="notice">This recorder is already paired with {r.objects === 1 ? "another bike" : `${r.objects} other bikes`}. Pairing it again is possible today but shouldn't be: see the limits in How Sharify is designed.</p>}
             </div>
           </div>
