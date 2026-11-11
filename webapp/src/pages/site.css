@@ -107,7 +107,7 @@
 @media (max-width: 700px) { .bike-top .object-image { margin-top: 8px; } }
 
 /* Round 2: the page's action stays in reach while reading the history. */
-.sticky-action { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: var(--bg); box-shadow: 0 -10px 30px var(--shadow); border-top: 1px solid var(--line-strong);
+.sticky-action { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: var(--bg); box-shadow: var(--elev-up); border-top: 1px solid var(--line-strong);
   transform: translateY(110%); transition: transform .25s ease; }
 .sticky-action.is-shown { transform: none; }
 .sticky-inner { max-width: var(--max); margin: 0 auto; padding: 12px var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 16px; }

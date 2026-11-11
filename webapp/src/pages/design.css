@@ -101,6 +101,6 @@
   .d-toc a[aria-current] { background: var(--ink); color: var(--bg); box-shadow: none; }
 }
 @media (max-width: 1000px) {
-  .d-toc { background: var(--bg); box-shadow: 0 10px 16px -12px rgba(23, 25, 27, .18); }
+  .d-toc { background: var(--bg); box-shadow: var(--elev-1); }
   .d-sec { scroll-margin-top: calc(var(--hdr-space) + 64px); }
 }

@@ -79,7 +79,6 @@ export function Finder({ bikes, me, locating, onLocate, live, rentingIt, loaded 
           <button type="button" className="chip" aria-pressed={!kind && !cheap} onClick={() => { setKind(null); setCheap(false); }}>All</button>
           {KINDS.map((k) => <button key={k.id} type="button" className="chip" aria-pressed={kind === k.id} onClick={() => setKind(kind === k.id ? null : k.id)}>{k.label}</button>)}
           <button type="button" className="chip" aria-pressed={cheap} onClick={() => setCheap(!cheap)}>Up to {CHEAP} dollars</button>
-          <button type="button" className="chip chip-near" onClick={onLocate} disabled={locating === "asking"}>{locating === "asking" ? "Locating…" : me ? "Recenter" : "Near me"}</button>
         </div>
         {locating === "denied" && <p className="finder-note" role="status">Location unavailable: showing bikes around Bocconi.</p>}
         {!live && loaded && <p className="finder-note">{rentingIt ? "You have the real bike right now, so it isn't on the map." : "The real bike is out on a ride right now, so it isn't on the map."}</p>}
@@ -119,6 +118,9 @@ export function Finder({ bikes, me, locating, onLocate, live, rentingIt, loaded 
 
         <div className="finder-map">
           <FleetMap bikes={fleetBikes} center={BOCCONI} me={me} selected={selected} highlight={hover} onSelect={select} padding={padding} />
+          <button type="button" className={`map-locate ${me ? "is-on" : ""}`} onClick={onLocate} disabled={locating === "asking"} aria-label={me ? "Recenter on you" : "Show bikes near me"}>
+            <i aria-hidden="true" /><span>{locating === "asking" ? "Locating…" : me ? "Recenter" : "Near me"}</span>
+          </button>
           <p className="map-legend" aria-hidden="true"><span><i className="lg-live" />Real bike</span><span><i className="lg-drop" />Dropped this week</span></p>
           {current && !phone && (
             <div className="mini" role="dialog" aria-label={current.b.label}>

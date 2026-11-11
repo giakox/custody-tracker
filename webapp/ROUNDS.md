@@ -1379,6 +1379,28 @@ Also removed: the estimator's styles in map.css, which matched the earnings card
 
 **Test, "another screen at a glance?"** No: a step back.
 
+## Round 96 · "Near me" lives on the map; every shadow on the scale
+
+**Hierarchy audit (the finder's controls):**
+
+| Block | Before | After |
+|---|---|---|
+| "Near me" as a blue chip at the end of the filter chips | at 1024 px it fell alone onto a second row; it is not a filter, it moves the map | a map control in the map's corner (a target icon and "Near me", "Recenter" once located), the way every map app places it; on a phone it sits above the sheet and hides when the sheet is pulled up |
+| Filter chips | All, City, E-bike, Cargo, Road, Up to 2 dollars, Near me | the five filters only: one row at every width from 1024 up |
+
+Also a step towards one shadow scale: the three hand-written shadows left (the phone sheet, the bottom bar, the Design strip on phones) now use the tokens; the upward ones share a new `--elev-up`.
+
+**Levels after:** filters are one row of equals; location is a map action. **Squint test:** before, a blue chip pulled the eye to the end of the filter row; after, the row is calm and the map has one control in its corner.
+
+**References:** Google Maps and Apple Maps (the locate button lives on the map) and Airbnb's map (controls on the map, filters above the list). Why ours looked cheaper: a map action dressed as a filter.
+
+**Three ideas:** (1) "Near me" as a map control. (2) The title as the switch ("Bikes near Bocconi / near you"). (3) Ask for location on load.
+**Discarded:** (2) a title that is also a button is hard to discover. (3) asking for location before the visitor has done anything is the pop-up we promised not to have.
+
+**Chosen, (1):** [1024 before and after](rounds/96-finder-1024.jpg), [phone](rounds/96-finder-375.jpg).
+
+**Test, "another screen at a glance?"** For the finder's top, yes at 1024: two rows of controls became one.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1389,7 +1411,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Home: "how it works" band (and bike page) | 70 |
 | Home: owners band | 80 |
 | Home: try the rule (and Rule step) | 82 |
-| Home: find a bike (grid + map) | 81 |
+| Home: find a bike (grid + map) | 96 |
 | Header | 77 |
 | Page transitions | 88 |
 | Live rental strip | 94 |

@@ -132,7 +132,7 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 .objects ol { border-top: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 20px; }
 
 /* ---------- shadow scale ---------- */
-:root { --elev-1: 0 2px 8px var(--shadow); --elev-2: 0 12px 32px var(--shadow); --elev-3: 0 28px 70px rgba(23, 25, 27, .22); }
+:root { --elev-1: 0 2px 8px var(--shadow); --elev-2: 0 12px 32px var(--shadow); --elev-3: 0 28px 70px rgba(23, 25, 27, .22); --elev-up: 0 -12px 40px var(--shadow); }
 /* ---------- Round 25: a translucent header that floats over the photos ---------- */
 .welcome-photo { height: min(86svh, 860px); }
 @media (max-width: 760px) { .welcome-photo { height: 58svh; min-height: 340px; } }

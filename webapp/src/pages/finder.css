@@ -12,7 +12,6 @@
 .chip:hover { border-color: var(--ink); }
 .chip:active { transform: scale(.97); }
 .chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.chip-near { margin-left: auto; background: var(--blue-wash); border-color: transparent; color: var(--blue-ink); font-weight: 600; }
 .finder-note { font-size: 15px; color: var(--mist); }
 
 .finder-main { min-width: 0; }
@@ -80,7 +79,7 @@
   .finder-map { position: absolute; inset: 0; height: auto; min-height: 0; border-radius: 0; box-shadow: none; }
   .finder-map .map-legend, .finder-map .leaflet-control-zoom { display: none; }
   .finder-map .leaflet-bottom.leaflet-right { bottom: 372px; }
-  .finder-list { position: absolute; z-index: 800; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; background: var(--bg); border-radius: var(--radius) var(--radius) 0 0; box-shadow: 0 -16px 50px rgba(23, 25, 27, .18); height: 372px; transition: height .4s cubic-bezier(.2, .8, .2, 1); }
+  .finder-list { position: absolute; z-index: 800; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; background: var(--bg); border-radius: var(--radius) var(--radius) 0 0; box-shadow: var(--elev-up); height: 372px; transition: height .4s cubic-bezier(.2, .8, .2, 1); }
   .finder-list[data-sheet="full"] { height: calc(100% - 112px); }
   .sheet-handle { display: flex; flex: none; flex-direction: column; align-items: center; gap: 6px; width: 100%; padding: 10px 0 6px; border: 0; background: none; color: var(--ink); font: 600 15px/1 var(--ui); cursor: pointer; touch-action: none; }
   .sheet-handle i { width: 44px; height: 5px; border-radius: 999px; background: var(--line-strong); }
@@ -97,7 +96,7 @@
 @media (min-width: 900px) and (max-width: 1023px) { .finder-grid { grid-template-columns: minmax(0, 1fr); } }
 
 .finder-title h2 { white-space: nowrap; }
-@media (max-width: 899px) { .finder-title h2 { font-size: 22px; } .chip-near { margin-left: 0; } }
+@media (max-width: 899px) { .finder-title h2 { font-size: 22px; } }
 .finder { scroll-margin-top: calc(var(--hdr-space) - 32px); }
 .mini-actions .btn { white-space: nowrap; }
 @media (max-width: 899px) { .finder { scroll-margin-top: 0; } }
@@ -144,3 +143,15 @@
   .finder-list[data-sheet="peek"] .bb-line { display: none; }
   .finder-list[data-sheet="peek"] .fcard-rent { top: auto; right: 12px; bottom: 12px; }
 }
+
+/* ---------- Round 96: "Near me" lives on the map, as a map control ---------- */
+.map-locate { position: absolute; z-index: 600; left: 14px; bottom: 14px; display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 16px 0 12px; border: 0; border-radius: 999px; background: var(--bg); box-shadow: var(--elev-2); font: 600 15px/1 var(--ui); color: var(--ink); cursor: pointer; transition: transform .12s ease, box-shadow .15s ease; }
+.map-locate i { position: relative; width: 16px; height: 16px; border-radius: 50%; box-shadow: inset 0 0 0 2px var(--blue-ink); }
+.map-locate i::after { content: ""; position: absolute; inset: 5px; border-radius: 50%; background: var(--blue-ink); }
+.map-locate.is-on i { background: var(--blue); box-shadow: 0 0 0 4px var(--blue-wash); }
+.map-locate:hover { box-shadow: var(--elev-3); }
+.map-locate:active { transform: scale(.97); }
+.map-locate:focus-visible { outline: 2px solid var(--blue-ink); outline-offset: 3px; }
+.map-locate:disabled { cursor: progress; }
+.finder:has(.mini) .map-locate { bottom: auto; top: 64px; }
+@media (max-width: 899px) { .map-locate { left: auto; right: 12px; bottom: 210px; } .finder:has(.finder-list[data-sheet="full"]) .map-locate { display: none; } }
