@@ -2290,6 +2290,25 @@ The owner side and the system's edges. "Your rules" shows the rule renters will 
 
 **Test on the blurred shots:** yes: three photos at three heights with dark holes became a rising diagonal that fills the band.
 
+## Round 144 · Design: "step by step" is one path, not a stack of identical cards
+
+**Hierarchy audit (Design page, last touched in 112):** the page's main body, "Step by step: who could cheat, and why it fails", was six identical cards in a column (white half, sand half, the same shadow), the protocol's "row of identical elements" turned vertical. The numbers sat inside each card, so the sequence (recorder → batch → relayer → contract → …) read as six separate boxes rather than one chain, which is the whole argument of the page.
+
+**What changed:** the cards are gone; the steps hang on one rail (the numbered blue dots joined by a grey line, the same rail as the Deposit step since 124). Left: the step's name, its parts, what it does. Right, as a note set off by a thin sand edge: "Could cheat" in orange, "Why it fails" in blue. Steps are separated by 48 px, not by boxes. On phones the notes indent under the step and the rail runs through them.
+
+**Separation without lines:** no horizontal rules; the rail is the sequence itself, and the notes' vertical sand edge says "aside".
+
+**Café test:** a recipe card lists the steps down one line, with the chef's notes in the margin. Still missing: the numbers band (dark) and the verdict (ink) are two dark blocks on a long reading page; worth a look in the next composition round.
+
+**References:** the Linear Method (a reading page, sequence on a rail, asides in the margin); Stripe's docs (steps on a numbered line, callouts beside them).
+
+**Three ideas:** (1) the rail with margin notes. (2) A horizontal swim-lane diagram (actors × steps). (3) Keep the cards, make them alternate sides.
+**Discarded:** (2) the downloadable SVG already is the diagram; on the page a lane chart would be unreadable on a phone. (3) still six identical cards, just zig-zagging.
+
+**Chosen, (1):** [before and after](rounds/144-design-scheme.jpg).
+
+**Test on the blurred shots:** yes: a column of grey slabs became a line of blue dots with text beside it.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -2321,4 +2340,4 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Add a bike | 119 (step 2), 128 (step 3), 129 (step 4), 131 (step 5) |
 | Verify | 137 |
 | Empty, loading and error states | 134 (finder) |
-| Design | 112 |
+| Design | 144 |

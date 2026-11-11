@@ -123,3 +123,17 @@
   .d-toc { z-index: 5; padding: 12px; margin-left: -12px; border-radius: var(--radius); background: var(--bg); box-shadow: var(--elev-1); }
   .d-toc .d-toc-dl { padding: 0 12px 4px; }
 }
+
+/* ---------- Round 144: "step by step" is one path, not a stack of identical cards: a rail of numbers, the step on the left, who could cheat and why it fails as notes on the right ---------- */
+.scheme ol { gap: 0; }
+.scheme ol > li { position: relative; }
+.stage { box-shadow: none; border-radius: 0; overflow: visible; gap: 40px; padding-bottom: 48px; }
+.stage-block { position: relative; padding: 0 0 0 56px; background: none; }
+.stage-n { position: absolute; left: 0; top: 0; width: 36px; height: 36px; }
+.stage h3 { margin-top: 2px; }
+.scheme ol > li:not(:last-child) .stage-block::before { content: ""; position: absolute; left: 17px; top: 46px; bottom: -40px; width: 2px; border-radius: 2px; background: var(--line-strong); }
+.stage-threat { padding: 4px 0 0 20px; background: none; box-shadow: inset 2px 0 0 var(--surface); }
+.stage-threat > *:first-child .k, .stage-threat .k:not(.k-ok) { color: var(--orange-ink); }
+@media (max-width: 700px) { .stage { gap: 16px; padding-bottom: 36px; } .stage-threat { margin-left: 56px; } }
+.scheme ol > li:not(:last-child) .stage-block::before { content: none; }
+.scheme ol > li:not(:last-child)::before { content: ""; position: absolute; left: 17px; top: 46px; bottom: 8px; width: 2px; border-radius: 2px; background: var(--line-strong); }
