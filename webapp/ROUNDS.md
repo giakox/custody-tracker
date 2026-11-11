@@ -1850,6 +1850,27 @@ Fixed on the way: an absolutely positioned photo inside a grid takes its grid ar
 
 **Test on the blurred shots:** yes: a dark diagonal drawing and a list became a wide photo over three tiles and a blue-ringed tile.
 
+## Round 120 · A step back: the wordmark signs off the pages you read, not the screens you work in
+
+**Hierarchy audit (every page, dark surfaces counted):** a probe of large dark surfaces per page: Home has three (journey, owners band, footer), the others two at most. The one surface repeated everywhere is the footer, and at its foot a 180 px blue "Sharify" wordmark: on the Home and the bike page it signs off a page you read top to bottom; on My bikes, the Add steps and Verify it is the heaviest block on a screen where you came to do one thing, and on a short page like My bikes it outweighs the work above it.
+
+**What changed:** on working screens (`main.rent`, owner pages included, and Verify) the wordmark is hidden and the footer closes on the links (492 px → 279 px). Home, bike page, receipt, My rentals and Design keep it. One CSS rule, nothing added.
+
+**Café test:** the café's sign is over the door, not on every table; the counter where you pay has just the menu. Still missing: the café's warmth on the owner screens, which are still white on white with one sand tile.
+
+**References:** Stripe (the marketing footer is big, the dashboard has none); Airbnb (host tools close on a short link row).
+
+**Three ideas:** (1) wordmark only on reading pages. (2) Lighten the owners band on the Home to drop a dark beat. (3) Merge the Home journey and owners band into one dark scene.
+**Discarded:** (2) the owners band is a photograph-led scene, the dark is the photo's, not a block; lightening it would wash the picture. (3) two different audiences (renters, owners) in one band is the confusion rounds 102–108 removed.
+
+**Chosen, (1):** [before and after, My bikes](rounds/120-footer.jpg).
+
+**Test on the blurred shots:** yes, for My bikes: the lower half was a black slab with a blue shape, now the tiles and the earnings card are the weight and the footer is a quiet band.
+
+## Block 111 to 120 (summary)
+
+Rounds 111–119 rotated through the screens that had gone longest untouched and turned each into a real place or object: the Return step got the photo of the spot and its map (111); Design got the numbers on a dark band and the verdict as a statement (112); the receipt became a slip on a dark counter (113); My bikes opens on today's ribbon (114); the header status became one sentence at a time (115, step back); the ride card shows the money split the receipt will show (116); My rentals opens on your last ride (117); Waiting became a line with one moving point and a deposit you can see is held (118); mounting the recorder uses the real photo and a check tile (119). This round removed instead of adding. Lines in `src`: about 7,700 of the 10,560 cap. Next: the oldest screens in the register (Rule and Deposit steps 86, Confirm a return 76, Home hero 78, page transitions 88, states 89).
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1865,7 +1886,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Header | 106 |
 | Page transitions | 88 |
 | Live rental strip | 94 |
-| Footer | 102 (dark) |
+| Footer | 120 (wordmark only on reading pages) |
 | Bike page | 107 (proof mode: 100) |
 | Rent flow: Rule, Deposit | 86 |
 | Rent flow: Wallet | 92 |

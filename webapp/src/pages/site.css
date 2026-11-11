@@ -251,3 +251,7 @@ footer.site-end .site-end-nav a { color: rgba(244, 241, 236, .78); }
 footer.site-end .site-end-nav a:hover { color: #fff; }
 .site-end-nav a:focus-visible { outline-color: #7cc8ef; }
 .site-end-name { color: var(--blue); }
+
+/* ---------- Round 120: a step back: the wordmark signs off the pages you read, not the screens you work in ---------- */
+.page:has(main.rent) .site-end-name, .page:has(main.verify) .site-end-name { display: none; }
+.page:has(main.rent) .site-end-inner, .page:has(main.verify) .site-end-inner { padding-bottom: clamp(40px, 5vw, 64px); }
