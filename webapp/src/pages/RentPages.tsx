@@ -11,6 +11,8 @@ import { TierMeter } from "../components/TierMeter";
 import { RuleSimulator } from "../components/RuleSimulator";
 import { TxSteps } from "../components/TxSteps";
 import { RideMap } from "../components/RideMap";
+import { SpotMap } from "../components/SpotMap";
+import { DEMO_SPOT } from "../data/mock/fleet";
 import { CASE_IMAGE, ObjectImage } from "../components/ObjectImage";
 import { day, hm, objectName, shortHex, span, TEST_MONEY, TIER_NAMES, usd, when } from "../ui/format";
 import { href } from "../ui/router";
@@ -290,8 +292,13 @@ export function ReturnPage({ id }: { id: number }) {
       </TripCard>
     }>
       <h1>Return the <em>bike</em>.</h1>
+      <figure className="return-spot">
+        <img src="./img/day/bocconi-park.jpg" alt="The spot: a bike rack outside Bocconi, people walking past" />
+        <SpotMap spot={DEMO_SPOT} label="Leave it here" />
+        <figcaption><b>The rack outside Bocconi</b><span>Where the owner asked for it back. Lock it to the rack.</span></figcaption>
+      </figure>
       <ol className="numbered tiles">
-        <li><span><b>Leave it where the owner asked</b>, locked.</span></li>
+        <li><span><b>Leave it at the rack</b>, locked.</span></li>
         <li><span><b>Tell the owner it's back</b> with the button. Knocks still count under your name until the owner confirms.</span></li>
         <li><span><b>Your deposit comes back by itself</b>, by the rule, when the owner confirms.</span></li>
       </ol>

@@ -358,3 +358,14 @@ i.split-kept { background: var(--orange); }
   .proof-details .tx-list a { color: #000; }
   .proof-details .tx-list a::after { content: " (" attr(href) ")"; font-size: 10pt; word-break: break-all; }
 }
+
+/* ---------- Round 111: returning shows the place: the rack in a photo and on a map ---------- */
+.return-spot { margin: 32px 0 0; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); grid-template-rows: auto auto; gap: 8px; border-radius: var(--radius); overflow: hidden; background: var(--surface); }
+.return-spot > img { grid-row: 1; width: 100%; height: 240px; object-fit: cover; display: block; }
+.return-spot .spot-map { grid-row: 1; height: 240px; }
+.return-spot figcaption { grid-column: 1 / -1; display: grid; gap: 2px; padding: 8px 16px 16px; font-size: 15px; color: var(--mist); }
+.return-spot figcaption b { font-size: 17px; font-weight: 650; color: var(--ink); }
+.spot-pin { position: relative; left: 0; top: 0; transform: translate(-50%, -100%); display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px 8px 10px; border-radius: 999px; background: var(--ink); color: #fff; font: 600 13px/1 var(--ui); white-space: nowrap; box-shadow: var(--elev-2); }
+.spot-pin i { width: 10px; height: 10px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 3px rgba(2, 151, 222, .35); }
+.spot-map .leaflet-tile-pane { filter: var(--tile-filter); }
+@media (max-width: 640px) { .return-spot { grid-template-columns: minmax(0, 1fr); } .return-spot > img, .return-spot .spot-map { grid-row: auto; height: 180px; } }

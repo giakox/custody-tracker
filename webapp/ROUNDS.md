@@ -1690,6 +1690,23 @@ Fixed on the way: an absolutely positioned photo inside a grid takes its grid ar
 - **The finder** stopped being a wall of equal cards: size says distance (103), and "Sample fleet" is said once (105).
 - **Still missing, honestly:** the café's second voice of type (it would change Theme B: to propose, not to impose) and its people (named regulars would be invented testimonials, which the rules forbid).
 
+## Round 111 · Returning shows the place: the rack in a photo and on a map
+
+**Hierarchy audit (Return step):** the first instruction was "Leave it where the owner asked, locked": where is that? The renter had to remember it, or go back to the bike page. A return is a moment in a place; the screen had no place in it.
+
+**What changed:** under the title, the spot: the photograph of the rack outside Bocconi beside a small map with a dark pin "Leave it here", and the caption "The rack outside Bocconi. Where the owner asked for it back. Lock it to the rack." The first step now says "Leave it at the rack". The map is fixed (no dragging): it's a sign, not a tool.
+
+**Café test:** the café's visit section ("Park in the back lot behind the bank", a map with the walk) is exactly this kind of instruction; ours now gives a renter somewhere to stand. Still white and quiet around it, which suits a working step.
+
+**References:** the café's "Getting here"; Uber's drop-off screen (the exact spot pinned on a small map, a photo of the entrance when there is one).
+
+**Three ideas:** (1) photo and map of the spot. (2) Turn-by-turn directions to the rack. (3) A checklist with a photo upload of the parked bike.
+**Discarded:** (2) the renter is usually a few metres away; directions are a navigation app's job. (3) a photo upload is a new function, outside the cap's rule, and the recorder already proves condition.
+
+**Chosen, (1):** [before (round 67) and after](rounds/111-return-place.jpg), [phone](rounds/111-return-375.jpg).
+
+**Test on the blurred shots:** yes: three grey tiles became a picture-and-map band over the tiles.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1709,7 +1726,8 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Bike page | 107 (proof mode: 100) |
 | Rent flow: Rule, Deposit | 86 |
 | Rent flow: Wallet | 92 |
-| Rent flow: Ride, Return, Waiting | 67 |
+| Rent flow: Ride, Waiting | 67 |
+| Rent flow: Return | 111 |
 | Rent flow: Outcome | 91 |
 | Receipt (print) | 97 |
 | My rentals | 99 |
