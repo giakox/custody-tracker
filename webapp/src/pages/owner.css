@@ -189,3 +189,21 @@ table.levels td:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
 .check-tile:has(input:focus-visible) { outline: 2px solid var(--blue-ink); outline-offset: 3px; }
 .check-tile b { display: block; font-size: 17px; font-weight: 650; color: var(--ink); }
 .check-tile small { font-size: 14px; color: var(--fog); }
+
+/* ---------- Round 121: Confirm a return starts at the rack: where it was left, then what confirming settles ---------- */
+.confirm-spot { margin-top: 28px; }
+.confirm-spot + .owner-split { margin-top: 16px; }
+.confirm-rule { margin-top: 16px; border-radius: var(--radius); background: var(--surface); }
+.confirm-rule summary { display: grid; gap: 2px; padding: 16px 48px 16px 20px; position: relative; cursor: pointer; list-style: none; font-size: 16px; font-weight: 650; color: var(--ink); border-radius: var(--radius); transition: background-color .15s ease; }
+.confirm-rule summary::-webkit-details-marker { display: none; }
+.confirm-rule summary span { font-size: 14px; font-weight: 400; color: var(--mist); }
+.confirm-rule summary::after { content: ""; position: absolute; right: 22px; top: 24px; width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); transition: transform .2s ease; }
+.confirm-rule[open] summary::after { transform: rotate(-135deg); }
+.confirm-rule summary:hover { background: var(--raise); }
+.confirm-rule summary:focus-visible { outline: 2px solid var(--blue-ink); outline-offset: 2px; }
+.confirm-rule > :not(summary) { padding: 0 12px 12px; }
+@media (min-width: 900px) { .confirm-sticky { display: none; } }
+@media (max-width: 899px) { .page:has(.confirm-sticky) .demo { margin-bottom: 84px; } .page:has(.confirm-sticky) main { padding-bottom: 96px; } }
+.confirm-sticky .sticky-name { font-size: 16px; white-space: nowrap; }
+.confirm-sticky .sticky-status { white-space: normal; }
+.confirm-sticky .sticky-inner { padding-left: 18px; }

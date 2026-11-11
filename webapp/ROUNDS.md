@@ -1871,6 +1871,23 @@ Fixed on the way: an absolutely positioned photo inside a grid takes its grid ar
 
 Rounds 111–119 rotated through the screens that had gone longest untouched and turned each into a real place or object: the Return step got the photo of the spot and its map (111); Design got the numbers on a dark band and the verdict as a statement (112); the receipt became a slip on a dark counter (113); My bikes opens on today's ribbon (114); the header status became one sentence at a time (115, step back); the ride card shows the money split the receipt will show (116); My rentals opens on your last ride (117); Waiting became a line with one moving point and a deposit you can see is held (118); mounting the recorder uses the real photo and a check tile (119). This round removed instead of adding. Lines in `src`: about 7,700 of the 10,560 cap. Next: the oldest screens in the register (Rule and Deposit steps 86, Confirm a return 76, Home hero 78, page transitions 88, states 89).
 
+## Round 121 · Confirm a return starts at the rack
+
+**Hierarchy audit (Confirm a return, untouched since 76):** the owner's one job is "go and look, then confirm". The page gave them a three-line lead about fees, a split box, the full four-row rule table (the same numbers as the split, a second time) and the button in a side card that on a phone sits below the whole table, about two screens down. Nothing on the page said *where* to look.
+
+**What changed:** the lead is one sentence ("Alice says it's back, 21 minutes ago. Go and look, then confirm."); under it the place: the rack photo and the map pin from the Return step (round 111), so the renter and the owner see the same spot; then the split, which is the answer; the rule table folds into "The rule you set" (closed, with its one-line reason in the summary). On phones a sticky bar carries the amounts and "Confirm it's back" from the first screen; it disappears once the confirmation is done (tested: click → "Done: 5 dollars to you, 45 dollars back to Alice.", bar gone).
+
+**Café test:** at the café you look at the cup before you pay; here you now look at the rack before you confirm. Still missing: a real photo of *this* return (the recorder can't take one; we don't pretend it does).
+
+**References:** Airbnb's host checkout (the place first, then the payout); car-sharing return flows (Zity, ShareNow) that show the parking spot on a map before you end the trip.
+
+**Three ideas:** (1) the place first, the rule folded, a sticky action on phones. (2) A checklist ("locked", "wheels turn", "no new damage") the owner ticks before the button unlocks. (3) Move the split into the side card and leave the left column to the photo.
+**Discarded:** (2) the fee is set by the rule, not by the owner's inspection: a damage checklist would suggest the owner can add charges, which the system doesn't do. (3) on phones the side card is far below; the split must stay next to the question.
+
+**Chosen, (1):** [before and after](rounds/121-confirm.jpg), [phone](rounds/121-confirm-375.jpg).
+
+**Test on the blurred shots:** yes: a text column over a table became a photo-and-map band under the question; on the phone a blue button is now on the first screen.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -1897,7 +1914,7 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Receipt | 113 (print: 97) |
 | My rentals | 117 |
 | Owner (My bikes) | 114 |
-| Owner: Confirm a return | 76 |
+| Owner: Confirm a return | 121 |
 | Add a bike | 119 (step 2) |
 | Verify | 109 |
 | Empty, loading and error states | 89 |

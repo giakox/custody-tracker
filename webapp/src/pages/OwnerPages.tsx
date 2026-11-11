@@ -16,6 +16,8 @@ import { hm, nameOf, objectName, span, TEST_MONEY, TIER_NAMES, usd, when } from 
 import { href } from "../ui/router";
 import { useViewer } from "../ui/viewer";
 import { priceOf } from "./MyRentalsPages";
+import { SpotMap } from "../components/SpotMap";
+import { DEMO_SPOT } from "../data/mock/fleet";
 import "./object-page.css";
 import "./site.css";
 import "./rent.css";
@@ -221,7 +223,14 @@ export function ConfirmReturnPage({ id }: { id: number }) {
         <div className="rent-step">
           <h1>{s ? (s.tier ? <>Done: {usd(s.fee)} to you, {usd(s.refund)} back to <em>{nameOf(r.renter)}</em>.</> : <>Done: all {usd(s.refund)} back to <em>{nameOf(r.renter)}</em>.</>)
             : <>Do you have {objectName(d, false)} <em>back</em>?</>}</h1>
-          {!s && <p className="lead">{nameOf(r.renter)} handed it back {d.pendingHandoff ? when(d.pendingHandoff.anchor.at) : ""}. Confirm only when it is really with you. You don't decide the fee: the hardest knock of the ride does, by the rule.</p>}
+          {!s && <p className="lead">{nameOf(r.renter)} says it's back, {d.pendingHandoff ? when(d.pendingHandoff.anchor.at) : ""}. Go and look, then confirm.</p>}
+          {!s && (
+            <figure className="return-spot confirm-spot">
+              <img src="./img/day/bocconi-park.jpg" alt="The rack outside Bocconi, people walking past" />
+              <SpotMap spot={DEMO_SPOT} label="Left here" />
+              <figcaption><b>The rack outside Bocconi</b><span>Where you asked for it back. Confirm only when it's really there, with you.</span></figcaption>
+            </figure>
+          )}
           <section className="owner-split" aria-label="What the confirmation settles">
             <p className="owner-split-k">{s ? "The deposit was settled" : "When you confirm, the deposit splits like this"}</p>
             <div className="split" role="img" aria-label={`${usd(String(back))} back to ${nameOf(r.renter)}, ${usd(String(toOwner))} to you`}>
@@ -230,7 +239,10 @@ export function ConfirmReturnPage({ id }: { id: number }) {
             </div>
             <p className="split-legend"><span><i className="split-back" /><span>{usd(String(back))} back to {nameOf(r.renter)}</span></span>{toOwner > 0 && <span><i className="split-kept" /><span>{usd(String(toOwner))} to you, for a <span className="shock">{TIER_NAMES[tier]}</span> knock</span></span>}</p>
           </section>
-          <RuleTiers terms={d.terms} highlight={tier as 0 | 1 | 2 | 3} />
+          <details className="confirm-rule">
+            <summary>The rule you set <span>You don't decide the fee: the hardest knock of the ride does.</span></summary>
+            <RuleTiers terms={d.terms} highlight={tier as 0 | 1 | 2 | 3} />
+          </details>
           {steps.length > 0 && <TxSteps steps={steps} deposit={usd(d.terms.collateral)} explorer={net.data?.explorer ?? null} viewer="owner" />}
           {error && <p className="notice error">{error}</p>}
         </div>
@@ -257,6 +269,14 @@ export function ConfirmReturnPage({ id }: { id: number }) {
           </div>
         </aside>
       </div>
+      {!s && state !== "done" && (
+        <div className="sticky-action is-shown confirm-sticky">
+          <div className="sticky-inner">
+            <div className="sticky-text"><span className="sticky-name"><b>{usd(String(back))}</b> back to {nameOf(r.renter)}</span><span className="sticky-status">{toOwner > 0 ? `${usd(String(toOwner))} to you, for a ${TIER_NAMES[tier]} knock` : "Nothing kept: no knocks"}</span></div>
+            <div className="sticky-btns"><button type="button" className="btn btn-primary" onClick={run} disabled={state === "running"}>{state === "running" ? "Working…" : "Confirm it's back"}</button></div>
+          </div>
+        </div>
+      )}
     </Page>
   );
 }
