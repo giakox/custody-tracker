@@ -312,3 +312,14 @@ p, li, dd { text-wrap: pretty; }
 @keyframes verified-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 @keyframes stamp { from { transform: scale(.4) rotate(-12deg); opacity: 0; } to { transform: none; opacity: 1; } }
 .v-title { font-family: var(--display); font-weight: var(--display-weight); color: var(--ink); }
+
+/* ---------- Round 36: the hero photo and its card move at different speeds ---------- */
+.welcome { overflow: clip; }
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .welcome-photo { animation: hero-drift linear both; animation-timeline: scroll(root); animation-range: 0 100svh; transform-origin: 50% 0; }
+    .welcome-card { animation: hero-card linear both; animation-timeline: scroll(root); animation-range: 0 80svh; }
+  }
+}
+@keyframes hero-drift { from { transform: translateY(0) scale(1); } to { transform: translateY(10%) scale(1.08); } }
+@keyframes hero-card { from { transform: translateY(0); } to { transform: translateY(-48px); } }

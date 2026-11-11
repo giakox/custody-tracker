@@ -350,3 +350,11 @@ Shots are 420 px JPEGs (a PNG of the map is ~10× larger). Prompt for every roun
 - **Reference:** Apple's iPhone page pacing: chapters that fit a screen and a bit, never more: https://www.apple.com/iphone/
 - **Shots:** none
 - **Lines:** 6359
+
+## Round 36 · Two speeds in the hero
+
+- **What:** As you scroll away from the first screen, the photo sinks and swells slowly while the white card moves up faster, so they separate like layers (scroll-driven, off with reduced motion).
+- **Why:** Parallax is the cheapest convincing depth. It makes the hero feel like a scene rather than a picture with a box on it.
+- **Reference:** Airbnb's and Apple's hero parallax: photo and text layer moving at different rates: https://www.apple.com/macbook-air/
+- **Shots:** [1440 px](rounds/36-1440.jpg)
+- **Lines:** 6370
