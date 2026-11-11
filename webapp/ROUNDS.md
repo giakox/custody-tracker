@@ -841,6 +841,38 @@ Return used a layout whose CSS was deleted in round 66 (the photo spilled over t
 
 **Test, "another screen at a glance?"** Yes: two columns of parts became one card with an answer in it.
 
+## Round 72 · "How Sharify is designed" reads like a document, with contents that follow you
+
+**Hierarchy audit (before, 6,440 px):**
+
+| Block | Who, when | If it vanished | Verdict |
+|---|---|---|---|
+| H1 + lead | professors | the purpose | kept |
+| Photo of the recorder, 21:9 | everyone | the object is abstract | kept, inside "In one minute" |
+| In one minute (3 points) | everyone, first | the gist is lost | secondary, first section |
+| The scheme: 7 stages, stage box + cheat box, ruled rows, mono labels | professors, the core | the design is unexplained | primary: paired cards, white "what happens" beside sand "could cheat / why it fails" |
+| Limits we state ourselves (9) | professors, the honest part | trust drops | kept open, in "Questions and limits" |
+| Design choices (2), Why not a database (4), Objections (3) | the professor who asks | small loss each | merged with the limits into one section of questions you open |
+| Do we need a blockchain? (ruled table) + verdict | professors | the "why blockchain" proof | secondary: five answer tiles, Yes in blue, No in black, the verdict large |
+| The numbers (4, at the very end) | professors | concreteness | moved up to second, as one sand band |
+
+Every section had the same layout (title left, content right) and the same weight; nothing told the eye what mattered.
+
+**Levels after:** primary = the scheme; secondary = in one minute, the numbers, the test's verdict; tertiary = the folded questions. **Squint test:** before, a long even grey column with seven identical boxes. After, a dark marker in the contents shows where you are, the scheme reads as seven white-and-sand pairs, the end is a stack of closed rows.
+
+**References:** Stripe's documentation (contents on the left that track the section you're reading, one column of text) and the Linear Method pages (one reading column, generous headings, details folded). Why ours looked cheaper: no way to see the shape of the document, and everything open at once at the same size.
+
+**Three ideas:** (1) a reading layout with sticky contents and scroll-spy, the numbers up, the minor sections folded. (2) One full screen per section, like slides, for projecting. (3) Tabs: Scheme / Test / Questions.
+**Discarded:** (2) slides fight the browser's scroll and hide how long the document is. (3) tabs hide the scheme behind a click, and a projector audience can't see which tab is which.
+
+**Chosen, (1):** [the length, before and after](rounds/72-design-length.jpg), [the scheme with the contents](rounds/72-design-scheme.jpg), [questions, one with focus](rounds/72-design-questions.jpg), [phone](rounds/72-design-375.jpg). 6,440 px became 5,520 px with nothing deleted. On a phone the contents become a row of pills under the lead.
+
+**Without lines:** ruled tables, ruled stages, ruled lists and the column header line are gone; groups separate by surface (white, sand) and space.
+
+**States:** contents items: hover sand, current dark pill, focus ring; folded rows: hover darker sand, chevron turns, the content fades in (off with reduced motion); clicking a contents item scrolls smoothly (instantly with reduced motion).
+
+**Test, "another screen at a glance?"** Yes: a long even column became a document with a map of itself.
+
 ## Rotation register
 
 Nothing is final: when every screen has had a round, the rotation starts again from the first, with the same protocol. This table says which round last touched each screen.
@@ -859,4 +891,4 @@ Nothing is final: when every screen has had a round, the rotation starts again f
 | Owner (My bikes) | 69 |
 | Add a bike | 63 |
 | Verify | 71 |
-| Design | — |
+| Design | 72 |
