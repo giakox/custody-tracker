@@ -358,3 +358,6 @@ button.v2-card { text-align: left; }
 /* On the tint (#F2F8FC) the strong blue is 4.41:1: small blue text there takes the darker step (5.5:1). */
 .v2 :is(.v2-band-tint, .d-tint) :is(.v2-eyebrow, .k-ok) { color: var(--v2-accent-strong-hover); }
 .v2-design .stage-threat .k-ok { color: var(--v2-accent-strong-hover); }
+/* The rule's live sum, wrapped (12 Nov): number, line and slider stack with the same rhythm everywhere. */
+.v2-try-card { display: grid; row-gap: 16px; }
+.v2-try-card .v2-try-big + p { margin-top: -12px; }

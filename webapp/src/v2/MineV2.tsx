@@ -39,7 +39,7 @@ export function MyRentalsV2() {
       <PageV2>
         <p className="v2-eyebrow">Your rentals</p>
         <h1 className="v2-h2">Your rentals.</h1>
-        <p className="v2-lead v2-muted v2-gap-16 v2-page-lead">Your rentals and receipts are tied to the wallet you rent with: Sharify keeps no account of its own.</p>
+        <p className="v2-lead v2-muted v2-gap-16 v2-page-lead">Your rentals live in your wallet. Sharify keeps no account.</p>
         <div className="v2-page-actions"><Button onClick={connect}>Connect wallet</Button><Button variant="secondary" href={href("bikes")}>Find a bike</Button></div>
       </PageV2>
     );
@@ -99,7 +99,7 @@ export function MyRentalsV2() {
         </section>
         )}
         {featured && past[0].d.status === "available" && !past[0].d.pendingHandoff && (
-          <p className="v2-body v2-gap-24"><a className="v2-textlink" href={href(`object/${past[0].d.id}`)}>Ride {objectName(past[0].d, false)} again</a> <span className="v2-muted">· {usd(past[0].d.terms.collateral)} deposit, the rule shown before you rent</span></p>
+          <p className="v2-body v2-gap-24"><a className="v2-textlink" href={href(`object/${past[0].d.id}`)}>Ride {objectName(past[0].d, false)} again</a> <span className="v2-muted">· {usd(past[0].d.terms.collateral)} deposit</span></p>
         )}
         </>
       )}
@@ -163,15 +163,15 @@ export function ReceiptV2({ id, period }: { id: number; period: number }) {
             { k: "Deposit", v: usd(r.collateral) },
             { k: "Hardest knock", v: s ? (s.tier ? TIER_NAMES[s.tier] : "none") : "rental in progress" },
             { k: "Kept for the knock", v: s ? (s.tier ? `${usd(s.fee)}, ${(Number(s.fee) / Number(r.collateral)) * 100}%` : "nothing") : "—" },
-            { k: <>Rental price<span className="v2-receipt-sub">{price.mins} min, per started quarter hour at 2 dollars an hour, paid to the owner separately</span></>, v: usd(price.amount) },
+            { k: <>Rental price<span className="v2-receipt-sub">{price.mins} min at 2 dollars an hour, paid apart</span></>, v: usd(price.amount) },
           ]} />
           <div className="v2-receipt-total"><span>Deposit back to you</span><span>{s ? usd(s.refund) : "Not settled yet"}</span></div>
         </div>
-        <p className="v2-body v2-muted">Nobody decided this by hand: the rule did. {TEST_MONEY}</p>
+        <p className="v2-small v2-muted">Settled by the rule, not by a person. {TEST_MONEY}</p>
 
         <section className="v2-receipt-block" aria-labelledby="proof-title">
           <h2 className="v2-h3" id="proof-title">The proof</h2>
-          <p className="v2-body v2-muted v2-gap-8">Each step below is a public transaction on Base Sepolia, a test blockchain. Amounts there are in dUSD, a test token where 1 dUSD stands for 1 dollar.{cause && <> The knock is in batch {cause.seq}, recorded at {hm(cause.anchor.at)} ({g(s?.peakCg ?? 0)}).</>}</p>
+          <p className="v2-body v2-muted v2-gap-8">Four public transactions on Base Sepolia. 1 dUSD stands for 1 dollar.{cause && <> The knock: batch {cause.seq}, {g(s?.peakCg ?? 0)}.</>}</p>
           <div className="v2-gap-16"><Bill rows={refs} /></div>
         </section>
 

@@ -58,8 +58,8 @@ export function VerifyV2({ id, seq: seqParam }: { id: number; seq: number | null
     <PageV2 narrow={720}>
       {d && <p><a className="v2-link-quiet" href={href(`object/${d.id}`)}>← {objectName(d)}</a></p>}
       <p className="v2-eyebrow v2-gap-24">Verify a reading</p>
-      <h1 className="v2-h2">{batch && reading ? `Is this ${g(reading.peakCg)} reading part of what the recorder signed?` : "Verify a reading."}</h1>
-      <p className="v2-lead v2-muted v2-gap-16">Pick one second of the ride and ask the blockchain whether it is really part of what the recorder signed. You don't have to trust Sharify.</p>
+      <h1 className="v2-h2">{batch && reading ? `Was this ${g(reading.peakCg)} reading really signed?` : "Verify a reading."}</h1>
+      <p className="v2-lead v2-muted v2-gap-16">Pick a second of the ride. The blockchain checks it, not Sharify.</p>
 
       {readings.isError && (
         <section className="v2-page-section" aria-live="polite">
@@ -103,7 +103,7 @@ export function VerifyV2({ id, seq: seqParam }: { id: number; seq: number | null
             {check.state === "idle" && (
               <>
                 <Button onClick={run} disabled={!reading}>Check it on the blockchain</Button>
-                <p className="v2-body v2-muted v2-gap-16">The contract recomputes this batch's fingerprint from the reading and compares it with the one the recorder signed.</p>
+                <p className="v2-body v2-muted v2-gap-16">The contract recomputes the fingerprint and compares it with the signed one.</p>
               </>
             )}
             {check.state === "asking" && (
@@ -132,8 +132,8 @@ export function VerifyV2({ id, seq: seqParam }: { id: number; seq: number | null
 
           {!check.result && (
             <section className="v2-page-section v2-two" aria-label="What a check proves">
-              <div><h2 className="v2-h3">What it proves</h2><p className="v2-body v2-muted v2-gap-8">That this second is part of what the recorder signed for this ride, and that nobody changed it afterwards: not the renter, not the owner, not Sharify.</p></div>
-              <div><h2 className="v2-h3">What it doesn't</h2><p className="v2-body v2-muted v2-gap-8">That the sensor itself was intact, or that the box stayed fixed to the frame. The signature vouches for the data, not for the hardware.</p></div>
+              <div className="v2-proves"><h2 className="v2-h3">What it proves</h2><p className="v2-small v2-muted v2-gap-8">The recorder signed this second, and nobody changed it since: not the renter, the owner or Sharify.</p></div>
+              <div className="v2-proves"><h2 className="v2-h3">What it doesn't</h2><p className="v2-small v2-muted v2-gap-8">That the sensor was intact or fixed to the frame. It vouches for the data, not the hardware.</p></div>
             </section>
           )}
           {check.result && (

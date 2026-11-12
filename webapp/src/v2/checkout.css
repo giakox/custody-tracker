@@ -231,3 +231,49 @@ a.v2-rail-hit:hover { background: #f7f9fb; }
 .v2-knocks-mini .v2-knock-unit { font-size: var(--v2-size-5); }
 .v2-knocks-mini .v2-knock-name { margin-top: 4px; font-size: var(--v2-size-5); font-weight: 500; }
 .v2-knocks-mini .v2-knock-sum { font-size: var(--v2-size-5); }
+
+/* ---------- Less reading, more seeing (12 Nov): facts sit in cards, prose is one line ---------- */
+/* Money rows and the ride's numbers: one tinted card each. */
+.v2-co .v2-bill { padding: 20px !important; border-radius: var(--v2-radius); background: var(--v2-tint); row-gap: 12px; }
+.v2-co .v2-bill > div + div { padding-top: 12px !important; border-top: 1px solid #e3edf5 !important; }
+/* The rule's live sum: the number, the line and the slider in one card. */
+.v2-co .v2-try { row-gap: 16px; }
+.v2-co .v2-try-card { display: grid; row-gap: 16px; padding: 20px !important; border-radius: var(--v2-radius); background: var(--v2-tint); }
+.v2-co .v2-try-card .v2-try-big + p { margin-top: -12px; }
+.v2-co .v2-try-card .v2-filter[aria-pressed="false"] { background: var(--v2-white); }
+/* The four lines of the rule as tiles: outlined, the one that applies filled. */
+.v2-co .v2-knocks.v2-knocks-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.v2-co .v2-knocks-grid .v2-knock { display: block; padding: 16px !important; border-radius: var(--v2-radius); border: 1.5px solid #e5e5ea !important; background: var(--v2-white); }
+.v2-co .v2-knocks-grid .v2-knock.is-current { border-color: var(--v2-accent) !important; background: var(--v2-tint); }
+.v2-co .v2-knocks-grid .v2-knock-num { font-size: var(--v2-size-3); line-height: 1.2; }
+.v2-co .v2-knocks-grid .v2-knock-unit { font-size: var(--v2-size-5); }
+.v2-co .v2-knocks-grid .v2-knock-name { margin-top: 8px; font-size: var(--v2-size-5); font-weight: 500; }
+.v2-co .v2-knocks-grid .v2-knock-sum { font-size: var(--v2-size-5); }
+/* Numbered steps: a bold line and, under it, a short grey one. */
+.v2-co-list li > span { display: grid; gap: 2px; }
+.v2-co-li-sub { font-size: var(--v2-size-5); color: var(--v2-muted); }
+/* The ride: two numbers side by side in one card. */
+.v2-co .v2-ride-stats { padding: 20px !important; border-radius: var(--v2-radius); background: var(--v2-tint); row-gap: 16px; }
+.v2-ride-seen { grid-column: 1 / -1; }
+.v2-co .v2-ride-stats > div > :first-child { margin-bottom: 4px; }
+
+@media (max-width: 767px) {
+  .v2-co .v2-knocks.v2-knocks-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* What you rent: a smaller thumb, price and deposit on one line. */
+  .v2-co-bike { gap: 12px; }
+  .v2-co-bike img { width: 48px; height: 48px !important; border-radius: 12px; }
+  .v2-co-bike .v2-body { font-size: var(--v2-size-5); line-height: 1.4; }
+  .v2-co-bike .v2-body.v2-strong { font-size: var(--v2-size-4); }
+  .v2-co-lead { font-size: var(--v2-size-4); margin-top: 8px; }
+  .v2-co .v2-ride-stats { grid-template-columns: 1fr 1fr; column-gap: 16px; }
+  .v2-co .v2-ride-time { font-size: 32px; line-height: 1.2; }
+  .v2-co .v2-ride-peak-g { font-size: 32px; line-height: 1.2; }
+  .v2-co .v2-try-big { font-size: 32px; }
+  .v2-co-note { font-size: var(--v2-size-5); }
+  /* The fixed bar fades the page into it instead of cutting a line in half. */
+  .v2-co-action::before { content: ""; position: absolute; left: 0; right: 0; top: -32px; height: 32px; background: linear-gradient(rgba(255, 255, 255, 0), var(--v2-white)); pointer-events: none; }
+  .v2-co-pair > img { display: none; }
+}
+/* The three examples stay on one row on a phone. */
+.v2-co .v2-try-examples { flex-wrap: nowrap; }
+.v2-co .v2-try-examples .v2-filter { flex: 1 1 0; min-width: 0; justify-content: center; padding-left: 8px !important; padding-right: 8px !important; font-size: var(--v2-size-5); white-space: nowrap; }

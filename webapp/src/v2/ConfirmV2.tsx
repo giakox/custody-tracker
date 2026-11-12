@@ -53,7 +53,7 @@ export function ConfirmV2({ id }: { id: number }) {
       action={state === "done" || s
         ? <Button full href={href("my-objects")}>Back to My bikes</Button>
         : <Button full onClick={run} disabled={state === "running"}>{state === "running" ? <><Spinner size={18} />Working…</> : state === "error" ? "Try again" : "Confirm it's back"}</Button>}
-      note={<><a className="v2-textlink" href={href("my-objects")}>My bikes</a>. The rental price is paid to you separately. {TEST_MONEY}</>}>
+      note={<><a className="v2-textlink" href={href("my-objects")}>My bikes</a>. {TEST_MONEY}</>}>
       <BikeLine d={d} sub={<>with {nameOf(r.renter)}, {span(r.started.at, d.periods[r.period]?.end?.at ?? d.pendingHandoff?.anchor.at ?? null)}</>} />
       {!s && (
         <figure>
@@ -61,11 +61,11 @@ export function ConfirmV2({ id }: { id: number }) {
             <img src="./img/day/bocconi-park.jpg" alt="The rack outside Bocconi, people walking past" />
             <div className="v2-co-map"><SpotMap spot={DEMO_SPOT} label="Left here" /></div>
           </div>
-          <figcaption className="v2-gap-16"><p className="v2-body v2-strong">The rack outside Bocconi</p><p className="v2-body v2-muted">Where you asked for it back. Confirm only when it's really there, with you.</p></figcaption>
+          <figcaption className="v2-gap-16"><p className="v2-body v2-strong">The rack outside Bocconi</p><p className="v2-small v2-muted">Confirm only once it's really there.</p></figcaption>
         </figure>
       )}
       <section aria-labelledby="split-title">
-        <h2 className="v2-co-sub" id="split-title">{s ? "The deposit was settled" : "When you confirm, the deposit splits like this"}</h2>
+        <h2 className="v2-co-sub" id="split-title">{s ? "The deposit was settled" : "When you confirm"}</h2>
         <Bill rows={[
           { k: `Back to ${nameOf(r.renter)}`, v: usd(String(back)), strong: true },
           { k: toOwner > 0 ? `To you, for a ${TIER_NAMES[tier]} knock` : "To you", v: usd(String(toOwner)) },

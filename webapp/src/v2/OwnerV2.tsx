@@ -59,7 +59,7 @@ export function MyObjectsV2() {
       <PageV2>
         <p className="v2-eyebrow">Your bikes</p>
         <h1 className="v2-h2">Connect the wallet you lend with.</h1>
-        <p className="v2-lead v2-muted v2-gap-16 v2-page-lead">Your bikes, the returns waiting for you and what you earned are tied to your wallet: Sharify keeps no account of its own.</p>
+        <p className="v2-lead v2-muted v2-gap-16 v2-page-lead">Your bikes and earnings live in your wallet. Sharify keeps no account.</p>
         <div className="v2-page-actions"><Button onClick={connect}>Connect wallet</Button><Button variant="secondary" href={href("add/1")}>Add a bike</Button></div>
       </PageV2>
     );
@@ -110,9 +110,8 @@ export function MyObjectsV2() {
                         {PHOTO ? <img className="v2-row-photo" src={PHOTO} alt="" width="96" height="96" /> : <span className="v2-row-photo" />}
                         <span className="v2-row-main">
                           <span className="v2-row-title">{objectName(d)}<StatusPill tone={d.status === "rented" ? "live" : "quiet"}>{st}</StatusPill></span>
-                          <span className="v2-row-meta">{last ? `last a ${TIER_NAMES[last.tier]} knock` : "never dropped"}</span>
+                          <span className="v2-row-meta">{d.rentals.length === 1 ? "1 rental" : `${d.rentals.length} rentals`} · {last ? `last ${TIER_NAMES[last.tier]} knock` : "never dropped"}</span>
                         </span>
-                        <span className="v2-row-right">{d.rentals.length === 1 ? "1 rental" : `${d.rentals.length} rentals`}</span>
                       </a>
                     </li>
                   );
@@ -126,8 +125,8 @@ export function MyObjectsV2() {
             <p className="v2-small v2-muted">Earned with Sharify</p>
             <p className="v2-owner-big">{usd(sum([income, fees]))}</p>
             <Bill rows={[
-              { k: <>Rental price<span className="v2-receipt-sub">{settled.length} rentals at 2 dollars an hour, paid to you separately</span></>, v: usd(income) },
-              { k: <>Kept for knocks<span className="v2-receipt-sub">From renters' deposits, by the rule. Already in your wallet.</span></>, v: usd(fees) },
+              { k: <>Rental price<span className="v2-receipt-sub">{settled.length} rentals, paid apart</span></>, v: usd(income) },
+              { k: <>Kept for knocks<span className="v2-receipt-sub">From deposits, by the rule</span></>, v: usd(fees) },
             ]} />
             <p className="v2-body v2-muted v2-gap-24">{out === 0 ? "All your bikes are with you." : out === 1 ? "1 bike is out with a renter." : `${out} bikes are out with renters.`} {TEST_MONEY}</p>
           </aside>
@@ -234,7 +233,7 @@ export function AddV2({ n }: { n: number }) {
 
   switch (n) {
     case 1: return (
-      <AddShell n={1} title="Do you have a Sharify recorder?" lead="The recorder is a small sealed box that notes every hard knock and seals each note. Each bike needs its own."
+      <AddShell n={1} title="Do you have a Sharify recorder?" lead="A small sealed box that signs every hard knock. One per bike."
         next={hasOne === "yes" ? "Continue" : undefined} onNext={hasOne === "yes" ? () => go(2) : undefined}>
         <img className="v2-add-photo v2-add-photo-small" src="./img/day/recorder-hand.jpg" alt="A hand holding the Sharify recorder next to a bike" />
         <fieldset className="v2-tiles">
@@ -277,7 +276,7 @@ export function AddV2({ n }: { n: number }) {
       const scan = async () => { setScanning(true); try { set({ recorder: await lookupRecorder("sharify:pk:a41c07d2e9b35f18") }); } finally { setScanning(false); } };
       const r = d.recorder;
       return (
-        <AddShell n={3} title="Pair the recorder." lead="Scan the QR on the recorder. It tells Sharify which box belongs to your bike."
+        <AddShell n={3} title="Pair the recorder." lead="Scan the QR on the recorder to link it to your bike."
           action={r ? <Button onClick={() => go(4)}>Continue</Button> : <Button onClick={scan} disabled={scanning}>{scanning ? <><Spinner size={18} />Reading…</> : "Scan the QR"}</Button>}>
           {r ? (
             <section className="v2-paired" aria-live="polite">
@@ -304,7 +303,7 @@ export function AddV2({ n }: { n: number }) {
       );
     }
     case 4: return (
-      <AddShell n={4} title="Your bike." lead="What renters read on the map and on the bike's page. The preview shows it as you type." next="Continue" onNext={d.label.trim() && d.spot.trim() ? () => go(5) : undefined}
+      <AddShell n={4} title="Your bike." lead="What renters see on the map and the bike page." next="Continue" onNext={d.label.trim() && d.spot.trim() ? () => go(5) : undefined}
         aside={<Preview d={d} onPhoto={(photo) => set({ photo })} />}>
         <div className="v2-form">
           <Field label="Name"><input className="v2-field-input" value={d.label} placeholder="Blue city bike" onChange={(e) => set({ label: e.target.value })} /></Field>
@@ -314,7 +313,7 @@ export function AddV2({ n }: { n: number }) {
             </select>
           </Field>
           <Field label="Where it's parked"><input className="v2-field-input" value={d.spot} placeholder="Via Sarfatti 25, Milan" onChange={(e) => set({ spot: e.target.value })} /></Field>
-          <p className="v2-body v2-muted">The map shows the bike here when it's free, never where a renter leaves it. The type sets the suggested knock levels on the next step.</p>
+          <p className="v2-small v2-muted">Shown on the map only while the bike is free.</p>
         </div>
       </AddShell>
     );
@@ -323,10 +322,10 @@ export function AddV2({ n }: { n: number }) {
       const lv = (i: number, v: string) => { const a = [...d.levels] as [number, number, number]; a[i] = Number(v); set({ levels: a }); };
       const bp = (i: number, v: string) => { const a = [...d.bps] as [number, number, number]; a[i] = Number(v); set({ bps: a }); };
       return (
-        <AddShell n={5} title="Your rules." lead={<>Renters accept these before they unlock. You can't change them during a rental. {TEST_MONEY}</>} next="Save the rules" onNext={err ? undefined : () => go(6)}
+        <AddShell n={5} title="Your rules." lead="Renters accept these before they unlock. Locked during a rental." next="Save the rules" onNext={err ? undefined : () => go(6)}
           aside={<Preview d={d} rule={err ? undefined : knockRows(termsOf(d))} />}>
           <div className="v2-form v2-form-2">
-            <Field label="Price per hour, dollars (paid to you separately)"><input className="v2-field-input" inputMode="decimal" value={d.price} onChange={(e) => set({ price: e.target.value })} /></Field>
+            <Field label="Price per hour, dollars"><input className="v2-field-input" inputMode="decimal" value={d.price} onChange={(e) => set({ price: e.target.value })} /></Field>
             <Field label="Deposit, dollars"><input className="v2-field-input" inputMode="decimal" value={d.deposit} onChange={(e) => set({ deposit: e.target.value })} /></Field>
           </div>
           <div className="v2-levels" role="table" aria-label="Knock levels">
@@ -340,7 +339,7 @@ export function AddV2({ n }: { n: number }) {
               </div>
             ))}
           </div>
-          <p className="v2-body v2-muted">Suggested for a {d.kind.toLowerCase()} from early tests, not measured on your bike. Knocks are in g: 1 g is the bike standing still, a pothole is about 15 g.</p>
+          <p className="v2-small v2-muted">Suggested for a {d.kind.toLowerCase()}. 1 g is a bike standing still, a pothole about 15 g.</p>
           {err && <ErrorLine>{err}</ErrorLine>}
         </AddShell>
       );
@@ -401,8 +400,8 @@ function AddReady({ d, account, connect }: { d: Draft; account: boolean; connect
       aside={id ? undefined : <Preview d={d} rule={knockRows(terms)} />}
       title={id ? "Ready to rent out." : "Publish your bike."}
       lead={id
-        ? "It's published and it's yours. Print the QR and stick it on the frame: renters scan it to open the bike page."
-        : `Your wallet will ask you to confirm ${shown.length || 3} times, a few seconds each. Your bike goes live when they're done.`}
+        ? "Print the QR and stick it on the frame. Renters scan it to rent."
+        : `Your wallet asks ${shown.length || 3} times, then the bike is live.`}
       back={!id && !busy ? <a className="v2-link-quiet" href={href("add/5")}>Back</a> : undefined}
       action={!id
         ? (account
@@ -411,7 +410,7 @@ function AddReady({ d, account, connect }: { d: Draft; account: boolean; connect
         : <Button full onClick={() => { if (posterPdf) window.open(posterPdf, "_blank"); }} disabled={!posterPdf}>Print the QR</Button>}
       note={id
         ? <><a className="v2-textlink" href={href(`object/${id}`)}>Open the bike page</a> · <a className="v2-textlink" href={href("my-objects")}>Go to My bikes</a></>
-        : "Public, and nobody can rewrite it: the recorder, that the bike is yours, the rule. Kept by Sharify: name, photo, type, spot and price."}>
+        : "On-chain for good: the recorder, your ownership, the rule."}>
       {id ? (<>
         <figure className="v2-qr">
           {qr ? <div className="v2-qr-svg" dangerouslySetInnerHTML={{ __html: qr }} /> : <div className="v2-qr-svg" />}
@@ -421,7 +420,7 @@ function AddReady({ d, account, connect }: { d: Draft; account: boolean; connect
         <>
           <Bill rows={[
             { k: "Deposit", v: usd(d.deposit), strong: true },
-            { k: <>Rental price<span className="v2-receipt-sub">paid to you separately</span></>, v: `${usd(d.price)} an hour` },
+            { k: <>Rental price<span className="v2-receipt-sub">paid apart</span></>, v: `${usd(d.price)} an hour` },
             { k: "Recorder", v: d.recorder ? "paired" : "not paired" },
           ]} />
         </>

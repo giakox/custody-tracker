@@ -133,7 +133,7 @@ export function BikesV2() {
           <p className="v2-body v2-muted v2-gap-8" role="status">
             {failed ? "The map reads the bikes from the blockchain, and it isn't answering right now."
               : !loaded ? "Looking for bikes near you…"
-              : `${shown.length} free to borrow, nearest first. Bikes out on a ride never show: where they are is where someone is.`}
+              : `${shown.length} free to borrow, nearest first.`}
           </p>
           <div className="v2-finder-filters" role="group" aria-label="Filter the bikes">
             <FilterPill pressed={!kind && !cheap} onClick={clear}>All</FilterPill>
@@ -162,7 +162,7 @@ export function BikesV2() {
               {shown.map(({ b, d }, i) => (
                 <Fragment key={b.key}>
                   {!b.live && i > 0 && shown[i - 1].b.live && (
-                    <li className="v2-finder-note"><p className="v2-body"><span className="v2-strong">Sample fleet.</span> <span className="v2-muted">How the map will look with more owners. These bikes have no recorder and can't be rented.</span></p></li>
+                    <li className="v2-finder-note"><p className="v2-body"><span className="v2-strong">Sample fleet.</span> <span className="v2-muted">Only the demo bike can be rented.</span></p></li>
                   )}
                   {!b.live && (i === 0 || shown[i - 1].b.live || band(shown[i - 1].d) !== band(d)) && (
                     <li className="v2-finder-group"><p className="v2-body v2-strong">{BAND_NAMES[band(d)]}</p></li>

@@ -161,3 +161,25 @@
 .v2 :is(.v2-book-actions, .v2-rentbar-actions) .btn-primary { transition: background-color 150ms ease-out; }
 .v2 :is(.v2-book-actions, .v2-rentbar-actions) .btn-primary:hover { background: var(--v2-accent-strong-hover); }
 .v2 :is(.v2-book-actions, .v2-rentbar-actions) .btn-secondary:hover { background: var(--v2-tint); }
+
+/* ---------- At a glance (12 Nov): price, deposit and rentals as three numbers, not sentences ---------- */
+.v2-keyfacts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-radius: var(--v2-radius); background: var(--v2-tint); padding: 20px 0 !important; }
+.v2-keyfacts > div { padding: 0 20px !important; display: grid; gap: 4px; align-content: start; }
+.v2-keyfacts > div + div { border-left: 1px solid #dde9f2 !important; }
+.v2-keyfacts dt { font-size: var(--v2-size-5); color: var(--v2-muted); }
+.v2-keyfacts dd { font-size: var(--v2-size-3); font-weight: 500; line-height: 1.3; }
+.v2-keyfacts dd span { display: block; font-size: var(--v2-size-5); font-weight: 400; color: var(--v2-muted); }
+/* The rule as four tiles, the same as in the renting path. */
+.v2-object-page .v2-knocks.v2-knocks-grid .v2-knock { border: 1.5px solid #e5e5ea !important; background: var(--v2-white); }
+/* Each rental: a row with a hairline between, the peak on the right. */
+.v2-rec { row-gap: 0; }
+.v2-rec-row { padding: 16px 0 !important; border-top: 1px solid #ececf0 !important; }
+.v2-rec-row:first-child { border-top: 0 !important; padding-top: 0 !important; }
+.v2-rec-main > * + * { margin-top: 4px; }
+.v2-rec-who { font-size: var(--v2-size-4); }
+.v2-rec-peak { font-size: var(--v2-size-5); }
+.v2-rec-g { font-size: var(--v2-size-4); }
+@media (max-width: 899px) {
+  .v2-keyfacts > div { padding: 0 14px !important; }
+  .v2-keyfacts dd { font-size: var(--v2-size-4); }
+}

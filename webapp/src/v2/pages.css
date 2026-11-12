@@ -110,3 +110,15 @@
 
 /* The status pill always sits on its own line under the name, in every row. */
 .v2-row-title { flex-direction: column; align-items: flex-start; gap: 8px; }
+/* Verify: what a check proves and what it doesn't, as two tinted cards. */
+.v2-proves { padding: 20px !important; border-radius: var(--v2-radius); background: var(--v2-tint); }
+.v2-proves .v2-h3 { font-size: var(--v2-size-4); }
+@media (max-width: 767px) { .v2-two:has(.v2-proves) { gap: 8px !important; } }
+/* Receipt on screen: the money in one tinted card (print keeps its own layout). */
+@media screen {
+  .v2-receipt-block { padding: 20px !important; border-radius: var(--v2-radius); background: var(--v2-tint); }
+  .v2-receipt-block .v2-bill > div + div { padding-top: 12px !important; border-top: 1px solid #e3edf5 !important; }
+  .v2-receipt-block .v2-bill { row-gap: 12px; }
+  .v2-receipt-total { padding-top: 16px !important; border-top: 1px solid #d6e6f2 !important; margin-top: 16px; }
+}
+@media screen and (max-width: 767px) { .v2-receipt-block { margin-top: 24px; } }

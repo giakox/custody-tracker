@@ -7,7 +7,7 @@ import { FleetMap } from "../components/FleetMap";
 import { Action, GALLERY, Summary, ViewerTitle } from "./action";
 import { CASE_IMAGE } from "./caseImage";
 import { StateLine } from "./StateLine";
-import { addressUrl, ago, day, g, hm, hms, nameOf, objectName, possessive, shortHex, span, TEST_MONEY, TIER_NAMES, txUrl, usd, whenShort } from "../ui/format";
+import { addressUrl, ago, day, g, hm, hms, nameOf, objectName, possessive, shortHex, TIER_NAMES, txUrl, usd, whenShort } from "../ui/format";
 import { distanceText, metres, walkText } from "../ui/geo";
 import { href } from "../ui/router";
 import { buildStory, tierOf } from "../ui/story";
@@ -65,15 +65,8 @@ function Gallery() {
 /** "What the box recorded": one clean row per rental (or stretch where something happened), newest first. */
 function Record({ d }: { d: ObjectDetail }) {
   const chapters = buildStory(d).filter((c) => c.isRental || c.events.some((e) => e.kind !== "registered"));
-  const settled = d.rentals.filter((r) => r.settlement);
-  const knocks = settled.filter((r) => r.settlement!.tier > 0);
-  const missing = d.gaps.reduce((s, x) => s + x.missing, 0);
-  const headline = settled.length === 0
-    ? (d.activeRental ? "Its first rental is under way." : "Nobody has rented it yet.")
-    : `${settled.length === 1 ? "1 rental" : `${settled.length} rentals`}, ${knocks.length === 0 ? "never dropped." : `dropped ${knocks.length === 1 ? "once" : `${knocks.length} times`}.`}`;
   return (
     <>
-      <p className="v2-body">{headline} <span className="v2-muted">On Sharify since {day(d.created.at)}.{missing > 0 && ` ${missing === 1 ? "1 page" : `${missing} pages`} of its diary missing.`}</span></p>
       <ol className="v2-rec">
         {chapters.map((c) => {
           const live = c.isRental && c.end === null;
@@ -81,19 +74,18 @@ function Record({ d }: { d: ObjectDetail }) {
           const settledEv = c.events.find((e) => e.kind === "settled");
           const tier = c.maxPeakCg === null ? 0 : tierOf(d, c.maxPeakCg);
           const outcome = settledEv && settledEv.kind === "settled"
-            ? (settledEv.tier === 0 ? `No drops. All ${usd(settledEv.refund)} back.` : `${usd(settledEv.fee)} kept, ${usd(settledEv.refund)} back.`)
-            : live ? "Riding now." : null;
+            ? (settledEv.tier === 0 ? `all ${usd(settledEv.refund)} back` : `${usd(settledEv.fee)} kept`)
+            : live ? "riding now" : null;
           const gap = c.events.find((e) => e.kind === "gap");
           return (
             <li className="v2-rec-row" key={c.period}>
               <div className="v2-rec-main">
                 <p className="v2-rec-who">{live && <StatusPill tone="live">Live</StatusPill>}{who}</p>
-                <p className="v2-body v2-muted">
+                <p className="v2-small v2-muted">
                   <time dateTime={new Date(c.start).toISOString()} title={`${day(c.start)}, ${hm(c.start)}`}>{whenShort(c.start)}</time>
-                  {" · "}{c.end ? span(c.start, c.end) : `${span(c.start, null)} so far`}
-                  {outcome && <> · {outcome}</>}
+                  {outcome && <> · <span className="v2-nowrap">{outcome}</span></>}
                 </p>
-                {gap && gap.kind === "gap" && <p className="v2-body v2-muted">{gap.missing === 1 ? "A page of its diary never arrived." : `${gap.missing} pages of its diary never arrived.`} The hole stays visible.</p>}
+                {gap && gap.kind === "gap" && <p className="v2-small v2-muted">{gap.missing === 1 ? "1 page missing" : `${gap.missing} pages missing`}</p>}
               </div>
               <p className="v2-rec-peak">
                 {c.maxPeakCg === null ? <span className="v2-muted">No readings</span> : <><span className="v2-rec-g">{g(c.maxPeakCg)}</span><span className="v2-muted">{tier === 0 ? "no knock" : `${TIER_NAMES[tier]} knock`}</span></>}
@@ -102,7 +94,7 @@ function Record({ d }: { d: ObjectDetail }) {
           );
         })}
       </ol>
-      <p className="v2-body v2-muted">Newest first. A knock is what the box felt, not proof of damage.</p>
+      <p className="v2-small v2-muted">A knock is what the box felt, not proof of damage.</p>
     </>
   );
 }
@@ -115,7 +107,7 @@ function Parked({ d }: { d: ObjectDetail }) {
   return (
     <>
       <div className="v2-obj-map"><FleetMap bikes={[b]} center={b} me={null} selected={b.key} onSelect={() => {}} padding={{ top: 12, bottom: 12, left: 0 }} /></div>
-      <p className="v2-body"><span className="v2-strong">Parked outside Bocconi.</span> <span className="v2-muted">{walkText(metres(BOCCONI, b))} from Bocconi. When it's out on a ride, it isn't on the map.</span></p>
+      <p className="v2-body"><span className="v2-strong">Outside Bocconi</span> <span className="v2-muted">· {walkText(metres(BOCCONI, b))}. Hidden while it's out on a ride.</span></p>
     </>
   );
 }
@@ -130,7 +122,7 @@ function Verify({ d, net, status, updatedAt }: { d: ObjectDetail; net: NetworkIn
   const rows = [...d.batches].reverse();
   return (
     <>
-      <p className="v2-body v2-muted">Every line above can be checked on a public blockchain, without asking us. Custody, shocks, collateral and settlements are read from two contracts on {net.label}. No server of ours can rewrite it.{status?.relayer === "offline" && " The relayer that keeps the raw readings is offline right now: the map and the per-reading proofs are unavailable, everything else on this page is not affected."}</p>
+      <p className="v2-body v2-muted">Everything above is read from two public contracts on {net.label}. No server of ours can rewrite it.{status?.relayer === "offline" && " The relayer is offline: the map and the per-reading proofs are unavailable for now."}</p>
       {shocks.length > 0 && (
         <ul className="v2-obj-links">
           {shocks.map((e) => <li key={e.seq}><a className="v2-textlink" href={href(`verify/${d.id}/${e.seq}`)}>Check the {TIER_NAMES[e.tier]} knock of {day(e.at.at)} ({g(e.peakCg)}, batch {e.seq})</a></li>)}
@@ -191,6 +183,9 @@ export function ObjectV2({ id }: { id: number }) {
     const parked = fleet.data?.find((x) => x.objectId === d.id);
     const m = parked ? metres(BOCCONI, parked) : null;
     const moving = d.status !== "available" || !!d.pendingHandoff;
+    const done = d.rentals.filter((r) => r.settlement);
+    const knocked = done.filter((r) => r.settlement!.tier > 0).length;
+    const priceHour = "2";
     body = (
       <>
         <div className="v2-container v2-obj">
@@ -208,18 +203,16 @@ export function ObjectV2({ id }: { id: number }) {
                   <div className="v2-gap-16 v2-obj-stateline"><StateLine d={d} /></div>
                 </section>
               )}
-              <Section title="The bike and its rule" id="obj-rule">
-                <dl className="v2-facts">
-                  <div><dt>Lent by</dt><dd>{owner}</dd></div>
-                  <div><dt>On Sharify since</dt><dd>{day(d.created.at)}</dd></div>
-                </dl>
-                <p className="v2-body v2-muted">If it's dropped, the rule decides. Not the owner, not us. {TEST_MONEY}</p>
+              <dl className="v2-keyfacts" aria-label="At a glance">
+                <div><dt>Price</dt><dd>{usd(priceHour)}<span>an hour</span></dd></div>
+                <div><dt>Deposit</dt><dd>{usd(d.terms.collateral)}</dd></div>
+                <div><dt>Rentals</dt><dd>{done.length}<span>{knocked === 0 ? "no drops" : `${knocked} ${knocked === 1 ? "knock" : "knocks"}`}</span></dd></div>
+              </dl>
+              <Section title="The rule" id="obj-deposit">
+                <p className="v2-body v2-muted">The hardest knock of your ride decides how much of the deposit comes back. Not the owner, not us.</p>
+                <KnockList rows={knockRows(d.terms)} className="v2-knocks-grid" />
               </Section>
               <Section title="What the box recorded" id="obj-record"><Record d={d} /></Section>
-              <Section title="How the deposit works" id="obj-deposit">
-                <p className="v2-body v2-muted">The hardest knock of your ride decides how much comes back.</p>
-                <KnockList rows={knockRows(d.terms)} />
-              </Section>
               <Section title="Where it is" id="obj-where"><Parked d={d} /></Section>
               <Section title="Check it yourself" id="obj-verify"><Verify d={d} net={net.data} status={status.data} updatedAt={obj.dataUpdatedAt || undefined} /></Section>
             </div>
@@ -234,7 +227,7 @@ export function ObjectV2({ id }: { id: number }) {
           </div>
         </div>
         <div className="v2-rentbar" ref={rentbar} role="region" aria-label="Rent it">
-          <p className="v2-rentbar-price"><span className="v2-strong">2 dollars</span> an hour<span className="v2-rentbar-sub">{depositLine(d)}</span></p>
+          <p className="v2-rentbar-price"><span className="v2-strong">2 dollars</span> an hour<span className="v2-rentbar-sub">{usd(d.terms.collateral)} deposit, back by the rule</span></p>
           <div className="v2-rentbar-actions"><Action d={d} me={account} compact /></div>
         </div>
       </>

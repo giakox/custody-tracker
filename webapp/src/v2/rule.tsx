@@ -38,7 +38,7 @@ export function KnockList({ rows, className = "", current }: { rows: KnockRow[];
 const tierOf = (t: Terms, cg: number): Tier => (cg >= t.strongCg ? 3 : cg >= t.mediumCg ? 2 : cg >= t.lightCg ? 1 : 0);
 
 /** Said wherever the examples are shown. */
-export const RULE_NOTE = "Examples are indicative peaks from early tests, not measurements of this bike. 1 g is the bike standing still.";
+export const RULE_NOTE = "Examples are rough peaks from early tests, not this bike. 1 g is a bike standing still.";
 
 /** Indicative peaks, not measurements of this bike. */
 const EXAMPLES = [{ g: 6, label: "Kerb" }, { g: 14, label: "Pothole" }, { g: 41, label: "Fall" }];
@@ -57,8 +57,9 @@ export function RuleTry({ terms, id = "try-knock", grid = false, note = true }: 
   const pct = (v: number) => `${(v / max) * 100}%`;
   return (
     <div className="v2-try">
+      <div className="v2-try-card">
       <p className="v2-try-big" aria-live="polite">{usd(String(back))} back</p>
-      <p className="v2-body v2-muted">{tier ? `${usd(String(fee))} of the ${usd(terms.collateral)} deposit kept for a ${TIER_NAMES[tier]} knock.` : `All of the ${usd(terms.collateral)} deposit comes back.`}</p>
+      <p className="v2-body v2-muted">{tier ? `${usd(String(fee))} kept for a ${TIER_NAMES[tier]} knock.` : `The whole ${usd(terms.collateral)} deposit.`}</p>
       <div className="v2-try-control">
         <label className="v2-small v2-muted" htmlFor={id}>Try a knock: <span className="v2-try-value">{g} g</span></label>
         <div className="v2-try-track">
@@ -72,6 +73,7 @@ export function RuleTry({ terms, id = "try-knock", grid = false, note = true }: 
         <div className="v2-try-examples" role="group" aria-label="Examples">
           {EXAMPLES.map((e) => <button key={e.label} type="button" className="v2-filter" aria-pressed={g === e.g} onClick={() => setG(e.g)}>{e.label} {e.g} g</button>)}
         </div>
+      </div>
       </div>
       <KnockList rows={knockRows(terms)} current={tier} className={grid ? "v2-knocks-grid" : ""} />
       {note && <p className="v2-small v2-muted">{RULE_NOTE}</p>}

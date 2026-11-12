@@ -177,3 +177,6 @@
   .v2-box-rule { margin-top: 32px; padding-left: 0 !important; }
   .v2-knocks.v2-knocks-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+/* The rule's four tiles: outlined, the one that applies filled, as on the bike page and in the renting path. */
+.v2-knocks-grid:not(.v2-knocks-mini) .v2-knock { border: 1.5px solid #e5e5ea !important; }
+.v2-knocks-grid:not(.v2-knocks-mini) .v2-knock.is-current { border-color: var(--v2-accent) !important; }
